@@ -10,13 +10,64 @@ import {
   Switch,
   DatePicker,
   DataGrid,
+  type GridColDef,
   Modal,
   Divider,
   Autocomplete,
-  type GridColDef,
+  AppBar,
+  CalendarButton,
+  NotificationButton,
+  LanguageButton,
+  UserButton,
+  SwitchThemeButton,
+  type ICustomFilterOperator,
+  SideBar,
+  type IPage,
+  DRAWER_WIDTH,
 } from "@nuam/common-fe-lib-components";
-import { Save, Cancel, Delete } from "@mui/icons-material";
+
+import {
+  Save,
+  Cancel,
+  Delete,
+  AdminPanelSettings,
+  TrendingUp,
+  Security,
+} from "@mui/icons-material";
 import { Box, Stack } from "@mui/material";
+import type { Location, NavigateFunction } from "react-router";
+
+interface Product {
+  id: number;
+  name: string;
+  price: number;
+  stock: number;
+  category: string;
+}
+
+// ✨ v1.31.0: Filtros personalizados con interfaz correcta
+const customFilterOperators: ICustomFilterOperator[] = [
+  { value: "contains", label: "Contiene", columnTypes: ["string"] },
+  { value: ">", label: "Mayor que", columnTypes: ["number"] },
+  { value: "<", label: "Menor que", columnTypes: ["number"] },
+  { value: "isEmpty", label: "Está vacío" },
+];
+
+const columnsCustom: GridColDef[] = [
+  { field: "id", headerName: "ID", width: 90 },
+  { field: "name", headerName: "Producto", width: 200 },
+  { field: "price", headerName: "Precio", width: 150, type: "number" },
+  { field: "stock", headerName: "Stock", width: 150, type: "number" },
+  { field: "category", headerName: "Categoría", width: 150 },
+];
+
+const rowsCustom: Product[] = [
+  { id: 1, name: "Laptop", price: 1200, stock: 15, category: "Electrónica" },
+  { id: 2, name: "Mouse", price: 25, stock: 100, category: "Accesorios" },
+  { id: 3, name: "Teclado", price: 80, stock: 50, category: "Accesorios" },
+  { id: 4, name: "Monitor", price: 350, stock: 30, category: "Electrónica" },
+  { id: 5, name: "Webcam", price: 120, stock: 45, category: "Accesorios" },
+];
 
 export interface SerieItemOpa {
   id: number;
@@ -157,18 +208,67 @@ const seriesDataOpa: SerieItemOpa[] = [
     },
   },
 ];
+
+// Estructura de menú para el SideBar
+const sidebarPages: IPage[] = [
+  {
+    name: "Administrativo",
+    path: "/administrativo",
+    icon: <AdminPanelSettings />,
+    children: [
+      {
+        name: "Gestión de usuarios",
+        path: "/usuarios",
+      },
+      {
+        name: "Gestión de usuarios 2",
+        path: "/usuarios-2",
+      },
+      {
+        name: "Gestión de usuarios 3",
+        path: "/usuarios-3",
+      },
+    ],
+  },
+  {
+    name: "Operaciones Rentable Variable",
+    path: "/operaciones",
+    icon: <TrendingUp />,
+    children: [
+      {
+        name: "Operaciones contado y repo",
+        path: "/contado-repo",
+      },
+    ],
+  },
+  {
+    name: "Garantías",
+    path: "/garantias",
+    icon: <Security />,
+  },
+];
+
 export default function AppComplete() {
   const [textValue, setTextValue] = useState("");
   const [emailValue, setEmailValue] = useState("");
   const [checkboxValue, setCheckboxValue] = useState(false);
   const [switchValue, setSwitchValue] = useState(false);
-  const [dateValue, setDateValue] = useState<any>(null);
+  const [dateValue, setDateValue] = useState<Date | null>(null);
   const [showModal, setShowModal] = useState(false);
   const [showAlert, setShowAlert] = useState(true);
   const [autocompleteValue, setAutocompleteValue] =
     useState<SerieItemOpa | null>(null);
+  const [openSideBar, setOpenSideBar] = useState(true);
 
-  // Datos para DataGrid
+  // Mock de location y navigation para SideBar (sin react-router)
+  const mockLocation = {
+    pathname: "/administrativo/usuarios",
+  } as unknown as Location;
+  const mockNavigation = ((path: string) => {
+    console.log("Navegando a:", path);
+  }) as unknown as NavigateFunction;
+
+  // Datos para DataGrid básico
   const dataGridColumns: GridColDef[] = [
     { field: "id", headerName: "ID", width: 70 },
     { field: "name", headerName: "Nombre", width: 150 },
@@ -194,9 +294,44 @@ export default function AppComplete() {
     { id: 5, name: "Carlos Ruiz", email: "carlos@example.com", city: "Bilbao" },
   ];
 
+  // Handlers
+  const handleRefresh = () => console.log("Refrescando datos...");
+  const handleDownload = () => console.log("Descargando CSV personalizado...");
+
   return (
     <NuamThemeWrapper>
-      <Box sx={{ padding: 3 }}>
+      {/* Header Bar */}
+      <AppBar
+        appTitle="NUAM Playground"
+        toggleSidebar={() => setOpenSideBar(!openSideBar)}
+        rightSideComponents={
+          <>
+            <CalendarButton />
+            <NotificationButton onClick={() => alert("Notificaciones")} />
+            <LanguageButton onClick={() => alert("Cambiar idioma")} />
+            <SwitchThemeButton />
+            <UserButton onClick={() => alert("Perfil de usuario")} />
+          </>
+        }
+      />
+
+      {/* SideBar */}
+      <SideBar
+        openSideBar={openSideBar}
+        pages={sidebarPages}
+        location={mockLocation}
+        navigation={mockNavigation}
+      />
+
+      {/* Main content with top margin to avoid header overlap and left margin for sidebar */}
+      <Box
+        sx={{
+          marginTop: "49px",
+          marginLeft: openSideBar ? `${DRAWER_WIDTH}px` : 0,
+          padding: 3,
+          transition: "margin-left 225ms cubic-bezier(0.4, 0, 0.6, 1) 0ms",
+        }}
+      >
         <Typography variant="h3" color="primary" gutterBottom>
           NUAM Component Library - Playground
         </Typography>
@@ -376,47 +511,228 @@ export default function AppComplete() {
           </Stack>
         </Card>
 
-        {/* SECCIÓN 3: DATAGRID */}
+        {/* SECCIÓN 3: DATAGRID BÁSICO */}
         <Card sx={{ mb: 3, p: 3 }}>
           <Typography variant="h5" color="primary" gutterBottom>
-            3. DataGrid
+            3. DataGrid Básico
           </Typography>
           <Divider sx={{ mb: 3 }} />
+          <Alert severity="info" sx={{ mb: 2 }}>
+            ✨ Pasa el cursor sobre los títulos de las columnas para ver el
+            icono de menú (⋮)
+          </Alert>
 
           <Box sx={{ height: 400, width: "100%" }}>
             <DataGrid
               rows={dataGridRows}
               columns={dataGridColumns}
               pagination
-              onRefresh={() => {
-                console.log("Refresh clicked");
-                alert("Datos actualizados");
-              }}
+              onRefresh={handleRefresh}
               language="es"
               initialState={{
                 pagination: {
                   paginationModel: { pageSize: 5, page: 0 },
                 },
-                filter: {
-                  filterModel: {
-                    items: [],
-                    logicOperator: "and",
-                  },
-                },
               }}
               pageSizeOptions={[5, 10, 25]}
+              paginationCounterProps={{ color: "primary" }}
               enableColumnMenu={true}
-              useNativeToolbar={true}
-              filterMode="client"
               showToolbar={true}
+              showDownload={true}
             />
           </Box>
         </Card>
 
-        {/* SECCIÓN 4: MODAL */}
+        {/* SECCIÓN 4: DATAGRID CON FILTROS PERSONALIZADOS (v1.31.0) */}
         <Card sx={{ mb: 3, p: 3 }}>
           <Typography variant="h5" color="primary" gutterBottom>
-            4. Modal
+            4. DataGrid con Filtros Personalizados
+          </Typography>
+          <Divider sx={{ mb: 3 }} />
+          <Alert severity="success" sx={{ mb: 2 }}>
+            🆕 <strong>v1.31.0:</strong> customFilterOperators permite definir
+            operadores de filtro personalizados por columna
+          </Alert>
+
+          <Box sx={{ height: 400, width: "100%" }}>
+            <DataGrid
+              rows={rowsCustom}
+              columns={columnsCustom}
+              onRefresh={handleRefresh}
+              pagination
+              paginationCounterProps={{ color: "primary" }}
+              language="es"
+              showDownload={true}
+              handleDownload={handleDownload}
+              showToolbar={true}
+              enableColumnMenu={false}
+              customFilterOperators={customFilterOperators} // ✨ NUEVO
+              addMenuItems={[
+                {
+                  text: "Exportar a Excel",
+                  onClick: () => console.log("Exportar Excel"),
+                },
+              ]}
+            />
+          </Box>
+        </Card>
+
+        {/* SECCIÓN 5: DATAGRID PRO (v1.33.0) */}
+        <Card sx={{ mb: 3, p: 3 }}>
+          <Typography variant="h5" color="primary" gutterBottom>
+            5. DataGridPro - Funcionalidades Avanzadas
+          </Typography>
+          <Divider sx={{ mb: 3 }} />
+          <Alert severity="success" sx={{ mb: 2 }}>
+            🆕 <strong>v1.33.0:</strong> DataGridPro con licencia MUI X
+            integrada, incluye todas las características Pro
+          </Alert>
+
+          <Box sx={{ height: 500, width: "100%" }}>
+            <DataGrid
+              rows={[
+                {
+                  id: 1,
+                  name: "Juan Pérez",
+                  email: "juan@example.com",
+                  role: "Admin",
+                  age: 32,
+                  active: true,
+                  department: "IT",
+                },
+                {
+                  id: 2,
+                  name: "María García",
+                  email: "maria@example.com",
+                  role: "Usuario",
+                  age: 28,
+                  active: true,
+                  department: "Ventas",
+                },
+                {
+                  id: 3,
+                  name: "Pedro López",
+                  email: "pedro@example.com",
+                  role: "Editor",
+                  age: 35,
+                  active: false,
+                  department: "Marketing",
+                },
+                {
+                  id: 4,
+                  name: "Ana Martínez",
+                  email: "ana@example.com",
+                  role: "Usuario",
+                  age: 26,
+                  active: true,
+                  department: "IT",
+                },
+                {
+                  id: 5,
+                  name: "Carlos Rodríguez",
+                  email: "carlos@example.com",
+                  role: "Admin",
+                  age: 40,
+                  active: true,
+                  department: "Finanzas",
+                },
+                {
+                  id: 6,
+                  name: "Laura Sánchez",
+                  email: "laura@example.com",
+                  role: "Editor",
+                  age: 31,
+                  active: true,
+                  department: "IT",
+                },
+                {
+                  id: 7,
+                  name: "Miguel Torres",
+                  email: "miguel@example.com",
+                  role: "Usuario",
+                  age: 29,
+                  active: false,
+                  department: "Ventas",
+                },
+                {
+                  id: 8,
+                  name: "Sofía Ramírez",
+                  email: "sofia@example.com",
+                  role: "Editor",
+                  age: 27,
+                  active: true,
+                  department: "Marketing",
+                },
+                {
+                  id: 9,
+                  name: "Diego Fernández",
+                  email: "diego@example.com",
+                  role: "Admin",
+                  age: 38,
+                  active: true,
+                  department: "IT",
+                },
+                {
+                  id: 10,
+                  name: "Carmen Ruiz",
+                  email: "carmen@example.com",
+                  role: "Usuario",
+                  age: 30,
+                  active: true,
+                  department: "Ventas",
+                },
+              ]}
+              columns={[
+                { field: "id", headerName: "ID", width: 70, type: "number" },
+                { field: "name", headerName: "Nombre", width: 180 },
+                { field: "email", headerName: "Email", width: 220 },
+                { field: "role", headerName: "Rol", width: 120 },
+                { field: "age", headerName: "Edad", width: 90, type: "number" },
+                { field: "department", headerName: "Departamento", width: 150 },
+                {
+                  field: "active",
+                  headerName: "Activo",
+                  width: 100,
+                  type: "boolean",
+                },
+              ]}
+              pagination
+              initialState={{
+                pagination: {
+                  paginationModel: { pageSize: 5, page: 0 },
+                },
+              }}
+              pageSizeOptions={[5, 10, 25]}
+              paginationCounterProps={{ color: "primary" }}
+              enableColumnMenu={true}
+              language="es"
+              onRefresh={handleRefresh}
+              showDownload={true}
+              handleDownload={handleDownload}
+              checkboxSelection
+              customFilterOperators={customFilterOperators}
+              addMenuItems={[
+                {
+                  text: "Exportar a Excel",
+                  onClick: () => console.log("Exportar Excel Pro"),
+                },
+                {
+                  text: "Configuración avanzada",
+                  onClick: () => console.log("Configuración Pro"),
+                },
+              ]}
+            />
+          </Box>
+          <Alert severity="info" sx={{ mt: 2 }}>
+            💡 DataGridPro incluye: Column Pinning, Row Grouping, Tree Data,
+            Excel Export y más características avanzadas de MUI X Pro
+          </Alert>
+        </Card>
+
+        {/* SECCIÓN 6: MODAL */}
+        <Card sx={{ mb: 3, p: 3 }}>
+          <Typography variant="h5" color="primary" gutterBottom>
+            6. Modal
           </Typography>
           <Divider sx={{ mb: 3 }} />
 
@@ -447,10 +763,10 @@ export default function AppComplete() {
           </Modal>
         </Card>
 
-        {/* SECCIÓN 5: TIPOGRAFÍA */}
+        {/* SECCIÓN 7: TIPOGRAFÍA */}
         <Card sx={{ mb: 3, p: 3 }}>
           <Typography variant="h5" color="primary" gutterBottom>
-            5. Tipografía
+            7. Tipografía
           </Typography>
           <Divider sx={{ mb: 3 }} />
 
@@ -472,10 +788,10 @@ export default function AppComplete() {
           </Stack>
         </Card>
 
-        {/* SECCIÓN 6: CARDS */}
+        {/* SECCIÓN 8: CARDS */}
         <Card sx={{ mb: 3, p: 3 }} elevation={3}>
           <Typography variant="h5" color="primary" gutterBottom>
-            6. Cards
+            8. Cards
           </Typography>
           <Divider sx={{ mb: 3 }} />
 
