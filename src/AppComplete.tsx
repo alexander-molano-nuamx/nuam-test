@@ -10,7 +10,7 @@ import {
   Switch,
   DatePicker,
   DataGrid,
-  type GridColDef,
+  DataGridPro,
   Modal,
   Divider,
   Autocomplete,
@@ -35,6 +35,7 @@ import {
   Security,
 } from "@mui/icons-material";
 import { Box, Stack } from "@mui/material";
+import type { GridColDef } from "@mui/x-data-grid";
 import type { Location, NavigateFunction } from "react-router";
 
 interface Product {
@@ -400,7 +401,7 @@ export default function AppComplete() {
               <Checkbox
                 label="Acepto los términos y condiciones"
                 checked={checkboxValue}
-                onChange={(checked) => setCheckboxValue(checked)}
+                onChange={(_, checked) => setCheckboxValue(checked)}
               />
             </Box>
 
@@ -412,7 +413,7 @@ export default function AppComplete() {
               <Switch
                 label="Activar notificaciones"
                 checked={switchValue}
-                onChange={(e) => setSwitchValue(e.target.checked)}
+                onChange={(_, checked) => setSwitchValue(checked)}
               />
             </Box>
             {/* Autocomplete */}
@@ -535,8 +536,7 @@ export default function AppComplete() {
                 },
               }}
               pageSizeOptions={[5, 10, 25]}
-              paginationCounterProps={{ color: "primary" }}
-              enableColumnMenu={true}
+              disableColumnMenu={false}
               showToolbar={true}
               showDownload={true}
             />
@@ -560,12 +560,11 @@ export default function AppComplete() {
               columns={columnsCustom}
               onRefresh={handleRefresh}
               pagination
-              paginationCounterProps={{ color: "primary" }}
               language="es"
               showDownload={true}
               handleDownload={handleDownload}
               showToolbar={true}
-              enableColumnMenu={false}
+              disableColumnMenu={true}
               customFilterOperators={customFilterOperators} // ✨ NUEVO
               addMenuItems={[
                 {
@@ -589,7 +588,7 @@ export default function AppComplete() {
           </Alert>
 
           <Box sx={{ height: 500, width: "100%" }}>
-            <DataGrid
+            <DataGridPro
               rows={[
                 {
                   id: 1,
@@ -703,8 +702,8 @@ export default function AppComplete() {
                 },
               }}
               pageSizeOptions={[5, 10, 25]}
-              paginationCounterProps={{ color: "primary" }}
-              enableColumnMenu={true}
+              disableColumnMenu={false}
+              showToolbar={true}
               language="es"
               onRefresh={handleRefresh}
               showDownload={true}
