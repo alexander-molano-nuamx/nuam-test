@@ -10,7 +10,6 @@ import {
   Switch,
   DatePicker,
   DataGrid,
-  DataGridPro,
   Modal,
   Divider,
   Autocomplete,
@@ -24,6 +23,7 @@ import {
   SideBar,
   type IPage,
   DRAWER_WIDTH,
+  DataGridPro,
 } from "@nuam/common-fe-lib-components";
 
 import {
