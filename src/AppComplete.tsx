@@ -303,7 +303,7 @@ export default function AppComplete() {
     <NuamThemeWrapper>
       {/* Header Bar */}
       <AppBar
-        appTitle="NUAM Components Playground"
+        appTitle="NUAM Playground"
         toggleSidebar={() => setOpenSideBar(!openSideBar)}
         rightSideComponents={
           <>
