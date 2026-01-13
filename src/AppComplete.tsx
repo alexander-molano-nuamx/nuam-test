@@ -23,7 +23,7 @@ import {
   SideBar,
   type IPage,
   DRAWER_WIDTH,
-  DataGridPro,
+  // DataGridPro,
 } from "@nuam/common-fe-lib-components";
 
 import {
@@ -587,7 +587,7 @@ export default function AppComplete() {
             integrada, incluye todas las características Pro
           </Alert>
 
-          <Box sx={{ height: 500, width: "100%" }}>
+          {/* <Box sx={{ height: 500, width: "100%" }}>
             <DataGridPro
               rows={[
                 {
@@ -721,7 +721,7 @@ export default function AppComplete() {
                 },
               ]}
             />
-          </Box>
+          </Box> */}
           <Alert severity="info" sx={{ mt: 2 }}>
             💡 DataGridPro incluye: Column Pinning, Row Grouping, Tree Data,
             Excel Export y más características avanzadas de MUI X Pro
