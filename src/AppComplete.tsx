@@ -23,8 +23,10 @@ import {
   SideBar,
   type IPage,
   DRAWER_WIDTH,
-  // DataGridPro,
+  IsotypeName,
+  DataGridPro,
 } from "@nuam/common-fe-lib-components";
+import isotypeLogoSrc from "./assets/isotype.svg";
 
 import {
   Save,
@@ -305,6 +307,13 @@ export default function AppComplete() {
       <AppBar
         appTitle="nuam Playground"
         toggleSidebar={() => setOpenSideBar(!openSideBar)}
+        useIsotypeName={true}
+        isotypeNameProps={{
+          projectName: "nuam",
+          logoSrc: isotypeLogoSrc,
+          variant: "horizontal",
+          showText: true,
+        }}
         rightSideComponents={
           <>
             <CalendarButton />
@@ -333,8 +342,8 @@ export default function AppComplete() {
           transition: "margin-left 225ms cubic-bezier(0.4, 0, 0.6, 1) 0ms",
         }}
       >
-        <Typography variant="h3" color="primary" gutterBottom>
-          NUAM Component Library - Playground
+        <Typography variant="h4" color="primary" gutterBottom>
+          nuam component library - Playground
         </Typography>
 
         {/* Alert */}
@@ -587,7 +596,7 @@ export default function AppComplete() {
             integrada, incluye todas las características Pro
           </Alert>
 
-          {/* <Box sx={{ height: 500, width: "100%" }}>
+          <Box sx={{ height: 500, width: "100%" }}>
             <DataGridPro
               rows={[
                 {
@@ -721,7 +730,7 @@ export default function AppComplete() {
                 },
               ]}
             />
-          </Box> */}
+          </Box>
           <Alert severity="info" sx={{ mt: 2 }}>
             💡 DataGridPro incluye: Column Pinning, Row Grouping, Tree Data,
             Excel Export y más características avanzadas de MUI X Pro
@@ -821,6 +830,193 @@ export default function AppComplete() {
                 </Typography>
               </Box>
             </Card>
+          </Stack>
+        </Card>
+
+        {/* SECCIÓN 9: ISOTYPE NAME */}
+        <Card sx={{ mb: 3, p: 3 }}>
+          <Typography variant="h5" color="primary" gutterBottom>
+            9. IsotypeName Component
+          </Typography>
+          <Divider sx={{ mb: 3 }} />
+          <Alert severity="success" sx={{ mb: 2 }}>
+            Componente para mostrar el isotipo (logo) + nombre del proyecto con
+            borde estilizado
+          </Alert>
+
+          <Stack spacing={4}>
+            {/* Con logo + texto */}
+            <Box>
+              <Typography variant="h6" gutterBottom>
+                Logo + Texto (showText: true)
+              </Typography>
+              <Stack direction="row" spacing={4} alignItems="center">
+                <Box>
+                  <Typography variant="caption" display="block" mb={1}>
+                    Size: sm
+                  </Typography>
+                  <IsotypeName
+                    projectName="nuam"
+                    logoSrc={isotypeLogoSrc}
+                    size="sm"
+                    showText={true}
+                  />
+                </Box>
+                <Box>
+                  <Typography variant="caption" display="block" mb={1}>
+                    Size: md
+                  </Typography>
+                  <IsotypeName
+                    projectName="nuam"
+                    logoSrc={isotypeLogoSrc}
+                    size="md"
+                    showText={true}
+                  />
+                </Box>
+                <Box>
+                  <Typography variant="caption" display="block" mb={1}>
+                    Size: lg
+                  </Typography>
+                  <IsotypeName
+                    projectName="nuam"
+                    logoSrc={isotypeLogoSrc}
+                    size="lg"
+                    showText={true}
+                  />
+                </Box>
+              </Stack>
+            </Box>
+
+            {/* Solo logo (showText: false) */}
+            <Box>
+              <Typography variant="h6" gutterBottom>
+                Solo Logo (showText: false)
+              </Typography>
+              <Stack direction="row" spacing={4} alignItems="center">
+                <Box>
+                  <Typography variant="caption" display="block" mb={1}>
+                    Size: sm
+                  </Typography>
+                  <IsotypeName
+                    projectName="nuam"
+                    logoSrc={isotypeLogoSrc}
+                    size="sm"
+                    showText={false}
+                  />
+                </Box>
+                <Box>
+                  <Typography variant="caption" display="block" mb={1}>
+                    Size: md
+                  </Typography>
+                  <IsotypeName
+                    projectName="nuam"
+                    logoSrc={isotypeLogoSrc}
+                    size="md"
+                    showText={false}
+                  />
+                </Box>
+                <Box>
+                  <Typography variant="caption" display="block" mb={1}>
+                    Size: lg
+                  </Typography>
+                  <IsotypeName
+                    projectName="nuam"
+                    logoSrc={isotypeLogoSrc}
+                    size="lg"
+                    showText={false}
+                  />
+                </Box>
+              </Stack>
+            </Box>
+
+            {/* Solo texto (sin logo) */}
+            <Box>
+              <Typography variant="h6" gutterBottom>
+                Solo Texto (sin logoSrc)
+              </Typography>
+              <Stack direction="row" spacing={4} alignItems="center">
+                <Box>
+                  <Typography variant="caption" display="block" mb={1}>
+                    Size: sm
+                  </Typography>
+                  <IsotypeName projectName="nuam" size="sm" />
+                </Box>
+                <Box>
+                  <Typography variant="caption" display="block" mb={1}>
+                    Size: md
+                  </Typography>
+                  <IsotypeName projectName="nuam" size="md" />
+                </Box>
+                <Box>
+                  <Typography variant="caption" display="block" mb={1}>
+                    Size: lg
+                  </Typography>
+                  <IsotypeName projectName="nuam" size="lg" />
+                </Box>
+              </Stack>
+            </Box>
+
+            {/* Variantes de layout */}
+            <Box>
+              <Typography variant="h6" gutterBottom>
+                Variantes
+              </Typography>
+              <Stack direction="row" spacing={4} alignItems="center">
+                <Box>
+                  <Typography variant="caption" display="block" mb={1}>
+                    horizontal
+                  </Typography>
+                  <IsotypeName
+                    projectName="nuam"
+                    logoSrc={isotypeLogoSrc}
+                    variant="horizontal"
+                    size="sm"
+                    showText={true}
+                  />
+                </Box>
+                <Box>
+                  <Typography variant="caption" display="block" mb={1}>
+                    vertical
+                  </Typography>
+                  <IsotypeName
+                    projectName="nuam"
+                    logoSrc={isotypeLogoSrc}
+                    variant="vertical"
+                    size="sm"
+                    showText={true}
+                  />
+                </Box>
+              </Stack>
+            </Box>
+
+            {/* Dark variant */}
+            <Box
+              sx={{
+                backgroundColor: "#1a1a1a",
+                p: 3,
+                borderRadius: 2,
+              }}
+            >
+              <Typography variant="h6" gutterBottom sx={{ color: "#fff" }}>
+                Dark Variant
+              </Typography>
+              <Stack direction="row" spacing={4} alignItems="center">
+                <IsotypeName
+                  projectName="nuam"
+                  logoSrc={isotypeLogoSrc}
+                  variant="dark"
+                  size="sm"
+                  showText={true}
+                />
+                <IsotypeName
+                  projectName="nuam"
+                  logoSrc={isotypeLogoSrc}
+                  variant="dark"
+                  size="md"
+                  showText={true}
+                />
+              </Stack>
+            </Box>
           </Stack>
         </Card>
 
