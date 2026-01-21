@@ -863,33 +863,15 @@ export default function AppComplete() {
                 },
               }}
               pageSizeOptions={[5, 10, 25]}
-              disableColumnMenu={false}
-              showToolbar={true}
-              language="es"
-              onRefresh={handleRefresh}
-              showDownload={true}
-              handleDownload={handleDownload}
               checkboxSelection
-              customFilterOperators={customFilterOperators}
-              addMenuItems={[
-                {
-                  text: "Exportar a Excel",
-                  onClick: () => console.log("Exportar Excel Pro"),
-                },
-                {
-                  text: "Configuración avanzada",
-                  onClick: () => console.log("Configuración Pro"),
-                },
-              ]}
             />
           </Box>
           <Alert severity="info" sx={{ mt: 2 }}>
-            💡 DataGridPro incluye: Column Pinning, Row Grouping, Tree Data,
-            Excel Export y más características avanzadas de MUI X Pro
+            💡 DataGridProX es un wrapper simple de MUI X DataGridPro
           </Alert>
         </Card>
 
-        {/* SECCIÓN 6: MODAL */}
+        {/* SECCIÓN 7: MODAL */}
         <Card sx={{ mb: 3, p: 3 }}>
           <Typography variant="h5" color="primary" gutterBottom>
             6. Modal

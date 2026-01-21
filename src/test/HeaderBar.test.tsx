@@ -9,8 +9,7 @@ import {
   UserButton,
   HEADER_HEIGHT,
 } from "@nuam/common-fe-lib-components";
-import { ThemeProvider, createTheme } from "@mui/material/styles";
-import { CssVarsProvider } from "@mui/material/styles";
+import { createTheme, ThemeProvider } from "@mui/material/styles";
 
 // Mock del logo para pruebas
 const mockLogoSrc = "/test-logo.svg";
@@ -18,13 +17,16 @@ const mockLogoSrc = "/test-logo.svg";
 // Wrapper con tema para componentes que usan useColorScheme
 const ThemeWrapper = ({ children }: { children: React.ReactNode }) => {
   const theme = createTheme({
+    cssVariables: {
+      colorSchemeSelector: "data-nuam-theme",
+    },
     colorSchemes: {
       light: true,
       dark: true,
     },
   });
 
-  return <CssVarsProvider theme={theme}>{children}</CssVarsProvider>;
+  return <ThemeProvider theme={theme}>{children}</ThemeProvider>;
 };
 
 describe("HeaderBar", () => {
