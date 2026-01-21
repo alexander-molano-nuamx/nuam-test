@@ -23,8 +23,9 @@ import {
   SideBar,
   type IPage,
   DRAWER_WIDTH,
-  IsotypeName,
   DataGridPro,
+  IsotypeName,
+  DataGridProX,
 } from "@nuam/common-fe-lib-components";
 import isotypeLogoSrc from "./assets/isotype.svg";
 
@@ -598,6 +599,157 @@ export default function AppComplete() {
 
           <Box sx={{ height: 500, width: "100%" }}>
             <DataGridPro
+              rows={[
+                {
+                  id: 1,
+                  name: "Juan Pérez",
+                  email: "juan@example.com",
+                  role: "Admin",
+                  age: 32,
+                  active: true,
+                  department: "IT",
+                },
+                {
+                  id: 2,
+                  name: "María García",
+                  email: "maria@example.com",
+                  role: "Usuario",
+                  age: 28,
+                  active: true,
+                  department: "Ventas",
+                },
+                {
+                  id: 3,
+                  name: "Pedro López",
+                  email: "pedro@example.com",
+                  role: "Editor",
+                  age: 35,
+                  active: false,
+                  department: "Marketing",
+                },
+                {
+                  id: 4,
+                  name: "Ana Martínez",
+                  email: "ana@example.com",
+                  role: "Usuario",
+                  age: 26,
+                  active: true,
+                  department: "IT",
+                },
+                {
+                  id: 5,
+                  name: "Carlos Rodríguez",
+                  email: "carlos@example.com",
+                  role: "Admin",
+                  age: 40,
+                  active: true,
+                  department: "Finanzas",
+                },
+                {
+                  id: 6,
+                  name: "Laura Sánchez",
+                  email: "laura@example.com",
+                  role: "Editor",
+                  age: 31,
+                  active: true,
+                  department: "IT",
+                },
+                {
+                  id: 7,
+                  name: "Miguel Torres",
+                  email: "miguel@example.com",
+                  role: "Usuario",
+                  age: 29,
+                  active: false,
+                  department: "Ventas",
+                },
+                {
+                  id: 8,
+                  name: "Sofía Ramírez",
+                  email: "sofia@example.com",
+                  role: "Editor",
+                  age: 27,
+                  active: true,
+                  department: "Marketing",
+                },
+                {
+                  id: 9,
+                  name: "Diego Fernández",
+                  email: "diego@example.com",
+                  role: "Admin",
+                  age: 38,
+                  active: true,
+                  department: "IT",
+                },
+                {
+                  id: 10,
+                  name: "Carmen Ruiz",
+                  email: "carmen@example.com",
+                  role: "Usuario",
+                  age: 30,
+                  active: true,
+                  department: "Ventas",
+                },
+              ]}
+              columns={[
+                { field: "id", headerName: "ID", width: 70, type: "number" },
+                { field: "name", headerName: "Nombre", width: 180 },
+                { field: "email", headerName: "Email", width: 220 },
+                { field: "role", headerName: "Rol", width: 120 },
+                { field: "age", headerName: "Edad", width: 90, type: "number" },
+                { field: "department", headerName: "Departamento", width: 150 },
+                {
+                  field: "active",
+                  headerName: "Activo",
+                  width: 100,
+                  type: "boolean",
+                },
+              ]}
+              pagination
+              initialState={{
+                pagination: {
+                  paginationModel: { pageSize: 5, page: 0 },
+                },
+              }}
+              pageSizeOptions={[5, 10, 25]}
+              disableColumnMenu={false}
+              showToolbar={true}
+              language="es"
+              onRefresh={handleRefresh}
+              showDownload={true}
+              handleDownload={handleDownload}
+              checkboxSelection
+              customFilterOperators={customFilterOperators}
+              addMenuItems={[
+                {
+                  text: "Exportar a Excel",
+                  onClick: () => console.log("Exportar Excel Pro"),
+                },
+                {
+                  text: "Configuración avanzada",
+                  onClick: () => console.log("Configuración Pro"),
+                },
+              ]}
+            />
+          </Box>
+          <Alert severity="info" sx={{ mt: 2 }}>
+            💡 DataGridProX incluye: Column Pinning, Row Grouping, Tree Data,
+            Excel Export y más características avanzadas de MUI X Pro
+          </Alert>
+        </Card>
+        {/* SECCIÓN 6: DATAGRID PRO-X (v1.33.0) */}
+        <Card sx={{ mb: 3, p: 3 }}>
+          <Typography variant="h5" color="primary" gutterBottom>
+            5. DataGridProX - Funcionalidades Avanzadas
+          </Typography>
+          <Divider sx={{ mb: 3 }} />
+          <Alert severity="success" sx={{ mb: 2 }}>
+            🆕 <strong>v1.33.0:</strong> DataGridPro con licencia MUI X
+            integrada, incluye todas las características Pro
+          </Alert>
+
+          <Box sx={{ height: 500, width: "100%" }}>
+            <DataGridProX
               rows={[
                 {
                   id: 1,
