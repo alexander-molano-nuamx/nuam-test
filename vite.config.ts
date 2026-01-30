@@ -7,11 +7,14 @@ import path from 'path'
 export default defineConfig({
   plugins: [react()],
   resolve: {
-    alias: {
-      // Forzar una sola instancia de React para evitar errores de hooks
-      'react': path.resolve(__dirname, 'node_modules/react'),
-      'react-dom': path.resolve(__dirname, 'node_modules/react-dom'),
-    },
+    dedupe: [
+      'react',
+      'react-dom',
+      '@mui/material',
+      '@mui/system',
+      '@emotion/react',
+      '@emotion/styled',
+    ],
   },
   test: {
     globals: true,
@@ -24,7 +27,6 @@ export default defineConfig({
       },
     },
     alias: {
-      // Aliases adicionales solo para tests
       '@mui/material': path.resolve(__dirname, 'node_modules/@mui/material'),
       '@mui/system': path.resolve(__dirname, 'node_modules/@mui/system'),
       '@mui/private-theming': path.resolve(__dirname, 'node_modules/@mui/private-theming'),
