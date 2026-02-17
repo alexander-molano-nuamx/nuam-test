@@ -41,6 +41,17 @@ import {
   TabsWrapper,
   TabItem,
   Select,
+  LineChart,
+  PieChart,
+  SparkLineChart,
+  BarChart,
+  ScatterChart,
+  Gauge,
+  RadarChart,
+  Heatmap,
+  FunnelChart,
+  SankeyChart,
+  AreaChart,
 } from "@nuam/common-fe-lib-components";
 import isotypeLogoSrc from "./assets/isotype.svg";
 
@@ -273,7 +284,7 @@ const sidebarPages: IPage[] = [
   },
 ];
 
-const shortcutsItems: PickersShortcutsItem<DateRange<Dayjs>>[] = [
+const shortcutsItems = [
   {
     label: "Esta Semana",
     getValue: () => {
@@ -2438,7 +2449,7 @@ export default function AppComplete() {
                   }
                   selectedItems={treeSelectedItems}
                   onSelectedItemsChange={(_, itemIds) =>
-                    setTreeSelectedItems(itemIds)
+                    setTreeSelectedItems(Array.isArray(itemIds) ? itemIds : [])
                   }
                   multiSelect
                   slots={{
@@ -3040,6 +3051,2601 @@ export default function AppComplete() {
             reordenamiento, mejor rendimiento con muchos nodos,
             checkboxSelection con propagación automática
           </Alert>
+        </Card>
+
+        {/* SECCIÓN 12: LINE CHARTS */}
+        <Card sx={{ mb: 3, p: 3 }}>
+          <Typography variant="h5" color="primary" gutterBottom>
+            12. LineChart - Gráficos de Línea
+          </Typography>
+          <Divider sx={{ mb: 3 }} />
+          <Alert severity="success" sx={{ mb: 3 }}>
+            Gráficos de línea con múltiples funcionalidades: áreas, apilado,
+            interpolación, marcadores, y más. Basado en MUI X Charts.
+          </Alert>
+
+          <Stack spacing={4}>
+            {/* 1. Basic Line Chart */}
+            <Box>
+              <Typography variant="h6" gutterBottom>
+                1. Gráfico de Línea Básico
+              </Typography>
+              <Typography variant="body2" color="text.secondary" sx={{ mb: 2 }}>
+                Gráfico simple con una sola serie de datos.
+              </Typography>
+              <LineChart
+                xAxis={[{ data: [1, 2, 3, 4, 5, 6, 7] }]}
+                series={[
+                  {
+                    data: [2, 5.5, 2, 8.5, 1.5, 5, 3],
+                    label: "Ventas",
+                  },
+                ]}
+                height={300}
+              />
+            </Box>
+
+            <Divider />
+
+            {/* 2. Multiple Series */}
+            <Box>
+              <Typography variant="h6" gutterBottom>
+                2. Múltiples Series
+              </Typography>
+              <Typography variant="body2" color="text.secondary" sx={{ mb: 2 }}>
+                Comparación de múltiples series en un solo gráfico.
+              </Typography>
+              <LineChart
+                xAxis={[
+                  {
+                    data: ["Ene", "Feb", "Mar", "Abr", "May", "Jun"],
+                    scaleType: "band",
+                  },
+                ]}
+                series={[
+                  { data: [35, 44, 24, 34, 25, 40], label: "2023" },
+                  { data: [51, 60, 47, 55, 48, 65], label: "2024" },
+                  { data: [15, 25, 30, 22, 35, 28], label: "2025" },
+                ]}
+                height={300}
+              />
+            </Box>
+
+            <Divider />
+
+            {/* 3. Area Chart */}
+            <Box>
+              <Typography variant="h6" gutterBottom>
+                3. Gráfico de Área
+              </Typography>
+              <Typography variant="body2" color="text.secondary" sx={{ mb: 2 }}>
+                Rellena el área bajo la línea con <code>area: true</code>.
+              </Typography>
+              <LineChart
+                xAxis={[{ data: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10] }]}
+                series={[
+                  {
+                    data: [2, 5, 3, 8, 1, 6, 4, 9, 2, 7],
+                    area: true,
+                    label: "Ingresos",
+                  },
+                ]}
+                height={300}
+              />
+            </Box>
+
+            <Divider />
+
+            {/* 4. Multiple Area Charts */}
+            <Box>
+              <Typography variant="h6" gutterBottom>
+                4. Múltiples Áreas
+              </Typography>
+              <Typography variant="body2" color="text.secondary" sx={{ mb: 2 }}>
+                Varias series con área para comparar tendencias.
+              </Typography>
+              <LineChart
+                xAxis={[
+                  {
+                    data: [
+                      "Ene",
+                      "Feb",
+                      "Mar",
+                      "Abr",
+                      "May",
+                      "Jun",
+                      "Jul",
+                      "Ago",
+                    ],
+                    scaleType: "band",
+                  },
+                ]}
+                series={[
+                  {
+                    data: [40, 35, 50, 45, 60, 55, 70, 65],
+                    area: true,
+                    label: "Producto A",
+                  },
+                  {
+                    data: [25, 30, 35, 40, 45, 50, 55, 60],
+                    area: true,
+                    label: "Producto B",
+                  },
+                ]}
+                height={300}
+              />
+            </Box>
+
+            <Divider />
+
+            {/* 5. Stacked Area Chart */}
+            <Box>
+              <Typography variant="h6" gutterBottom>
+                5. Áreas Apiladas (Stacked)
+              </Typography>
+              <Typography variant="body2" color="text.secondary" sx={{ mb: 2 }}>
+                Series apiladas usando <code>stack: &quot;total&quot;</code>.
+              </Typography>
+              <LineChart
+                xAxis={[
+                  {
+                    data: ["Q1", "Q2", "Q3", "Q4"],
+                    scaleType: "band",
+                  },
+                ]}
+                series={[
+                  {
+                    data: [120, 150, 180, 200],
+                    area: true,
+                    stack: "total",
+                    label: "Norte",
+                  },
+                  {
+                    data: [80, 100, 120, 140],
+                    area: true,
+                    stack: "total",
+                    label: "Sur",
+                  },
+                  {
+                    data: [60, 70, 90, 100],
+                    area: true,
+                    stack: "total",
+                    label: "Este",
+                  },
+                ]}
+                height={300}
+              />
+            </Box>
+
+            <Divider />
+
+            {/* 6. Different Curve Types */}
+            <Box>
+              <Typography variant="h6" gutterBottom>
+                6. Tipos de Interpolación (Curve)
+              </Typography>
+              <Typography variant="body2" color="text.secondary" sx={{ mb: 2 }}>
+                Diferentes tipos de curva: linear, catmullRom, step, monotoneX.
+              </Typography>
+              <Stack direction={{ xs: "column", md: "row" }} spacing={2}>
+                <Box sx={{ flex: 1 }}>
+                  <Typography variant="caption" display="block" gutterBottom>
+                    <code>curve: &quot;linear&quot;</code>
+                  </Typography>
+                  <LineChart
+                    xAxis={[{ data: [0, 1, 2, 3, 4, 5] }]}
+                    series={[
+                      {
+                        data: [0, 5, 2, 6, 3, 9],
+                        curve: "linear",
+                      },
+                    ]}
+                    height={200}
+                  />
+                </Box>
+                <Box sx={{ flex: 1 }}>
+                  <Typography variant="caption" display="block" gutterBottom>
+                    <code>curve: &quot;catmullRom&quot;</code>
+                  </Typography>
+                  <LineChart
+                    xAxis={[{ data: [0, 1, 2, 3, 4, 5] }]}
+                    series={[
+                      {
+                        data: [0, 5, 2, 6, 3, 9],
+                        curve: "catmullRom",
+                      },
+                    ]}
+                    height={200}
+                  />
+                </Box>
+              </Stack>
+              <Stack direction={{ xs: "column", md: "row" }} spacing={2} mt={2}>
+                <Box sx={{ flex: 1 }}>
+                  <Typography variant="caption" display="block" gutterBottom>
+                    <code>curve: &quot;step&quot;</code>
+                  </Typography>
+                  <LineChart
+                    xAxis={[{ data: [0, 1, 2, 3, 4, 5] }]}
+                    series={[
+                      {
+                        data: [0, 5, 2, 6, 3, 9],
+                        curve: "step",
+                      },
+                    ]}
+                    height={200}
+                  />
+                </Box>
+                <Box sx={{ flex: 1 }}>
+                  <Typography variant="caption" display="block" gutterBottom>
+                    <code>curve: &quot;monotoneX&quot;</code>
+                  </Typography>
+                  <LineChart
+                    xAxis={[{ data: [0, 1, 2, 3, 4, 5] }]}
+                    series={[
+                      {
+                        data: [0, 5, 2, 6, 3, 9],
+                        curve: "monotoneX",
+                      },
+                    ]}
+                    height={200}
+                  />
+                </Box>
+              </Stack>
+            </Box>
+
+            <Divider />
+
+            {/* 7. With Marks/Points */}
+            <Box>
+              <Typography variant="h6" gutterBottom>
+                7. Con Marcadores (Marks)
+              </Typography>
+              <Typography variant="body2" color="text.secondary" sx={{ mb: 2 }}>
+                Muestra puntos en cada dato con <code>showMark: true</code>.
+              </Typography>
+              <LineChart
+                xAxis={[
+                  {
+                    data: ["Lun", "Mar", "Mié", "Jue", "Vie", "Sáb", "Dom"],
+                    scaleType: "band",
+                  },
+                ]}
+                series={[
+                  {
+                    data: [65, 59, 80, 81, 56, 55, 70],
+                    label: "Visitantes",
+                    showMark: true,
+                  },
+                ]}
+                height={300}
+              />
+            </Box>
+
+            <Divider />
+
+            {/* 8. Baseline Variations */}
+            <Box>
+              <Typography variant="h6" gutterBottom>
+                8. Variaciones de Baseline
+              </Typography>
+              <Typography variant="body2" color="text.secondary" sx={{ mb: 2 }}>
+                Control del baseline del área: default (0), min, max.
+              </Typography>
+              <Stack direction={{ xs: "column", md: "row" }} spacing={2}>
+                <Box sx={{ flex: 1 }}>
+                  <Typography variant="caption" display="block" gutterBottom>
+                    <code>baseline: &quot;min&quot;</code> (rellena hacia abajo)
+                  </Typography>
+                  <LineChart
+                    xAxis={[{ data: [1, 2, 3, 4, 5] }]}
+                    series={[
+                      {
+                        data: [4, 3, 5, 2, 6],
+                        area: true,
+                        baseline: "min",
+                      },
+                    ]}
+                    height={200}
+                  />
+                </Box>
+                <Box sx={{ flex: 1 }}>
+                  <Typography variant="caption" display="block" gutterBottom>
+                    <code>baseline: &quot;max&quot;</code> (rellena hacia
+                    arriba)
+                  </Typography>
+                  <LineChart
+                    xAxis={[{ data: [1, 2, 3, 4, 5] }]}
+                    series={[
+                      {
+                        data: [4, 3, 5, 2, 6],
+                        area: true,
+                        baseline: "max",
+                      },
+                    ]}
+                    height={200}
+                  />
+                </Box>
+              </Stack>
+            </Box>
+
+            <Divider />
+
+            {/* 9. Null Values & Connect Nulls */}
+            <Box>
+              <Typography variant="h6" gutterBottom>
+                9. Valores Nulos y connectNulls
+              </Typography>
+              <Typography variant="body2" color="text.secondary" sx={{ mb: 2 }}>
+                Manejo de datos faltantes con <code>connectNulls</code>.
+              </Typography>
+              <Stack direction={{ xs: "column", md: "row" }} spacing={2}>
+                <Box sx={{ flex: 1 }}>
+                  <Typography variant="caption" display="block" gutterBottom>
+                    Sin connectNulls (gap en datos)
+                  </Typography>
+                  <LineChart
+                    xAxis={[{ data: [1, 2, 3, 4, 5, 6, 7, 8] }]}
+                    series={[
+                      {
+                        data: [2, 5, null, null, 8, 3, 6, 4],
+                        connectNulls: false,
+                      },
+                    ]}
+                    height={200}
+                  />
+                </Box>
+                <Box sx={{ flex: 1 }}>
+                  <Typography variant="caption" display="block" gutterBottom>
+                    Con <code>connectNulls: true</code>
+                  </Typography>
+                  <LineChart
+                    xAxis={[{ data: [1, 2, 3, 4, 5, 6, 7, 8] }]}
+                    series={[
+                      {
+                        data: [2, 5, null, null, 8, 3, 6, 4],
+                        connectNulls: true,
+                      },
+                    ]}
+                    height={200}
+                  />
+                </Box>
+              </Stack>
+            </Box>
+
+            <Divider />
+
+            {/* 10. With Grid */}
+            <Box>
+              <Typography variant="h6" gutterBottom>
+                10. Con Grid de Fondo
+              </Typography>
+              <Typography variant="body2" color="text.secondary" sx={{ mb: 2 }}>
+                Agrega líneas de referencia con <code>grid</code>.
+              </Typography>
+              <LineChart
+                xAxis={[
+                  {
+                    data: [
+                      "Ene",
+                      "Feb",
+                      "Mar",
+                      "Abr",
+                      "May",
+                      "Jun",
+                      "Jul",
+                      "Ago",
+                      "Sep",
+                      "Oct",
+                      "Nov",
+                      "Dic",
+                    ],
+                    scaleType: "band",
+                  },
+                ]}
+                series={[
+                  {
+                    data: [
+                      186, 305, 237, 173, 209, 214, 276, 298, 312, 267, 245,
+                      289,
+                    ],
+                    label: "Ventas 2024",
+                    area: true,
+                  },
+                ]}
+                grid={{ vertical: true, horizontal: true }}
+                height={300}
+              />
+            </Box>
+
+            <Divider />
+
+            {/* 11. Custom Colors */}
+            <Box>
+              <Typography variant="h6" gutterBottom>
+                11. Colores Personalizados
+              </Typography>
+              <Typography variant="body2" color="text.secondary" sx={{ mb: 2 }}>
+                Define colores específicos para cada serie.
+              </Typography>
+              <LineChart
+                xAxis={[{ data: [1, 2, 3, 4, 5, 6] }]}
+                series={[
+                  {
+                    data: [3, 4, 1, 6, 5, 2],
+                    label: "Serie Roja",
+                    color: "#f44336",
+                  },
+                  {
+                    data: [1, 3, 2, 5, 4, 6],
+                    label: "Serie Verde",
+                    color: "#4caf50",
+                  },
+                  {
+                    data: [2, 1, 4, 3, 6, 5],
+                    label: "Serie Azul",
+                    color: "#2196f3",
+                  },
+                ]}
+                height={300}
+              />
+            </Box>
+
+            <Divider />
+
+            {/* 12. Dataset Format */}
+            <Box>
+              <Typography variant="h6" gutterBottom>
+                12. Formato Dataset
+              </Typography>
+              <Typography variant="body2" color="text.secondary" sx={{ mb: 2 }}>
+                Usa <code>dataset</code> con <code>dataKey</code> para
+                estructuras de datos más organizadas.
+              </Typography>
+              <LineChart
+                dataset={[
+                  { mes: "Ene", ventas: 65, gastos: 40, margen: 25 },
+                  { mes: "Feb", ventas: 78, gastos: 45, margen: 33 },
+                  { mes: "Mar", ventas: 90, gastos: 55, margen: 35 },
+                  { mes: "Abr", ventas: 81, gastos: 50, margen: 31 },
+                  { mes: "May", ventas: 95, gastos: 58, margen: 37 },
+                  { mes: "Jun", ventas: 110, gastos: 65, margen: 45 },
+                ]}
+                xAxis={[{ dataKey: "mes", scaleType: "band" }]}
+                series={[
+                  { dataKey: "ventas", label: "Ventas" },
+                  { dataKey: "gastos", label: "Gastos" },
+                  { dataKey: "margen", label: "Margen", area: true },
+                ]}
+                height={300}
+              />
+            </Box>
+
+            <Divider />
+
+            {/* 13. Skip Animation */}
+            <Box>
+              <Typography variant="h6" gutterBottom>
+                13. Sin Animación
+              </Typography>
+              <Typography variant="body2" color="text.secondary" sx={{ mb: 2 }}>
+                Desactiva animaciones con <code>skipAnimation</code>.
+              </Typography>
+              <LineChart
+                xAxis={[{ data: [1, 2, 3, 4, 5] }]}
+                series={[
+                  {
+                    data: [10, 15, 12, 18, 14],
+                    label: "Datos estáticos",
+                    area: true,
+                  },
+                ]}
+                skipAnimation
+                height={250}
+              />
+            </Box>
+
+            <Divider />
+
+            {/* 14. Step Variations */}
+            <Box>
+              <Typography variant="h6" gutterBottom>
+                14. Variaciones de Step
+              </Typography>
+              <Typography variant="body2" color="text.secondary" sx={{ mb: 2 }}>
+                Diferentes posiciones del step: step, stepBefore, stepAfter.
+              </Typography>
+              <Stack direction={{ xs: "column", md: "row" }} spacing={2}>
+                <Box sx={{ flex: 1 }}>
+                  <Typography variant="caption" display="block" gutterBottom>
+                    <code>curve: &quot;stepBefore&quot;</code>
+                  </Typography>
+                  <LineChart
+                    xAxis={[{ data: [1, 2, 3, 4, 5] }]}
+                    series={[{ data: [2, 5, 3, 7, 4], curve: "stepBefore" }]}
+                    height={180}
+                  />
+                </Box>
+                <Box sx={{ flex: 1 }}>
+                  <Typography variant="caption" display="block" gutterBottom>
+                    <code>curve: &quot;stepAfter&quot;</code>
+                  </Typography>
+                  <LineChart
+                    xAxis={[{ data: [1, 2, 3, 4, 5] }]}
+                    series={[{ data: [2, 5, 3, 7, 4], curve: "stepAfter" }]}
+                    height={180}
+                  />
+                </Box>
+              </Stack>
+            </Box>
+
+            <Divider />
+
+            {/* 15. Complete Dashboard Example */}
+            <Box>
+              <Typography variant="h6" gutterBottom>
+                15. Ejemplo Dashboard Completo
+              </Typography>
+              <Typography variant="body2" color="text.secondary" sx={{ mb: 2 }}>
+                Gráfico completo con todas las funcionalidades combinadas.
+              </Typography>
+              <LineChart
+                dataset={[
+                  { month: "Ene", organic: 4000, paid: 2400, referral: 1200 },
+                  { month: "Feb", organic: 3000, paid: 1398, referral: 1100 },
+                  { month: "Mar", organic: 2000, paid: 9800, referral: 2290 },
+                  { month: "Abr", organic: 2780, paid: 3908, referral: 2000 },
+                  { month: "May", organic: 1890, paid: 4800, referral: 2181 },
+                  { month: "Jun", organic: 2390, paid: 3800, referral: 2500 },
+                  { month: "Jul", organic: 3490, paid: 4300, referral: 2100 },
+                  { month: "Ago", organic: 4200, paid: 5100, referral: 2800 },
+                  { month: "Sep", organic: 3800, paid: 4700, referral: 2400 },
+                  { month: "Oct", organic: 4500, paid: 5300, referral: 3000 },
+                  { month: "Nov", organic: 5200, paid: 6100, referral: 3200 },
+                  { month: "Dic", organic: 6000, paid: 7000, referral: 3500 },
+                ]}
+                xAxis={[
+                  {
+                    dataKey: "month",
+                    scaleType: "band",
+                  },
+                ]}
+                series={[
+                  {
+                    dataKey: "organic",
+                    label: "Tráfico Orgánico",
+                    area: true,
+                    stack: "traffic",
+                    color: "#4caf50",
+                    showMark: true,
+                  },
+                  {
+                    dataKey: "paid",
+                    label: "Tráfico Pagado",
+                    area: true,
+                    stack: "traffic",
+                    color: "#2196f3",
+                    showMark: true,
+                  },
+                  {
+                    dataKey: "referral",
+                    label: "Referidos",
+                    area: true,
+                    stack: "traffic",
+                    color: "#ff9800",
+                    showMark: true,
+                  },
+                ]}
+                grid={{ vertical: true, horizontal: true }}
+                height={400}
+              />
+            </Box>
+          </Stack>
+
+          <Alert severity="info" sx={{ mt: 3 }}>
+            💡 <strong>Props principales:</strong>
+            <ul style={{ margin: "8px 0", paddingLeft: "20px" }}>
+              <li>
+                <code>area: true</code> - Rellena el área bajo la línea
+              </li>
+              <li>
+                <code>stack: &quot;nombre&quot;</code> - Apila series con el
+                mismo nombre
+              </li>
+              <li>
+                <code>curve</code> - Tipo de interpolación (linear, catmullRom,
+                step, monotoneX, etc.)
+              </li>
+              <li>
+                <code>showMark: true</code> - Muestra puntos en cada dato
+              </li>
+              <li>
+                <code>connectNulls: true</code> - Conecta puntos ignorando
+                valores null
+              </li>
+              <li>
+                <code>baseline</code> - Control del baseline del área (min, max,
+                número)
+              </li>
+              <li>
+                <code>grid</code> - Muestra líneas de referencia
+              </li>
+              <li>
+                <code>dataset + dataKey</code> - Formato estructurado de datos
+              </li>
+            </ul>
+          </Alert>
+        </Card>
+
+        {/* SECCIÓN 13: PIE CHARTS */}
+        <Card sx={{ mb: 3, p: 3 }}>
+          <Typography variant="h5" color="primary" gutterBottom>
+            13. PieChart - Gráficos Circulares
+          </Typography>
+          <Divider sx={{ mb: 3 }} />
+          <Alert severity="success" sx={{ mb: 3 }}>
+            Gráficos circulares con múltiples funcionalidades: donut, etiquetas,
+            ángulos, radios personalizados, highlighting y más.
+          </Alert>
+
+          <Stack spacing={4}>
+            {/* 1. Basic Pie Chart */}
+            <Box>
+              <Typography variant="h6" gutterBottom>
+                1. Gráfico de Pie Básico
+              </Typography>
+              <Typography variant="body2" color="text.secondary" sx={{ mb: 2 }}>
+                Gráfico circular simple con datos básicos.
+              </Typography>
+              <PieChart
+                series={[
+                  {
+                    data: [
+                      { id: 0, value: 10, label: "Categoría A" },
+                      { id: 1, value: 15, label: "Categoría B" },
+                      { id: 2, value: 20, label: "Categoría C" },
+                    ],
+                  },
+                ]}
+                width={400}
+                height={200}
+              />
+            </Box>
+
+            <Divider />
+
+            {/* 2. Donut Chart */}
+            <Box>
+              <Typography variant="h6" gutterBottom>
+                2. Gráfico Donut (innerRadius)
+              </Typography>
+              <Typography variant="body2" color="text.secondary" sx={{ mb: 2 }}>
+                Usa <code>innerRadius</code> para crear un agujero en el centro.
+              </Typography>
+              <Stack direction={{ xs: "column", md: "row" }} spacing={2}>
+                <Box sx={{ flex: 1 }}>
+                  <Typography variant="caption" display="block" gutterBottom>
+                    <code>innerRadius: 30</code>
+                  </Typography>
+                  <PieChart
+                    series={[
+                      {
+                        data: [
+                          { id: 0, value: 35, label: "Ventas" },
+                          { id: 1, value: 25, label: "Marketing" },
+                          { id: 2, value: 20, label: "Desarrollo" },
+                          { id: 3, value: 20, label: "Soporte" },
+                        ],
+                        innerRadius: 30,
+                      },
+                    ]}
+                    width={300}
+                    height={200}
+                  />
+                </Box>
+                <Box sx={{ flex: 1 }}>
+                  <Typography variant="caption" display="block" gutterBottom>
+                    <code>innerRadius: 60</code>
+                  </Typography>
+                  <PieChart
+                    series={[
+                      {
+                        data: [
+                          { id: 0, value: 35, label: "Ventas" },
+                          { id: 1, value: 25, label: "Marketing" },
+                          { id: 2, value: 20, label: "Desarrollo" },
+                          { id: 3, value: 20, label: "Soporte" },
+                        ],
+                        innerRadius: 60,
+                      },
+                    ]}
+                    width={300}
+                    height={200}
+                  />
+                </Box>
+              </Stack>
+            </Box>
+
+            <Divider />
+
+            {/* 3. Padding Angle */}
+            <Box>
+              <Typography variant="h6" gutterBottom>
+                3. Espaciado entre Arcos (paddingAngle)
+              </Typography>
+              <Typography variant="body2" color="text.secondary" sx={{ mb: 2 }}>
+                Agrega espacio angular entre los segmentos.
+              </Typography>
+              <Stack direction={{ xs: "column", md: "row" }} spacing={2}>
+                <Box sx={{ flex: 1 }}>
+                  <Typography variant="caption" display="block" gutterBottom>
+                    <code>paddingAngle: 2</code>
+                  </Typography>
+                  <PieChart
+                    series={[
+                      {
+                        data: [
+                          { id: 0, value: 30 },
+                          { id: 1, value: 25 },
+                          { id: 2, value: 20 },
+                          { id: 3, value: 15 },
+                          { id: 4, value: 10 },
+                        ],
+                        paddingAngle: 2,
+                        innerRadius: 40,
+                      },
+                    ]}
+                    width={250}
+                    height={200}
+                  />
+                </Box>
+                <Box sx={{ flex: 1 }}>
+                  <Typography variant="caption" display="block" gutterBottom>
+                    <code>paddingAngle: 5</code>
+                  </Typography>
+                  <PieChart
+                    series={[
+                      {
+                        data: [
+                          { id: 0, value: 30 },
+                          { id: 1, value: 25 },
+                          { id: 2, value: 20 },
+                          { id: 3, value: 15 },
+                          { id: 4, value: 10 },
+                        ],
+                        paddingAngle: 5,
+                        innerRadius: 40,
+                      },
+                    ]}
+                    width={250}
+                    height={200}
+                  />
+                </Box>
+              </Stack>
+            </Box>
+
+            <Divider />
+
+            {/* 4. Corner Radius */}
+            <Box>
+              <Typography variant="h6" gutterBottom>
+                4. Bordes Redondeados (cornerRadius)
+              </Typography>
+              <Typography variant="body2" color="text.secondary" sx={{ mb: 2 }}>
+                Similar a CSS border-radius para los arcos.
+              </Typography>
+              <Stack direction={{ xs: "column", md: "row" }} spacing={2}>
+                <Box sx={{ flex: 1 }}>
+                  <Typography variant="caption" display="block" gutterBottom>
+                    <code>cornerRadius: 5</code>
+                  </Typography>
+                  <PieChart
+                    series={[
+                      {
+                        data: [
+                          { id: 0, value: 40, label: "Norte" },
+                          { id: 1, value: 30, label: "Sur" },
+                          { id: 2, value: 20, label: "Este" },
+                          { id: 3, value: 10, label: "Oeste" },
+                        ],
+                        cornerRadius: 5,
+                        innerRadius: 30,
+                        paddingAngle: 2,
+                      },
+                    ]}
+                    width={300}
+                    height={200}
+                  />
+                </Box>
+                <Box sx={{ flex: 1 }}>
+                  <Typography variant="caption" display="block" gutterBottom>
+                    <code>cornerRadius: 10</code>
+                  </Typography>
+                  <PieChart
+                    series={[
+                      {
+                        data: [
+                          { id: 0, value: 40, label: "Norte" },
+                          { id: 1, value: 30, label: "Sur" },
+                          { id: 2, value: 20, label: "Este" },
+                          { id: 3, value: 10, label: "Oeste" },
+                        ],
+                        cornerRadius: 10,
+                        innerRadius: 30,
+                        paddingAngle: 2,
+                      },
+                    ]}
+                    width={300}
+                    height={200}
+                  />
+                </Box>
+              </Stack>
+            </Box>
+
+            <Divider />
+
+            {/* 5. Start and End Angle */}
+            <Box>
+              <Typography variant="h6" gutterBottom>
+                5. Ángulo Inicial y Final
+              </Typography>
+              <Typography variant="body2" color="text.secondary" sx={{ mb: 2 }}>
+                Control del rango del arco con <code>startAngle</code> y{" "}
+                <code>endAngle</code>.
+              </Typography>
+              <Stack direction={{ xs: "column", md: "row" }} spacing={2}>
+                <Box sx={{ flex: 1 }}>
+                  <Typography variant="caption" display="block" gutterBottom>
+                    Semicírculo: <code>startAngle: -90, endAngle: 90</code>
+                  </Typography>
+                  <PieChart
+                    series={[
+                      {
+                        data: [
+                          { id: 0, value: 50, label: "Completado" },
+                          { id: 1, value: 30, label: "En Progreso" },
+                          { id: 2, value: 20, label: "Pendiente" },
+                        ],
+                        startAngle: -90,
+                        endAngle: 90,
+                        innerRadius: 40,
+                      },
+                    ]}
+                    width={300}
+                    height={200}
+                  />
+                </Box>
+                <Box sx={{ flex: 1 }}>
+                  <Typography variant="caption" display="block" gutterBottom>
+                    Gauge: <code>startAngle: -120, endAngle: 120</code>
+                  </Typography>
+                  <PieChart
+                    series={[
+                      {
+                        data: [
+                          { id: 0, value: 70, label: "Usado" },
+                          { id: 1, value: 30, label: "Libre" },
+                        ],
+                        startAngle: -120,
+                        endAngle: 120,
+                        innerRadius: 50,
+                        cornerRadius: 5,
+                      },
+                    ]}
+                    width={300}
+                    height={200}
+                  />
+                </Box>
+              </Stack>
+            </Box>
+
+            <Divider />
+
+            {/* 6. Arc Labels */}
+            <Box>
+              <Typography variant="h6" gutterBottom>
+                6. Etiquetas en Arcos (arcLabel)
+              </Typography>
+              <Typography variant="body2" color="text.secondary" sx={{ mb: 2 }}>
+                Muestra etiquetas dentro de los arcos.
+              </Typography>
+              <Stack direction={{ xs: "column", md: "row" }} spacing={2}>
+                <Box sx={{ flex: 1 }}>
+                  <Typography variant="caption" display="block" gutterBottom>
+                    <code>arcLabel: &quot;value&quot;</code>
+                  </Typography>
+                  <PieChart
+                    series={[
+                      {
+                        data: [
+                          { id: 0, value: 45, label: "Chrome" },
+                          { id: 1, value: 25, label: "Firefox" },
+                          { id: 2, value: 20, label: "Safari" },
+                          { id: 3, value: 10, label: "Edge" },
+                        ],
+                        arcLabel: "value",
+                      },
+                    ]}
+                    width={300}
+                    height={200}
+                  />
+                </Box>
+                <Box sx={{ flex: 1 }}>
+                  <Typography variant="caption" display="block" gutterBottom>
+                    <code>arcLabel: &quot;label&quot;</code>
+                  </Typography>
+                  <PieChart
+                    series={[
+                      {
+                        data: [
+                          { id: 0, value: 45, label: "Chrome" },
+                          { id: 1, value: 25, label: "Firefox" },
+                          { id: 2, value: 20, label: "Safari" },
+                          { id: 3, value: 10, label: "Edge" },
+                        ],
+                        arcLabel: "label",
+                      },
+                    ]}
+                    width={300}
+                    height={200}
+                  />
+                </Box>
+              </Stack>
+            </Box>
+
+            <Divider />
+
+            {/* 7. Arc Label with Percentage */}
+            <Box>
+              <Typography variant="h6" gutterBottom>
+                7. Etiquetas con Porcentaje
+              </Typography>
+              <Typography variant="body2" color="text.secondary" sx={{ mb: 2 }}>
+                Función personalizada para mostrar porcentajes.
+              </Typography>
+              <PieChart
+                series={[
+                  {
+                    data: [
+                      { id: 0, value: 40, label: "Producto A" },
+                      { id: 1, value: 35, label: "Producto B" },
+                      { id: 2, value: 15, label: "Producto C" },
+                      { id: 3, value: 10, label: "Otros" },
+                    ],
+                    arcLabel: (item) => `${item.value}%`,
+                    arcLabelMinAngle: 35,
+                    innerRadius: 30,
+                  },
+                ]}
+                width={400}
+                height={250}
+              />
+            </Box>
+
+            <Divider />
+
+            {/* 8. Arc Label Min Angle */}
+            <Box>
+              <Typography variant="h6" gutterBottom>
+                8. Ángulo Mínimo para Etiquetas
+              </Typography>
+              <Typography variant="body2" color="text.secondary" sx={{ mb: 2 }}>
+                <code>arcLabelMinAngle</code> oculta etiquetas en arcos
+                pequeños.
+              </Typography>
+              <Stack direction={{ xs: "column", md: "row" }} spacing={2}>
+                <Box sx={{ flex: 1 }}>
+                  <Typography variant="caption" display="block" gutterBottom>
+                    Sin mínimo (etiquetas en todos)
+                  </Typography>
+                  <PieChart
+                    series={[
+                      {
+                        data: [
+                          { id: 0, value: 60 },
+                          { id: 1, value: 20 },
+                          { id: 2, value: 10 },
+                          { id: 3, value: 5 },
+                          { id: 4, value: 3 },
+                          { id: 5, value: 2 },
+                        ],
+                        arcLabel: "value",
+                      },
+                    ]}
+                    width={250}
+                    height={200}
+                  />
+                </Box>
+                <Box sx={{ flex: 1 }}>
+                  <Typography variant="caption" display="block" gutterBottom>
+                    <code>arcLabelMinAngle: 25</code>
+                  </Typography>
+                  <PieChart
+                    series={[
+                      {
+                        data: [
+                          { id: 0, value: 60 },
+                          { id: 1, value: 20 },
+                          { id: 2, value: 10 },
+                          { id: 3, value: 5 },
+                          { id: 4, value: 3 },
+                          { id: 5, value: 2 },
+                        ],
+                        arcLabel: "value",
+                        arcLabelMinAngle: 25,
+                      },
+                    ]}
+                    width={250}
+                    height={200}
+                  />
+                </Box>
+              </Stack>
+            </Box>
+
+            <Divider />
+
+            {/* 9. Custom Colors */}
+            <Box>
+              <Typography variant="h6" gutterBottom>
+                9. Colores Personalizados
+              </Typography>
+              <Typography variant="body2" color="text.secondary" sx={{ mb: 2 }}>
+                Define colores por dato o usa una paleta global.
+              </Typography>
+              <Stack direction={{ xs: "column", md: "row" }} spacing={2}>
+                <Box sx={{ flex: 1 }}>
+                  <Typography variant="caption" display="block" gutterBottom>
+                    Colores por dato
+                  </Typography>
+                  <PieChart
+                    series={[
+                      {
+                        data: [
+                          {
+                            id: 0,
+                            value: 30,
+                            label: "Éxito",
+                            color: "#4caf50",
+                          },
+                          {
+                            id: 1,
+                            value: 20,
+                            label: "Advertencia",
+                            color: "#ff9800",
+                          },
+                          {
+                            id: 2,
+                            value: 10,
+                            label: "Error",
+                            color: "#f44336",
+                          },
+                          { id: 3, value: 40, label: "Info", color: "#2196f3" },
+                        ],
+                      },
+                    ]}
+                    width={300}
+                    height={200}
+                  />
+                </Box>
+                <Box sx={{ flex: 1 }}>
+                  <Typography variant="caption" display="block" gutterBottom>
+                    Paleta global con <code>colors</code>
+                  </Typography>
+                  <PieChart
+                    colors={["#9c27b0", "#e91e63", "#ff5722", "#795548"]}
+                    series={[
+                      {
+                        data: [
+                          { id: 0, value: 25, label: "Q1" },
+                          { id: 1, value: 30, label: "Q2" },
+                          { id: 2, value: 28, label: "Q3" },
+                          { id: 3, value: 17, label: "Q4" },
+                        ],
+                      },
+                    ]}
+                    width={300}
+                    height={200}
+                  />
+                </Box>
+              </Stack>
+            </Box>
+
+            <Divider />
+
+            {/* 10. Highlighted State */}
+            <Box>
+              <Typography variant="h6" gutterBottom>
+                10. Estado Highlighted (Resaltado)
+              </Typography>
+              <Typography variant="body2" color="text.secondary" sx={{ mb: 2 }}>
+                Modifica el tamaño al hacer hover con{" "}
+                <code>highlighted.additionalRadius</code>.
+              </Typography>
+              <PieChart
+                series={[
+                  {
+                    data: [
+                      { id: 0, value: 35, label: "Desktop" },
+                      { id: 1, value: 45, label: "Mobile" },
+                      { id: 2, value: 20, label: "Tablet" },
+                    ],
+                    innerRadius: 40,
+                    paddingAngle: 2,
+                    cornerRadius: 5,
+                    highlighted: { additionalRadius: 10 },
+                  },
+                ]}
+                width={400}
+                height={250}
+              />
+            </Box>
+
+            <Divider />
+
+            {/* 11. Faded State */}
+            <Box>
+              <Typography variant="h6" gutterBottom>
+                11. Estado Faded (Desvanecido)
+              </Typography>
+              <Typography variant="body2" color="text.secondary" sx={{ mb: 2 }}>
+                Reduce el radio de elementos no seleccionados con{" "}
+                <code>faded.additionalRadius</code>.
+              </Typography>
+              <PieChart
+                series={[
+                  {
+                    data: [
+                      { id: 0, value: 40, label: "Orgánico" },
+                      { id: 1, value: 30, label: "Pagado" },
+                      { id: 2, value: 20, label: "Social" },
+                      { id: 3, value: 10, label: "Directo" },
+                    ],
+                    innerRadius: 30,
+                    faded: { innerRadius: 30, additionalRadius: -10 },
+                    highlighted: { additionalRadius: 5 },
+                  },
+                ]}
+                width={400}
+                height={250}
+              />
+            </Box>
+
+            <Divider />
+
+            {/* 12. Center Position */}
+            <Box>
+              <Typography variant="h6" gutterBottom>
+                12. Posición del Centro (cx, cy)
+              </Typography>
+              <Typography variant="body2" color="text.secondary" sx={{ mb: 2 }}>
+                Controla la posición del centro del pie.
+              </Typography>
+              <Stack direction={{ xs: "column", md: "row" }} spacing={2}>
+                <Box sx={{ flex: 1 }}>
+                  <Typography variant="caption" display="block" gutterBottom>
+                    <code>cx: 100</code> (izquierda)
+                  </Typography>
+                  <PieChart
+                    series={[
+                      {
+                        data: [
+                          { id: 0, value: 50 },
+                          { id: 1, value: 30 },
+                          { id: 2, value: 20 },
+                        ],
+                        cx: 100,
+                      },
+                    ]}
+                    width={300}
+                    height={200}
+                  />
+                </Box>
+                <Box sx={{ flex: 1 }}>
+                  <Typography variant="caption" display="block" gutterBottom>
+                    <code>cx: 200</code> (derecha)
+                  </Typography>
+                  <PieChart
+                    series={[
+                      {
+                        data: [
+                          { id: 0, value: 50 },
+                          { id: 1, value: 30 },
+                          { id: 2, value: 20 },
+                        ],
+                        cx: 200,
+                      },
+                    ]}
+                    width={300}
+                    height={200}
+                  />
+                </Box>
+              </Stack>
+            </Box>
+
+            <Divider />
+
+            {/* 13. Outer Radius */}
+            <Box>
+              <Typography variant="h6" gutterBottom>
+                13. Radio Exterior (outerRadius)
+              </Typography>
+              <Typography variant="body2" color="text.secondary" sx={{ mb: 2 }}>
+                Controla el tamaño máximo del pie.
+              </Typography>
+              <Stack direction={{ xs: "column", md: "row" }} spacing={2}>
+                <Box sx={{ flex: 1 }}>
+                  <Typography variant="caption" display="block" gutterBottom>
+                    <code>outerRadius: 60</code>
+                  </Typography>
+                  <PieChart
+                    series={[
+                      {
+                        data: [
+                          { id: 0, value: 40 },
+                          { id: 1, value: 35 },
+                          { id: 2, value: 25 },
+                        ],
+                        outerRadius: 60,
+                      },
+                    ]}
+                    width={200}
+                    height={200}
+                  />
+                </Box>
+                <Box sx={{ flex: 1 }}>
+                  <Typography variant="caption" display="block" gutterBottom>
+                    <code>outerRadius: 90</code>
+                  </Typography>
+                  <PieChart
+                    series={[
+                      {
+                        data: [
+                          { id: 0, value: 40 },
+                          { id: 1, value: 35 },
+                          { id: 2, value: 25 },
+                        ],
+                        outerRadius: 90,
+                      },
+                    ]}
+                    width={200}
+                    height={200}
+                  />
+                </Box>
+              </Stack>
+            </Box>
+
+            <Divider />
+
+            {/* 14. Skip Animation */}
+            <Box>
+              <Typography variant="h6" gutterBottom>
+                14. Sin Animación
+              </Typography>
+              <Typography variant="body2" color="text.secondary" sx={{ mb: 2 }}>
+                Desactiva animaciones con <code>skipAnimation</code>.
+              </Typography>
+              <PieChart
+                series={[
+                  {
+                    data: [
+                      { id: 0, value: 55, label: "Aprobado" },
+                      { id: 1, value: 30, label: "Pendiente" },
+                      { id: 2, value: 15, label: "Rechazado" },
+                    ],
+                    innerRadius: 40,
+                    arcLabel: "value",
+                  },
+                ]}
+                skipAnimation
+                width={400}
+                height={250}
+              />
+            </Box>
+
+            <Divider />
+
+            {/* 15. Complete Dashboard Example */}
+            <Box>
+              <Typography variant="h6" gutterBottom>
+                15. Ejemplo Dashboard Completo
+              </Typography>
+              <Typography variant="body2" color="text.secondary" sx={{ mb: 2 }}>
+                Combinación de todas las funcionalidades.
+              </Typography>
+              <Stack direction={{ xs: "column", md: "row" }} spacing={3}>
+                <Box sx={{ flex: 1, textAlign: "center" }}>
+                  <Typography variant="subtitle2" gutterBottom>
+                    Distribución de Ventas
+                  </Typography>
+                  <PieChart
+                    series={[
+                      {
+                        data: [
+                          {
+                            id: 0,
+                            value: 45,
+                            label: "Electrónica",
+                            color: "#3f51b5",
+                          },
+                          {
+                            id: 1,
+                            value: 25,
+                            label: "Ropa",
+                            color: "#f50057",
+                          },
+                          {
+                            id: 2,
+                            value: 18,
+                            label: "Hogar",
+                            color: "#00bcd4",
+                          },
+                          {
+                            id: 3,
+                            value: 12,
+                            label: "Otros",
+                            color: "#ff9800",
+                          },
+                        ],
+                        innerRadius: 50,
+                        outerRadius: 90,
+                        paddingAngle: 3,
+                        cornerRadius: 8,
+                        arcLabel: (item) => `${item.value}%`,
+                        arcLabelMinAngle: 30,
+                        highlighted: { additionalRadius: 10 },
+                        faded: { additionalRadius: -5, color: "gray" },
+                      },
+                    ]}
+                    width={350}
+                    height={250}
+                  />
+                </Box>
+                <Box sx={{ flex: 1, textAlign: "center" }}>
+                  <Typography variant="subtitle2" gutterBottom>
+                    Estado de Proyectos
+                  </Typography>
+                  <PieChart
+                    series={[
+                      {
+                        data: [
+                          {
+                            id: 0,
+                            value: 8,
+                            label: "Completados",
+                            color: "#4caf50",
+                          },
+                          {
+                            id: 1,
+                            value: 5,
+                            label: "En Progreso",
+                            color: "#2196f3",
+                          },
+                          {
+                            id: 2,
+                            value: 3,
+                            label: "Pendientes",
+                            color: "#ff9800",
+                          },
+                          {
+                            id: 3,
+                            value: 2,
+                            label: "Cancelados",
+                            color: "#f44336",
+                          },
+                        ],
+                        startAngle: -90,
+                        endAngle: 270,
+                        innerRadius: 60,
+                        outerRadius: 85,
+                        paddingAngle: 2,
+                        cornerRadius: 4,
+                        arcLabel: "value",
+                        arcLabelMinAngle: 20,
+                        highlighted: { additionalRadius: 8 },
+                      },
+                    ]}
+                    width={350}
+                    height={250}
+                  />
+                </Box>
+              </Stack>
+            </Box>
+          </Stack>
+
+          <Alert severity="info" sx={{ mt: 3 }}>
+            💡 <strong>Props principales de PieChart:</strong>
+            <ul style={{ margin: "8px 0", paddingLeft: "20px" }}>
+              <li>
+                <code>innerRadius</code> - Radio interior (0 = pie sólido, &gt;0
+                = donut)
+              </li>
+              <li>
+                <code>outerRadius</code> - Radio exterior del pie
+              </li>
+              <li>
+                <code>paddingAngle</code> - Espacio angular entre arcos (grados)
+              </li>
+              <li>
+                <code>cornerRadius</code> - Bordes redondeados en los arcos
+              </li>
+              <li>
+                <code>startAngle / endAngle</code> - Rango del arco en grados
+              </li>
+              <li>
+                <code>arcLabel</code> - Etiquetas (&quot;value&quot;,
+                &quot;label&quot;, o función)
+              </li>
+              <li>
+                <code>arcLabelMinAngle</code> - Ángulo mínimo para mostrar
+                etiquetas
+              </li>
+              <li>
+                <code>highlighted / faded</code> - Estados de interacción
+              </li>
+              <li>
+                <code>cx / cy</code> - Posición del centro
+              </li>
+            </ul>
+          </Alert>
+        </Card>
+
+        {/* SECCIÓN 14: SPARKLINE CHARTS */}
+        <Card sx={{ mb: 3, p: 3 }}>
+          <Typography variant="h5" color="primary" gutterBottom>
+            14. SparkLineChart - Gráficos Compactos
+          </Typography>
+          <Divider sx={{ mb: 3 }} />
+          <Alert severity="success" sx={{ mb: 3 }}>
+            Gráficos compactos ideales para mostrar tendencias en espacios
+            reducidos: tablas, tarjetas, dashboards. Soporta líneas, barras y
+            áreas.
+          </Alert>
+
+          <Stack spacing={4}>
+            {/* 1. Basic Sparkline */}
+            <Box>
+              <Typography variant="h6" gutterBottom>
+                1. Sparkline Básico
+              </Typography>
+              <Typography variant="body2" color="text.secondary" sx={{ mb: 2 }}>
+                Gráfico de línea compacto para mostrar tendencias.
+              </Typography>
+              <SparkLineChart
+                data={[1, 4, 2, 5, 7, 2, 4, 6]}
+                height={100}
+                width={300}
+              />
+            </Box>
+
+            <Divider />
+
+            {/* 2. Plot Types */}
+            <Box>
+              <Typography variant="h6" gutterBottom>
+                2. Tipos de Gráfico (plotType)
+              </Typography>
+              <Typography variant="body2" color="text.secondary" sx={{ mb: 2 }}>
+                Usa <code>plotType</code> para elegir entre línea y barras.
+              </Typography>
+              <Stack direction={{ xs: "column", md: "row" }} spacing={4}>
+                <Box sx={{ flex: 1 }}>
+                  <Typography variant="caption" display="block" gutterBottom>
+                    <code>plotType: &quot;line&quot;</code> (default)
+                  </Typography>
+                  <SparkLineChart
+                    data={[3, 1, 4, 1, 5, 9, 2, 6, 5, 3]}
+                    height={80}
+                    width={200}
+                    plotType="line"
+                  />
+                </Box>
+                <Box sx={{ flex: 1 }}>
+                  <Typography variant="caption" display="block" gutterBottom>
+                    <code>plotType: &quot;bar&quot;</code>
+                  </Typography>
+                  <SparkLineChart
+                    data={[3, 1, 4, 1, 5, 9, 2, 6, 5, 3]}
+                    height={80}
+                    width={200}
+                    plotType="bar"
+                  />
+                </Box>
+              </Stack>
+            </Box>
+
+            <Divider />
+
+            {/* 3. Area Sparkline */}
+            <Box>
+              <Typography variant="h6" gutterBottom>
+                3. Sparkline con Área
+              </Typography>
+              <Typography variant="body2" color="text.secondary" sx={{ mb: 2 }}>
+                Rellena el área bajo la línea con <code>area: true</code>.
+              </Typography>
+              <Stack direction={{ xs: "column", md: "row" }} spacing={4}>
+                <Box sx={{ flex: 1 }}>
+                  <Typography variant="caption" display="block" gutterBottom>
+                    Sin área
+                  </Typography>
+                  <SparkLineChart
+                    data={[2, 5, 3, 8, 1, 6, 4, 9, 2, 7]}
+                    height={80}
+                    width={200}
+                  />
+                </Box>
+                <Box sx={{ flex: 1 }}>
+                  <Typography variant="caption" display="block" gutterBottom>
+                    <code>area: true</code>
+                  </Typography>
+                  <SparkLineChart
+                    data={[2, 5, 3, 8, 1, 6, 4, 9, 2, 7]}
+                    height={80}
+                    width={200}
+                    area
+                  />
+                </Box>
+              </Stack>
+            </Box>
+
+            <Divider />
+
+            {/* 4. With Tooltip */}
+            <Box>
+              <Typography variant="h6" gutterBottom>
+                4. Con Tooltip (showTooltip)
+              </Typography>
+              <Typography variant="body2" color="text.secondary" sx={{ mb: 2 }}>
+                Muestra el valor al pasar el cursor con{" "}
+                <code>showTooltip: true</code>.
+              </Typography>
+              <Stack direction={{ xs: "column", md: "row" }} spacing={4}>
+                <Box sx={{ flex: 1 }}>
+                  <Typography variant="caption" display="block" gutterBottom>
+                    Línea con tooltip
+                  </Typography>
+                  <SparkLineChart
+                    data={[10, 25, 18, 32, 15, 28, 22, 35, 20, 30]}
+                    height={80}
+                    width={200}
+                    showTooltip
+                  />
+                </Box>
+                <Box sx={{ flex: 1 }}>
+                  <Typography variant="caption" display="block" gutterBottom>
+                    Barras con tooltip
+                  </Typography>
+                  <SparkLineChart
+                    data={[10, 25, 18, 32, 15, 28, 22, 35, 20, 30]}
+                    height={80}
+                    width={200}
+                    plotType="bar"
+                    showTooltip
+                  />
+                </Box>
+              </Stack>
+            </Box>
+
+            <Divider />
+
+            {/* 5. With Highlight */}
+            <Box>
+              <Typography variant="h6" gutterBottom>
+                5. Con Resaltado (showHighlight)
+              </Typography>
+              <Typography variant="body2" color="text.secondary" sx={{ mb: 2 }}>
+                Resalta el punto activo con <code>showHighlight: true</code>.
+              </Typography>
+              <Stack direction={{ xs: "column", md: "row" }} spacing={4}>
+                <Box sx={{ flex: 1 }}>
+                  <Typography variant="caption" display="block" gutterBottom>
+                    Línea con highlight (punto)
+                  </Typography>
+                  <SparkLineChart
+                    data={[5, 12, 8, 15, 10, 18, 14, 20, 16, 22]}
+                    height={80}
+                    width={200}
+                    showHighlight
+                    showTooltip
+                  />
+                </Box>
+                <Box sx={{ flex: 1 }}>
+                  <Typography variant="caption" display="block" gutterBottom>
+                    Barras con highlight (banda)
+                  </Typography>
+                  <SparkLineChart
+                    data={[5, 12, 8, 15, 10, 18, 14, 20, 16, 22]}
+                    height={80}
+                    width={200}
+                    plotType="bar"
+                    showHighlight
+                    showTooltip
+                  />
+                </Box>
+              </Stack>
+            </Box>
+
+            <Divider />
+
+            {/* 6. Negative Values */}
+            <Box>
+              <Typography variant="h6" gutterBottom>
+                6. Valores Negativos
+              </Typography>
+              <Typography variant="body2" color="text.secondary" sx={{ mb: 2 }}>
+                Sparklines manejan correctamente valores positivos y negativos.
+              </Typography>
+              <Stack direction={{ xs: "column", md: "row" }} spacing={4}>
+                <Box sx={{ flex: 1 }}>
+                  <Typography variant="caption" display="block" gutterBottom>
+                    Línea con negativos
+                  </Typography>
+                  <SparkLineChart
+                    data={[3, -10, -2, 5, 7, -2, 4, 6, -5, 8]}
+                    height={80}
+                    width={200}
+                    area
+                    showTooltip
+                  />
+                </Box>
+                <Box sx={{ flex: 1 }}>
+                  <Typography variant="caption" display="block" gutterBottom>
+                    Barras con negativos
+                  </Typography>
+                  <SparkLineChart
+                    data={[3, -10, -2, 5, 7, -2, 4, 6, -5, 8]}
+                    height={80}
+                    width={200}
+                    plotType="bar"
+                    showTooltip
+                  />
+                </Box>
+              </Stack>
+            </Box>
+
+            <Divider />
+
+            {/* 7. Custom Colors */}
+            <Box>
+              <Typography variant="h6" gutterBottom>
+                7. Colores Personalizados
+              </Typography>
+              <Typography variant="body2" color="text.secondary" sx={{ mb: 2 }}>
+                Define colores usando la prop <code>colors</code>.
+              </Typography>
+              <Stack direction={{ xs: "column", md: "row" }} spacing={4}>
+                <Box sx={{ flex: 1 }}>
+                  <Typography variant="caption" display="block" gutterBottom>
+                    Verde (tendencia positiva)
+                  </Typography>
+                  <SparkLineChart
+                    data={[10, 15, 12, 18, 20, 25, 22, 30, 28, 35]}
+                    height={80}
+                    width={200}
+                    colors={["#4caf50"]}
+                    area
+                  />
+                </Box>
+                <Box sx={{ flex: 1 }}>
+                  <Typography variant="caption" display="block" gutterBottom>
+                    Rojo (tendencia negativa)
+                  </Typography>
+                  <SparkLineChart
+                    data={[35, 30, 32, 25, 28, 20, 22, 15, 18, 10]}
+                    height={80}
+                    width={200}
+                    colors={["#f44336"]}
+                    area
+                  />
+                </Box>
+              </Stack>
+            </Box>
+
+            <Divider />
+
+            {/* 8. Value Formatter */}
+            <Box>
+              <Typography variant="h6" gutterBottom>
+                8. Formato de Valores (valueFormatter)
+              </Typography>
+              <Typography variant="body2" color="text.secondary" sx={{ mb: 2 }}>
+                Personaliza el formato del tooltip con{" "}
+                <code>valueFormatter</code>.
+              </Typography>
+              <Stack direction={{ xs: "column", md: "row" }} spacing={4}>
+                <Box sx={{ flex: 1 }}>
+                  <Typography variant="caption" display="block" gutterBottom>
+                    Formato moneda
+                  </Typography>
+                  <SparkLineChart
+                    data={[1200, 1500, 1350, 1800, 1650, 2000, 1900, 2200]}
+                    height={80}
+                    width={200}
+                    showTooltip
+                    showHighlight
+                    valueFormatter={(value) =>
+                      value !== null ? `$${value.toLocaleString()}` : ""
+                    }
+                  />
+                </Box>
+                <Box sx={{ flex: 1 }}>
+                  <Typography variant="caption" display="block" gutterBottom>
+                    Formato porcentaje
+                  </Typography>
+                  <SparkLineChart
+                    data={[45, 52, 48, 58, 55, 62, 60, 68]}
+                    height={80}
+                    width={200}
+                    showTooltip
+                    showHighlight
+                    valueFormatter={(value) =>
+                      value !== null ? `${value}%` : ""
+                    }
+                    plotType="bar"
+                  />
+                </Box>
+              </Stack>
+            </Box>
+
+            <Divider />
+
+            {/* 9. Different Sizes */}
+            <Box>
+              <Typography variant="h6" gutterBottom>
+                9. Diferentes Tamaños
+              </Typography>
+              <Typography variant="body2" color="text.secondary" sx={{ mb: 2 }}>
+                Ajusta <code>width</code> y <code>height</code> según el
+                contexto.
+              </Typography>
+              <Stack direction="row" spacing={4} alignItems="flex-end">
+                <Box>
+                  <Typography variant="caption" display="block" gutterBottom>
+                    Mini (100x40)
+                  </Typography>
+                  <SparkLineChart
+                    data={[1, 4, 2, 5, 3]}
+                    height={40}
+                    width={100}
+                  />
+                </Box>
+                <Box>
+                  <Typography variant="caption" display="block" gutterBottom>
+                    Pequeño (150x60)
+                  </Typography>
+                  <SparkLineChart
+                    data={[1, 4, 2, 5, 3, 6, 4]}
+                    height={60}
+                    width={150}
+                  />
+                </Box>
+                <Box>
+                  <Typography variant="caption" display="block" gutterBottom>
+                    Mediano (200x80)
+                  </Typography>
+                  <SparkLineChart
+                    data={[1, 4, 2, 5, 3, 6, 4, 7]}
+                    height={80}
+                    width={200}
+                  />
+                </Box>
+              </Stack>
+            </Box>
+
+            <Divider />
+
+            {/* 10. Curve Types */}
+            <Box>
+              <Typography variant="h6" gutterBottom>
+                10. Tipos de Curva
+              </Typography>
+              <Typography variant="body2" color="text.secondary" sx={{ mb: 2 }}>
+                Diferentes interpolaciones con la prop <code>curve</code>.
+              </Typography>
+              <Stack direction={{ xs: "column", md: "row" }} spacing={4}>
+                <Box sx={{ flex: 1 }}>
+                  <Typography variant="caption" display="block" gutterBottom>
+                    <code>curve: &quot;linear&quot;</code>
+                  </Typography>
+                  <SparkLineChart
+                    data={[2, 5, 3, 8, 4, 7, 5]}
+                    height={70}
+                    width={180}
+                    curve="linear"
+                  />
+                </Box>
+                <Box sx={{ flex: 1 }}>
+                  <Typography variant="caption" display="block" gutterBottom>
+                    <code>curve: &quot;natural&quot;</code>
+                  </Typography>
+                  <SparkLineChart
+                    data={[2, 5, 3, 8, 4, 7, 5]}
+                    height={70}
+                    width={180}
+                    curve="natural"
+                  />
+                </Box>
+                <Box sx={{ flex: 1 }}>
+                  <Typography variant="caption" display="block" gutterBottom>
+                    <code>curve: &quot;monotoneX&quot;</code>
+                  </Typography>
+                  <SparkLineChart
+                    data={[2, 5, 3, 8, 4, 7, 5]}
+                    height={70}
+                    width={180}
+                    curve="monotoneX"
+                  />
+                </Box>
+              </Stack>
+            </Box>
+
+            <Divider />
+
+            {/* 11. Dashboard Example with Table */}
+            <Box>
+              <Typography variant="h6" gutterBottom>
+                11. Ejemplo en Contexto - KPIs
+              </Typography>
+              <Typography variant="body2" color="text.secondary" sx={{ mb: 2 }}>
+                Sparklines en tarjetas de métricas estilo dashboard.
+              </Typography>
+              <Stack direction={{ xs: "column", md: "row" }} spacing={2}>
+                <Card
+                  variant="outlined"
+                  sx={{ flex: 1, p: 2, textAlign: "center" }}
+                >
+                  <Typography variant="caption" color="text.secondary">
+                    Ventas Mensuales
+                  </Typography>
+                  <Typography variant="h5" sx={{ my: 1 }}>
+                    $125,430
+                  </Typography>
+                  <SparkLineChart
+                    data={[80, 95, 88, 102, 98, 115, 108, 125]}
+                    height={50}
+                    width={150}
+                    colors={["#4caf50"]}
+                    area
+                  />
+                  <Typography variant="caption" color="success.main">
+                    ↑ 12.5% vs mes anterior
+                  </Typography>
+                </Card>
+                <Card
+                  variant="outlined"
+                  sx={{ flex: 1, p: 2, textAlign: "center" }}
+                >
+                  <Typography variant="caption" color="text.secondary">
+                    Usuarios Activos
+                  </Typography>
+                  <Typography variant="h5" sx={{ my: 1 }}>
+                    8,542
+                  </Typography>
+                  <SparkLineChart
+                    data={[7200, 7500, 7800, 8100, 8000, 8300, 8400, 8542]}
+                    height={50}
+                    width={150}
+                    colors={["#2196f3"]}
+                    area
+                  />
+                  <Typography variant="caption" color="info.main">
+                    ↑ 5.2% vs mes anterior
+                  </Typography>
+                </Card>
+                <Card
+                  variant="outlined"
+                  sx={{ flex: 1, p: 2, textAlign: "center" }}
+                >
+                  <Typography variant="caption" color="text.secondary">
+                    Tasa de Rebote
+                  </Typography>
+                  <Typography variant="h5" sx={{ my: 1 }}>
+                    32.4%
+                  </Typography>
+                  <SparkLineChart
+                    data={[45, 42, 40, 38, 36, 35, 34, 32]}
+                    height={50}
+                    width={150}
+                    colors={["#ff9800"]}
+                    area
+                  />
+                  <Typography variant="caption" color="warning.main">
+                    ↓ 8.1% (mejorando)
+                  </Typography>
+                </Card>
+              </Stack>
+            </Box>
+
+            <Divider />
+
+            {/* 12. Complete Interactive Example */}
+            <Box>
+              <Typography variant="h6" gutterBottom>
+                12. Ejemplo Interactivo Completo
+              </Typography>
+              <Typography variant="body2" color="text.secondary" sx={{ mb: 2 }}>
+                Todas las funcionalidades combinadas.
+              </Typography>
+              <Stack direction={{ xs: "column", md: "row" }} spacing={4}>
+                <Box sx={{ flex: 1 }}>
+                  <Typography variant="subtitle2" gutterBottom>
+                    Rendimiento Semanal
+                  </Typography>
+                  <SparkLineChart
+                    data={[65, 72, 68, 85, 78, 92, 88, 95, 90, 102, 98, 110]}
+                    height={100}
+                    width={250}
+                    showTooltip
+                    showHighlight
+                    area
+                    colors={["#673ab7"]}
+                    valueFormatter={(value) =>
+                      value !== null ? `${value} unidades` : ""
+                    }
+                  />
+                </Box>
+                <Box sx={{ flex: 1 }}>
+                  <Typography variant="subtitle2" gutterBottom>
+                    Distribución Diaria
+                  </Typography>
+                  <SparkLineChart
+                    data={[12, 19, 15, 25, 22, 18, 20]}
+                    height={100}
+                    width={250}
+                    plotType="bar"
+                    showTooltip
+                    showHighlight
+                    colors={["#009688"]}
+                    valueFormatter={(value) =>
+                      value !== null ? `${value} órdenes` : ""
+                    }
+                  />
+                </Box>
+              </Stack>
+            </Box>
+          </Stack>
+
+          <Alert severity="info" sx={{ mt: 3 }}>
+            💡 <strong>Props principales de SparkLineChart:</strong>
+            <ul style={{ margin: "8px 0", paddingLeft: "20px" }}>
+              <li>
+                <code>data</code> - Array de números con los valores
+              </li>
+              <li>
+                <code>plotType</code> - Tipo de gráfico (&quot;line&quot; |
+                &quot;bar&quot;)
+              </li>
+              <li>
+                <code>area</code> - Rellena el área bajo la línea
+              </li>
+              <li>
+                <code>showTooltip</code> - Muestra tooltip al hacer hover
+              </li>
+              <li>
+                <code>showHighlight</code> - Resalta el punto/barra activo
+              </li>
+              <li>
+                <code>valueFormatter</code> - Función para formatear valores en
+                tooltip
+              </li>
+              <li>
+                <code>colors</code> - Array de colores para la serie
+              </li>
+              <li>
+                <code>curve</code> - Tipo de interpolación (linear, natural,
+                etc.)
+              </li>
+              <li>
+                <code>width / height</code> - Dimensiones del gráfico
+              </li>
+            </ul>
+          </Alert>
+        </Card>
+
+        {/* SECCIÓN 15: BAR CHARTS */}
+        <Card sx={{ mb: 3, p: 3 }}>
+          <Typography variant="h5" color="primary" gutterBottom>
+            15. BarChart - Gráficos de Barras
+          </Typography>
+          <Divider sx={{ mb: 3 }} />
+          <Alert severity="success" sx={{ mb: 3 }}>
+            Gráficos de barras verticales y horizontales con múltiples series,
+            apilado, y personalización completa.
+          </Alert>
+
+          <Stack spacing={4}>
+            {/* Basic Bar Chart */}
+            <Box>
+              <Typography variant="h6" gutterBottom>
+                1. Barras Básicas
+              </Typography>
+              <BarChart
+                xAxis={[
+                  {
+                    scaleType: "band",
+                    data: ["Ene", "Feb", "Mar", "Abr", "May", "Jun"],
+                  },
+                ]}
+                series={[{ data: [4, 3, 5, 2, 6, 4], label: "Ventas" }]}
+                height={300}
+              />
+            </Box>
+
+            <Divider />
+
+            {/* Multiple Series */}
+            <Box>
+              <Typography variant="h6" gutterBottom>
+                2. Múltiples Series
+              </Typography>
+              <BarChart
+                xAxis={[
+                  {
+                    scaleType: "band",
+                    data: ["Q1", "Q2", "Q3", "Q4"],
+                  },
+                ]}
+                series={[
+                  { data: [35, 44, 24, 34], label: "2023" },
+                  { data: [51, 60, 47, 55], label: "2024" },
+                  { data: [15, 25, 30, 22], label: "2025" },
+                ]}
+                height={300}
+              />
+            </Box>
+
+            <Divider />
+
+            {/* Stacked Bars */}
+            <Box>
+              <Typography variant="h6" gutterBottom>
+                3. Barras Apiladas (stack)
+              </Typography>
+              <BarChart
+                xAxis={[
+                  {
+                    scaleType: "band",
+                    data: ["Norte", "Sur", "Este", "Oeste"],
+                  },
+                ]}
+                series={[
+                  {
+                    data: [40, 30, 25, 35],
+                    label: "Producto A",
+                    stack: "total",
+                  },
+                  {
+                    data: [30, 25, 30, 25],
+                    label: "Producto B",
+                    stack: "total",
+                  },
+                  {
+                    data: [20, 35, 20, 30],
+                    label: "Producto C",
+                    stack: "total",
+                  },
+                ]}
+                height={300}
+              />
+            </Box>
+
+            <Divider />
+
+            {/* Horizontal Bars */}
+            <Box>
+              <Typography variant="h6" gutterBottom>
+                4. Barras Horizontales (layout: horizontal)
+              </Typography>
+              <BarChart
+                yAxis={[
+                  {
+                    scaleType: "band",
+                    data: ["Marketing", "Ventas", "IT", "RRHH", "Finanzas"],
+                  },
+                ]}
+                series={[
+                  { data: [85, 72, 90, 65, 78], label: "Presupuesto %" },
+                ]}
+                layout="horizontal"
+                height={300}
+              />
+            </Box>
+
+            <Divider />
+
+            {/* Custom Colors */}
+            <Box>
+              <Typography variant="h6" gutterBottom>
+                5. Colores Personalizados
+              </Typography>
+              <BarChart
+                xAxis={[
+                  {
+                    scaleType: "band",
+                    data: ["Exitoso", "Pendiente", "Fallido"],
+                  },
+                ]}
+                series={[
+                  {
+                    data: [85, 12, 3],
+                    color: "#4caf50",
+                  },
+                ]}
+                colors={["#4caf50", "#ff9800", "#f44336"]}
+                height={250}
+              />
+            </Box>
+
+            <Divider />
+
+            {/* With Grid */}
+            <Box>
+              <Typography variant="h6" gutterBottom>
+                6. Con Grid y Negative Values
+              </Typography>
+              <BarChart
+                xAxis={[
+                  {
+                    scaleType: "band",
+                    data: ["Ene", "Feb", "Mar", "Abr", "May", "Jun"],
+                  },
+                ]}
+                series={[
+                  {
+                    data: [15, -8, 22, -5, 18, -12],
+                    label: "Balance",
+                  },
+                ]}
+                grid={{ horizontal: true }}
+                height={300}
+              />
+            </Box>
+          </Stack>
+
+          <Alert severity="info" sx={{ mt: 3 }}>
+            💡 <strong>Props principales:</strong> <code>layout</code>{" "}
+            (vertical/horizontal), <code>stack</code> para apilar,{" "}
+            <code>grid</code> para líneas de referencia.
+          </Alert>
+        </Card>
+
+        {/* SECCIÓN 16: SCATTER CHART */}
+        <Card sx={{ mb: 3, p: 3 }}>
+          <Typography variant="h5" color="primary" gutterBottom>
+            16. ScatterChart - Gráficos de Dispersión
+          </Typography>
+          <Divider sx={{ mb: 3 }} />
+          <Alert severity="success" sx={{ mb: 3 }}>
+            Gráficos de dispersión para visualizar correlaciones entre dos
+            variables numéricas.
+          </Alert>
+
+          <Stack spacing={4}>
+            {/* Basic Scatter */}
+            <Box>
+              <Typography variant="h6" gutterBottom>
+                1. Dispersión Básica
+              </Typography>
+              <ScatterChart
+                series={[
+                  {
+                    data: [
+                      { x: 1, y: 2, id: 1 },
+                      { x: 2, y: 5, id: 2 },
+                      { x: 3, y: 3, id: 3 },
+                      { x: 4, y: 8, id: 4 },
+                      { x: 5, y: 6, id: 5 },
+                      { x: 6, y: 9, id: 6 },
+                      { x: 7, y: 4, id: 7 },
+                    ],
+                    label: "Serie A",
+                  },
+                ]}
+                height={300}
+              />
+            </Box>
+
+            <Divider />
+
+            {/* Multiple Series */}
+            <Box>
+              <Typography variant="h6" gutterBottom>
+                2. Múltiples Series
+              </Typography>
+              <ScatterChart
+                series={[
+                  {
+                    data: [
+                      { x: 10, y: 20, id: 1 },
+                      { x: 25, y: 35, id: 2 },
+                      { x: 40, y: 45, id: 3 },
+                      { x: 55, y: 60, id: 4 },
+                      { x: 70, y: 75, id: 5 },
+                    ],
+                    label: "Grupo A",
+                  },
+                  {
+                    data: [
+                      { x: 15, y: 40, id: 6 },
+                      { x: 30, y: 55, id: 7 },
+                      { x: 45, y: 30, id: 8 },
+                      { x: 60, y: 50, id: 9 },
+                      { x: 75, y: 65, id: 10 },
+                    ],
+                    label: "Grupo B",
+                  },
+                ]}
+                height={300}
+              />
+            </Box>
+
+            <Divider />
+
+            {/* With Grid */}
+            <Box>
+              <Typography variant="h6" gutterBottom>
+                3. Con Grid y Colores
+              </Typography>
+              <ScatterChart
+                series={[
+                  {
+                    data: [
+                      { x: 100, y: 200, id: 1 },
+                      { x: 150, y: 280, id: 2 },
+                      { x: 200, y: 350, id: 3 },
+                      { x: 250, y: 420, id: 4 },
+                      { x: 300, y: 380, id: 5 },
+                    ],
+                    label: "Ventas vs Clientes",
+                    color: "#e91e63",
+                  },
+                ]}
+                grid={{ horizontal: true, vertical: true }}
+                height={300}
+              />
+            </Box>
+          </Stack>
+
+          <Alert severity="info" sx={{ mt: 3 }}>
+            💡 <strong>Props principales:</strong> Cada punto necesita{" "}
+            <code>x</code>, <code>y</code> e <code>id</code>.
+          </Alert>
+        </Card>
+
+        {/* SECCIÓN 17: GAUGE */}
+        <Card sx={{ mb: 3, p: 3 }}>
+          <Typography variant="h5" color="primary" gutterBottom>
+            17. Gauge - Medidores
+          </Typography>
+          <Divider sx={{ mb: 3 }} />
+          <Alert severity="success" sx={{ mb: 3 }}>
+            Medidores circulares para mostrar progreso, KPIs y métricas de
+            rendimiento.
+          </Alert>
+
+          <Stack spacing={4}>
+            {/* Basic Gauge */}
+            <Box>
+              <Typography variant="h6" gutterBottom>
+                1. Gauge Básico
+              </Typography>
+              <Stack direction="row" spacing={4} justifyContent="center">
+                <Gauge value={75} height={200} width={200} />
+                <Gauge value={45} height={200} width={200} />
+                <Gauge value={90} height={200} width={200} />
+              </Stack>
+            </Box>
+
+            <Divider />
+
+            {/* With Text */}
+            <Box>
+              <Typography variant="h6" gutterBottom>
+                2. Con Texto Personalizado
+              </Typography>
+              <Stack direction="row" spacing={4} justifyContent="center">
+                <Gauge
+                  value={68}
+                  height={200}
+                  width={200}
+                  text={({ value }) => `${value}%`}
+                />
+                <Gauge
+                  value={850}
+                  valueMax={1000}
+                  height={200}
+                  width={200}
+                  text={({ value }) => `${value}/1000`}
+                />
+              </Stack>
+            </Box>
+
+            <Divider />
+
+            {/* Start/End Angles */}
+            <Box>
+              <Typography variant="h6" gutterBottom>
+                3. Ángulos Personalizados
+              </Typography>
+              <Stack direction="row" spacing={4} justifyContent="center">
+                <Box textAlign="center">
+                  <Typography variant="caption">Semicírculo</Typography>
+                  <Gauge
+                    value={60}
+                    startAngle={-90}
+                    endAngle={90}
+                    height={150}
+                    width={200}
+                  />
+                </Box>
+                <Box textAlign="center">
+                  <Typography variant="caption">270°</Typography>
+                  <Gauge
+                    value={80}
+                    startAngle={-135}
+                    endAngle={135}
+                    height={150}
+                    width={200}
+                  />
+                </Box>
+              </Stack>
+            </Box>
+
+            <Divider />
+
+            {/* Inner/Outer Radius */}
+            <Box>
+              <Typography variant="h6" gutterBottom>
+                4. Radio Interior/Exterior
+              </Typography>
+              <Stack direction="row" spacing={4} justifyContent="center">
+                <Box textAlign="center">
+                  <Typography variant="caption">Delgado</Typography>
+                  <Gauge
+                    value={70}
+                    innerRadius="80%"
+                    outerRadius="100%"
+                    height={180}
+                    width={180}
+                  />
+                </Box>
+                <Box textAlign="center">
+                  <Typography variant="caption">Grueso</Typography>
+                  <Gauge
+                    value={70}
+                    innerRadius="50%"
+                    outerRadius="100%"
+                    height={180}
+                    width={180}
+                  />
+                </Box>
+              </Stack>
+            </Box>
+          </Stack>
+
+          <Alert severity="info" sx={{ mt: 3 }}>
+            💡 <strong>Props principales:</strong> <code>value</code>,{" "}
+            <code>valueMax</code>, <code>startAngle/endAngle</code>,{" "}
+            <code>innerRadius/outerRadius</code>, <code>text</code>.
+          </Alert>
+        </Card>
+
+        {/* SECCIÓN 18: RADAR CHART */}
+        <Card sx={{ mb: 3, p: 3 }}>
+          <Typography variant="h5" color="primary" gutterBottom>
+            18. RadarChart - Gráficos de Radar
+          </Typography>
+          <Divider sx={{ mb: 3 }} />
+          <Alert severity="success" sx={{ mb: 3 }}>
+            Gráficos de radar para comparar múltiples variables en formato
+            radial.
+          </Alert>
+
+          <Stack spacing={4}>
+            <Box>
+              <Typography variant="h6" gutterBottom>
+                Ejemplo de Radar
+              </Typography>
+              <RadarChart
+                height={400}
+                series={[{ data: [80, 95, 70, 85, 90] }]}
+                radar={{
+                  metrics: [
+                    "Ventas",
+                    "Marketing",
+                    "Desarrollo",
+                    "Soporte",
+                    "RRHH",
+                  ],
+                }}
+              />
+            </Box>
+          </Stack>
+        </Card>
+
+        {/* SECCIÓN 19: HEATMAP */}
+        <Card sx={{ mb: 3, p: 3 }}>
+          <Typography variant="h5" color="primary" gutterBottom>
+            19. Heatmap - Mapas de Calor
+          </Typography>
+          <Divider sx={{ mb: 3 }} />
+          <Alert severity="success" sx={{ mb: 3 }}>
+            Mapas de calor para visualizar densidad de datos en matrices.
+          </Alert>
+
+          <Stack spacing={4}>
+            <Box>
+              <Typography variant="h6" gutterBottom>
+                Ejemplo de Heatmap
+              </Typography>
+              <Heatmap
+                height={300}
+                xAxis={[{ data: ["Lun", "Mar", "Mié", "Jue", "Vie"] }]}
+                yAxis={[{ data: ["Mañana", "Tarde", "Noche"] }]}
+                series={[
+                  {
+                    data: [
+                      [0, 0, 10],
+                      [0, 1, 20],
+                      [0, 2, 15],
+                      [1, 0, 25],
+                      [1, 1, 30],
+                      [1, 2, 20],
+                      [2, 0, 35],
+                      [2, 1, 40],
+                      [2, 2, 25],
+                      [3, 0, 30],
+                      [3, 1, 35],
+                      [3, 2, 30],
+                      [4, 0, 20],
+                      [4, 1, 25],
+                      [4, 2, 40],
+                    ],
+                  },
+                ]}
+              />
+            </Box>
+          </Stack>
+        </Card>
+
+        {/* SECCIÓN 20: FUNNEL CHART */}
+        <Card sx={{ mb: 3, p: 3 }}>
+          <Typography variant="h5" color="primary" gutterBottom>
+            20. FunnelChart - Gráficos de Embudo
+          </Typography>
+          <Divider sx={{ mb: 3 }} />
+          <Alert severity="success" sx={{ mb: 3 }}>
+            Gráficos de embudo para visualizar procesos de conversión.
+          </Alert>
+
+          <Stack spacing={4}>
+            <Box>
+              <Typography variant="h6" gutterBottom>
+                Embudo de Ventas
+              </Typography>
+              <FunnelChart
+                height={350}
+                series={[
+                  {
+                    data: [
+                      { value: 1000, label: "Visitantes" },
+                      { value: 750, label: "Leads" },
+                      { value: 500, label: "Oportunidades" },
+                      { value: 250, label: "Propuestas" },
+                      { value: 100, label: "Ventas" },
+                    ],
+                  },
+                ]}
+              />
+            </Box>
+          </Stack>
+        </Card>
+
+        {/* SECCIÓN 21: SANKEY CHART */}
+        <Card sx={{ mb: 3, p: 3 }}>
+          <Typography variant="h5" color="primary" gutterBottom>
+            21. SankeyChart - Diagramas de Flujo
+          </Typography>
+          <Divider sx={{ mb: 3 }} />
+          <Alert severity="success" sx={{ mb: 3 }}>
+            Diagramas de Sankey para visualizar flujos entre categorías.
+          </Alert>
+
+          <Stack spacing={4}>
+            <Box>
+              <Typography variant="h6" gutterBottom>
+                Flujo de Tráfico
+              </Typography>
+              {/* <SankeyChart
+                height={400}
+                series={[
+                  {
+                    data: {
+                      nodes: [
+                        { id: "google", label: "Google" },
+                        { id: "facebook", label: "Facebook" },
+                        { id: "home", label: "Home Page" },
+                        { id: "products", label: "Products" },
+                        { id: "checkout", label: "Checkout" },
+                      ],
+                      links: [
+                        { source: "google", target: "home", value: 500 },
+                        { source: "facebook", target: "home", value: 300 },
+                        { source: "home", target: "products", value: 600 },
+                        { source: "products", target: "checkout", value: 400 },
+                      ],
+                    },
+                  },
+                ]}
+              /> */}
+            </Box>
+          </Stack>
+        </Card>
+
+        {/* SECCIÓN 22: AREA CHART */}
+        <Card sx={{ mb: 3, p: 3 }}>
+          <Typography variant="h5" color="primary" gutterBottom>
+            22. AreaChart - Gráficos de Área
+          </Typography>
+          <Divider sx={{ mb: 3 }} />
+          <Alert severity="success" sx={{ mb: 3 }}>
+            Gráficos de área para mostrar tendencias acumulativas.
+          </Alert>
+
+          <Stack spacing={4}>
+            <Box>
+              <Typography variant="h6" gutterBottom>
+                Área Básica
+              </Typography>
+              <AreaChart
+                xAxis={[{ data: [1, 2, 3, 4, 5, 6, 7, 8] }]}
+                series={[
+                  {
+                    data: [2, 5, 3, 8, 1, 6, 4, 7],
+                    label: "Ventas",
+                    area: true,
+                  },
+                ]}
+                height={300}
+              />
+            </Box>
+
+            <Divider />
+
+            <Box>
+              <Typography variant="h6" gutterBottom>
+                Áreas Apiladas
+              </Typography>
+              <AreaChart
+                xAxis={[
+                  {
+                    data: ["Ene", "Feb", "Mar", "Abr", "May", "Jun"],
+                    scaleType: "band",
+                  },
+                ]}
+                series={[
+                  {
+                    data: [40, 35, 50, 45, 60, 55],
+                    label: "Web",
+                    stack: "total",
+                    area: true,
+                  },
+                  {
+                    data: [30, 40, 35, 50, 45, 55],
+                    label: "Mobile",
+                    stack: "total",
+                    area: true,
+                  },
+                  {
+                    data: [20, 25, 30, 25, 35, 30],
+                    label: "Desktop",
+                    stack: "total",
+                    area: true,
+                  },
+                ]}
+                height={300}
+              />
+            </Box>
+          </Stack>
         </Card>
 
         {/* Footer */}
