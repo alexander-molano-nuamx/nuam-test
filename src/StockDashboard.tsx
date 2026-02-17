@@ -296,10 +296,10 @@ export default function StockDashboard() {
                 minWidth: 150,
               }}
             >
-              <Typography variant="body2" color="success.dark">
+              <Typography variant="body2" sx={{ color: "success.dark" }}>
                 Ganadores
               </Typography>
-              <Typography variant="h5" color="success.dark" fontWeight="bold">
+              <Typography variant="h5" sx={{ color: "success.dark" }} fontWeight="bold">
                 {stocks.filter((s) => s.change > 0).length}
               </Typography>
             </Box>
@@ -311,10 +311,10 @@ export default function StockDashboard() {
                 minWidth: 150,
               }}
             >
-              <Typography variant="body2" color="error.dark">
+              <Typography variant="body2" sx={{ color: "error.dark" }}>
                 Perdedores
               </Typography>
-              <Typography variant="h5" color="error.dark" fontWeight="bold">
+              <Typography variant="h5" sx={{ color: "error.dark" }} fontWeight="bold">
                 {stocks.filter((s) => s.change < 0).length}
               </Typography>
             </Box>
@@ -326,7 +326,7 @@ export default function StockDashboard() {
                 minWidth: 150,
               }}
             >
-              <Typography variant="body2" color="text.secondary">
+              <Typography variant="body2" sx={{ color: "text.secondary" }}>
                 Sin cambio
               </Typography>
               <Typography variant="h5" fontWeight="bold">
@@ -408,7 +408,7 @@ export default function StockDashboard() {
                 }}
               >
                 <Box>
-                  <Typography variant="body2" color="text.secondary">
+                  <Typography variant="body2" sx={{ color: "text.secondary" }}>
                     Precio Actual
                   </Typography>
                   <Typography variant="h5" fontWeight="bold">
@@ -416,15 +416,15 @@ export default function StockDashboard() {
                   </Typography>
                 </Box>
                 <Box>
-                  <Typography variant="body2" color="text.secondary">
+                  <Typography variant="body2" sx={{ color: "text.secondary" }}>
                     Cambio
                   </Typography>
                   <Typography
                     variant="h5"
                     fontWeight="bold"
-                    color={
-                      selectedStock.change >= 0 ? "success.main" : "error.main"
-                    }
+                    sx={{
+                      color: selectedStock.change >= 0 ? "success.main" : "error.main",
+                    }}
                   >
                     {selectedStock.change >= 0 ? "+" : ""}
                     {selectedStock.change.toFixed(2)} (
@@ -432,7 +432,7 @@ export default function StockDashboard() {
                   </Typography>
                 </Box>
                 <Box>
-                  <Typography variant="body2" color="text.secondary">
+                  <Typography variant="body2" sx={{ color: "text.secondary" }}>
                     Volumen
                   </Typography>
                   <Typography variant="h5" fontWeight="bold">
@@ -440,7 +440,7 @@ export default function StockDashboard() {
                   </Typography>
                 </Box>
                 <Box>
-                  <Typography variant="body2" color="text.secondary">
+                  <Typography variant="body2" sx={{ color: "text.secondary" }}>
                     Cap. Mercado
                   </Typography>
                   <Typography variant="h5" fontWeight="bold">
@@ -448,7 +448,7 @@ export default function StockDashboard() {
                   </Typography>
                 </Box>
                 <Box>
-                  <Typography variant="body2" color="text.secondary">
+                  <Typography variant="body2" sx={{ color: "text.secondary" }}>
                     Sector
                   </Typography>
                   <Chip label={selectedStock.sector} color="primary" />
