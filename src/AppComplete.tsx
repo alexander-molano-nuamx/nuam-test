@@ -52,6 +52,7 @@ import {
   FunnelChart,
   SankeyChart,
   AreaChart,
+  type GridRenderCellParams,
 } from "@nuam/common-fe-lib-components";
 import isotypeLogoSrc from "./assets/isotype.svg";
 
@@ -1768,7 +1769,7 @@ export default function AppComplete() {
                             />
                             <TextField
                               value={detailFormData.telefono}
-                              onChange={(value) =>
+                              onChange={(value: string) =>
                                 handleDetailFormChange("telefono", value)
                               }
                               placeholder="000 000 0000"
@@ -1798,7 +1799,7 @@ export default function AppComplete() {
                           <TextField
                             label="Página web"
                             value={detailFormData.paginaWeb}
-                            onChange={(value) =>
+                            onChange={(value: string) =>
                               handleDetailFormChange("paginaWeb", value)
                             }
                             size="small"
@@ -1810,7 +1811,7 @@ export default function AppComplete() {
                               detailFormData.correoElectronico ||
                               params.row.email
                             }
-                            onChange={(value) =>
+                            onChange={(value: string) =>
                               handleDetailFormChange("correoElectronico", value)
                             }
                             size="small"
@@ -2071,7 +2072,7 @@ export default function AppComplete() {
                   width: 130,
                   type: "singleSelect",
                   valueOptions: ["Activo", "Inactivo", "Bajo Stock"],
-                  renderCell: (params) => (
+                  renderCell: (params: GridRenderCellParams) => (
                     <Box
                       sx={{
                         px: 1.5,
@@ -2444,11 +2445,11 @@ export default function AppComplete() {
                 <RichTreeView
                   items={treeItems}
                   expandedItems={treeExpandedItems}
-                  onExpandedItemsChange={(_, itemIds) =>
+                  onExpandedItemsChange={(_: React.SyntheticEvent | null, itemIds: string[]) =>
                     setTreeExpandedItems(itemIds)
                   }
                   selectedItems={treeSelectedItems}
-                  onSelectedItemsChange={(_, itemIds) =>
+                  onSelectedItemsChange={(_: React.SyntheticEvent | null, itemIds: string | string[] | null) =>
                     setTreeSelectedItems(Array.isArray(itemIds) ? itemIds : [])
                   }
                   multiSelect
@@ -4011,7 +4012,7 @@ export default function AppComplete() {
                       { id: 2, value: 15, label: "Producto C" },
                       { id: 3, value: 10, label: "Otros" },
                     ],
-                    arcLabel: (item) => `${item.value}%`,
+                    arcLabel: (item: { value: number }) => `${item.value}%`,
                     arcLabelMinAngle: 35,
                     innerRadius: 30,
                   },
@@ -4389,7 +4390,7 @@ export default function AppComplete() {
                         outerRadius: 90,
                         paddingAngle: 3,
                         cornerRadius: 8,
-                        arcLabel: (item) => `${item.value}%`,
+                        arcLabel: (item: { value: number }) => `${item.value}%`,
                         arcLabelMinAngle: 30,
                         highlighted: { additionalRadius: 10 },
                         faded: { additionalRadius: -5, color: "gray" },
@@ -4762,7 +4763,7 @@ export default function AppComplete() {
                     width={200}
                     showTooltip
                     showHighlight
-                    valueFormatter={(value) =>
+                    valueFormatter={(value: number | null) =>
                       value !== null ? `$${value.toLocaleString()}` : ""
                     }
                   />
@@ -4777,7 +4778,7 @@ export default function AppComplete() {
                     width={200}
                     showTooltip
                     showHighlight
-                    valueFormatter={(value) =>
+                    valueFormatter={(value: number | null) =>
                       value !== null ? `${value}%` : ""
                     }
                     plotType="bar"
@@ -4978,7 +4979,7 @@ export default function AppComplete() {
                     showHighlight
                     area
                     colors={["#673ab7"]}
-                    valueFormatter={(value) =>
+                    valueFormatter={(value: number | null) =>
                       value !== null ? `${value} unidades` : ""
                     }
                   />
@@ -4995,7 +4996,7 @@ export default function AppComplete() {
                     showTooltip
                     showHighlight
                     colors={["#009688"]}
-                    valueFormatter={(value) =>
+                    valueFormatter={(value: number | null) =>
                       value !== null ? `${value} órdenes` : ""
                     }
                   />
@@ -5347,14 +5348,14 @@ export default function AppComplete() {
                   value={68}
                   height={200}
                   width={200}
-                  text={({ value }) => `${value}%`}
+                  text={({ value }: { value: number }) => `${value}%`}
                 />
                 <Gauge
                   value={850}
                   valueMax={1000}
                   height={200}
                   width={200}
-                  text={({ value }) => `${value}/1000`}
+                  text={({ value }: { value: number }) => `${value}/1000`}
                 />
               </Stack>
             </Box>

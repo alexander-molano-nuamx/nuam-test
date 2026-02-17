@@ -356,7 +356,7 @@ export default function StockDashboard() {
               enableColumnMenu={true}
               checkboxSelection
               disableRowSelectionOnClick={false}
-              onRowClick={(params) => setSelectedStock(params.row as Stock)}
+              onRowClick={(params: { row: Stock }) => setSelectedStock(params.row)}
               sx={{
                 "& .MuiDataGrid-row:hover": {
                   bgcolor: "action.hover",
