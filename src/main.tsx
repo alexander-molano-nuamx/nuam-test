@@ -1,3 +1,4 @@
+import "./muiLicense"; // Inicializa la licencia MUI X antes de cualquier componente
 import { StrictMode, useState } from "react";
 import { createRoot } from "react-dom/client";
 import "./index.css";
