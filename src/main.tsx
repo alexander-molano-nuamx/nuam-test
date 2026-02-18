@@ -1,7 +1,6 @@
 import { StrictMode, useState } from "react";
 import { createRoot } from "react-dom/client";
 import "./index.css";
-import "./muiLicense";
 import AppComplete from "./AppComplete.tsx";
 import StockDashboard from "./StockDashboard.tsx";
 import { NuamThemeWrapper, Button } from "@nuam/common-fe-lib-components";
