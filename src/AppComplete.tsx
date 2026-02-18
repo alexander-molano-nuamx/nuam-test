@@ -1412,7 +1412,10 @@ export default function AppComplete() {
                     <Typography variant="h5" sx={{ fontWeight: 400 }}>
                       Editar Participante: {params.row.name}
                     </Typography>
-                    <Typography variant="body2" sx={{ color: "text.secondary" }}>
+                    <Typography
+                      variant="body2"
+                      sx={{ color: "text.secondary" }}
+                    >
                       Los campos marcados con{" "}
                       <span style={{ color: "red" }}>*</span> son obligatorios
                     </Typography>
@@ -1505,7 +1508,12 @@ export default function AppComplete() {
                               />
                               <Typography
                                 variant="caption"
-                                sx={{ color: "text.secondary", mt: 0.5, ml: 1, display: "block" }}
+                                sx={{
+                                  color: "text.secondary",
+                                  mt: 0.5,
+                                  ml: 1,
+                                  display: "block",
+                                }}
                               >
                                 Máximo 5 opciones
                               </Typography>
@@ -1609,7 +1617,12 @@ export default function AppComplete() {
                             />
                             <Typography
                               variant="caption"
-                              sx={{ color: "text.secondary", mt: 0.5, ml: 1, display: "block" }}
+                              sx={{
+                                color: "text.secondary",
+                                mt: 0.5,
+                                ml: 1,
+                                display: "block",
+                              }}
                             >
                               Máximo 2 opciones
                             </Typography>
@@ -1820,7 +1833,10 @@ export default function AppComplete() {
 
                     <TabItem id={1} title="EQUIVALENCIAS">
                       <Box sx={{ pt: 3 }}>
-                        <Typography variant="body2" sx={{ color: "text.secondary" }}>
+                        <Typography
+                          variant="body2"
+                          sx={{ color: "text.secondary" }}
+                        >
                           Configuración de equivalencias del participante.
                         </Typography>
                         <Box
@@ -1842,7 +1858,10 @@ export default function AppComplete() {
 
                     <TabItem id={2} title="CONVENIOS">
                       <Box sx={{ pt: 3 }}>
-                        <Typography variant="body2" sx={{ color: "text.secondary" }}>
+                        <Typography
+                          variant="body2"
+                          sx={{ color: "text.secondary" }}
+                        >
                           Configuración de convenios del participante.
                         </Typography>
                         <Box
@@ -2441,11 +2460,15 @@ export default function AppComplete() {
                 <RichTreeView
                   items={treeItems}
                   expandedItems={treeExpandedItems}
-                  onExpandedItemsChange={(_: React.SyntheticEvent | null, itemIds: string[]) =>
-                    setTreeExpandedItems(itemIds)
-                  }
+                  onExpandedItemsChange={(
+                    _: React.SyntheticEvent | null,
+                    itemIds: string[],
+                  ) => setTreeExpandedItems(itemIds)}
                   selectedItems={treeSelectedItems}
-                  onSelectedItemsChange={(_: React.SyntheticEvent | null, itemIds: string | string[] | null) =>
+                  onSelectedItemsChange={(
+                    _: React.SyntheticEvent | null,
+                    itemIds: string | string[] | null,
+                  ) =>
                     setTreeSelectedItems(Array.isArray(itemIds) ? itemIds : [])
                   }
                   multiSelect
@@ -2517,7 +2540,10 @@ export default function AppComplete() {
                       </Typography>
                     ))
                   ) : (
-                    <Typography variant="body2" sx={{ color: "text.secondary" }}>
+                    <Typography
+                      variant="body2"
+                      sx={{ color: "text.secondary" }}
+                    >
                       Ningún item expandido
                     </Typography>
                   )}
@@ -2563,7 +2589,10 @@ export default function AppComplete() {
                       </Typography>
                     ))
                   ) : (
-                    <Typography variant="body2" sx={{ color: "text.secondary" }}>
+                    <Typography
+                      variant="body2"
+                      sx={{ color: "text.secondary" }}
+                    >
                       Ningún item seleccionado (Ctrl+Click para multi-selección)
                     </Typography>
                   )}
@@ -3067,7 +3096,10 @@ export default function AppComplete() {
               <Typography variant="h6" gutterBottom>
                 1. Gráfico de Línea Básico
               </Typography>
-              <Typography variant="body2" sx={{ color: "text.secondary", mb: 2 }}>
+              <Typography
+                variant="body2"
+                sx={{ color: "text.secondary", mb: 2 }}
+              >
                 Gráfico simple con una sola serie de datos.
               </Typography>
               <LineChart
@@ -3089,7 +3121,10 @@ export default function AppComplete() {
               <Typography variant="h6" gutterBottom>
                 2. Múltiples Series
               </Typography>
-              <Typography variant="body2" sx={{ color: "text.secondary", mb: 2 }}>
+              <Typography
+                variant="body2"
+                sx={{ color: "text.secondary", mb: 2 }}
+              >
                 Comparación de múltiples series en un solo gráfico.
               </Typography>
               <LineChart
@@ -3115,7 +3150,10 @@ export default function AppComplete() {
               <Typography variant="h6" gutterBottom>
                 3. Gráfico de Área
               </Typography>
-              <Typography variant="body2" sx={{ color: "text.secondary", mb: 2 }}>
+              <Typography
+                variant="body2"
+                sx={{ color: "text.secondary", mb: 2 }}
+              >
                 Rellena el área bajo la línea con <code>area: true</code>.
               </Typography>
               <LineChart
@@ -3138,7 +3176,10 @@ export default function AppComplete() {
               <Typography variant="h6" gutterBottom>
                 4. Múltiples Áreas
               </Typography>
-              <Typography variant="body2" sx={{ color: "text.secondary", mb: 2 }}>
+              <Typography
+                variant="body2"
+                sx={{ color: "text.secondary", mb: 2 }}
+              >
                 Varias series con área para comparar tendencias.
               </Typography>
               <LineChart
@@ -3180,7 +3221,10 @@ export default function AppComplete() {
               <Typography variant="h6" gutterBottom>
                 5. Áreas Apiladas (Stacked)
               </Typography>
-              <Typography variant="body2" sx={{ color: "text.secondary", mb: 2 }}>
+              <Typography
+                variant="body2"
+                sx={{ color: "text.secondary", mb: 2 }}
+              >
                 Series apiladas usando <code>stack: &quot;total&quot;</code>.
               </Typography>
               <LineChart
@@ -3221,7 +3265,10 @@ export default function AppComplete() {
               <Typography variant="h6" gutterBottom>
                 6. Tipos de Interpolación (Curve)
               </Typography>
-              <Typography variant="body2" sx={{ color: "text.secondary", mb: 2 }}>
+              <Typography
+                variant="body2"
+                sx={{ color: "text.secondary", mb: 2 }}
+              >
                 Diferentes tipos de curva: linear, catmullRom, step, monotoneX.
               </Typography>
               <Stack direction={{ xs: "column", md: "row" }} spacing={2}>
@@ -3297,7 +3344,10 @@ export default function AppComplete() {
               <Typography variant="h6" gutterBottom>
                 7. Con Marcadores (Marks)
               </Typography>
-              <Typography variant="body2" sx={{ color: "text.secondary", mb: 2 }}>
+              <Typography
+                variant="body2"
+                sx={{ color: "text.secondary", mb: 2 }}
+              >
                 Muestra puntos en cada dato con <code>showMark: true</code>.
               </Typography>
               <LineChart
@@ -3325,7 +3375,10 @@ export default function AppComplete() {
               <Typography variant="h6" gutterBottom>
                 8. Variaciones de Baseline
               </Typography>
-              <Typography variant="body2" sx={{ color: "text.secondary", mb: 2 }}>
+              <Typography
+                variant="body2"
+                sx={{ color: "text.secondary", mb: 2 }}
+              >
                 Control del baseline del área: default (0), min, max.
               </Typography>
               <Stack direction={{ xs: "column", md: "row" }} spacing={2}>
@@ -3372,7 +3425,10 @@ export default function AppComplete() {
               <Typography variant="h6" gutterBottom>
                 9. Valores Nulos y connectNulls
               </Typography>
-              <Typography variant="body2" sx={{ color: "text.secondary", mb: 2 }}>
+              <Typography
+                variant="body2"
+                sx={{ color: "text.secondary", mb: 2 }}
+              >
                 Manejo de datos faltantes con <code>connectNulls</code>.
               </Typography>
               <Stack direction={{ xs: "column", md: "row" }} spacing={2}>
@@ -3416,7 +3472,10 @@ export default function AppComplete() {
               <Typography variant="h6" gutterBottom>
                 10. Con Grid de Fondo
               </Typography>
-              <Typography variant="body2" sx={{ color: "text.secondary", mb: 2 }}>
+              <Typography
+                variant="body2"
+                sx={{ color: "text.secondary", mb: 2 }}
+              >
                 Agrega líneas de referencia con <code>grid</code>.
               </Typography>
               <LineChart
@@ -3461,7 +3520,10 @@ export default function AppComplete() {
               <Typography variant="h6" gutterBottom>
                 11. Colores Personalizados
               </Typography>
-              <Typography variant="body2" sx={{ color: "text.secondary", mb: 2 }}>
+              <Typography
+                variant="body2"
+                sx={{ color: "text.secondary", mb: 2 }}
+              >
                 Define colores específicos para cada serie.
               </Typography>
               <LineChart
@@ -3494,7 +3556,10 @@ export default function AppComplete() {
               <Typography variant="h6" gutterBottom>
                 12. Formato Dataset
               </Typography>
-              <Typography variant="body2" sx={{ color: "text.secondary", mb: 2 }}>
+              <Typography
+                variant="body2"
+                sx={{ color: "text.secondary", mb: 2 }}
+              >
                 Usa <code>dataset</code> con <code>dataKey</code> para
                 estructuras de datos más organizadas.
               </Typography>
@@ -3524,7 +3589,10 @@ export default function AppComplete() {
               <Typography variant="h6" gutterBottom>
                 13. Sin Animación
               </Typography>
-              <Typography variant="body2" sx={{ color: "text.secondary", mb: 2 }}>
+              <Typography
+                variant="body2"
+                sx={{ color: "text.secondary", mb: 2 }}
+              >
                 Desactiva animaciones con <code>skipAnimation</code>.
               </Typography>
               <LineChart
@@ -3548,7 +3616,10 @@ export default function AppComplete() {
               <Typography variant="h6" gutterBottom>
                 14. Variaciones de Step
               </Typography>
-              <Typography variant="body2" sx={{ color: "text.secondary", mb: 2 }}>
+              <Typography
+                variant="body2"
+                sx={{ color: "text.secondary", mb: 2 }}
+              >
                 Diferentes posiciones del step: step, stepBefore, stepAfter.
               </Typography>
               <Stack direction={{ xs: "column", md: "row" }} spacing={2}>
@@ -3582,7 +3653,10 @@ export default function AppComplete() {
               <Typography variant="h6" gutterBottom>
                 15. Ejemplo Dashboard Completo
               </Typography>
-              <Typography variant="body2" sx={{ color: "text.secondary", mb: 2 }}>
+              <Typography
+                variant="body2"
+                sx={{ color: "text.secondary", mb: 2 }}
+              >
                 Gráfico completo con todas las funcionalidades combinadas.
               </Typography>
               <LineChart
@@ -3690,7 +3764,10 @@ export default function AppComplete() {
               <Typography variant="h6" gutterBottom>
                 1. Gráfico de Pie Básico
               </Typography>
-              <Typography variant="body2" sx={{ color: "text.secondary", mb: 2 }}>
+              <Typography
+                variant="body2"
+                sx={{ color: "text.secondary", mb: 2 }}
+              >
                 Gráfico circular simple con datos básicos.
               </Typography>
               <PieChart
@@ -3715,7 +3792,10 @@ export default function AppComplete() {
               <Typography variant="h6" gutterBottom>
                 2. Gráfico Donut (innerRadius)
               </Typography>
-              <Typography variant="body2" sx={{ color: "text.secondary", mb: 2 }}>
+              <Typography
+                variant="body2"
+                sx={{ color: "text.secondary", mb: 2 }}
+              >
                 Usa <code>innerRadius</code> para crear un agujero en el centro.
               </Typography>
               <Stack direction={{ xs: "column", md: "row" }} spacing={2}>
@@ -3769,7 +3849,10 @@ export default function AppComplete() {
               <Typography variant="h6" gutterBottom>
                 3. Espaciado entre Arcos (paddingAngle)
               </Typography>
-              <Typography variant="body2" sx={{ color: "text.secondary", mb: 2 }}>
+              <Typography
+                variant="body2"
+                sx={{ color: "text.secondary", mb: 2 }}
+              >
                 Agrega espacio angular entre los segmentos.
               </Typography>
               <Stack direction={{ xs: "column", md: "row" }} spacing={2}>
@@ -3827,7 +3910,10 @@ export default function AppComplete() {
               <Typography variant="h6" gutterBottom>
                 4. Bordes Redondeados (cornerRadius)
               </Typography>
-              <Typography variant="body2" sx={{ color: "text.secondary", mb: 2 }}>
+              <Typography
+                variant="body2"
+                sx={{ color: "text.secondary", mb: 2 }}
+              >
                 Similar a CSS border-radius para los arcos.
               </Typography>
               <Stack direction={{ xs: "column", md: "row" }} spacing={2}>
@@ -3885,7 +3971,10 @@ export default function AppComplete() {
               <Typography variant="h6" gutterBottom>
                 5. Ángulo Inicial y Final
               </Typography>
-              <Typography variant="body2" sx={{ color: "text.secondary", mb: 2 }}>
+              <Typography
+                variant="body2"
+                sx={{ color: "text.secondary", mb: 2 }}
+              >
                 Control del rango del arco con <code>startAngle</code> y{" "}
                 <code>endAngle</code>.
               </Typography>
@@ -3942,7 +4031,10 @@ export default function AppComplete() {
               <Typography variant="h6" gutterBottom>
                 6. Etiquetas en Arcos (arcLabel)
               </Typography>
-              <Typography variant="body2" sx={{ color: "text.secondary", mb: 2 }}>
+              <Typography
+                variant="body2"
+                sx={{ color: "text.secondary", mb: 2 }}
+              >
                 Muestra etiquetas dentro de los arcos.
               </Typography>
               <Stack direction={{ xs: "column", md: "row" }} spacing={2}>
@@ -3996,7 +4088,10 @@ export default function AppComplete() {
               <Typography variant="h6" gutterBottom>
                 7. Etiquetas con Porcentaje
               </Typography>
-              <Typography variant="body2" sx={{ color: "text.secondary", mb: 2 }}>
+              <Typography
+                variant="body2"
+                sx={{ color: "text.secondary", mb: 2 }}
+              >
                 Función personalizada para mostrar porcentajes.
               </Typography>
               <PieChart
@@ -4025,7 +4120,10 @@ export default function AppComplete() {
               <Typography variant="h6" gutterBottom>
                 8. Ángulo Mínimo para Etiquetas
               </Typography>
-              <Typography variant="body2" sx={{ color: "text.secondary", mb: 2 }}>
+              <Typography
+                variant="body2"
+                sx={{ color: "text.secondary", mb: 2 }}
+              >
                 <code>arcLabelMinAngle</code> oculta etiquetas en arcos
                 pequeños.
               </Typography>
@@ -4085,7 +4183,10 @@ export default function AppComplete() {
               <Typography variant="h6" gutterBottom>
                 9. Colores Personalizados
               </Typography>
-              <Typography variant="body2" sx={{ color: "text.secondary", mb: 2 }}>
+              <Typography
+                variant="body2"
+                sx={{ color: "text.secondary", mb: 2 }}
+              >
                 Define colores por dato o usa una paleta global.
               </Typography>
               <Stack direction={{ xs: "column", md: "row" }} spacing={2}>
@@ -4153,7 +4254,10 @@ export default function AppComplete() {
               <Typography variant="h6" gutterBottom>
                 10. Estado Highlighted (Resaltado)
               </Typography>
-              <Typography variant="body2" sx={{ color: "text.secondary", mb: 2 }}>
+              <Typography
+                variant="body2"
+                sx={{ color: "text.secondary", mb: 2 }}
+              >
                 Modifica el tamaño al hacer hover con{" "}
                 <code>highlighted.additionalRadius</code>.
               </Typography>
@@ -4183,7 +4287,10 @@ export default function AppComplete() {
               <Typography variant="h6" gutterBottom>
                 11. Estado Faded (Desvanecido)
               </Typography>
-              <Typography variant="body2" sx={{ color: "text.secondary", mb: 2 }}>
+              <Typography
+                variant="body2"
+                sx={{ color: "text.secondary", mb: 2 }}
+              >
                 Reduce el radio de elementos no seleccionados con{" "}
                 <code>faded.additionalRadius</code>.
               </Typography>
@@ -4213,7 +4320,10 @@ export default function AppComplete() {
               <Typography variant="h6" gutterBottom>
                 12. Posición del Centro (cx, cy)
               </Typography>
-              <Typography variant="body2" sx={{ color: "text.secondary", mb: 2 }}>
+              <Typography
+                variant="body2"
+                sx={{ color: "text.secondary", mb: 2 }}
+              >
                 Controla la posición del centro del pie.
               </Typography>
               <Stack direction={{ xs: "column", md: "row" }} spacing={2}>
@@ -4265,7 +4375,10 @@ export default function AppComplete() {
               <Typography variant="h6" gutterBottom>
                 13. Radio Exterior (outerRadius)
               </Typography>
-              <Typography variant="body2" sx={{ color: "text.secondary", mb: 2 }}>
+              <Typography
+                variant="body2"
+                sx={{ color: "text.secondary", mb: 2 }}
+              >
                 Controla el tamaño máximo del pie.
               </Typography>
               <Stack direction={{ xs: "column", md: "row" }} spacing={2}>
@@ -4317,7 +4430,10 @@ export default function AppComplete() {
               <Typography variant="h6" gutterBottom>
                 14. Sin Animación
               </Typography>
-              <Typography variant="body2" sx={{ color: "text.secondary", mb: 2 }}>
+              <Typography
+                variant="body2"
+                sx={{ color: "text.secondary", mb: 2 }}
+              >
                 Desactiva animaciones con <code>skipAnimation</code>.
               </Typography>
               <PieChart
@@ -4345,7 +4461,10 @@ export default function AppComplete() {
               <Typography variant="h6" gutterBottom>
                 15. Ejemplo Dashboard Completo
               </Typography>
-              <Typography variant="body2" sx={{ color: "text.secondary", mb: 2 }}>
+              <Typography
+                variant="body2"
+                sx={{ color: "text.secondary", mb: 2 }}
+              >
                 Combinación de todas las funcionalidades.
               </Typography>
               <Stack direction={{ xs: "column", md: "row" }} spacing={3}>
@@ -4503,7 +4622,10 @@ export default function AppComplete() {
               <Typography variant="h6" gutterBottom>
                 1. Sparkline Básico
               </Typography>
-              <Typography variant="body2" sx={{ color: "text.secondary", mb: 2 }}>
+              <Typography
+                variant="body2"
+                sx={{ color: "text.secondary", mb: 2 }}
+              >
                 Gráfico de línea compacto para mostrar tendencias.
               </Typography>
               <SparkLineChart
@@ -4520,7 +4642,10 @@ export default function AppComplete() {
               <Typography variant="h6" gutterBottom>
                 2. Tipos de Gráfico (plotType)
               </Typography>
-              <Typography variant="body2" sx={{ color: "text.secondary", mb: 2 }}>
+              <Typography
+                variant="body2"
+                sx={{ color: "text.secondary", mb: 2 }}
+              >
                 Usa <code>plotType</code> para elegir entre línea y barras.
               </Typography>
               <Stack direction={{ xs: "column", md: "row" }} spacing={4}>
@@ -4556,7 +4681,10 @@ export default function AppComplete() {
               <Typography variant="h6" gutterBottom>
                 3. Sparkline con Área
               </Typography>
-              <Typography variant="body2" sx={{ color: "text.secondary", mb: 2 }}>
+              <Typography
+                variant="body2"
+                sx={{ color: "text.secondary", mb: 2 }}
+              >
                 Rellena el área bajo la línea con <code>area: true</code>.
               </Typography>
               <Stack direction={{ xs: "column", md: "row" }} spacing={4}>
@@ -4591,7 +4719,10 @@ export default function AppComplete() {
               <Typography variant="h6" gutterBottom>
                 4. Con Tooltip (showTooltip)
               </Typography>
-              <Typography variant="body2" sx={{ color: "text.secondary", mb: 2 }}>
+              <Typography
+                variant="body2"
+                sx={{ color: "text.secondary", mb: 2 }}
+              >
                 Muestra el valor al pasar el cursor con{" "}
                 <code>showTooltip: true</code>.
               </Typography>
@@ -4629,7 +4760,10 @@ export default function AppComplete() {
               <Typography variant="h6" gutterBottom>
                 5. Con Resaltado (showHighlight)
               </Typography>
-              <Typography variant="body2" sx={{ color: "text.secondary", mb: 2 }}>
+              <Typography
+                variant="body2"
+                sx={{ color: "text.secondary", mb: 2 }}
+              >
                 Resalta el punto activo con <code>showHighlight: true</code>.
               </Typography>
               <Stack direction={{ xs: "column", md: "row" }} spacing={4}>
@@ -4668,7 +4802,10 @@ export default function AppComplete() {
               <Typography variant="h6" gutterBottom>
                 6. Valores Negativos
               </Typography>
-              <Typography variant="body2" sx={{ color: "text.secondary", mb: 2 }}>
+              <Typography
+                variant="body2"
+                sx={{ color: "text.secondary", mb: 2 }}
+              >
                 Sparklines manejan correctamente valores positivos y negativos.
               </Typography>
               <Stack direction={{ xs: "column", md: "row" }} spacing={4}>
@@ -4706,7 +4843,10 @@ export default function AppComplete() {
               <Typography variant="h6" gutterBottom>
                 7. Colores Personalizados
               </Typography>
-              <Typography variant="body2" sx={{ color: "text.secondary", mb: 2 }}>
+              <Typography
+                variant="body2"
+                sx={{ color: "text.secondary", mb: 2 }}
+              >
                 Define colores usando la prop <code>colors</code>.
               </Typography>
               <Stack direction={{ xs: "column", md: "row" }} spacing={4}>
@@ -4729,7 +4869,7 @@ export default function AppComplete() {
                   <SparkLineChart
                     data={[35, 30, 32, 25, 28, 20, 22, 15, 18, 10]}
                     height={80}
-                    width={200}
+                    width={204}
                     color="#f44336"
                     area
                   />
@@ -4744,7 +4884,10 @@ export default function AppComplete() {
               <Typography variant="h6" gutterBottom>
                 8. Formato de Valores (valueFormatter)
               </Typography>
-              <Typography variant="body2" sx={{ color: "text.secondary", mb: 2 }}>
+              <Typography
+                variant="body2"
+                sx={{ color: "text.secondary", mb: 2 }}
+              >
                 Personaliza el formato del tooltip con{" "}
                 <code>valueFormatter</code>.
               </Typography>
@@ -4790,7 +4933,10 @@ export default function AppComplete() {
               <Typography variant="h6" gutterBottom>
                 9. Diferentes Tamaños
               </Typography>
-              <Typography variant="body2" sx={{ color: "text.secondary", mb: 2 }}>
+              <Typography
+                variant="body2"
+                sx={{ color: "text.secondary", mb: 2 }}
+              >
                 Ajusta <code>width</code> y <code>height</code> según el
                 contexto.
               </Typography>
@@ -4835,7 +4981,10 @@ export default function AppComplete() {
               <Typography variant="h6" gutterBottom>
                 10. Tipos de Curva
               </Typography>
-              <Typography variant="body2" sx={{ color: "text.secondary", mb: 2 }}>
+              <Typography
+                variant="body2"
+                sx={{ color: "text.secondary", mb: 2 }}
+              >
                 Diferentes interpolaciones con la prop <code>curve</code>.
               </Typography>
               <Stack direction={{ xs: "column", md: "row" }} spacing={4}>
@@ -4882,7 +5031,10 @@ export default function AppComplete() {
               <Typography variant="h6" gutterBottom>
                 11. Ejemplo en Contexto - KPIs
               </Typography>
-              <Typography variant="body2" sx={{ color: "text.secondary", mb: 2 }}>
+              <Typography
+                variant="body2"
+                sx={{ color: "text.secondary", mb: 2 }}
+              >
                 Sparklines en tarjetas de métricas estilo dashboard.
               </Typography>
               <Stack direction={{ xs: "column", md: "row" }} spacing={2}>
@@ -4890,7 +5042,10 @@ export default function AppComplete() {
                   variant="outlined"
                   sx={{ flex: 1, p: 2, textAlign: "center" }}
                 >
-                  <Typography variant="caption" sx={{ color: "text.secondary" }}>
+                  <Typography
+                    variant="caption"
+                    sx={{ color: "text.secondary" }}
+                  >
                     Ventas Mensuales
                   </Typography>
                   <Typography variant="h5" sx={{ my: 1 }}>
@@ -4911,7 +5066,10 @@ export default function AppComplete() {
                   variant="outlined"
                   sx={{ flex: 1, p: 2, textAlign: "center" }}
                 >
-                  <Typography variant="caption" sx={{ color: "text.secondary" }}>
+                  <Typography
+                    variant="caption"
+                    sx={{ color: "text.secondary" }}
+                  >
                     Usuarios Activos
                   </Typography>
                   <Typography variant="h5" sx={{ my: 1 }}>
@@ -4932,7 +5090,10 @@ export default function AppComplete() {
                   variant="outlined"
                   sx={{ flex: 1, p: 2, textAlign: "center" }}
                 >
-                  <Typography variant="caption" sx={{ color: "text.secondary" }}>
+                  <Typography
+                    variant="caption"
+                    sx={{ color: "text.secondary" }}
+                  >
                     Tasa de Rebote
                   </Typography>
                   <Typography variant="h5" sx={{ my: 1 }}>
@@ -4959,7 +5120,10 @@ export default function AppComplete() {
               <Typography variant="h6" gutterBottom>
                 12. Ejemplo Interactivo Completo
               </Typography>
-              <Typography variant="body2" sx={{ color: "text.secondary", mb: 2 }}>
+              <Typography
+                variant="body2"
+                sx={{ color: "text.secondary", mb: 2 }}
+              >
                 Todas las funcionalidades combinadas.
               </Typography>
               <Stack direction={{ xs: "column", md: "row" }} spacing={4}>
@@ -5344,14 +5508,18 @@ export default function AppComplete() {
                   value={68}
                   height={200}
                   width={200}
-                  text={({ value }: { value: number | null }) => `${value ?? 0}%`}
+                  text={({ value }: { value: number | null }) =>
+                    `${value ?? 0}%`
+                  }
                 />
                 <Gauge
                   value={850}
                   valueMax={1000}
                   height={200}
                   width={200}
-                  text={({ value }: { value: number | null }) => `${value ?? 0}/1000`}
+                  text={({ value }: { value: number | null }) =>
+                    `${value ?? 0}/1000`
+                  }
                 />
               </Stack>
             </Box>
