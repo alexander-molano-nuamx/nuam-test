@@ -59,14 +59,17 @@ import {
   Save,
   Cancel,
   Delete,
-  AdminPanelSettings,
-  TrendingUp,
-  Security,
   Folder,
   FolderOpen,
   InsertDriveFile,
   Description,
   Code,
+  Article,
+  SmartButton,
+  TableChart,
+  LayersOutlined,
+  AccountTree,
+  BarChartOutlined,
 } from "@mui/icons-material";
 import { Box, Stack } from "@mui/material";
 import type { GridColDef } from "@mui/x-data-grid";
@@ -247,39 +250,64 @@ const seriesDataOpa: SerieItemOpa[] = [
 // Estructura de menú para el SideBar
 const sidebarPages: IPage[] = [
   {
-    name: "Administrativo",
-    path: "/administrativo",
-    icon: <AdminPanelSettings />,
+    name: "Formularios",
+    path: "#section-formularios",
+    icon: <Article />,
+  },
+  {
+    name: "Botones",
+    path: "#section-botones",
+    icon: <SmartButton />,
+  },
+  {
+    name: "DataGrid",
+    path: "#section-datagrid",
+    icon: <TableChart />,
     children: [
-      {
-        name: "Gestión de usuarios",
-        path: "/usuarios",
-      },
-      {
-        name: "Gestión de usuarios 2",
-        path: "/usuarios-2",
-      },
-      {
-        name: "Gestión de usuarios 3",
-        path: "/usuarios-3",
-      },
+      { name: "DataGrid Básico", path: "#section-datagrid" },
+      { name: "Filtros Personalizados", path: "#section-datagrid-filtros" },
+      { name: "DataGridPro", path: "#section-datagrid-pro" },
+      { name: "Master-Detail", path: "#section-datagrid-master-detail" },
+      { name: "Header Filters", path: "#section-datagrid-header-filters" },
     ],
   },
   {
-    name: "Operaciones Rentable Variable",
-    path: "/operaciones",
-    icon: <TrendingUp />,
+    name: "UI Components",
+    path: "#section-modal",
+    icon: <LayersOutlined />,
     children: [
-      {
-        name: "Operaciones contado y repo",
-        path: "/contado-repo",
-      },
+      { name: "Modal", path: "#section-modal" },
+      { name: "Tipografía", path: "#section-tipografia" },
+      { name: "Cards", path: "#section-cards" },
+      { name: "IsotypeName", path: "#section-isotype" },
     ],
   },
   {
-    name: "Garantías",
-    path: "/garantias",
-    icon: <Security />,
+    name: "TreeView",
+    path: "#section-rich-tree-view",
+    icon: <AccountTree />,
+    children: [
+      { name: "RichTreeView", path: "#section-rich-tree-view" },
+      { name: "RichTreeViewPro", path: "#section-rich-tree-view-pro" },
+    ],
+  },
+  {
+    name: "Charts",
+    path: "#section-line-chart",
+    icon: <BarChartOutlined />,
+    children: [
+      { name: "LineChart", path: "#section-line-chart" },
+      { name: "PieChart", path: "#section-pie-chart" },
+      { name: "SparkLine", path: "#section-sparkline-chart" },
+      { name: "BarChart", path: "#section-bar-chart" },
+      { name: "ScatterChart", path: "#section-scatter-chart" },
+      { name: "Gauge", path: "#section-gauge" },
+      { name: "RadarChart", path: "#section-radar-chart" },
+      { name: "Heatmap", path: "#section-heatmap" },
+      { name: "FunnelChart", path: "#section-funnel-chart" },
+      { name: "SankeyChart", path: "#section-sankey-chart" },
+      { name: "AreaChart", path: "#section-area-chart" },
+    ],
   },
 ];
 
@@ -444,10 +472,12 @@ export default function AppComplete() {
 
   // Mock de location y navigation para SideBar (sin react-router)
   const mockLocation = {
-    pathname: "/administrativo/usuarios",
+    pathname: "#section-formularios",
   } as unknown as Location;
   const mockNavigation = ((path: string) => {
-    console.log("Navegando a:", path);
+    const id = path.startsWith("#") ? path.slice(1) : path;
+    const el = document.getElementById(id);
+    if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
   }) as unknown as NavigateFunction;
 
   // Datos para DataGrid básico
@@ -599,7 +629,7 @@ export default function AppComplete() {
         )}
 
         {/* SECCIÓN 1: FORMULARIOS */}
-        <Card sx={{ mb: 3, p: 3 }}>
+        <Card id="section-formularios" sx={{ mb: 3, p: 3 }}>
           <Typography variant="h5" color="primary" gutterBottom>
             1. Componentes de Formulario
           </Typography>
@@ -1092,7 +1122,7 @@ export default function AppComplete() {
         </Card>
 
         {/* SECCIÓN 2: BOTONES */}
-        <Card sx={{ mb: 3, p: 3 }}>
+        <Card id="section-botones" sx={{ mb: 3, p: 3 }}>
           <Typography variant="h5" color="primary" gutterBottom>
             2. Botones
           </Typography>
@@ -1133,7 +1163,7 @@ export default function AppComplete() {
         </Card>
 
         {/* SECCIÓN 3: DATAGRID BÁSICO */}
-        <Card sx={{ mb: 3, p: 3 }}>
+        <Card id="section-datagrid" sx={{ mb: 3, p: 3 }}>
           <Typography variant="h5" color="primary" gutterBottom>
             3. DataGrid Básico
           </Typography>
@@ -1164,7 +1194,7 @@ export default function AppComplete() {
         </Card>
 
         {/* SECCIÓN 4: DATAGRID CON FILTROS PERSONALIZADOS (v1.31.0) */}
-        <Card sx={{ mb: 3, p: 3 }}>
+        <Card id="section-datagrid-filtros" sx={{ mb: 3, p: 3 }}>
           <Typography variant="h5" color="primary" gutterBottom>
             4. DataGrid con Filtros Personalizados
           </Typography>
@@ -1197,7 +1227,7 @@ export default function AppComplete() {
         </Card>
 
         {/* SECCIÓN 5: DATAGRID PRO (v1.33.0) */}
-        <Card sx={{ mb: 3, p: 3 }}>
+        <Card id="section-datagrid-pro" sx={{ mb: 3, p: 3 }}>
           <Typography variant="h5" color="primary" gutterBottom>
             5. DataGridPro - Funcionalidades Avanzadas
           </Typography>
@@ -1349,7 +1379,7 @@ export default function AppComplete() {
           </Alert>
         </Card>
         {/* SECCIÓN 6: DATAGRID PRO-X con Master-Detail */}
-        <Card sx={{ mb: 3, p: 3 }}>
+        <Card id="section-datagrid-master-detail" sx={{ mb: 3, p: 3 }}>
           <Typography variant="h5" color="primary" gutterBottom>
             6. DataGridProX - Master-Detail Panel
           </Typography>
@@ -1919,7 +1949,7 @@ export default function AppComplete() {
         </Card>
 
         {/* SECCIÓN 7: DATA GRID HEADER FILTERS */}
-        <Card sx={{ mb: 3, p: 3 }}>
+        <Card id="section-datagrid-header-filters" sx={{ mb: 3, p: 3 }}>
           <Typography variant="h5" color="primary" gutterBottom>
             7. DataGridProX - Header Filters
           </Typography>
@@ -2149,7 +2179,7 @@ export default function AppComplete() {
         </Card>
 
         {/* SECCIÓN 8: MODAL */}
-        <Card sx={{ mb: 3, p: 3 }}>
+        <Card id="section-modal" sx={{ mb: 3, p: 3 }}>
           <Typography variant="h5" color="primary" gutterBottom>
             6. Modal
           </Typography>
@@ -2183,7 +2213,7 @@ export default function AppComplete() {
         </Card>
 
         {/* SECCIÓN 7: TIPOGRAFÍA */}
-        <Card sx={{ mb: 3, p: 3 }}>
+        <Card id="section-tipografia" sx={{ mb: 3, p: 3 }}>
           <Typography variant="h5" color="primary" gutterBottom>
             7. Tipografía
           </Typography>
@@ -2208,7 +2238,7 @@ export default function AppComplete() {
         </Card>
 
         {/* SECCIÓN 8: CARDS */}
-        <Card sx={{ mb: 3, p: 3 }} elevation={3}>
+        <Card id="section-cards" sx={{ mb: 3, p: 3 }} elevation={3}>
           <Typography variant="h5" color="primary" gutterBottom>
             8. Cards
           </Typography>
@@ -2245,7 +2275,7 @@ export default function AppComplete() {
         </Card>
 
         {/* SECCIÓN 9: ISOTYPE NAME */}
-        <Card sx={{ mb: 3, p: 3 }}>
+        <Card id="section-isotype" sx={{ mb: 3, p: 3 }}>
           <Typography variant="h5" color="primary" gutterBottom>
             9. IsotypeName Component
           </Typography>
@@ -2432,7 +2462,7 @@ export default function AppComplete() {
         </Card>
 
         {/* SECCIÓN 10: RICH TREE VIEW */}
-        <Card sx={{ mb: 3, p: 3 }}>
+        <Card id="section-rich-tree-view" sx={{ mb: 3, p: 3 }}>
           <Typography variant="h5" color="primary" gutterBottom>
             10. RichTreeView
           </Typography>
@@ -2770,7 +2800,7 @@ export default function AppComplete() {
         </Card>
 
         {/* SECCIÓN 11: RICH TREE VIEW PRO */}
-        <Card sx={{ mb: 3, p: 3 }}>
+        <Card id="section-rich-tree-view-pro" sx={{ mb: 3, p: 3 }}>
           <Typography variant="h5" color="primary" gutterBottom>
             11. RichTreeViewPro
           </Typography>
@@ -3080,7 +3110,7 @@ export default function AppComplete() {
         </Card>
 
         {/* SECCIÓN 12: LINE CHARTS */}
-        <Card sx={{ mb: 3, p: 3 }}>
+        <Card id="section-line-chart" sx={{ mb: 3, p: 3 }}>
           <Typography variant="h5" color="primary" gutterBottom>
             12. LineChart - Gráficos de Línea
           </Typography>
@@ -3748,7 +3778,7 @@ export default function AppComplete() {
         </Card>
 
         {/* SECCIÓN 13: PIE CHARTS */}
-        <Card sx={{ mb: 3, p: 3 }}>
+        <Card id="section-pie-chart" sx={{ mb: 3, p: 3 }}>
           <Typography variant="h5" color="primary" gutterBottom>
             13. PieChart - Gráficos Circulares
           </Typography>
@@ -4605,7 +4635,7 @@ export default function AppComplete() {
         </Card>
 
         {/* SECCIÓN 14: SPARKLINE CHARTS */}
-        <Card sx={{ mb: 3, p: 3 }}>
+        <Card id="section-sparkline-chart" sx={{ mb: 3, p: 3 }}>
           <Typography variant="h5" color="primary" gutterBottom>
             14. SparkLineChart - Gráficos Compactos
           </Typography>
@@ -5203,7 +5233,7 @@ export default function AppComplete() {
         </Card>
 
         {/* SECCIÓN 15: BAR CHARTS */}
-        <Card sx={{ mb: 3, p: 3 }}>
+        <Card id="section-bar-chart" sx={{ mb: 3, p: 3 }}>
           <Typography variant="h5" color="primary" gutterBottom>
             15. BarChart - Gráficos de Barras
           </Typography>
@@ -5370,7 +5400,7 @@ export default function AppComplete() {
         </Card>
 
         {/* SECCIÓN 16: SCATTER CHART */}
-        <Card sx={{ mb: 3, p: 3 }}>
+        <Card id="section-scatter-chart" sx={{ mb: 3, p: 3 }}>
           <Typography variant="h5" color="primary" gutterBottom>
             16. ScatterChart - Gráficos de Dispersión
           </Typography>
@@ -5473,7 +5503,7 @@ export default function AppComplete() {
         </Card>
 
         {/* SECCIÓN 17: GAUGE */}
-        <Card sx={{ mb: 3, p: 3 }}>
+        <Card id="section-gauge" sx={{ mb: 3, p: 3 }}>
           <Typography variant="h5" color="primary" gutterBottom>
             17. Gauge - Medidores
           </Typography>
@@ -5595,7 +5625,7 @@ export default function AppComplete() {
         </Card>
 
         {/* SECCIÓN 18: RADAR CHART */}
-        <Card sx={{ mb: 3, p: 3 }}>
+        <Card id="section-radar-chart" sx={{ mb: 3, p: 3 }}>
           <Typography variant="h5" color="primary" gutterBottom>
             18. RadarChart - Gráficos de Radar
           </Typography>
@@ -5628,7 +5658,7 @@ export default function AppComplete() {
         </Card>
 
         {/* SECCIÓN 19: HEATMAP */}
-        <Card sx={{ mb: 3, p: 3 }}>
+        <Card id="section-heatmap" sx={{ mb: 3, p: 3 }}>
           <Typography variant="h5" color="primary" gutterBottom>
             19. Heatmap - Mapas de Calor
           </Typography>
@@ -5673,7 +5703,7 @@ export default function AppComplete() {
         </Card>
 
         {/* SECCIÓN 20: FUNNEL CHART */}
-        <Card sx={{ mb: 3, p: 3 }}>
+        <Card id="section-funnel-chart" sx={{ mb: 3, p: 3 }}>
           <Typography variant="h5" color="primary" gutterBottom>
             20. FunnelChart - Gráficos de Embudo
           </Typography>
@@ -5706,7 +5736,7 @@ export default function AppComplete() {
         </Card>
 
         {/* SECCIÓN 21: SANKEY CHART */}
-        <Card sx={{ mb: 3, p: 3 }}>
+        <Card id="section-sankey-chart" sx={{ mb: 3, p: 3 }}>
           <Typography variant="h5" color="primary" gutterBottom>
             21. SankeyChart - Diagramas de Flujo
           </Typography>
@@ -5747,7 +5777,7 @@ export default function AppComplete() {
         </Card>
 
         {/* SECCIÓN 22: AREA CHART */}
-        <Card sx={{ mb: 3, p: 3 }}>
+        <Card id="section-area-chart" sx={{ mb: 3, p: 3 }}>
           <Typography variant="h5" color="primary" gutterBottom>
             22. AreaChart - Gráficos de Área
           </Typography>
