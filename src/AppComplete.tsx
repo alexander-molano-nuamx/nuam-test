@@ -251,62 +251,62 @@ const seriesDataOpa: SerieItemOpa[] = [
 const sidebarPages: IPage[] = [
   {
     name: "Formularios",
-    path: "#section-formularios",
+    path: "/section-formularios",
     icon: <Article />,
   },
   {
     name: "Botones",
-    path: "#section-botones",
+    path: "/section-botones",
     icon: <SmartButton />,
   },
   {
     name: "DataGrid",
-    path: "#section-datagrid",
+    path: "/section-datagrid",
     icon: <TableChart />,
     children: [
-      { name: "DataGrid Básico", path: "#section-datagrid" },
-      { name: "Filtros Personalizados", path: "#section-datagrid-filtros" },
-      { name: "DataGridPro", path: "#section-datagrid-pro" },
-      { name: "Master-Detail", path: "#section-datagrid-master-detail" },
-      { name: "Header Filters", path: "#section-datagrid-header-filters" },
+      { name: "DataGrid Básico", path: "/section-datagrid" },
+      { name: "Filtros Personalizados", path: "/section-datagrid-filtros" },
+      { name: "DataGridPro", path: "/section-datagrid-pro" },
+      { name: "Master-Detail", path: "/section-datagrid-master-detail" },
+      { name: "Header Filters", path: "/section-datagrid-header-filters" },
     ],
   },
   {
     name: "UI Components",
-    path: "#section-modal",
+    path: "/section-modal",
     icon: <LayersOutlined />,
     children: [
-      { name: "Modal", path: "#section-modal" },
-      { name: "Tipografía", path: "#section-tipografia" },
-      { name: "Cards", path: "#section-cards" },
-      { name: "IsotypeName", path: "#section-isotype" },
+      { name: "Modal", path: "/section-modal" },
+      { name: "Tipografía", path: "/section-tipografia" },
+      { name: "Cards", path: "/section-cards" },
+      { name: "IsotypeName", path: "/section-isotype" },
     ],
   },
   {
     name: "TreeView",
-    path: "#section-rich-tree-view",
+    path: "/section-rich-tree-view",
     icon: <AccountTree />,
     children: [
-      { name: "RichTreeView", path: "#section-rich-tree-view" },
-      { name: "RichTreeViewPro", path: "#section-rich-tree-view-pro" },
+      { name: "RichTreeView", path: "/section-rich-tree-view" },
+      { name: "RichTreeViewPro", path: "/section-rich-tree-view-pro" },
     ],
   },
   {
     name: "Charts",
-    path: "#section-line-chart",
+    path: "/section-line-chart",
     icon: <BarChartOutlined />,
     children: [
-      { name: "LineChart", path: "#section-line-chart" },
-      { name: "PieChart", path: "#section-pie-chart" },
-      { name: "SparkLine", path: "#section-sparkline-chart" },
-      { name: "BarChart", path: "#section-bar-chart" },
-      { name: "ScatterChart", path: "#section-scatter-chart" },
-      { name: "Gauge", path: "#section-gauge" },
-      { name: "RadarChart", path: "#section-radar-chart" },
-      { name: "Heatmap", path: "#section-heatmap" },
-      { name: "FunnelChart", path: "#section-funnel-chart" },
-      { name: "SankeyChart", path: "#section-sankey-chart" },
-      { name: "AreaChart", path: "#section-area-chart" },
+      { name: "LineChart", path: "/section-line-chart" },
+      { name: "PieChart", path: "/section-pie-chart" },
+      { name: "SparkLine", path: "/section-sparkline-chart" },
+      { name: "BarChart", path: "/section-bar-chart" },
+      { name: "ScatterChart", path: "/section-scatter-chart" },
+      { name: "Gauge", path: "/section-gauge" },
+      { name: "RadarChart", path: "/section-radar-chart" },
+      { name: "Heatmap", path: "/section-heatmap" },
+      { name: "FunnelChart", path: "/section-funnel-chart" },
+      { name: "SankeyChart", path: "/section-sankey-chart" },
+      { name: "AreaChart", path: "/section-area-chart" },
     ],
   },
 ];
@@ -472,10 +472,11 @@ export default function AppComplete() {
 
   // Mock de location y navigation para SideBar (sin react-router)
   const mockLocation = {
-    pathname: "#section-formularios",
+    pathname: "/section-formularios",
   } as unknown as Location;
   const mockNavigation = ((path: string) => {
-    const id = path.startsWith("#") ? path.slice(1) : path;
+    // path viene como "/section-xxx" → extraemos el id sin la barra inicial
+    const id = path.replace(/^\//, "");
     const el = document.getElementById(id);
     if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
   }) as unknown as NavigateFunction;
