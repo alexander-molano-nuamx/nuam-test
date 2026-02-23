@@ -4138,35 +4138,48 @@ export default function AppComplete() {
               >
                 Series apiladas usando <code>stack: &quot;total&quot;</code>.
               </Typography>
-              <LineChart
-                xAxis={[
-                  {
-                    data: ["Q1", "Q2", "Q3", "Q4"],
-                    scaleType: "band",
-                  },
-                ]}
-                series={[
-                  {
-                    data: [120, 150, 180, 200],
-                    area: true,
-                    stack: "total",
-                    label: "Norte",
-                  },
-                  {
-                    data: [80, 100, 120, 140],
-                    area: true,
-                    stack: "total",
-                    label: "Sur",
-                  },
-                  {
-                    data: [60, 70, 90, 100],
-                    area: true,
-                    stack: "total",
-                    label: "Este",
-                  },
-                ]}
-                height={300}
-              />
+              <CodeExample
+                title="5. Áreas Apiladas"
+                code={`<LineChart
+  xAxis={[{ data: ["Q1", "Q2", "Q3", "Q4"], scaleType: "band" }]}
+  series={[
+    { data: [120, 150, 180, 200], area: true, stack: "total", label: "Norte" },
+    { data: [80, 100, 120, 140], area: true, stack: "total", label: "Sur" },
+    { data: [60, 70, 90, 100], area: true, stack: "total", label: "Este" },
+  ]}
+  height={300}
+/>`}
+              >
+                <LineChart
+                  xAxis={[
+                    {
+                      data: ["Q1", "Q2", "Q3", "Q4"],
+                      scaleType: "band",
+                    },
+                  ]}
+                  series={[
+                    {
+                      data: [120, 150, 180, 200],
+                      area: true,
+                      stack: "total",
+                      label: "Norte",
+                    },
+                    {
+                      data: [80, 100, 120, 140],
+                      area: true,
+                      stack: "total",
+                      label: "Sur",
+                    },
+                    {
+                      data: [60, 70, 90, 100],
+                      area: true,
+                      stack: "total",
+                      label: "Este",
+                    },
+                  ]}
+                  height={300}
+                />
+              </CodeExample>
             </Box>
 
             <Divider />
@@ -4182,70 +4195,58 @@ export default function AppComplete() {
               >
                 Diferentes tipos de curva: linear, catmullRom, step, monotoneX.
               </Typography>
-              <Stack direction={{ xs: "column", md: "row" }} spacing={2}>
-                <Box sx={{ flex: 1 }}>
-                  <Typography variant="caption" display="block" gutterBottom>
-                    <code>curve: &quot;linear&quot;</code>
-                  </Typography>
-                  <LineChart
-                    xAxis={[{ data: [0, 1, 2, 3, 4, 5] }]}
-                    series={[
-                      {
-                        data: [0, 5, 2, 6, 3, 9],
-                        curve: "linear",
-                      },
-                    ]}
-                    height={200}
-                  />
-                </Box>
-                <Box sx={{ flex: 1 }}>
-                  <Typography variant="caption" display="block" gutterBottom>
-                    <code>curve: &quot;catmullRom&quot;</code>
-                  </Typography>
-                  <LineChart
-                    xAxis={[{ data: [0, 1, 2, 3, 4, 5] }]}
-                    series={[
-                      {
-                        data: [0, 5, 2, 6, 3, 9],
-                        curve: "catmullRom",
-                      },
-                    ]}
-                    height={200}
-                  />
-                </Box>
-              </Stack>
-              <Stack direction={{ xs: "column", md: "row" }} spacing={2} mt={2}>
-                <Box sx={{ flex: 1 }}>
-                  <Typography variant="caption" display="block" gutterBottom>
-                    <code>curve: &quot;step&quot;</code>
-                  </Typography>
-                  <LineChart
-                    xAxis={[{ data: [0, 1, 2, 3, 4, 5] }]}
-                    series={[
-                      {
-                        data: [0, 5, 2, 6, 3, 9],
-                        curve: "step",
-                      },
-                    ]}
-                    height={200}
-                  />
-                </Box>
-                <Box sx={{ flex: 1 }}>
-                  <Typography variant="caption" display="block" gutterBottom>
-                    <code>curve: &quot;monotoneX&quot;</code>
-                  </Typography>
-                  <LineChart
-                    xAxis={[{ data: [0, 1, 2, 3, 4, 5] }]}
-                    series={[
-                      {
-                        data: [0, 5, 2, 6, 3, 9],
-                        curve: "monotoneX",
-                      },
-                    ]}
-                    height={200}
-                  />
-                </Box>
-              </Stack>
+              <CodeExample
+                title="6. Tipos de Interpolación (Curve)"
+                code={`<LineChart xAxis={[{ data: [0,1,2,3,4,5] }]} series={[{ data: [0,5,2,6,3,9], curve: "linear" }]} height={200} />
+<LineChart xAxis={[{ data: [0,1,2,3,4,5] }]} series={[{ data: [0,5,2,6,3,9], curve: "catmullRom" }]} height={200} />
+<LineChart xAxis={[{ data: [0,1,2,3,4,5] }]} series={[{ data: [0,5,2,6,3,9], curve: "step" }]} height={200} />
+<LineChart xAxis={[{ data: [0,1,2,3,4,5] }]} series={[{ data: [0,5,2,6,3,9], curve: "monotoneX" }]} height={200} />`}
+              >
+                <Stack direction={{ xs: "column", md: "row" }} spacing={2}>
+                  <Box sx={{ flex: 1 }}>
+                    <Typography variant="caption" display="block" gutterBottom>
+                      <code>curve: &quot;linear&quot;</code>
+                    </Typography>
+                    <LineChart
+                      xAxis={[{ data: [0, 1, 2, 3, 4, 5] }]}
+                      series={[{ data: [0, 5, 2, 6, 3, 9], curve: "linear" }]}
+                      height={200}
+                    />
+                  </Box>
+                  <Box sx={{ flex: 1 }}>
+                    <Typography variant="caption" display="block" gutterBottom>
+                      <code>curve: &quot;catmullRom&quot;</code>
+                    </Typography>
+                    <LineChart
+                      xAxis={[{ data: [0, 1, 2, 3, 4, 5] }]}
+                      series={[{ data: [0, 5, 2, 6, 3, 9], curve: "catmullRom" }]}
+                      height={200}
+                    />
+                  </Box>
+                </Stack>
+                <Stack direction={{ xs: "column", md: "row" }} spacing={2} mt={2}>
+                  <Box sx={{ flex: 1 }}>
+                    <Typography variant="caption" display="block" gutterBottom>
+                      <code>curve: &quot;step&quot;</code>
+                    </Typography>
+                    <LineChart
+                      xAxis={[{ data: [0, 1, 2, 3, 4, 5] }]}
+                      series={[{ data: [0, 5, 2, 6, 3, 9], curve: "step" }]}
+                      height={200}
+                    />
+                  </Box>
+                  <Box sx={{ flex: 1 }}>
+                    <Typography variant="caption" display="block" gutterBottom>
+                      <code>curve: &quot;monotoneX&quot;</code>
+                    </Typography>
+                    <LineChart
+                      xAxis={[{ data: [0, 1, 2, 3, 4, 5] }]}
+                      series={[{ data: [0, 5, 2, 6, 3, 9], curve: "monotoneX" }]}
+                      height={200}
+                    />
+                  </Box>
+                </Stack>
+              </CodeExample>
             </Box>
 
             <Divider />
@@ -4261,22 +4262,31 @@ export default function AppComplete() {
               >
                 Muestra puntos en cada dato con <code>showMark: true</code>.
               </Typography>
-              <LineChart
-                xAxis={[
-                  {
-                    data: ["Lun", "Mar", "Mié", "Jue", "Vie", "Sáb", "Dom"],
-                    scaleType: "band",
-                  },
-                ]}
-                series={[
-                  {
-                    data: [65, 59, 80, 81, 56, 55, 70],
-                    label: "Visitantes",
-                    showMark: true,
-                  },
-                ]}
-                height={300}
-              />
+              <CodeExample
+                title="7. Con Marcadores (Marks)"
+                code={`<LineChart
+  xAxis={[{ data: ["Lun", "Mar", "Mié", "Jue", "Vie", "Sáb", "Dom"], scaleType: "band" }]}
+  series={[{ data: [65, 59, 80, 81, 56, 55, 70], label: "Visitantes", showMark: true }]}
+  height={300}
+/>`}
+              >
+                <LineChart
+                  xAxis={[
+                    {
+                      data: ["Lun", "Mar", "Mié", "Jue", "Vie", "Sáb", "Dom"],
+                      scaleType: "band",
+                    },
+                  ]}
+                  series={[
+                    {
+                      data: [65, 59, 80, 81, 56, 55, 70],
+                      label: "Visitantes",
+                      showMark: true,
+                    },
+                  ]}
+                  height={300}
+                />
+              </CodeExample>
             </Box>
 
             <Divider />
@@ -4292,41 +4302,34 @@ export default function AppComplete() {
               >
                 Control del baseline del área: default (0), min, max.
               </Typography>
-              <Stack direction={{ xs: "column", md: "row" }} spacing={2}>
-                <Box sx={{ flex: 1 }}>
-                  <Typography variant="caption" display="block" gutterBottom>
-                    <code>baseline: &quot;min&quot;</code> (rellena hacia abajo)
-                  </Typography>
-                  <LineChart
-                    xAxis={[{ data: [1, 2, 3, 4, 5] }]}
-                    series={[
-                      {
-                        data: [4, 3, 5, 2, 6],
-                        area: true,
-                        baseline: "min",
-                      },
-                    ]}
-                    height={200}
-                  />
-                </Box>
-                <Box sx={{ flex: 1 }}>
-                  <Typography variant="caption" display="block" gutterBottom>
-                    <code>baseline: &quot;max&quot;</code> (rellena hacia
-                    arriba)
-                  </Typography>
-                  <LineChart
-                    xAxis={[{ data: [1, 2, 3, 4, 5] }]}
-                    series={[
-                      {
-                        data: [4, 3, 5, 2, 6],
-                        area: true,
-                        baseline: "max",
-                      },
-                    ]}
-                    height={200}
-                  />
-                </Box>
-              </Stack>
+              <CodeExample
+                title="8. Variaciones de Baseline"
+                code={`<LineChart xAxis={[{ data: [1,2,3,4,5] }]} series={[{ data: [4,3,5,2,6], area: true, baseline: "min" }]} height={200} />
+<LineChart xAxis={[{ data: [1,2,3,4,5] }]} series={[{ data: [4,3,5,2,6], area: true, baseline: "max" }]} height={200} />`}
+              >
+                <Stack direction={{ xs: "column", md: "row" }} spacing={2}>
+                  <Box sx={{ flex: 1 }}>
+                    <Typography variant="caption" display="block" gutterBottom>
+                      <code>baseline: &quot;min&quot;</code> (rellena hacia abajo)
+                    </Typography>
+                    <LineChart
+                      xAxis={[{ data: [1, 2, 3, 4, 5] }]}
+                      series={[{ data: [4, 3, 5, 2, 6], area: true, baseline: "min" }]}
+                      height={200}
+                    />
+                  </Box>
+                  <Box sx={{ flex: 1 }}>
+                    <Typography variant="caption" display="block" gutterBottom>
+                      <code>baseline: &quot;max&quot;</code> (rellena hacia arriba)
+                    </Typography>
+                    <LineChart
+                      xAxis={[{ data: [1, 2, 3, 4, 5] }]}
+                      series={[{ data: [4, 3, 5, 2, 6], area: true, baseline: "max" }]}
+                      height={200}
+                    />
+                  </Box>
+                </Stack>
+              </CodeExample>
             </Box>
 
             <Divider />
@@ -4342,38 +4345,34 @@ export default function AppComplete() {
               >
                 Manejo de datos faltantes con <code>connectNulls</code>.
               </Typography>
-              <Stack direction={{ xs: "column", md: "row" }} spacing={2}>
-                <Box sx={{ flex: 1 }}>
-                  <Typography variant="caption" display="block" gutterBottom>
-                    Sin connectNulls (gap en datos)
-                  </Typography>
-                  <LineChart
-                    xAxis={[{ data: [1, 2, 3, 4, 5, 6, 7, 8] }]}
-                    series={[
-                      {
-                        data: [2, 5, null, null, 8, 3, 6, 4],
-                        connectNulls: false,
-                      },
-                    ]}
-                    height={200}
-                  />
-                </Box>
-                <Box sx={{ flex: 1 }}>
-                  <Typography variant="caption" display="block" gutterBottom>
-                    Con <code>connectNulls: true</code>
-                  </Typography>
-                  <LineChart
-                    xAxis={[{ data: [1, 2, 3, 4, 5, 6, 7, 8] }]}
-                    series={[
-                      {
-                        data: [2, 5, null, null, 8, 3, 6, 4],
-                        connectNulls: true,
-                      },
-                    ]}
-                    height={200}
-                  />
-                </Box>
-              </Stack>
+              <CodeExample
+                title="9. Valores Nulos y connectNulls"
+                code={`<LineChart xAxis={[{ data: [1,2,3,4,5,6,7,8] }]} series={[{ data: [2,5,null,null,8,3,6,4], connectNulls: false }]} height={200} />
+<LineChart xAxis={[{ data: [1,2,3,4,5,6,7,8] }]} series={[{ data: [2,5,null,null,8,3,6,4], connectNulls: true }]} height={200} />`}
+              >
+                <Stack direction={{ xs: "column", md: "row" }} spacing={2}>
+                  <Box sx={{ flex: 1 }}>
+                    <Typography variant="caption" display="block" gutterBottom>
+                      Sin connectNulls (gap en datos)
+                    </Typography>
+                    <LineChart
+                      xAxis={[{ data: [1, 2, 3, 4, 5, 6, 7, 8] }]}
+                      series={[{ data: [2, 5, null, null, 8, 3, 6, 4], connectNulls: false }]}
+                      height={200}
+                    />
+                  </Box>
+                  <Box sx={{ flex: 1 }}>
+                    <Typography variant="caption" display="block" gutterBottom>
+                      Con <code>connectNulls: true</code>
+                    </Typography>
+                    <LineChart
+                      xAxis={[{ data: [1, 2, 3, 4, 5, 6, 7, 8] }]}
+                      series={[{ data: [2, 5, null, null, 8, 3, 6, 4], connectNulls: true }]}
+                      height={200}
+                    />
+                  </Box>
+                </Stack>
+              </CodeExample>
             </Box>
 
             <Divider />
@@ -4389,39 +4388,49 @@ export default function AppComplete() {
               >
                 Agrega líneas de referencia con <code>grid</code>.
               </Typography>
-              <LineChart
-                xAxis={[
-                  {
-                    data: [
-                      "Ene",
-                      "Feb",
-                      "Mar",
-                      "Abr",
-                      "May",
-                      "Jun",
-                      "Jul",
-                      "Ago",
-                      "Sep",
-                      "Oct",
-                      "Nov",
-                      "Dic",
-                    ],
-                    scaleType: "band",
-                  },
-                ]}
-                series={[
-                  {
-                    data: [
-                      186, 305, 237, 173, 209, 214, 276, 298, 312, 267, 245,
-                      289,
-                    ],
-                    label: "Ventas 2024",
-                    area: true,
-                  },
-                ]}
-                grid={{ vertical: true, horizontal: true }}
-                height={300}
-              />
+              <CodeExample
+                title="10. Con Grid de Fondo"
+                code={`<LineChart
+  xAxis={[{ data: ["Ene","Feb","Mar","Abr","May","Jun","Jul","Ago","Sep","Oct","Nov","Dic"], scaleType: "band" }]}
+  series={[{ data: [186,305,237,173,209,214,276,298,312,267,245,289], label: "Ventas 2024", area: true }]}
+  grid={{ vertical: true, horizontal: true }}
+  height={300}
+/>`}
+              >
+                <LineChart
+                  xAxis={[
+                    {
+                      data: [
+                        "Ene",
+                        "Feb",
+                        "Mar",
+                        "Abr",
+                        "May",
+                        "Jun",
+                        "Jul",
+                        "Ago",
+                        "Sep",
+                        "Oct",
+                        "Nov",
+                        "Dic",
+                      ],
+                      scaleType: "band",
+                    },
+                  ]}
+                  series={[
+                    {
+                      data: [
+                        186, 305, 237, 173, 209, 214, 276, 298, 312, 267, 245,
+                        289,
+                      ],
+                      label: "Ventas 2024",
+                      area: true,
+                    },
+                  ]}
+                  grid={{ vertical: true, horizontal: true }}
+                  height={300}
+                />
+              </CodeExample>
             </Box>
 
             <Divider />
@@ -4437,27 +4446,28 @@ export default function AppComplete() {
               >
                 Define colores específicos para cada serie.
               </Typography>
-              <LineChart
-                xAxis={[{ data: [1, 2, 3, 4, 5, 6] }]}
-                series={[
-                  {
-                    data: [3, 4, 1, 6, 5, 2],
-                    label: "Serie Roja",
-                    color: "#f44336",
-                  },
-                  {
-                    data: [1, 3, 2, 5, 4, 6],
-                    label: "Serie Verde",
-                    color: "#4caf50",
-                  },
-                  {
-                    data: [2, 1, 4, 3, 6, 5],
-                    label: "Serie Azul",
-                    color: "#2196f3",
-                  },
-                ]}
-                height={300}
-              />
+              <CodeExample
+                title="11. Colores Personalizados"
+                code={`<LineChart
+  xAxis={[{ data: [1, 2, 3, 4, 5, 6] }]}
+  series={[
+    { data: [3, 4, 1, 6, 5, 2], label: "Serie Roja", color: "#f44336" },
+    { data: [1, 3, 2, 5, 4, 6], label: "Serie Verde", color: "#4caf50" },
+    { data: [2, 1, 4, 3, 6, 5], label: "Serie Azul", color: "#2196f3" },
+  ]}
+  height={300}
+/>`}
+              >
+                <LineChart
+                  xAxis={[{ data: [1, 2, 3, 4, 5, 6] }]}
+                  series={[
+                    { data: [3, 4, 1, 6, 5, 2], label: "Serie Roja", color: "#f44336" },
+                    { data: [1, 3, 2, 5, 4, 6], label: "Serie Verde", color: "#4caf50" },
+                    { data: [2, 1, 4, 3, 6, 5], label: "Serie Azul", color: "#2196f3" },
+                  ]}
+                  height={300}
+                />
+              </CodeExample>
             </Box>
 
             <Divider />
@@ -4474,23 +4484,41 @@ export default function AppComplete() {
                 Usa <code>dataset</code> con <code>dataKey</code> para
                 estructuras de datos más organizadas.
               </Typography>
-              <LineChart
-                dataset={[
-                  { mes: "Ene", ventas: 65, gastos: 40, margen: 25 },
-                  { mes: "Feb", ventas: 78, gastos: 45, margen: 33 },
-                  { mes: "Mar", ventas: 90, gastos: 55, margen: 35 },
-                  { mes: "Abr", ventas: 81, gastos: 50, margen: 31 },
-                  { mes: "May", ventas: 95, gastos: 58, margen: 37 },
-                  { mes: "Jun", ventas: 110, gastos: 65, margen: 45 },
-                ]}
-                xAxis={[{ dataKey: "mes", scaleType: "band" }]}
-                series={[
-                  { dataKey: "ventas", label: "Ventas" },
-                  { dataKey: "gastos", label: "Gastos" },
-                  { dataKey: "margen", label: "Margen", area: true },
-                ]}
-                height={300}
-              />
+              <CodeExample
+                title="12. Formato Dataset"
+                code={`<LineChart
+  dataset={[
+    { mes: "Ene", ventas: 65, gastos: 40, margen: 25 },
+    { mes: "Feb", ventas: 78, gastos: 45, margen: 33 },
+    // ...
+  ]}
+  xAxis={[{ dataKey: "mes", scaleType: "band" }]}
+  series={[
+    { dataKey: "ventas", label: "Ventas" },
+    { dataKey: "gastos", label: "Gastos" },
+    { dataKey: "margen", label: "Margen", area: true },
+  ]}
+  height={300}
+/>`}
+              >
+                <LineChart
+                  dataset={[
+                    { mes: "Ene", ventas: 65, gastos: 40, margen: 25 },
+                    { mes: "Feb", ventas: 78, gastos: 45, margen: 33 },
+                    { mes: "Mar", ventas: 90, gastos: 55, margen: 35 },
+                    { mes: "Abr", ventas: 81, gastos: 50, margen: 31 },
+                    { mes: "May", ventas: 95, gastos: 58, margen: 37 },
+                    { mes: "Jun", ventas: 110, gastos: 65, margen: 45 },
+                  ]}
+                  xAxis={[{ dataKey: "mes", scaleType: "band" }]}
+                  series={[
+                    { dataKey: "ventas", label: "Ventas" },
+                    { dataKey: "gastos", label: "Gastos" },
+                    { dataKey: "margen", label: "Margen", area: true },
+                  ]}
+                  height={300}
+                />
+              </CodeExample>
             </Box>
 
             <Divider />
@@ -4506,18 +4534,28 @@ export default function AppComplete() {
               >
                 Desactiva animaciones con <code>skipAnimation</code>.
               </Typography>
-              <LineChart
-                xAxis={[{ data: [1, 2, 3, 4, 5] }]}
-                series={[
-                  {
-                    data: [10, 15, 12, 18, 14],
-                    label: "Datos estáticos",
-                    area: true,
-                  },
-                ]}
-                skipAnimation
-                height={250}
-              />
+              <CodeExample
+                title="13. Sin Animación"
+                code={`<LineChart
+  xAxis={[{ data: [1, 2, 3, 4, 5] }]}
+  series={[{ data: [10, 15, 12, 18, 14], label: "Datos estáticos", area: true }]}
+  skipAnimation
+  height={250}
+/>`}
+              >
+                <LineChart
+                  xAxis={[{ data: [1, 2, 3, 4, 5] }]}
+                  series={[
+                    {
+                      data: [10, 15, 12, 18, 14],
+                      label: "Datos estáticos",
+                      area: true,
+                    },
+                  ]}
+                  skipAnimation
+                  height={250}
+                />
+              </CodeExample>
             </Box>
 
             <Divider />
@@ -4533,28 +4571,34 @@ export default function AppComplete() {
               >
                 Diferentes posiciones del step: step, stepBefore, stepAfter.
               </Typography>
-              <Stack direction={{ xs: "column", md: "row" }} spacing={2}>
-                <Box sx={{ flex: 1 }}>
-                  <Typography variant="caption" display="block" gutterBottom>
-                    <code>curve: &quot;stepBefore&quot;</code>
-                  </Typography>
-                  <LineChart
-                    xAxis={[{ data: [1, 2, 3, 4, 5] }]}
-                    series={[{ data: [2, 5, 3, 7, 4], curve: "stepBefore" }]}
-                    height={180}
-                  />
-                </Box>
-                <Box sx={{ flex: 1 }}>
-                  <Typography variant="caption" display="block" gutterBottom>
-                    <code>curve: &quot;stepAfter&quot;</code>
-                  </Typography>
-                  <LineChart
-                    xAxis={[{ data: [1, 2, 3, 4, 5] }]}
-                    series={[{ data: [2, 5, 3, 7, 4], curve: "stepAfter" }]}
-                    height={180}
-                  />
-                </Box>
-              </Stack>
+              <CodeExample
+                title="14. Variaciones de Step"
+                code={`<LineChart xAxis={[{ data: [1,2,3,4,5] }]} series={[{ data: [2,5,3,7,4], curve: "stepBefore" }]} height={180} />
+<LineChart xAxis={[{ data: [1,2,3,4,5] }]} series={[{ data: [2,5,3,7,4], curve: "stepAfter" }]} height={180} />`}
+              >
+                <Stack direction={{ xs: "column", md: "row" }} spacing={2}>
+                  <Box sx={{ flex: 1 }}>
+                    <Typography variant="caption" display="block" gutterBottom>
+                      <code>curve: &quot;stepBefore&quot;</code>
+                    </Typography>
+                    <LineChart
+                      xAxis={[{ data: [1, 2, 3, 4, 5] }]}
+                      series={[{ data: [2, 5, 3, 7, 4], curve: "stepBefore" }]}
+                      height={180}
+                    />
+                  </Box>
+                  <Box sx={{ flex: 1 }}>
+                    <Typography variant="caption" display="block" gutterBottom>
+                      <code>curve: &quot;stepAfter&quot;</code>
+                    </Typography>
+                    <LineChart
+                      xAxis={[{ data: [1, 2, 3, 4, 5] }]}
+                      series={[{ data: [2, 5, 3, 7, 4], curve: "stepAfter" }]}
+                      height={180}
+                    />
+                  </Box>
+                </Stack>
+              </CodeExample>
             </Box>
 
             <Divider />
@@ -4570,56 +4614,69 @@ export default function AppComplete() {
               >
                 Gráfico completo con todas las funcionalidades combinadas.
               </Typography>
-              <LineChart
-                dataset={[
-                  { month: "Ene", organic: 4000, paid: 2400, referral: 1200 },
-                  { month: "Feb", organic: 3000, paid: 1398, referral: 1100 },
-                  { month: "Mar", organic: 2000, paid: 9800, referral: 2290 },
-                  { month: "Abr", organic: 2780, paid: 3908, referral: 2000 },
-                  { month: "May", organic: 1890, paid: 4800, referral: 2181 },
-                  { month: "Jun", organic: 2390, paid: 3800, referral: 2500 },
-                  { month: "Jul", organic: 3490, paid: 4300, referral: 2100 },
-                  { month: "Ago", organic: 4200, paid: 5100, referral: 2800 },
-                  { month: "Sep", organic: 3800, paid: 4700, referral: 2400 },
-                  { month: "Oct", organic: 4500, paid: 5300, referral: 3000 },
-                  { month: "Nov", organic: 5200, paid: 6100, referral: 3200 },
-                  { month: "Dic", organic: 6000, paid: 7000, referral: 3500 },
-                ]}
-                xAxis={[
-                  {
-                    dataKey: "month",
-                    scaleType: "band",
-                  },
-                ]}
-                series={[
-                  {
-                    dataKey: "organic",
-                    label: "Tráfico Orgánico",
-                    area: true,
-                    stack: "traffic",
-                    color: "#4caf50",
-                    showMark: true,
-                  },
-                  {
-                    dataKey: "paid",
-                    label: "Tráfico Pagado",
-                    area: true,
-                    stack: "traffic",
-                    color: "#2196f3",
-                    showMark: true,
-                  },
-                  {
-                    dataKey: "referral",
-                    label: "Referidos",
-                    area: true,
-                    stack: "traffic",
-                    color: "#ff9800",
-                    showMark: true,
-                  },
-                ]}
-                grid={{ vertical: true, horizontal: true }}
-                height={400}
-              />
+              <CodeExample
+                title="15. Ejemplo Dashboard Completo"
+                code={`<LineChart
+  dataset={[
+    { month: "Ene", organic: 4000, paid: 2400, referral: 1200 },
+    // ... 12 meses
+  ]}
+  xAxis={[{ dataKey: "month", scaleType: "band" }]}
+  series={[
+    { dataKey: "organic", label: "Tráfico Orgánico", area: true, stack: "traffic", color: "#4caf50", showMark: true },
+    { dataKey: "paid", label: "Tráfico Pagado", area: true, stack: "traffic", color: "#2196f3", showMark: true },
+    { dataKey: "referral", label: "Referidos", area: true, stack: "traffic", color: "#ff9800", showMark: true },
+  ]}
+  grid={{ vertical: true, horizontal: true }}
+  height={400}
+/>`}
+              >
+                <LineChart
+                  dataset={[
+                    { month: "Ene", organic: 4000, paid: 2400, referral: 1200 },
+                    { month: "Feb", organic: 3000, paid: 1398, referral: 1100 },
+                    { month: "Mar", organic: 2000, paid: 9800, referral: 2290 },
+                    { month: "Abr", organic: 2780, paid: 3908, referral: 2000 },
+                    { month: "May", organic: 1890, paid: 4800, referral: 2181 },
+                    { month: "Jun", organic: 2390, paid: 3800, referral: 2500 },
+                    { month: "Jul", organic: 3490, paid: 4300, referral: 2100 },
+                    { month: "Ago", organic: 4200, paid: 5100, referral: 2800 },
+                    { month: "Sep", organic: 3800, paid: 4700, referral: 2400 },
+                    { month: "Oct", organic: 4500, paid: 5300, referral: 3000 },
+                    { month: "Nov", organic: 5200, paid: 6100, referral: 3200 },
+                    { month: "Dic", organic: 6000, paid: 7000, referral: 3500 },
+                  ]}
+                  xAxis={[{ dataKey: "month", scaleType: "band" }]}
+                  series={[
+                    {
+                      dataKey: "organic",
+                      label: "Tráfico Orgánico",
+                      area: true,
+                      stack: "traffic",
+                      color: "#4caf50",
+                      showMark: true,
+                    },
+                    {
+                      dataKey: "paid",
+                      label: "Tráfico Pagado",
+                      area: true,
+                      stack: "traffic",
+                      color: "#2196f3",
+                      showMark: true,
+                    },
+                    {
+                      dataKey: "referral",
+                      label: "Referidos",
+                      area: true,
+                      stack: "traffic",
+                      color: "#ff9800",
+                      showMark: true,
+                    },
+                  ]}
+                  grid={{ vertical: true, horizontal: true }}
+                  height={400}
+                />
+              </CodeExample>
             </Box>
           </Stack>
 
@@ -4681,19 +4738,36 @@ export default function AppComplete() {
               >
                 Gráfico circular simple con datos básicos.
               </Typography>
-              <PieChart
-                series={[
-                  {
-                    data: [
-                      { id: 0, value: 10, label: "Categoría A" },
-                      { id: 1, value: 15, label: "Categoría B" },
-                      { id: 2, value: 20, label: "Categoría C" },
-                    ],
-                  },
-                ]}
-                width={400}
-                height={200}
-              />
+              <CodeExample
+                title="1. Gráfico de Pie Básico"
+                code={`<PieChart
+  series={[
+    {
+      data: [
+        { id: 0, value: 10, label: "Categoría A" },
+        { id: 1, value: 15, label: "Categoría B" },
+        { id: 2, value: 20, label: "Categoría C" },
+      ],
+    },
+  ]}
+  width={400}
+  height={200}
+/>`}
+              >
+                <PieChart
+                  series={[
+                    {
+                      data: [
+                        { id: 0, value: 10, label: "Categoría A" },
+                        { id: 1, value: 15, label: "Categoría B" },
+                        { id: 2, value: 20, label: "Categoría C" },
+                      ],
+                    },
+                  ]}
+                  width={400}
+                  height={200}
+                />
+              </CodeExample>
             </Box>
 
             <Divider />
@@ -4709,48 +4783,62 @@ export default function AppComplete() {
               >
                 Usa <code>innerRadius</code> para crear un agujero en el centro.
               </Typography>
-              <Stack direction={{ xs: "column", md: "row" }} spacing={2}>
-                <Box sx={{ flex: 1 }}>
-                  <Typography variant="caption" display="block" gutterBottom>
-                    <code>innerRadius: 30</code>
-                  </Typography>
-                  <PieChart
-                    series={[
-                      {
-                        data: [
-                          { id: 0, value: 35, label: "Ventas" },
-                          { id: 1, value: 25, label: "Marketing" },
-                          { id: 2, value: 20, label: "Desarrollo" },
-                          { id: 3, value: 20, label: "Soporte" },
-                        ],
-                        innerRadius: 30,
-                      },
-                    ]}
-                    width={300}
-                    height={200}
-                  />
-                </Box>
-                <Box sx={{ flex: 1 }}>
-                  <Typography variant="caption" display="block" gutterBottom>
-                    <code>innerRadius: 60</code>
-                  </Typography>
-                  <PieChart
-                    series={[
-                      {
-                        data: [
-                          { id: 0, value: 35, label: "Ventas" },
-                          { id: 1, value: 25, label: "Marketing" },
-                          { id: 2, value: 20, label: "Desarrollo" },
-                          { id: 3, value: 20, label: "Soporte" },
-                        ],
-                        innerRadius: 60,
-                      },
-                    ]}
-                    width={300}
-                    height={200}
-                  />
-                </Box>
-              </Stack>
+              <CodeExample
+                title="2. Gráfico Donut (innerRadius)"
+                code={`<PieChart
+  series={[{ data: [...], innerRadius: 30 }]}
+  width={300}
+  height={200}
+/>
+<PieChart
+  series={[{ data: [...], innerRadius: 60 }]}
+  width={300}
+  height={200}
+/>`}
+              >
+                <Stack direction={{ xs: "column", md: "row" }} spacing={2}>
+                  <Box sx={{ flex: 1 }}>
+                    <Typography variant="caption" display="block" gutterBottom>
+                      <code>innerRadius: 30</code>
+                    </Typography>
+                    <PieChart
+                      series={[
+                        {
+                          data: [
+                            { id: 0, value: 35, label: "Ventas" },
+                            { id: 1, value: 25, label: "Marketing" },
+                            { id: 2, value: 20, label: "Desarrollo" },
+                            { id: 3, value: 20, label: "Soporte" },
+                          ],
+                          innerRadius: 30,
+                        },
+                      ]}
+                      width={300}
+                      height={200}
+                    />
+                  </Box>
+                  <Box sx={{ flex: 1 }}>
+                    <Typography variant="caption" display="block" gutterBottom>
+                      <code>innerRadius: 60</code>
+                    </Typography>
+                    <PieChart
+                      series={[
+                        {
+                          data: [
+                            { id: 0, value: 35, label: "Ventas" },
+                            { id: 1, value: 25, label: "Marketing" },
+                            { id: 2, value: 20, label: "Desarrollo" },
+                            { id: 3, value: 20, label: "Soporte" },
+                          ],
+                          innerRadius: 60,
+                        },
+                      ]}
+                      width={300}
+                      height={200}
+                    />
+                  </Box>
+                </Stack>
+              </CodeExample>
             </Box>
 
             <Divider />
@@ -4766,52 +4854,58 @@ export default function AppComplete() {
               >
                 Agrega espacio angular entre los segmentos.
               </Typography>
-              <Stack direction={{ xs: "column", md: "row" }} spacing={2}>
-                <Box sx={{ flex: 1 }}>
-                  <Typography variant="caption" display="block" gutterBottom>
-                    <code>paddingAngle: 2</code>
-                  </Typography>
-                  <PieChart
-                    series={[
-                      {
-                        data: [
-                          { id: 0, value: 30 },
-                          { id: 1, value: 25 },
-                          { id: 2, value: 20 },
-                          { id: 3, value: 15 },
-                          { id: 4, value: 10 },
-                        ],
-                        paddingAngle: 2,
-                        innerRadius: 40,
-                      },
-                    ]}
-                    width={250}
-                    height={200}
-                  />
-                </Box>
-                <Box sx={{ flex: 1 }}>
-                  <Typography variant="caption" display="block" gutterBottom>
-                    <code>paddingAngle: 5</code>
-                  </Typography>
-                  <PieChart
-                    series={[
-                      {
-                        data: [
-                          { id: 0, value: 30 },
-                          { id: 1, value: 25 },
-                          { id: 2, value: 20 },
-                          { id: 3, value: 15 },
-                          { id: 4, value: 10 },
-                        ],
-                        paddingAngle: 5,
-                        innerRadius: 40,
-                      },
-                    ]}
-                    width={250}
-                    height={200}
-                  />
-                </Box>
-              </Stack>
+              <CodeExample
+                title="3. Espaciado entre Arcos (paddingAngle)"
+                code={`<PieChart series={[{ data: [...], paddingAngle: 2, innerRadius: 40 }]} width={250} height={200} />
+<PieChart series={[{ data: [...], paddingAngle: 5, innerRadius: 40 }]} width={250} height={200} />`}
+              >
+                <Stack direction={{ xs: "column", md: "row" }} spacing={2}>
+                  <Box sx={{ flex: 1 }}>
+                    <Typography variant="caption" display="block" gutterBottom>
+                      <code>paddingAngle: 2</code>
+                    </Typography>
+                    <PieChart
+                      series={[
+                        {
+                          data: [
+                            { id: 0, value: 30 },
+                            { id: 1, value: 25 },
+                            { id: 2, value: 20 },
+                            { id: 3, value: 15 },
+                            { id: 4, value: 10 },
+                          ],
+                          paddingAngle: 2,
+                          innerRadius: 40,
+                        },
+                      ]}
+                      width={250}
+                      height={200}
+                    />
+                  </Box>
+                  <Box sx={{ flex: 1 }}>
+                    <Typography variant="caption" display="block" gutterBottom>
+                      <code>paddingAngle: 5</code>
+                    </Typography>
+                    <PieChart
+                      series={[
+                        {
+                          data: [
+                            { id: 0, value: 30 },
+                            { id: 1, value: 25 },
+                            { id: 2, value: 20 },
+                            { id: 3, value: 15 },
+                            { id: 4, value: 10 },
+                          ],
+                          paddingAngle: 5,
+                          innerRadius: 40,
+                        },
+                      ]}
+                      width={250}
+                      height={200}
+                    />
+                  </Box>
+                </Stack>
+              </CodeExample>
             </Box>
 
             <Divider />
@@ -4827,52 +4921,58 @@ export default function AppComplete() {
               >
                 Similar a CSS border-radius para los arcos.
               </Typography>
-              <Stack direction={{ xs: "column", md: "row" }} spacing={2}>
-                <Box sx={{ flex: 1 }}>
-                  <Typography variant="caption" display="block" gutterBottom>
-                    <code>cornerRadius: 5</code>
-                  </Typography>
-                  <PieChart
-                    series={[
-                      {
-                        data: [
-                          { id: 0, value: 40, label: "Norte" },
-                          { id: 1, value: 30, label: "Sur" },
-                          { id: 2, value: 20, label: "Este" },
-                          { id: 3, value: 10, label: "Oeste" },
-                        ],
-                        cornerRadius: 5,
-                        innerRadius: 30,
-                        paddingAngle: 2,
-                      },
-                    ]}
-                    width={300}
-                    height={200}
-                  />
-                </Box>
-                <Box sx={{ flex: 1 }}>
-                  <Typography variant="caption" display="block" gutterBottom>
-                    <code>cornerRadius: 10</code>
-                  </Typography>
-                  <PieChart
-                    series={[
-                      {
-                        data: [
-                          { id: 0, value: 40, label: "Norte" },
-                          { id: 1, value: 30, label: "Sur" },
-                          { id: 2, value: 20, label: "Este" },
-                          { id: 3, value: 10, label: "Oeste" },
-                        ],
-                        cornerRadius: 10,
-                        innerRadius: 30,
-                        paddingAngle: 2,
-                      },
-                    ]}
-                    width={300}
-                    height={200}
-                  />
-                </Box>
-              </Stack>
+              <CodeExample
+                title="4. Bordes Redondeados (cornerRadius)"
+                code={`<PieChart series={[{ data: [...], cornerRadius: 5, innerRadius: 30, paddingAngle: 2 }]} width={300} height={200} />
+<PieChart series={[{ data: [...], cornerRadius: 10, innerRadius: 30, paddingAngle: 2 }]} width={300} height={200} />`}
+              >
+                <Stack direction={{ xs: "column", md: "row" }} spacing={2}>
+                  <Box sx={{ flex: 1 }}>
+                    <Typography variant="caption" display="block" gutterBottom>
+                      <code>cornerRadius: 5</code>
+                    </Typography>
+                    <PieChart
+                      series={[
+                        {
+                          data: [
+                            { id: 0, value: 40, label: "Norte" },
+                            { id: 1, value: 30, label: "Sur" },
+                            { id: 2, value: 20, label: "Este" },
+                            { id: 3, value: 10, label: "Oeste" },
+                          ],
+                          cornerRadius: 5,
+                          innerRadius: 30,
+                          paddingAngle: 2,
+                        },
+                      ]}
+                      width={300}
+                      height={200}
+                    />
+                  </Box>
+                  <Box sx={{ flex: 1 }}>
+                    <Typography variant="caption" display="block" gutterBottom>
+                      <code>cornerRadius: 10</code>
+                    </Typography>
+                    <PieChart
+                      series={[
+                        {
+                          data: [
+                            { id: 0, value: 40, label: "Norte" },
+                            { id: 1, value: 30, label: "Sur" },
+                            { id: 2, value: 20, label: "Este" },
+                            { id: 3, value: 10, label: "Oeste" },
+                          ],
+                          cornerRadius: 10,
+                          innerRadius: 30,
+                          paddingAngle: 2,
+                        },
+                      ]}
+                      width={300}
+                      height={200}
+                    />
+                  </Box>
+                </Stack>
+              </CodeExample>
             </Box>
 
             <Divider />
@@ -4889,50 +4989,56 @@ export default function AppComplete() {
                 Control del rango del arco con <code>startAngle</code> y{" "}
                 <code>endAngle</code>.
               </Typography>
-              <Stack direction={{ xs: "column", md: "row" }} spacing={2}>
-                <Box sx={{ flex: 1 }}>
-                  <Typography variant="caption" display="block" gutterBottom>
-                    Semicírculo: <code>startAngle: -90, endAngle: 90</code>
-                  </Typography>
-                  <PieChart
-                    series={[
-                      {
-                        data: [
-                          { id: 0, value: 50, label: "Completado" },
-                          { id: 1, value: 30, label: "En Progreso" },
-                          { id: 2, value: 20, label: "Pendiente" },
-                        ],
-                        startAngle: -90,
-                        endAngle: 90,
-                        innerRadius: 40,
-                      },
-                    ]}
-                    width={300}
-                    height={200}
-                  />
-                </Box>
-                <Box sx={{ flex: 1 }}>
-                  <Typography variant="caption" display="block" gutterBottom>
-                    Gauge: <code>startAngle: -120, endAngle: 120</code>
-                  </Typography>
-                  <PieChart
-                    series={[
-                      {
-                        data: [
-                          { id: 0, value: 70, label: "Usado" },
-                          { id: 1, value: 30, label: "Libre" },
-                        ],
-                        startAngle: -120,
-                        endAngle: 120,
-                        innerRadius: 50,
-                        cornerRadius: 5,
-                      },
-                    ]}
-                    width={300}
-                    height={200}
-                  />
-                </Box>
-              </Stack>
+              <CodeExample
+                title="5. Ángulo Inicial y Final"
+                code={`<PieChart series={[{ data: [...], startAngle: -90, endAngle: 90, innerRadius: 40 }]} width={300} height={200} />
+<PieChart series={[{ data: [...], startAngle: -120, endAngle: 120, innerRadius: 50, cornerRadius: 5 }]} width={300} height={200} />`}
+              >
+                <Stack direction={{ xs: "column", md: "row" }} spacing={2}>
+                  <Box sx={{ flex: 1 }}>
+                    <Typography variant="caption" display="block" gutterBottom>
+                      Semicírculo: <code>startAngle: -90, endAngle: 90</code>
+                    </Typography>
+                    <PieChart
+                      series={[
+                        {
+                          data: [
+                            { id: 0, value: 50, label: "Completado" },
+                            { id: 1, value: 30, label: "En Progreso" },
+                            { id: 2, value: 20, label: "Pendiente" },
+                          ],
+                          startAngle: -90,
+                          endAngle: 90,
+                          innerRadius: 40,
+                        },
+                      ]}
+                      width={300}
+                      height={200}
+                    />
+                  </Box>
+                  <Box sx={{ flex: 1 }}>
+                    <Typography variant="caption" display="block" gutterBottom>
+                      Gauge: <code>startAngle: -120, endAngle: 120</code>
+                    </Typography>
+                    <PieChart
+                      series={[
+                        {
+                          data: [
+                            { id: 0, value: 70, label: "Usado" },
+                            { id: 1, value: 30, label: "Libre" },
+                          ],
+                          startAngle: -120,
+                          endAngle: 120,
+                          innerRadius: 50,
+                          cornerRadius: 5,
+                        },
+                      ]}
+                      width={300}
+                      height={200}
+                    />
+                  </Box>
+                </Stack>
+              </CodeExample>
             </Box>
 
             <Divider />
@@ -4948,48 +5054,54 @@ export default function AppComplete() {
               >
                 Muestra etiquetas dentro de los arcos.
               </Typography>
-              <Stack direction={{ xs: "column", md: "row" }} spacing={2}>
-                <Box sx={{ flex: 1 }}>
-                  <Typography variant="caption" display="block" gutterBottom>
-                    <code>arcLabel: &quot;value&quot;</code>
-                  </Typography>
-                  <PieChart
-                    series={[
-                      {
-                        data: [
-                          { id: 0, value: 45, label: "Chrome" },
-                          { id: 1, value: 25, label: "Firefox" },
-                          { id: 2, value: 20, label: "Safari" },
-                          { id: 3, value: 10, label: "Edge" },
-                        ],
-                        arcLabel: "value",
-                      },
-                    ]}
-                    width={300}
-                    height={200}
-                  />
-                </Box>
-                <Box sx={{ flex: 1 }}>
-                  <Typography variant="caption" display="block" gutterBottom>
-                    <code>arcLabel: &quot;label&quot;</code>
-                  </Typography>
-                  <PieChart
-                    series={[
-                      {
-                        data: [
-                          { id: 0, value: 45, label: "Chrome" },
-                          { id: 1, value: 25, label: "Firefox" },
-                          { id: 2, value: 20, label: "Safari" },
-                          { id: 3, value: 10, label: "Edge" },
-                        ],
-                        arcLabel: "label",
-                      },
-                    ]}
-                    width={300}
-                    height={200}
-                  />
-                </Box>
-              </Stack>
+              <CodeExample
+                title="6. Etiquetas en Arcos (arcLabel)"
+                code={`<PieChart series={[{ data: [...], arcLabel: "value" }]} width={300} height={200} />
+<PieChart series={[{ data: [...], arcLabel: "label" }]} width={300} height={200} />`}
+              >
+                <Stack direction={{ xs: "column", md: "row" }} spacing={2}>
+                  <Box sx={{ flex: 1 }}>
+                    <Typography variant="caption" display="block" gutterBottom>
+                      <code>arcLabel: &quot;value&quot;</code>
+                    </Typography>
+                    <PieChart
+                      series={[
+                        {
+                          data: [
+                            { id: 0, value: 45, label: "Chrome" },
+                            { id: 1, value: 25, label: "Firefox" },
+                            { id: 2, value: 20, label: "Safari" },
+                            { id: 3, value: 10, label: "Edge" },
+                          ],
+                          arcLabel: "value",
+                        },
+                      ]}
+                      width={300}
+                      height={200}
+                    />
+                  </Box>
+                  <Box sx={{ flex: 1 }}>
+                    <Typography variant="caption" display="block" gutterBottom>
+                      <code>arcLabel: &quot;label&quot;</code>
+                    </Typography>
+                    <PieChart
+                      series={[
+                        {
+                          data: [
+                            { id: 0, value: 45, label: "Chrome" },
+                            { id: 1, value: 25, label: "Firefox" },
+                            { id: 2, value: 20, label: "Safari" },
+                            { id: 3, value: 10, label: "Edge" },
+                          ],
+                          arcLabel: "label",
+                        },
+                      ]}
+                      width={300}
+                      height={200}
+                    />
+                  </Box>
+                </Stack>
+              </CodeExample>
             </Box>
 
             <Divider />
@@ -5005,23 +5117,44 @@ export default function AppComplete() {
               >
                 Función personalizada para mostrar porcentajes.
               </Typography>
-              <PieChart
-                series={[
-                  {
-                    data: [
-                      { id: 0, value: 40, label: "Producto A" },
-                      { id: 1, value: 35, label: "Producto B" },
-                      { id: 2, value: 15, label: "Producto C" },
-                      { id: 3, value: 10, label: "Otros" },
-                    ],
-                    arcLabel: (item: { value: number }) => `${item.value}%`,
-                    arcLabelMinAngle: 35,
-                    innerRadius: 30,
-                  },
-                ]}
-                width={400}
-                height={250}
-              />
+              <CodeExample
+                title="7. Etiquetas con Porcentaje"
+                code={`<PieChart
+  series={[
+    {
+      data: [
+        { id: 0, value: 40, label: "Producto A" },
+        { id: 1, value: 35, label: "Producto B" },
+        { id: 2, value: 15, label: "Producto C" },
+        { id: 3, value: 10, label: "Otros" },
+      ],
+      arcLabel: (item) => \`\${item.value}%\`,
+      arcLabelMinAngle: 35,
+      innerRadius: 30,
+    },
+  ]}
+  width={400}
+  height={250}
+/>`}
+              >
+                <PieChart
+                  series={[
+                    {
+                      data: [
+                        { id: 0, value: 40, label: "Producto A" },
+                        { id: 1, value: 35, label: "Producto B" },
+                        { id: 2, value: 15, label: "Producto C" },
+                        { id: 3, value: 10, label: "Otros" },
+                      ],
+                      arcLabel: (item: { value: number }) => `${item.value}%`,
+                      arcLabelMinAngle: 35,
+                      innerRadius: 30,
+                    },
+                  ]}
+                  width={400}
+                  height={250}
+                />
+              </CodeExample>
             </Box>
 
             <Divider />
@@ -5038,53 +5171,59 @@ export default function AppComplete() {
                 <code>arcLabelMinAngle</code> oculta etiquetas en arcos
                 pequeños.
               </Typography>
-              <Stack direction={{ xs: "column", md: "row" }} spacing={2}>
-                <Box sx={{ flex: 1 }}>
-                  <Typography variant="caption" display="block" gutterBottom>
-                    Sin mínimo (etiquetas en todos)
-                  </Typography>
-                  <PieChart
-                    series={[
-                      {
-                        data: [
-                          { id: 0, value: 60 },
-                          { id: 1, value: 20 },
-                          { id: 2, value: 10 },
-                          { id: 3, value: 5 },
-                          { id: 4, value: 3 },
-                          { id: 5, value: 2 },
-                        ],
-                        arcLabel: "value",
-                      },
-                    ]}
-                    width={250}
-                    height={200}
-                  />
-                </Box>
-                <Box sx={{ flex: 1 }}>
-                  <Typography variant="caption" display="block" gutterBottom>
-                    <code>arcLabelMinAngle: 25</code>
-                  </Typography>
-                  <PieChart
-                    series={[
-                      {
-                        data: [
-                          { id: 0, value: 60 },
-                          { id: 1, value: 20 },
-                          { id: 2, value: 10 },
-                          { id: 3, value: 5 },
-                          { id: 4, value: 3 },
-                          { id: 5, value: 2 },
-                        ],
-                        arcLabel: "value",
-                        arcLabelMinAngle: 25,
-                      },
-                    ]}
-                    width={250}
-                    height={200}
-                  />
-                </Box>
-              </Stack>
+              <CodeExample
+                title="8. Ángulo Mínimo para Etiquetas"
+                code={`<PieChart series={[{ data: [...], arcLabel: "value" }]} width={250} height={200} />
+<PieChart series={[{ data: [...], arcLabel: "value", arcLabelMinAngle: 25 }]} width={250} height={200} />`}
+              >
+                <Stack direction={{ xs: "column", md: "row" }} spacing={2}>
+                  <Box sx={{ flex: 1 }}>
+                    <Typography variant="caption" display="block" gutterBottom>
+                      Sin mínimo (etiquetas en todos)
+                    </Typography>
+                    <PieChart
+                      series={[
+                        {
+                          data: [
+                            { id: 0, value: 60 },
+                            { id: 1, value: 20 },
+                            { id: 2, value: 10 },
+                            { id: 3, value: 5 },
+                            { id: 4, value: 3 },
+                            { id: 5, value: 2 },
+                          ],
+                          arcLabel: "value",
+                        },
+                      ]}
+                      width={250}
+                      height={200}
+                    />
+                  </Box>
+                  <Box sx={{ flex: 1 }}>
+                    <Typography variant="caption" display="block" gutterBottom>
+                      <code>arcLabelMinAngle: 25</code>
+                    </Typography>
+                    <PieChart
+                      series={[
+                        {
+                          data: [
+                            { id: 0, value: 60 },
+                            { id: 1, value: 20 },
+                            { id: 2, value: 10 },
+                            { id: 3, value: 5 },
+                            { id: 4, value: 3 },
+                            { id: 5, value: 2 },
+                          ],
+                          arcLabel: "value",
+                          arcLabelMinAngle: 25,
+                        },
+                      ]}
+                      width={250}
+                      height={200}
+                    />
+                  </Box>
+                </Stack>
+              </CodeExample>
             </Box>
 
             <Divider />
@@ -5100,62 +5239,55 @@ export default function AppComplete() {
               >
                 Define colores por dato o usa una paleta global.
               </Typography>
-              <Stack direction={{ xs: "column", md: "row" }} spacing={2}>
-                <Box sx={{ flex: 1 }}>
-                  <Typography variant="caption" display="block" gutterBottom>
-                    Colores por dato
-                  </Typography>
-                  <PieChart
-                    series={[
-                      {
-                        data: [
-                          {
-                            id: 0,
-                            value: 30,
-                            label: "Éxito",
-                            color: "#4caf50",
-                          },
-                          {
-                            id: 1,
-                            value: 20,
-                            label: "Advertencia",
-                            color: "#ff9800",
-                          },
-                          {
-                            id: 2,
-                            value: 10,
-                            label: "Error",
-                            color: "#f44336",
-                          },
-                          { id: 3, value: 40, label: "Info", color: "#2196f3" },
-                        ],
-                      },
-                    ]}
-                    width={300}
-                    height={200}
-                  />
-                </Box>
-                <Box sx={{ flex: 1 }}>
-                  <Typography variant="caption" display="block" gutterBottom>
-                    Paleta global con <code>colors</code>
-                  </Typography>
-                  <PieChart
-                    colors={["#9c27b0", "#e91e63", "#ff5722", "#795548"]}
-                    series={[
-                      {
-                        data: [
-                          { id: 0, value: 25, label: "Q1" },
-                          { id: 1, value: 30, label: "Q2" },
-                          { id: 2, value: 28, label: "Q3" },
-                          { id: 3, value: 17, label: "Q4" },
-                        ],
-                      },
-                    ]}
-                    width={300}
-                    height={200}
-                  />
-                </Box>
-              </Stack>
+              <CodeExample
+                title="9. Colores Personalizados"
+                code={`// Colores por dato:
+<PieChart series={[{ data: [{ id: 0, value: 30, label: "Éxito", color: "#4caf50" }, ...] }]} width={300} height={200} />
+// Paleta global:
+<PieChart colors={["#9c27b0", "#e91e63", "#ff5722", "#795548"]} series={[{ data: [...] }]} width={300} height={200} />`}
+              >
+                <Stack direction={{ xs: "column", md: "row" }} spacing={2}>
+                  <Box sx={{ flex: 1 }}>
+                    <Typography variant="caption" display="block" gutterBottom>
+                      Colores por dato
+                    </Typography>
+                    <PieChart
+                      series={[
+                        {
+                          data: [
+                            { id: 0, value: 30, label: "Éxito", color: "#4caf50" },
+                            { id: 1, value: 20, label: "Advertencia", color: "#ff9800" },
+                            { id: 2, value: 10, label: "Error", color: "#f44336" },
+                            { id: 3, value: 40, label: "Info", color: "#2196f3" },
+                          ],
+                        },
+                      ]}
+                      width={300}
+                      height={200}
+                    />
+                  </Box>
+                  <Box sx={{ flex: 1 }}>
+                    <Typography variant="caption" display="block" gutterBottom>
+                      Paleta global con <code>colors</code>
+                    </Typography>
+                    <PieChart
+                      colors={["#9c27b0", "#e91e63", "#ff5722", "#795548"]}
+                      series={[
+                        {
+                          data: [
+                            { id: 0, value: 25, label: "Q1" },
+                            { id: 1, value: 30, label: "Q2" },
+                            { id: 2, value: 28, label: "Q3" },
+                            { id: 3, value: 17, label: "Q4" },
+                          ],
+                        },
+                      ]}
+                      width={300}
+                      height={200}
+                    />
+                  </Box>
+                </Stack>
+              </CodeExample>
             </Box>
 
             <Divider />
@@ -5172,23 +5304,38 @@ export default function AppComplete() {
                 Modifica el tamaño al hacer hover con{" "}
                 <code>highlighted.additionalRadius</code>.
               </Typography>
-              <PieChart
-                series={[
-                  {
-                    data: [
-                      { id: 0, value: 35, label: "Desktop" },
-                      { id: 1, value: 45, label: "Mobile" },
-                      { id: 2, value: 20, label: "Tablet" },
-                    ],
-                    innerRadius: 40,
-                    paddingAngle: 2,
-                    cornerRadius: 5,
-                    highlighted: { additionalRadius: 10 },
-                  },
-                ]}
-                width={400}
-                height={250}
-              />
+              <CodeExample
+                title="10. Estado Highlighted (Resaltado)"
+                code={`<PieChart
+  series={[{
+    data: [{ id: 0, value: 35, label: "Desktop" }, ...],
+    innerRadius: 40,
+    paddingAngle: 2,
+    cornerRadius: 5,
+    highlighted: { additionalRadius: 10 },
+  }]}
+  width={400}
+  height={250}
+/>`}
+              >
+                <PieChart
+                  series={[
+                    {
+                      data: [
+                        { id: 0, value: 35, label: "Desktop" },
+                        { id: 1, value: 45, label: "Mobile" },
+                        { id: 2, value: 20, label: "Tablet" },
+                      ],
+                      innerRadius: 40,
+                      paddingAngle: 2,
+                      cornerRadius: 5,
+                      highlighted: { additionalRadius: 10 },
+                    },
+                  ]}
+                  width={400}
+                  height={250}
+                />
+              </CodeExample>
             </Box>
 
             <Divider />
@@ -5205,23 +5352,37 @@ export default function AppComplete() {
                 Reduce el radio de elementos no seleccionados con{" "}
                 <code>faded.additionalRadius</code>.
               </Typography>
-              <PieChart
-                series={[
-                  {
-                    data: [
-                      { id: 0, value: 40, label: "Orgánico" },
-                      { id: 1, value: 30, label: "Pagado" },
-                      { id: 2, value: 20, label: "Social" },
-                      { id: 3, value: 10, label: "Directo" },
-                    ],
-                    innerRadius: 30,
-                    faded: { innerRadius: 30, additionalRadius: -10 },
-                    highlighted: { additionalRadius: 5 },
-                  },
-                ]}
-                width={400}
-                height={250}
-              />
+              <CodeExample
+                title="11. Estado Faded (Desvanecido)"
+                code={`<PieChart
+  series={[{
+    data: [{ id: 0, value: 40, label: "Orgánico" }, ...],
+    innerRadius: 30,
+    faded: { innerRadius: 30, additionalRadius: -10 },
+    highlighted: { additionalRadius: 5 },
+  }]}
+  width={400}
+  height={250}
+/>`}
+              >
+                <PieChart
+                  series={[
+                    {
+                      data: [
+                        { id: 0, value: 40, label: "Orgánico" },
+                        { id: 1, value: 30, label: "Pagado" },
+                        { id: 2, value: 20, label: "Social" },
+                        { id: 3, value: 10, label: "Directo" },
+                      ],
+                      innerRadius: 30,
+                      faded: { innerRadius: 30, additionalRadius: -10 },
+                      highlighted: { additionalRadius: 5 },
+                    },
+                  ]}
+                  width={400}
+                  height={250}
+                />
+              </CodeExample>
             </Box>
 
             <Divider />
@@ -5237,46 +5398,34 @@ export default function AppComplete() {
               >
                 Controla la posición del centro del pie.
               </Typography>
-              <Stack direction={{ xs: "column", md: "row" }} spacing={2}>
-                <Box sx={{ flex: 1 }}>
-                  <Typography variant="caption" display="block" gutterBottom>
-                    <code>cx: 100</code> (izquierda)
-                  </Typography>
-                  <PieChart
-                    series={[
-                      {
-                        data: [
-                          { id: 0, value: 50 },
-                          { id: 1, value: 30 },
-                          { id: 2, value: 20 },
-                        ],
-                        cx: 100,
-                      },
-                    ]}
-                    width={300}
-                    height={200}
-                  />
-                </Box>
-                <Box sx={{ flex: 1 }}>
-                  <Typography variant="caption" display="block" gutterBottom>
-                    <code>cx: 200</code> (derecha)
-                  </Typography>
-                  <PieChart
-                    series={[
-                      {
-                        data: [
-                          { id: 0, value: 50 },
-                          { id: 1, value: 30 },
-                          { id: 2, value: 20 },
-                        ],
-                        cx: 200,
-                      },
-                    ]}
-                    width={300}
-                    height={200}
-                  />
-                </Box>
-              </Stack>
+              <CodeExample
+                title="12. Posición del Centro (cx, cy)"
+                code={`<PieChart series={[{ data: [...], cx: 100 }]} width={300} height={200} />
+<PieChart series={[{ data: [...], cx: 200 }]} width={300} height={200} />`}
+              >
+                <Stack direction={{ xs: "column", md: "row" }} spacing={2}>
+                  <Box sx={{ flex: 1 }}>
+                    <Typography variant="caption" display="block" gutterBottom>
+                      <code>cx: 100</code> (izquierda)
+                    </Typography>
+                    <PieChart
+                      series={[{ data: [{ id: 0, value: 50 }, { id: 1, value: 30 }, { id: 2, value: 20 }], cx: 100 }]}
+                      width={300}
+                      height={200}
+                    />
+                  </Box>
+                  <Box sx={{ flex: 1 }}>
+                    <Typography variant="caption" display="block" gutterBottom>
+                      <code>cx: 200</code> (derecha)
+                    </Typography>
+                    <PieChart
+                      series={[{ data: [{ id: 0, value: 50 }, { id: 1, value: 30 }, { id: 2, value: 20 }], cx: 200 }]}
+                      width={300}
+                      height={200}
+                    />
+                  </Box>
+                </Stack>
+              </CodeExample>
             </Box>
 
             <Divider />
@@ -5292,46 +5441,34 @@ export default function AppComplete() {
               >
                 Controla el tamaño máximo del pie.
               </Typography>
-              <Stack direction={{ xs: "column", md: "row" }} spacing={2}>
-                <Box sx={{ flex: 1 }}>
-                  <Typography variant="caption" display="block" gutterBottom>
-                    <code>outerRadius: 60</code>
-                  </Typography>
-                  <PieChart
-                    series={[
-                      {
-                        data: [
-                          { id: 0, value: 40 },
-                          { id: 1, value: 35 },
-                          { id: 2, value: 25 },
-                        ],
-                        outerRadius: 60,
-                      },
-                    ]}
-                    width={200}
-                    height={200}
-                  />
-                </Box>
-                <Box sx={{ flex: 1 }}>
-                  <Typography variant="caption" display="block" gutterBottom>
-                    <code>outerRadius: 90</code>
-                  </Typography>
-                  <PieChart
-                    series={[
-                      {
-                        data: [
-                          { id: 0, value: 40 },
-                          { id: 1, value: 35 },
-                          { id: 2, value: 25 },
-                        ],
-                        outerRadius: 90,
-                      },
-                    ]}
-                    width={200}
-                    height={200}
-                  />
-                </Box>
-              </Stack>
+              <CodeExample
+                title="13. Radio Exterior (outerRadius)"
+                code={`<PieChart series={[{ data: [...], outerRadius: 60 }]} width={200} height={200} />
+<PieChart series={[{ data: [...], outerRadius: 90 }]} width={200} height={200} />`}
+              >
+                <Stack direction={{ xs: "column", md: "row" }} spacing={2}>
+                  <Box sx={{ flex: 1 }}>
+                    <Typography variant="caption" display="block" gutterBottom>
+                      <code>outerRadius: 60</code>
+                    </Typography>
+                    <PieChart
+                      series={[{ data: [{ id: 0, value: 40 }, { id: 1, value: 35 }, { id: 2, value: 25 }], outerRadius: 60 }]}
+                      width={200}
+                      height={200}
+                    />
+                  </Box>
+                  <Box sx={{ flex: 1 }}>
+                    <Typography variant="caption" display="block" gutterBottom>
+                      <code>outerRadius: 90</code>
+                    </Typography>
+                    <PieChart
+                      series={[{ data: [{ id: 0, value: 40 }, { id: 1, value: 35 }, { id: 2, value: 25 }], outerRadius: 90 }]}
+                      width={200}
+                      height={200}
+                    />
+                  </Box>
+                </Stack>
+              </CodeExample>
             </Box>
 
             <Divider />
@@ -5347,22 +5484,36 @@ export default function AppComplete() {
               >
                 Desactiva animaciones con <code>skipAnimation</code>.
               </Typography>
-              <PieChart
-                series={[
-                  {
-                    data: [
-                      { id: 0, value: 55, label: "Aprobado" },
-                      { id: 1, value: 30, label: "Pendiente" },
-                      { id: 2, value: 15, label: "Rechazado" },
-                    ],
-                    innerRadius: 40,
-                    arcLabel: "value",
-                  },
-                ]}
-                skipAnimation
-                width={400}
-                height={250}
-              />
+              <CodeExample
+                title="14. Sin Animación"
+                code={`<PieChart
+  series={[{
+    data: [{ id: 0, value: 55, label: "Aprobado" }, ...],
+    innerRadius: 40,
+    arcLabel: "value",
+  }]}
+  skipAnimation
+  width={400}
+  height={250}
+/>`}
+              >
+                <PieChart
+                  series={[
+                    {
+                      data: [
+                        { id: 0, value: 55, label: "Aprobado" },
+                        { id: 1, value: 30, label: "Pendiente" },
+                        { id: 2, value: 15, label: "Rechazado" },
+                      ],
+                      innerRadius: 40,
+                      arcLabel: "value",
+                    },
+                  ]}
+                  skipAnimation
+                  width={400}
+                  height={250}
+                />
+              </CodeExample>
             </Box>
 
             <Divider />
@@ -5378,103 +5529,82 @@ export default function AppComplete() {
               >
                 Combinación de todas las funcionalidades.
               </Typography>
-              <Stack direction={{ xs: "column", md: "row" }} spacing={3}>
-                <Box sx={{ flex: 1, textAlign: "center" }}>
-                  <Typography variant="subtitle2" gutterBottom>
-                    Distribución de Ventas
-                  </Typography>
-                  <PieChart
-                    series={[
-                      {
-                        data: [
-                          {
-                            id: 0,
-                            value: 45,
-                            label: "Electrónica",
-                            color: "#3f51b5",
-                          },
-                          {
-                            id: 1,
-                            value: 25,
-                            label: "Ropa",
-                            color: "#f50057",
-                          },
-                          {
-                            id: 2,
-                            value: 18,
-                            label: "Hogar",
-                            color: "#00bcd4",
-                          },
-                          {
-                            id: 3,
-                            value: 12,
-                            label: "Otros",
-                            color: "#ff9800",
-                          },
-                        ],
-                        innerRadius: 50,
-                        outerRadius: 90,
-                        paddingAngle: 3,
-                        cornerRadius: 8,
-                        arcLabel: (item: { value: number }) => `${item.value}%`,
-                        arcLabelMinAngle: 30,
-                        highlighted: { additionalRadius: 10 },
-                        faded: { additionalRadius: -5, color: "gray" },
-                      },
-                    ]}
-                    width={350}
-                    height={250}
-                  />
-                </Box>
-                <Box sx={{ flex: 1, textAlign: "center" }}>
-                  <Typography variant="subtitle2" gutterBottom>
-                    Estado de Proyectos
-                  </Typography>
-                  <PieChart
-                    series={[
-                      {
-                        data: [
-                          {
-                            id: 0,
-                            value: 8,
-                            label: "Completados",
-                            color: "#4caf50",
-                          },
-                          {
-                            id: 1,
-                            value: 5,
-                            label: "En Progreso",
-                            color: "#2196f3",
-                          },
-                          {
-                            id: 2,
-                            value: 3,
-                            label: "Pendientes",
-                            color: "#ff9800",
-                          },
-                          {
-                            id: 3,
-                            value: 2,
-                            label: "Cancelados",
-                            color: "#f44336",
-                          },
-                        ],
-                        startAngle: -90,
-                        endAngle: 270,
-                        innerRadius: 60,
-                        outerRadius: 85,
-                        paddingAngle: 2,
-                        cornerRadius: 4,
-                        arcLabel: "value",
-                        arcLabelMinAngle: 20,
-                        highlighted: { additionalRadius: 8 },
-                      },
-                    ]}
-                    width={350}
-                    height={250}
-                  />
-                </Box>
-              </Stack>
+              <CodeExample
+                title="15. Ejemplo Dashboard Completo"
+                code={`<PieChart
+  series={[{
+    data: [{ id: 0, value: 45, label: "Electrónica", color: "#3f51b5" }, ...],
+    innerRadius: 50,
+    outerRadius: 90,
+    paddingAngle: 3,
+    cornerRadius: 8,
+    arcLabel: (item) => \`\${item.value}%\`,
+    arcLabelMinAngle: 30,
+    highlighted: { additionalRadius: 10 },
+    faded: { additionalRadius: -5, color: "gray" },
+  }]}
+  width={350}
+  height={250}
+/>`}
+              >
+                <Stack direction={{ xs: "column", md: "row" }} spacing={3}>
+                  <Box sx={{ flex: 1, textAlign: "center" }}>
+                    <Typography variant="subtitle2" gutterBottom>
+                      Distribución de Ventas
+                    </Typography>
+                    <PieChart
+                      series={[
+                        {
+                          data: [
+                            { id: 0, value: 45, label: "Electrónica", color: "#3f51b5" },
+                            { id: 1, value: 25, label: "Ropa", color: "#f50057" },
+                            { id: 2, value: 18, label: "Hogar", color: "#00bcd4" },
+                            { id: 3, value: 12, label: "Otros", color: "#ff9800" },
+                          ],
+                          innerRadius: 50,
+                          outerRadius: 90,
+                          paddingAngle: 3,
+                          cornerRadius: 8,
+                          arcLabel: (item: { value: number }) => `${item.value}%`,
+                          arcLabelMinAngle: 30,
+                          highlighted: { additionalRadius: 10 },
+                          faded: { additionalRadius: -5, color: "gray" },
+                        },
+                      ]}
+                      width={350}
+                      height={250}
+                    />
+                  </Box>
+                  <Box sx={{ flex: 1, textAlign: "center" }}>
+                    <Typography variant="subtitle2" gutterBottom>
+                      Estado de Proyectos
+                    </Typography>
+                    <PieChart
+                      series={[
+                        {
+                          data: [
+                            { id: 0, value: 8, label: "Completados", color: "#4caf50" },
+                            { id: 1, value: 5, label: "En Progreso", color: "#2196f3" },
+                            { id: 2, value: 3, label: "Pendientes", color: "#ff9800" },
+                            { id: 3, value: 2, label: "Cancelados", color: "#f44336" },
+                          ],
+                          startAngle: -90,
+                          endAngle: 270,
+                          innerRadius: 60,
+                          outerRadius: 85,
+                          paddingAngle: 2,
+                          cornerRadius: 4,
+                          arcLabel: "value",
+                          arcLabelMinAngle: 20,
+                          highlighted: { additionalRadius: 8 },
+                        },
+                      ]}
+                      width={350}
+                      height={250}
+                    />
+                  </Box>
+                </Stack>
+              </CodeExample>
             </Box>
           </Stack>
 
