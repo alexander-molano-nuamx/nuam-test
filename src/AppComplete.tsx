@@ -355,7 +355,6 @@ const shortcutsItems = [
 
 export default function AppComplete() {
   const [textValue, setTextValue] = useState("");
-
   const [emailValue, setEmailValue] = useState("");
   const [checkboxValue, setCheckboxValue] = useState(false);
   const [switchValue, setSwitchValue] = useState(false);
@@ -719,6 +718,7 @@ export default function AppComplete() {
                     label="Campo deshabilitado"
                     disabled
                     value="No editable"
+                    sx={{ width: "50%" }}
                   />
                 </CodeExample>
               </Stack>
@@ -729,11 +729,20 @@ export default function AppComplete() {
               <Typography variant="h6" gutterBottom>
                 Checkbox
               </Typography>
-              <Checkbox
-                label="Acepto los términos y condiciones"
-                checked={checkboxValue}
-                onChange={(_, checked) => setCheckboxValue(checked)}
-              />
+              <CodeExample
+                title="Ejemplo de Checkbox"
+                code={`<Checkbox
+ label="Acepto los términos y condiciones"
+ checked={checkboxValue}
+ onChange={(_, checked) => setCheckboxValue(checked)}
+/>`}
+              >
+                <Checkbox
+                  label="Acepto los términos y condiciones"
+                  checked={checkboxValue}
+                  onChange={(_, checked) => setCheckboxValue(checked)}
+                />
+              </CodeExample>
             </Box>
 
             {/* Switch */}
@@ -741,65 +750,108 @@ export default function AppComplete() {
               <Typography variant="h6" gutterBottom>
                 Switch
               </Typography>
-              <Switch
-                label="Activar notificaciones"
-                checked={switchValue}
-                onChange={(_, checked) => setSwitchValue(checked)}
-              />
+              <CodeExample
+                title="Ejemplo de Switch"
+                code={`<Switch
+ label="Activar notificaciones"
+ checked={switchValue}
+ onChange={(_, checked) => setSwitchValue(checked)}
+/>`}
+              >
+                <Switch
+                  label="Activar notificaciones"
+                  checked={switchValue}
+                  onChange={(_, checked) => setSwitchValue(checked)}
+                />
+              </CodeExample>
             </Box>
             {/* Autocomplete */}
             <Box>
               <Typography variant="h6" gutterBottom>
                 Autocomplete
               </Typography>
-              <Autocomplete
-                showClearIndicator={true}
-                options={seriesDataOpa}
-                value={autocompleteValue?.id}
-                onChange={(value) =>
-                  setAutocompleteValue(value as SerieItemOpa | null)
-                }
-                label="Filtrar por Títulos Ofertados"
-                labelKey="name"
-                valueKey="id"
-                searchKeys={["name", "duration", "type"]}
-                sx={{ width: "40%" }}
-              />
-              {autocompleteValue && (
-                <Box
-                  mt={2}
-                  p={2}
-                  sx={{ backgroundColor: "#f5f5f5", borderRadius: 1 }}
-                >
-                  <Typography variant="body2">
-                    <strong>Seleccionado:</strong> {autocompleteValue.name}
-                  </Typography>
-                  <Typography variant="body2">
-                    <strong>Duración:</strong> {autocompleteValue.duration}
-                  </Typography>
-                  <Typography variant="body2">
-                    <strong>Tipo:</strong> {autocompleteValue.type}
-                  </Typography>
-                  <Typography variant="body2">
-                    <strong>Color:</strong>{" "}
-                    <span style={{ color: autocompleteValue.color }}>●</span>{" "}
-                    {autocompleteValue.color}
-                  </Typography>
-                </Box>
-              )}
+
+              <CodeExample
+                title="Ejemplo de Autocomplete"
+                code={`<Autocomplete
+  showClearIndicator={true}
+  options={seriesDataOpa}
+  value={autocompleteValue?.id}
+  onChange={(value) =>
+   setAutocompleteValue(value as SerieItemOpa | null)
+   } 
+  label="Filtrar por Títulos Ofertados"
+  labelKey="name"
+  valueKey="id"
+  searchKeys={["name", "duration", "type"]}
+  sx={{ width: "40%" }}
+/>`}
+              >
+                <Autocomplete
+                  showClearIndicator={true}
+                  options={seriesDataOpa}
+                  value={autocompleteValue?.id}
+                  onChange={(value) =>
+                    setAutocompleteValue(value as SerieItemOpa | null)
+                  }
+                  label="Filtrar por Títulos Ofertados"
+                  labelKey="name"
+                  valueKey="id"
+                  searchKeys={["name", "duration", "type"]}
+                  sx={{ width: "40%" }}
+                />
+                {autocompleteValue && (
+                  <Box
+                    mt={2}
+                    p={2}
+                    sx={{
+                      backgroundColor: "Background.secondary",
+                      borderRadius: 1,
+                      border: "1px solid",
+                      borderColor: "Divider",
+                    }}
+                  >
+                    <Typography variant="body2">
+                      <strong>Seleccionado:</strong> {autocompleteValue.name}
+                    </Typography>
+                    <Typography variant="body2">
+                      <strong>Duración:</strong> {autocompleteValue.duration}
+                    </Typography>
+                    <Typography variant="body2">
+                      <strong>Tipo:</strong> {autocompleteValue.type}
+                    </Typography>
+                    <Typography variant="body2">
+                      <strong>Color:</strong>{" "}
+                      <span style={{ color: autocompleteValue.color }}>●</span>{" "}
+                      {autocompleteValue.color}
+                    </Typography>
+                  </Box>
+                )}
+              </CodeExample>
             </Box>
             {/* DatePicker */}
             <Box>
               <Typography variant="h6" gutterBottom>
                 DatePicker
               </Typography>
-              <DatePicker
-                label="Selecciona una fecha"
-                showClearIndicator={true}
-                value={dateValue}
-                onChange={(value) => setDateValue(value)}
-                sx={{ width: "40%" }}
-              />
+              <CodeExample
+                title="Ejemplo de DatePicker"
+                code={`<DatePicker
+ label="Selecciona una fecha"
+ showClearIndicator={true}
+ value={dateValue}
+ onChange={(value) => setDateValue(value)}
+ sx={{ width: "40%" }}
+/>`}
+              >
+                <DatePicker
+                  label="Selecciona una fecha"
+                  showClearIndicator={true}
+                  value={dateValue}
+                  onChange={(value) => setDateValue(value)}
+                  sx={{ width: "40%" }}
+                />
+              </CodeExample>
             </Box>
             {/* DateRangePicker */}
             <Box>
@@ -812,28 +864,47 @@ export default function AppComplete() {
               >
                 Selector de rango de fechas con botón para limpiar
               </Typography>
-              <DateRangePicker
-                localeText={{ start: "Fecha inicio", end: "Fecha fin" }}
-                value={dateRangeValue}
-                onChange={(newValue) => setDateRangeValue(newValue)}
-                sx={{ width: "40%" }}
-              />
-              {dateRangeValue[0] && dateRangeValue[1] && (
-                <Box sx={{ mt: 2, p: 2, bgcolor: "#f5f5f5", borderRadius: 1 }}>
-                  <Typography variant="body2">
-                    <strong>Inicio:</strong>{" "}
-                    {dateRangeValue[0].format("DD/MM/YYYY")}
-                  </Typography>
-                  <Typography variant="body2">
-                    <strong>Fin:</strong>{" "}
-                    {dateRangeValue[1].format("DD/MM/YYYY")}
-                  </Typography>
-                  <Typography variant="body2">
-                    <strong>Días:</strong>{" "}
-                    {dateRangeValue[1].diff(dateRangeValue[0], "day")} días
-                  </Typography>
-                </Box>
-              )}
+              <CodeExample
+                title="Ejemplo de DateRangePicker"
+                code={`<DateRangePicker
+ localeText={{ start: "Fecha inicio", end: "Fecha fin" }}
+ value={dateRangeValue}
+ onChange={(newValue) => setDateRangeValue(newValue)}
+ sx={{ width: "40%" }}
+/>`}
+              >
+                <DateRangePicker
+                  localeText={{ start: "Fecha inicio", end: "Fecha fin" }}
+                  value={dateRangeValue}
+                  onChange={(newValue) => setDateRangeValue(newValue)}
+                  sx={{ width: "40%" }}
+                />
+                {dateRangeValue[0] && dateRangeValue[1] && (
+                  <Box
+                    sx={{
+                      mt: 2,
+                      p: 2,
+                      bgcolor: "Background.secondary",
+                      borderRadius: 1,
+                      border: "1px solid",
+                      borderColor: "Divider",
+                    }}
+                  >
+                    <Typography variant="body2">
+                      <strong>Inicio:</strong>{" "}
+                      {dateRangeValue[0].format("DD/MM/YYYY")}
+                    </Typography>
+                    <Typography variant="body2">
+                      <strong>Fin:</strong>{" "}
+                      {dateRangeValue[1].format("DD/MM/YYYY")}
+                    </Typography>
+                    <Typography variant="body2">
+                      <strong>Días:</strong>{" "}
+                      {dateRangeValue[1].diff(dateRangeValue[0], "day")} días
+                    </Typography>
+                  </Box>
+                )}
+              </CodeExample>
             </Box>
             {/* DateTimeRangePicker */}
             <Box>
@@ -846,7 +917,10 @@ export default function AppComplete() {
               >
                 Selector de rango de fecha y hora con todas las funcionalidades
               </Typography>
-              <DateTimeRangePicker
+              <CodeExample
+                title="Ejemplo de DateTimeRangePicker"
+                code={`
+                <DateTimeRangePicker
                 localeText={{
                   start: "Fecha/hora inicio",
                   end: "Fecha/hora fin",
@@ -856,19 +930,41 @@ export default function AppComplete() {
                 sx={{
                   width: "40%",
                 }}
-              />
-              {dateTimeRangeValue[0] && dateTimeRangeValue[1] && (
-                <Box sx={{ mt: 2, p: 2, bgcolor: "#f5f5f5", borderRadius: 1 }}>
-                  <Typography variant="body2">
-                    <strong>Inicio:</strong>{" "}
-                    {dateTimeRangeValue[0].format("DD/MM/YYYY HH:mm")}
-                  </Typography>
-                  <Typography variant="body2">
-                    <strong>Fin:</strong>{" "}
-                    {dateTimeRangeValue[1].format("DD/MM/YYYY HH:mm")}
-                  </Typography>
-                </Box>
-              )}
+              />`}
+              >
+                <DateTimeRangePicker
+                  localeText={{
+                    start: "Fecha/hora inicio",
+                    end: "Fecha/hora fin",
+                  }}
+                  value={dateTimeRangeValue}
+                  onChange={(newValue) => setDateTimeRangeValue(newValue)}
+                  sx={{
+                    width: "40%",
+                  }}
+                />
+                {dateTimeRangeValue[0] && dateTimeRangeValue[1] && (
+                  <Box
+                    sx={{
+                      mt: 2,
+                      p: 2,
+                      bgcolor: "Background.secondary",
+                      borderRadius: 1,
+                      border: "1px solid",
+                      borderColor: "Divider",
+                    }}
+                  >
+                    <Typography variant="body2">
+                      <strong>Inicio:</strong>{" "}
+                      {dateTimeRangeValue[0].format("DD/MM/YYYY HH:mm")}
+                    </Typography>
+                    <Typography variant="body2">
+                      <strong>Fin:</strong>{" "}
+                      {dateTimeRangeValue[1].format("DD/MM/YYYY HH:mm")}
+                    </Typography>
+                  </Box>
+                )}
+              </CodeExample>
             </Box>
             {/* TimeRangePicker */}
             <Box>
@@ -881,30 +977,51 @@ export default function AppComplete() {
               >
                 Selector de rango de horas (sin fecha)
               </Typography>
-              <TimeRangePicker
-                localeText={{
-                  start: "Hora inicio",
-                  end: "Hora fin",
-                }}
-                value={timeRangeValue}
-                onChange={(newValue) => setTimeRangeValue(newValue)}
-                sx={{ width: "40%" }}
-              />
-              {timeRangeValue[0] && timeRangeValue[1] && (
-                <Box sx={{ mt: 2, p: 2, bgcolor: "#f5f5f5", borderRadius: 1 }}>
-                  <Typography variant="body2">
-                    <strong>Inicio:</strong> {timeRangeValue[0].format("HH:mm")}
-                  </Typography>
-                  <Typography variant="body2">
-                    <strong>Fin:</strong> {timeRangeValue[1].format("HH:mm")}
-                  </Typography>
-                  <Typography variant="body2">
-                    <strong>Duración:</strong>{" "}
-                    {timeRangeValue[1].diff(timeRangeValue[0], "minute")}{" "}
-                    minutos
-                  </Typography>
-                </Box>
-              )}
+              <CodeExample
+                title="Ejemplo de TimeRangePicker"
+                code={`<TimeRangePicker
+ label="Selecciona un rango de horas"
+ value={timeRangeValue}
+ onChange={(newValue) => setTimeRangeValue(newValue)}
+ sx={{ width: "40%" }}
+/>`}
+              >
+                <TimeRangePicker
+                  localeText={{
+                    start: "Hora inicio",
+                    end: "Hora fin",
+                  }}
+                  value={timeRangeValue}
+                  onChange={(newValue) => setTimeRangeValue(newValue)}
+                  sx={{ width: "40%" }}
+                />
+
+                {timeRangeValue[0] && timeRangeValue[1] && (
+                  <Box
+                    sx={{
+                      mt: 2,
+                      p: 2,
+                      bgcolor: "Background.secondary",
+                      borderRadius: 1,
+                      border: "1px solid",
+                      borderColor: "Divider",
+                    }}
+                  >
+                    <Typography variant="body2">
+                      <strong>Inicio:</strong>{" "}
+                      {timeRangeValue[0].format("HH:mm")}
+                    </Typography>
+                    <Typography variant="body2">
+                      <strong>Fin:</strong> {timeRangeValue[1].format("HH:mm")}
+                    </Typography>
+                    <Typography variant="body2">
+                      <strong>Duración:</strong>{" "}
+                      {timeRangeValue[1].diff(timeRangeValue[0], "minute")}{" "}
+                      minutos
+                    </Typography>
+                  </Box>
+                )}
+              </CodeExample>
             </Box>
             {/* StaticDateRangePicker */}
             <Box>
@@ -927,40 +1044,66 @@ export default function AppComplete() {
                   width: "fit-content",
                 }}
               >
-                <StaticDateRangePicker
-                  slotProps={{
-                    shortcuts: {
-                      items: shortcutsItems,
-                    },
-                    actionBar: { actions: [] },
-                  }}
-                  value={staticDateRangeValue}
-                  onChange={(newValue) => setStaticDateRangeValue(newValue)}
-                  displayStaticWrapperAs="desktop"
-                  calendars={3}
-                  sx={{ width: "fit-content", padding: 1 }}
-                />
+                <CodeExample
+                  title="Ejemplo de StaticDateRangePicker con shortcuts personalizados"
+                  code={`<StaticDateRangePicker
+ slotProps={{
+   shortcuts: {
+     items: shortcutsItems,
+   },
+   actionBar: { actions: [] },
+ }}
+ value={staticDateRangeValue}
+ onChange={(newValue) => setStaticDateRangeValue(newValue)}
+ displayStaticWrapperAs="desktop"
+ calendars={3}
+ sx={{ width: "fit-content", padding: 1 }}
+/>`}
+                >
+                  <StaticDateRangePicker
+                    slotProps={{
+                      shortcuts: {
+                        items: shortcutsItems,
+                      },
+                      actionBar: { actions: [] },
+                    }}
+                    value={staticDateRangeValue}
+                    onChange={(newValue) => setStaticDateRangeValue(newValue)}
+                    displayStaticWrapperAs="desktop"
+                    calendars={3}
+                    sx={{ width: "fit-content", padding: 1 }}
+                  />
+                  {staticDateRangeValue[0] && staticDateRangeValue[1] && (
+                    <Box
+                      sx={{
+                        mt: 2,
+                        p: 2,
+                        bgcolor: "Background.secondary",
+                        borderRadius: 1,
+                        border: "1px solid",
+                        borderColor: "Divider",
+                      }}
+                    >
+                      <Typography variant="body2">
+                        <strong>Inicio:</strong>{" "}
+                        {staticDateRangeValue[0].format("DD/MM/YYYY")}
+                      </Typography>
+                      <Typography variant="body2">
+                        <strong>Fin:</strong>{" "}
+                        {staticDateRangeValue[1].format("DD/MM/YYYY")}
+                      </Typography>
+                      <Typography variant="body2">
+                        <strong>Días:</strong>{" "}
+                        {staticDateRangeValue[1].diff(
+                          staticDateRangeValue[0],
+                          "day",
+                        )}{" "}
+                        días
+                      </Typography>
+                    </Box>
+                  )}
+                </CodeExample>
               </Box>
-              {staticDateRangeValue[0] && staticDateRangeValue[1] && (
-                <Box sx={{ mt: 2, p: 2, bgcolor: "#f5f5f5", borderRadius: 1 }}>
-                  <Typography variant="body2">
-                    <strong>Inicio:</strong>{" "}
-                    {staticDateRangeValue[0].format("DD/MM/YYYY")}
-                  </Typography>
-                  <Typography variant="body2">
-                    <strong>Fin:</strong>{" "}
-                    {staticDateRangeValue[1].format("DD/MM/YYYY")}
-                  </Typography>
-                  <Typography variant="body2">
-                    <strong>Días:</strong>{" "}
-                    {staticDateRangeValue[1].diff(
-                      staticDateRangeValue[0],
-                      "day",
-                    )}{" "}
-                    días
-                  </Typography>
-                </Box>
-              )}
             </Box>
             {/* SingleInputDateRangeField */}
             <Box>
@@ -974,32 +1117,51 @@ export default function AppComplete() {
                 Campo de rango de fechas en un solo input (formato: fecha inicio
                 - fecha fin)
               </Typography>
-              <SingleInputDateRangeField
-                label="Rango de fechas"
-                value={singleInputDateRange}
-                onChange={(newValue) => setSingleInputDateRange(newValue)}
-                sx={{ width: "40%" }}
-              />
-              {singleInputDateRange[0] && singleInputDateRange[1] && (
-                <Box sx={{ mt: 2, p: 2, bgcolor: "#f5f5f5", borderRadius: 1 }}>
-                  <Typography variant="body2">
-                    <strong>Inicio:</strong>{" "}
-                    {singleInputDateRange[0].format("DD/MM/YYYY")}
-                  </Typography>
-                  <Typography variant="body2">
-                    <strong>Fin:</strong>{" "}
-                    {singleInputDateRange[1].format("DD/MM/YYYY")}
-                  </Typography>
-                  <Typography variant="body2">
-                    <strong>Días:</strong>{" "}
-                    {singleInputDateRange[1].diff(
-                      singleInputDateRange[0],
-                      "day",
-                    )}{" "}
-                    días
-                  </Typography>
-                </Box>
-              )}
+              <CodeExample
+                title="Ejemplo de SingleInputDateRangeField"
+                code={`<SingleInputDateRangeField
+ label="Rango de fechas"
+ value={singleInputDateRange}
+ onChange={(newValue) => setSingleInputDateRange(newValue)}
+ sx={{ width: "40%" }}
+/>`}
+              >
+                <SingleInputDateRangeField
+                  label="Rango de fechas"
+                  value={singleInputDateRange}
+                  onChange={(newValue) => setSingleInputDateRange(newValue)}
+                  sx={{ width: "40%" }}
+                />
+                {singleInputDateRange[0] && singleInputDateRange[1] && (
+                  <Box
+                    sx={{
+                      mt: 2,
+                      p: 2,
+                      bgcolor: "Background.secondary",
+                      borderRadius: 1,
+                      border: "1px solid",
+                      borderColor: "Divider",
+                    }}
+                  >
+                    <Typography variant="body2">
+                      <strong>Inicio:</strong>{" "}
+                      {singleInputDateRange[0].format("DD/MM/YYYY")}
+                    </Typography>
+                    <Typography variant="body2">
+                      <strong>Fin:</strong>{" "}
+                      {singleInputDateRange[1].format("DD/MM/YYYY")}
+                    </Typography>
+                    <Typography variant="body2">
+                      <strong>Días:</strong>{" "}
+                      {singleInputDateRange[1].diff(
+                        singleInputDateRange[0],
+                        "day",
+                      )}{" "}
+                      días
+                    </Typography>
+                  </Box>
+                )}
+              </CodeExample>
             </Box>
             {/* MultiInputDateRangeField */}
             <Box>
@@ -1012,33 +1174,60 @@ export default function AppComplete() {
               >
                 Campo de rango de fechas con inputs separados para inicio y fin
               </Typography>
-              <MultiInputDateRangeField
-                slotProps={{
-                  textField: ({ position }) => ({
-                    label: position === "start" ? "Fecha inicio" : "Fecha fin",
-                  }),
-                }}
-                value={multiInputDateRange}
-                onChange={(newValue) => setMultiInputDateRange(newValue)}
-                sx={{ width: "40%" }}
-              />
-              {multiInputDateRange[0] && multiInputDateRange[1] && (
-                <Box sx={{ mt: 2, p: 2, bgcolor: "#f5f5f5", borderRadius: 1 }}>
-                  <Typography variant="body2">
-                    <strong>Inicio:</strong>{" "}
-                    {multiInputDateRange[0].format("DD/MM/YYYY")}
-                  </Typography>
-                  <Typography variant="body2">
-                    <strong>Fin:</strong>{" "}
-                    {multiInputDateRange[1].format("DD/MM/YYYY")}
-                  </Typography>
-                  <Typography variant="body2">
-                    <strong>Días:</strong>{" "}
-                    {multiInputDateRange[1].diff(multiInputDateRange[0], "day")}{" "}
-                    días
-                  </Typography>
-                </Box>
-              )}
+              <CodeExample
+                title="Ejemplo de MultiInputDateRangeField"
+                code={`<MultiInputDateRangeField
+ slotProps={{
+   textField: ({ position }) => ({
+     label: position === "start" ? "Fecha inicio" : "Fecha fin",
+   }),
+ }}
+ value={multiInputDateRange}
+ onChange={(newValue) => setMultiInputDateRange(newValue)}
+ sx={{ width: "40%" }}
+/>`}
+              >
+                <MultiInputDateRangeField
+                  slotProps={{
+                    textField: ({ position }) => ({
+                      label:
+                        position === "start" ? "Fecha inicio" : "Fecha fin",
+                    }),
+                  }}
+                  value={multiInputDateRange}
+                  onChange={(newValue) => setMultiInputDateRange(newValue)}
+                  sx={{ width: "40%" }}
+                />
+                {multiInputDateRange[0] && multiInputDateRange[1] && (
+                  <Box
+                    sx={{
+                      mt: 2,
+                      p: 2,
+                      bgcolor: "Background.secondary",
+                      borderRadius: 1,
+                      border: "1px solid",
+                      borderColor: "Divider",
+                    }}
+                  >
+                    <Typography variant="body2">
+                      <strong>Inicio:</strong>{" "}
+                      {multiInputDateRange[0].format("DD/MM/YYYY")}
+                    </Typography>
+                    <Typography variant="body2">
+                      <strong>Fin:</strong>{" "}
+                      {multiInputDateRange[1].format("DD/MM/YYYY")}
+                    </Typography>
+                    <Typography variant="body2">
+                      <strong>Días:</strong>{" "}
+                      {multiInputDateRange[1].diff(
+                        multiInputDateRange[0],
+                        "day",
+                      )}{" "}
+                      días
+                    </Typography>
+                  </Box>
+                )}
+              </CodeExample>
             </Box>
             {/* DateRangeCalendar */}
             <Box>
@@ -1061,33 +1250,53 @@ export default function AppComplete() {
                   width: "fit-content",
                 }}
               >
-                <DateRangeCalendar
-                  value={dateRangeCalendarValue}
-                  onChange={(newValue) => setDateRangeCalendarValue(newValue)}
-                  calendars={2}
-                  disablePast
-                />
+                <CodeExample
+                  title="Ejemplo de DateRangeCalendar con 2 meses y deshabilitando fechas pasadas"
+                  code={`<DateRangeCalendar
+ value={dateRangeCalendarValue}
+ onChange={(newValue) => setDateRangeCalendarValue(newValue)}
+ calendars={2}
+ disablePast
+/>`}
+                >
+                  <DateRangeCalendar
+                    value={dateRangeCalendarValue}
+                    onChange={(newValue) => setDateRangeCalendarValue(newValue)}
+                    calendars={2}
+                    disablePast
+                  />
+
+                  {dateRangeCalendarValue[0] && dateRangeCalendarValue[1] && (
+                    <Box
+                      sx={{
+                        mt: 2,
+                        p: 2,
+                        bgcolor: "Background.secondary",
+                        borderRadius: 1,
+                        border: "1px solid",
+                        borderColor: "Divider",
+                      }}
+                    >
+                      <Typography variant="body2">
+                        <strong>Inicio:</strong>{" "}
+                        {dateRangeCalendarValue[0].format("DD/MM/YYYY")}
+                      </Typography>
+                      <Typography variant="body2">
+                        <strong>Fin:</strong>{" "}
+                        {dateRangeCalendarValue[1].format("DD/MM/YYYY")}
+                      </Typography>
+                      <Typography variant="body2">
+                        <strong>Días:</strong>{" "}
+                        {dateRangeCalendarValue[1].diff(
+                          dateRangeCalendarValue[0],
+                          "day",
+                        )}{" "}
+                        días
+                      </Typography>
+                    </Box>
+                  )}
+                </CodeExample>
               </Box>
-              {dateRangeCalendarValue[0] && dateRangeCalendarValue[1] && (
-                <Box sx={{ mt: 2, p: 2, bgcolor: "#f5f5f5", borderRadius: 1 }}>
-                  <Typography variant="body2">
-                    <strong>Inicio:</strong>{" "}
-                    {dateRangeCalendarValue[0].format("DD/MM/YYYY")}
-                  </Typography>
-                  <Typography variant="body2">
-                    <strong>Fin:</strong>{" "}
-                    {dateRangeCalendarValue[1].format("DD/MM/YYYY")}
-                  </Typography>
-                  <Typography variant="body2">
-                    <strong>Días:</strong>{" "}
-                    {dateRangeCalendarValue[1].diff(
-                      dateRangeCalendarValue[0],
-                      "day",
-                    )}{" "}
-                    días
-                  </Typography>
-                </Box>
-              )}
             </Box>
             {/* SingleInputTimeRangeField */}
             <Box>
@@ -1101,32 +1310,51 @@ export default function AppComplete() {
                 Campo de rango de horas en un solo input (formato: hora inicio -
                 hora fin)
               </Typography>
-              <SingleInputTimeRangeField
-                label="Rango de horas"
-                value={singleInputTimeRange}
-                onChange={(newValue) => setSingleInputTimeRange(newValue)}
-                sx={{ width: "40%" }}
-              />
-              {singleInputTimeRange[0] && singleInputTimeRange[1] && (
-                <Box sx={{ mt: 2, p: 2, bgcolor: "#f5f5f5", borderRadius: 1 }}>
-                  <Typography variant="body2">
-                    <strong>Inicio:</strong>{" "}
-                    {singleInputTimeRange[0].format("HH:mm")}
-                  </Typography>
-                  <Typography variant="body2">
-                    <strong>Fin:</strong>{" "}
-                    {singleInputTimeRange[1].format("HH:mm")}
-                  </Typography>
-                  <Typography variant="body2">
-                    <strong>Duración:</strong>{" "}
-                    {singleInputTimeRange[1].diff(
-                      singleInputTimeRange[0],
-                      "minute",
-                    )}{" "}
-                    minutos
-                  </Typography>
-                </Box>
-              )}
+              <CodeExample
+                title="Ejemplo de SingleInputTimeRangeField"
+                code={`<SingleInputTimeRangeField
+ label="Rango de horas"
+ value={singleInputTimeRange}
+ onChange={(newValue) => setSingleInputTimeRange(newValue)}
+ sx={{ width: "40%" }}
+/>`}
+              >
+                <SingleInputTimeRangeField
+                  label="Rango de horas"
+                  value={singleInputTimeRange}
+                  onChange={(newValue) => setSingleInputTimeRange(newValue)}
+                  sx={{ width: "40%" }}
+                />
+                {singleInputTimeRange[0] && singleInputTimeRange[1] && (
+                  <Box
+                    sx={{
+                      mt: 2,
+                      p: 2,
+                      bgcolor: "Background.secondary",
+                      borderRadius: 1,
+                      border: "1px solid",
+                      borderColor: "Divider",
+                    }}
+                  >
+                    <Typography variant="body2">
+                      <strong>Inicio:</strong>{" "}
+                      {singleInputTimeRange[0].format("HH:mm")}
+                    </Typography>
+                    <Typography variant="body2">
+                      <strong>Fin:</strong>{" "}
+                      {singleInputTimeRange[1].format("HH:mm")}
+                    </Typography>
+                    <Typography variant="body2">
+                      <strong>Duración:</strong>{" "}
+                      {singleInputTimeRange[1].diff(
+                        singleInputTimeRange[0],
+                        "minute",
+                      )}{" "}
+                      minutos
+                    </Typography>
+                  </Box>
+                )}
+              </CodeExample>
             </Box>
             {/* MultiInputTimeRangeField */}
             <Box>
@@ -1139,36 +1367,59 @@ export default function AppComplete() {
               >
                 Campo de rango de horas con inputs separados para inicio y fin
               </Typography>
-              <MultiInputTimeRangeField
-                slotProps={{
-                  textField: ({ position }) => ({
-                    label: position === "start" ? "Hora inicio" : "Hora fin",
-                  }),
-                }}
-                value={multiInputTimeRange}
-                onChange={(newValue) => setMultiInputTimeRange(newValue)}
-                sx={{ width: "40%" }}
-              />
-              {multiInputTimeRange[0] && multiInputTimeRange[1] && (
-                <Box sx={{ mt: 2, p: 2, bgcolor: "#f5f5f5", borderRadius: 1 }}>
-                  <Typography variant="body2">
-                    <strong>Inicio:</strong>{" "}
-                    {multiInputTimeRange[0].format("HH:mm")}
-                  </Typography>
-                  <Typography variant="body2">
-                    <strong>Fin:</strong>{" "}
-                    {multiInputTimeRange[1].format("HH:mm")}
-                  </Typography>
-                  <Typography variant="body2">
-                    <strong>Duración:</strong>{" "}
-                    {multiInputTimeRange[1].diff(
-                      multiInputTimeRange[0],
-                      "minute",
-                    )}{" "}
-                    minutos
-                  </Typography>
-                </Box>
-              )}
+              <CodeExample
+                title="Ejemplo de MultiInputTimeRangeField"
+                code={`<MultiInputTimeRangeField
+ slotProps={{
+  textField: ({ position }) => ({
+   label: position === "start" ? "Hora inicio" : "Hora fin",
+   }),
+  }}
+  value={multiInputTimeRange}
+  onChange={(newValue) => setMultiInputTimeRange(newValue)}
+  sx={{ width: "40%" }}
+/>`}
+              >
+                <MultiInputTimeRangeField
+                  slotProps={{
+                    textField: ({ position }) => ({
+                      label: position === "start" ? "Hora inicio" : "Hora fin",
+                    }),
+                  }}
+                  value={multiInputTimeRange}
+                  onChange={(newValue) => setMultiInputTimeRange(newValue)}
+                  sx={{ width: "40%" }}
+                />
+                {multiInputTimeRange[0] && multiInputTimeRange[1] && (
+                  <Box
+                    sx={{
+                      mt: 2,
+                      p: 2,
+                      bgcolor: "Background.secondary",
+                      borderRadius: 1,
+                      border: "1px solid",
+                      borderColor: "Divider",
+                    }}
+                  >
+                    <Typography variant="body2">
+                      <strong>Inicio:</strong>{" "}
+                      {multiInputTimeRange[0].format("HH:mm")}
+                    </Typography>
+                    <Typography variant="body2">
+                      <strong>Fin:</strong>{" "}
+                      {multiInputTimeRange[1].format("HH:mm")}
+                    </Typography>
+                    <Typography variant="body2">
+                      <strong>Duración:</strong>{" "}
+                      {multiInputTimeRange[1].diff(
+                        multiInputTimeRange[0],
+                        "minute",
+                      )}{" "}
+                      minutos
+                    </Typography>
+                  </Box>
+                )}
+              </CodeExample>
             </Box>
           </Stack>
         </Card>
@@ -1245,23 +1496,43 @@ export default function AppComplete() {
             icono de menú (⋮)
           </Alert>
 
-          <Box sx={{ height: 400, width: "100%" }}>
-            <DataGrid
-              rows={dataGridRows}
-              columns={dataGridColumns}
-              pagination
-              onRefresh={handleRefresh}
-              language="es"
-              initialState={{
-                pagination: {
-                  paginationModel: { pageSize: 5, page: 0 },
-                },
-              }}
-              pageSizeOptions={[5, 10, 25]}
-              disableColumnMenu={false}
-              showToolbar={true}
-              showDownload={true}
-            />
+          <Box sx={{ width: "100%" }}>
+            <CodeExample
+              title="Ejemplo de DataGrid básico con paginación y toolbar"
+              code={`<DataGrid
+ rows={dataGridRows}
+ columns={dataGridColumns}
+ pagination
+ onRefresh={handleRefresh}
+ language="es"
+ initialState={{
+   pagination: {
+   paginationModel: { pageSize: 5, page: 0 },
+   },
+ }}
+ pageSizeOptions={[5, 10, 25]}
+ disableColumnMenu={false}
+ showToolbar={true}
+ showDownload={true}
+/>`}
+            >
+              <DataGrid
+                rows={dataGridRows}
+                columns={dataGridColumns}
+                pagination
+                onRefresh={handleRefresh}
+                language="es"
+                initialState={{
+                  pagination: {
+                    paginationModel: { pageSize: 5, page: 0 },
+                  },
+                }}
+                pageSizeOptions={[5, 10, 25]}
+                disableColumnMenu={false}
+                showToolbar={true}
+                showDownload={true}
+              />
+            </CodeExample>
           </Box>
         </Card>
 
@@ -1276,25 +1547,47 @@ export default function AppComplete() {
             operadores de filtro personalizados por columna
           </Alert>
 
-          <Box sx={{ height: 400, width: "100%" }}>
-            <DataGrid
-              rows={rowsCustom}
-              columns={columnsCustom}
-              onRefresh={handleRefresh}
-              pagination
-              language="es"
-              showDownload={true}
-              handleDownload={handleDownload}
-              showToolbar={true}
-              disableColumnMenu={true}
-              customFilterOperators={customFilterOperators} // ✨ NUEVO
-              addMenuItems={[
-                {
-                  text: "Exportar a Excel",
-                  onClick: () => console.log("Exportar Excel"),
-                },
-              ]}
-            />
+          <Box sx={{ width: "100%" }}>
+            <CodeExample
+              title="DataGrid con customFilterOperators para filtros personalizados"
+              code={`<DataGrid
+  rows={rowsCustom}
+  columns={columnsCustom}
+  onRefresh={handleRefresh}
+  pagination
+  language="es"
+  showDownload={true}
+  handleDownload={handleDownload}
+  showToolbar={true}
+  disableColumnMenu={true}
+  customFilterOperators={customFilterOperators} // ✨ NUEVO
+  addMenuItems={[
+    {
+      text: "Exportar a Excel",
+      onClick: () => console.log("Exportar Excel"),
+    },
+  ]}
+/>`}
+            >
+              <DataGrid
+                rows={rowsCustom}
+                columns={columnsCustom}
+                onRefresh={handleRefresh}
+                pagination
+                language="es"
+                showDownload={true}
+                handleDownload={handleDownload}
+                showToolbar={true}
+                disableColumnMenu={true}
+                customFilterOperators={customFilterOperators} // ✨ NUEVO
+                addMenuItems={[
+                  {
+                    text: "Exportar a Excel",
+                    onClick: () => console.log("Exportar Excel"),
+                  },
+                ]}
+              />
+            </CodeExample>
           </Box>
         </Card>
 
@@ -1309,141 +1602,184 @@ export default function AppComplete() {
             integrada, incluye todas las características Pro
           </Alert>
 
-          <Box sx={{ height: 500, width: "100%" }}>
-            <DataGridPro
-              rows={[
-                {
-                  id: 1,
-                  name: "Juan Pérez",
-                  email: "juan@example.com",
-                  role: "Admin",
-                  age: 32,
-                  active: true,
-                  department: "IT",
-                },
-                {
-                  id: 2,
-                  name: "María García",
-                  email: "maria@example.com",
-                  role: "Usuario",
-                  age: 28,
-                  active: true,
-                  department: "Ventas",
-                },
-                {
-                  id: 3,
-                  name: "Pedro López",
-                  email: "pedro@example.com",
-                  role: "Editor",
-                  age: 35,
-                  active: false,
-                  department: "Marketing",
-                },
-                {
-                  id: 4,
-                  name: "Ana Martínez",
-                  email: "ana@example.com",
-                  role: "Usuario",
-                  age: 26,
-                  active: true,
-                  department: "IT",
-                },
-                {
-                  id: 5,
-                  name: "Carlos Rodríguez",
-                  email: "carlos@example.com",
-                  role: "Admin",
-                  age: 40,
-                  active: true,
-                  department: "Finanzas",
-                },
-                {
-                  id: 6,
-                  name: "Laura Sánchez",
-                  email: "laura@example.com",
-                  role: "Editor",
-                  age: 31,
-                  active: true,
-                  department: "IT",
-                },
-                {
-                  id: 7,
-                  name: "Miguel Torres",
-                  email: "miguel@example.com",
-                  role: "Usuario",
-                  age: 29,
-                  active: false,
-                  department: "Ventas",
-                },
-                {
-                  id: 8,
-                  name: "Sofía Ramírez",
-                  email: "sofia@example.com",
-                  role: "Editor",
-                  age: 27,
-                  active: true,
-                  department: "Marketing",
-                },
-                {
-                  id: 9,
-                  name: "Diego Fernández",
-                  email: "diego@example.com",
-                  role: "Admin",
-                  age: 38,
-                  active: true,
-                  department: "IT",
-                },
-                {
-                  id: 10,
-                  name: "Carmen Ruiz",
-                  email: "carmen@example.com",
-                  role: "Usuario",
-                  age: 30,
-                  active: true,
-                  department: "Ventas",
-                },
-              ]}
-              columns={[
-                { field: "id", headerName: "ID", width: 70, type: "number" },
-                { field: "name", headerName: "Nombre", width: 180 },
-                { field: "email", headerName: "Email", width: 220 },
-                { field: "role", headerName: "Rol", width: 120 },
-                { field: "age", headerName: "Edad", width: 90, type: "number" },
-                { field: "department", headerName: "Departamento", width: 150 },
-                {
-                  field: "active",
-                  headerName: "Activo",
-                  width: 100,
-                  type: "boolean",
-                },
-              ]}
-              pagination
-              initialState={{
-                pagination: {
-                  paginationModel: { pageSize: 5, page: 0 },
-                },
-              }}
-              rowReordering
-              pageSizeOptions={[5, 10, 25]}
-              disableColumnMenu={false}
-              showToolbar={true}
-              language="es"
-              onRefresh={handleRefresh}
-              showDownload={true}
-              handleDownload={handleDownload}
-              checkboxSelection
-              customFilterOperators={customFilterOperators}
-              addMenuItems={[
-                {
-                  text: "Exportar a Excel",
-                  onClick: () => console.log("Exportar Excel Pro"),
-                },
-                {
-                  text: "Configuración avanzada",
-                  onClick: () => console.log("Configuración Pro"),
-                },
-              ]}
-            />
+          <Box sx={{ width: "100%" }}>
+            <CodeExample
+              title="Ejemplo de DataGridPro con características avanzadas"
+              code={`<DataGridPro
+ rows={rowsPro}
+ columns={columnsPro}
+ onRefresh={handleRefresh}
+ pagination
+ initialState={{
+   pagination: {
+     paginationModel: { pageSize: 5, page: 0 },
+   },
+ }}
+ rowReordering
+ pageSizeOptions={[5, 10, 25]}
+ disableColumnMenu={false}
+ showToolbar={true}
+ language="es"
+ showDownload={true}
+ handleDownload={handleDownload}
+ checkboxSelection
+ customFilterOperators={customFilterOperators}
+ addMenuItems={[
+   {
+     text: "Exportar a Excel",
+     onClick: () => console.log("Exportar Excel Pro"),
+   },
+   {
+     text: "Configuración avanzada",
+     onClick: () => console.log("Configuración Pro"),
+   },
+ ]}
+/>`}
+            >
+              <DataGridPro
+                rows={[
+                  {
+                    id: 1,
+                    name: "Juan Pérez",
+                    email: "juan@example.com",
+                    role: "Admin",
+                    age: 32,
+                    active: true,
+                    department: "IT",
+                  },
+                  {
+                    id: 2,
+                    name: "María García",
+                    email: "maria@example.com",
+                    role: "Usuario",
+                    age: 28,
+                    active: true,
+                    department: "Ventas",
+                  },
+                  {
+                    id: 3,
+                    name: "Pedro López",
+                    email: "pedro@example.com",
+                    role: "Editor",
+                    age: 35,
+                    active: false,
+                    department: "Marketing",
+                  },
+                  {
+                    id: 4,
+                    name: "Ana Martínez",
+                    email: "ana@example.com",
+                    role: "Usuario",
+                    age: 26,
+                    active: true,
+                    department: "IT",
+                  },
+                  {
+                    id: 5,
+                    name: "Carlos Rodríguez",
+                    email: "carlos@example.com",
+                    role: "Admin",
+                    age: 40,
+                    active: true,
+                    department: "Finanzas",
+                  },
+                  {
+                    id: 6,
+                    name: "Laura Sánchez",
+                    email: "laura@example.com",
+                    role: "Editor",
+                    age: 31,
+                    active: true,
+                    department: "IT",
+                  },
+                  {
+                    id: 7,
+                    name: "Miguel Torres",
+                    email: "miguel@example.com",
+                    role: "Usuario",
+                    age: 29,
+                    active: false,
+                    department: "Ventas",
+                  },
+                  {
+                    id: 8,
+                    name: "Sofía Ramírez",
+                    email: "sofia@example.com",
+                    role: "Editor",
+                    age: 27,
+                    active: true,
+                    department: "Marketing",
+                  },
+                  {
+                    id: 9,
+                    name: "Diego Fernández",
+                    email: "diego@example.com",
+                    role: "Admin",
+                    age: 38,
+                    active: true,
+                    department: "IT",
+                  },
+                  {
+                    id: 10,
+                    name: "Carmen Ruiz",
+                    email: "carmen@example.com",
+                    role: "Usuario",
+                    age: 30,
+                    active: true,
+                    department: "Ventas",
+                  },
+                ]}
+                columns={[
+                  { field: "id", headerName: "ID", width: 70, type: "number" },
+                  { field: "name", headerName: "Nombre", width: 180 },
+                  { field: "email", headerName: "Email", width: 220 },
+                  { field: "role", headerName: "Rol", width: 120 },
+                  {
+                    field: "age",
+                    headerName: "Edad",
+                    width: 90,
+                    type: "number",
+                  },
+                  {
+                    field: "department",
+                    headerName: "Departamento",
+                    width: 150,
+                  },
+                  {
+                    field: "active",
+                    headerName: "Activo",
+                    width: 100,
+                    type: "boolean",
+                  },
+                ]}
+                pagination
+                initialState={{
+                  pagination: {
+                    paginationModel: { pageSize: 5, page: 0 },
+                  },
+                }}
+                rowReordering
+                pageSizeOptions={[5, 10, 25]}
+                disableColumnMenu={false}
+                showToolbar={true}
+                language="es"
+                onRefresh={handleRefresh}
+                showDownload={true}
+                handleDownload={handleDownload}
+                checkboxSelection
+                customFilterOperators={customFilterOperators}
+                addMenuItems={[
+                  {
+                    text: "Exportar a Excel",
+                    onClick: () => console.log("Exportar Excel Pro"),
+                  },
+                  {
+                    text: "Configuración avanzada",
+                    onClick: () => console.log("Configuración Pro"),
+                  },
+                ]}
+              />
+            </CodeExample>
           </Box>
           <Alert severity="info" sx={{ mt: 2 }}>
             💡 DataGridProX incluye: Column Pinning, Row Grouping, Tree Data,
@@ -1462,147 +1798,298 @@ export default function AppComplete() {
           </Alert>
 
           <Box sx={{ width: "100%" }}>
-            <DataGridProX
-              rows={[
-                {
-                  id: 1,
-                  name: "Juan Pérez",
-                  email: "juan@example.com",
-                  role: "Admin",
-                  age: 32,
-                  active: true,
-                  department: "IT",
-                },
-                {
-                  id: 2,
-                  name: "María García",
-                  email: "maria@example.com",
-                  role: "Usuario",
-                  age: 28,
-                  active: true,
-                  department: "Ventas",
-                },
-                {
-                  id: 3,
-                  name: "Pedro López",
-                  email: "pedro@example.com",
-                  role: "Editor",
-                  age: 35,
-                  active: false,
-                  department: "Marketing",
-                },
-              ]}
-              columns={[
-                { field: "id", headerName: "ID", width: 70, type: "number" },
-                { field: "name", headerName: "Nombre", width: 180 },
-                { field: "email", headerName: "Email", width: 220 },
-                { field: "role", headerName: "Rol", width: 120 },
-                { field: "age", headerName: "Edad", width: 90, type: "number" },
-                { field: "department", headerName: "Departamento", width: 150 },
-                {
-                  field: "active",
-                  headerName: "Activo",
-                  width: 100,
-                  type: "boolean",
-                },
-              ]}
-              getDetailPanelHeight={() => 600}
-              getDetailPanelContent={(params) => (
-                <Box sx={{ p: 3, bgcolor: "background.paper" }}>
-                  {/* Header */}
-                  <Box sx={{ mb: 1 }}>
-                    <Typography variant="h5" sx={{ fontWeight: 400 }}>
-                      Editar Participante: {params.row.name}
-                    </Typography>
-                    <Typography
-                      variant="body2"
-                      sx={{ color: "text.secondary" }}
-                    >
-                      Los campos marcados con{" "}
-                      <span style={{ color: "red" }}>*</span> son obligatorios
-                    </Typography>
-                  </Box>
+            <CodeExample
+              title="Ejemplo de DataGridProX con Master-Detail Panel personalizado"
+              code={`<DataGridProX
+ rows={rowsProX}
+ columns={columnsProX}
+ onRefresh={handleRefresh}
+ pagination
+ initialState={{
+   pagination: {
+     paginationModel: { pageSize: 5, page: 0 },
+   },
+ }}
+  rowReordering
+  pageSizeOptions={[5, 10, 25]}
+  disableColumnMenu={false}
+  showToolbar={true}
+  language="es"
+  showDownload={true}
+  handleDownload={handleDownload}
+  checkboxSelection
+  customFilterOperators={customFilterOperators}
+  addMenuItems={[
+    {
+      text: "Exportar a Excel",
+      onClick: () => console.log("Exportar Excel ProX"),
+    },
+    {
+      text: "Configuración avanzada",
+      onClick: () => console.log("Configuración ProX"),
+    },
+  ]}
+/>`}
+            >
+              <DataGridProX
+                rows={[
+                  {
+                    id: 1,
+                    name: "Juan Pérez",
+                    email: "juan@example.com",
+                    role: "Admin",
+                    age: 32,
+                    active: true,
+                    department: "IT",
+                  },
+                  {
+                    id: 2,
+                    name: "María García",
+                    email: "maria@example.com",
+                    role: "Usuario",
+                    age: 28,
+                    active: true,
+                    department: "Ventas",
+                  },
+                  {
+                    id: 3,
+                    name: "Pedro López",
+                    email: "pedro@example.com",
+                    role: "Editor",
+                    age: 35,
+                    active: false,
+                    department: "Marketing",
+                  },
+                ]}
+                columns={[
+                  { field: "id", headerName: "ID", width: 70, type: "number" },
+                  { field: "name", headerName: "Nombre", width: 180 },
+                  { field: "email", headerName: "Email", width: 220 },
+                  { field: "role", headerName: "Rol", width: 120 },
+                  {
+                    field: "age",
+                    headerName: "Edad",
+                    width: 90,
+                    type: "number",
+                  },
+                  {
+                    field: "department",
+                    headerName: "Departamento",
+                    width: 150,
+                  },
+                  {
+                    field: "active",
+                    headerName: "Activo",
+                    width: 100,
+                    type: "boolean",
+                  },
+                ]}
+                getDetailPanelHeight={() => 600}
+                getDetailPanelContent={(params) => (
+                  <Box sx={{ p: 3, bgcolor: "background.paper" }}>
+                    {/* Header */}
+                    <Box sx={{ mb: 1 }}>
+                      <Typography variant="h5" sx={{ fontWeight: 400 }}>
+                        Editar Participante: {params.row.name}
+                      </Typography>
+                      <Typography
+                        variant="body2"
+                        sx={{ color: "text.secondary" }}
+                      >
+                        Los campos marcados con{" "}
+                        <span style={{ color: "red" }}>*</span> son obligatorios
+                      </Typography>
+                    </Box>
 
-                  {/* Tabs */}
-                  <TabsWrapper
-                    currentTab={detailPanelTab}
-                    setCurrentTab={setDetailPanelTab}
-                  >
-                    <TabItem id={0} title="GENERAL">
-                      <Box sx={{ pt: 3 }}>
-                        {/* Información Básica */}
-                        <Box sx={{ mb: 3 }}>
+                    {/* Tabs */}
+                    <TabsWrapper
+                      currentTab={detailPanelTab}
+                      setCurrentTab={setDetailPanelTab}
+                    >
+                      <TabItem id={0} title="GENERAL">
+                        <Box sx={{ pt: 3 }}>
+                          {/* Información Básica */}
+                          <Box sx={{ mb: 3 }}>
+                            <Typography
+                              variant="subtitle1"
+                              sx={{ mb: 2, fontWeight: 600 }}
+                            >
+                              Información Básica
+                            </Typography>
+
+                            {/* Grid 3 columnas x 4 filas */}
+                            <Box
+                              sx={{
+                                display: "grid",
+                                gridTemplateColumns: "repeat(3, 1fr)",
+                                gap: 2,
+                              }}
+                            >
+                              {/* Fila 1: País nuam, CO Código, Nombre Corto */}
+                              <Select
+                                label="País nuam"
+                                value={detailFormData.paisNuam}
+                                onChange={(value) =>
+                                  handleDetailFormChange("paisNuam", value)
+                                }
+                                options={paisNuamOptions}
+                                size="small"
+                                fullWidth
+                                showClearIndicator
+                                formControlProps={{ fullWidth: true }}
+                              />
+                              <TextField
+                                label="CO Código *"
+                                value={detailFormData.codigo || params.row.id}
+                                onChange={(value) =>
+                                  handleDetailFormChange("codigo", value)
+                                }
+                                size="small"
+                                fullWidth
+                              />
+                              <TextField
+                                label="Nombre Corto *"
+                                value={
+                                  detailFormData.nombreCorto ||
+                                  params.row.name.split(" ")[0]
+                                }
+                                onChange={(value) =>
+                                  handleDetailFormChange("nombreCorto", value)
+                                }
+                                size="small"
+                                fullWidth
+                              />
+
+                              {/* Fila 2: Nombre, Tipo de Participante, País de Origen */}
+                              <TextField
+                                label="Nombre *"
+                                value={detailFormData.nombre || params.row.name}
+                                onChange={(value) =>
+                                  handleDetailFormChange("nombre", value)
+                                }
+                                size="small"
+                                fullWidth
+                              />
+                              <Box sx={{ width: "100%" }}>
+                                <Select
+                                  label="Tipo de Participante *"
+                                  value={detailFormData.tipoParticipante}
+                                  onChange={(value) =>
+                                    handleDetailFormChange(
+                                      "tipoParticipante",
+                                      value,
+                                    )
+                                  }
+                                  options={tipoParticipanteOptions}
+                                  size="small"
+                                  fullWidth
+                                  showClearIndicator
+                                  formControlProps={{ fullWidth: true }}
+                                />
+                                <Typography
+                                  variant="caption"
+                                  sx={{
+                                    color: "text.secondary",
+                                    mt: 0.5,
+                                    ml: 1,
+                                    display: "block",
+                                  }}
+                                >
+                                  Máximo 5 opciones
+                                </Typography>
+                              </Box>
+                              <Select
+                                label="País de Origen *"
+                                value={detailFormData.paisOrigen}
+                                onChange={(value) =>
+                                  handleDetailFormChange("paisOrigen", value)
+                                }
+                                options={paisOrigenOptions}
+                                size="small"
+                                fullWidth
+                                showClearIndicator
+                                formControlProps={{ fullWidth: true }}
+                              />
+
+                              {/* Fila 3: Tipo de Entidad, Código Fiscal, Fecha de Ingreso */}
+                              <Select
+                                label="Tipo de Entidad *"
+                                value={detailFormData.tipoEntidad}
+                                onChange={(value) =>
+                                  handleDetailFormChange("tipoEntidad", value)
+                                }
+                                options={tipoEntidadOptions}
+                                size="small"
+                                fullWidth
+                                showClearIndicator
+                                formControlProps={{ fullWidth: true }}
+                              />
+                              <TextField
+                                label="Código Fiscal *"
+                                value={detailFormData.codigoFiscal}
+                                onChange={(value) =>
+                                  handleDetailFormChange("codigoFiscal", value)
+                                }
+                                size="small"
+                                fullWidth
+                              />
+                              <DatePicker
+                                label="Fecha de Ingreso *"
+                                value={detailFormData.fechaIngreso}
+                                onChange={(value) =>
+                                  handleDetailFormChange("fechaIngreso", value)
+                                }
+                                slotProps={{
+                                  textField: { size: "small", fullWidth: true },
+                                }}
+                                showClearIndicator
+                              />
+
+                              {/* Fila 4: Estado */}
+                              <Select
+                                label="Estado *"
+                                value={detailFormData.estado}
+                                onChange={(value) =>
+                                  handleDetailFormChange("estado", value)
+                                }
+                                options={estadoOptions}
+                                size="small"
+                                fullWidth
+                                showClearIndicator
+                                formControlProps={{ fullWidth: true }}
+                              />
+                            </Box>
+                          </Box>
+
+                          {/* Financiero */}
                           <Typography
                             variant="subtitle1"
                             sx={{ mb: 2, fontWeight: 600 }}
                           >
-                            Información Básica
+                            Financiero
                           </Typography>
 
-                          {/* Grid 3 columnas x 4 filas */}
                           <Box
                             sx={{
                               display: "grid",
                               gridTemplateColumns: "repeat(3, 1fr)",
-                              gap: 2,
+                              gap: 3,
+                              mb: 3,
+                              alignItems: "start",
                             }}
                           >
-                            {/* Fila 1: País nuam, CO Código, Nombre Corto */}
-                            <Select
-                              label="País nuam"
-                              value={detailFormData.paisNuam}
-                              onChange={(value) =>
-                                handleDetailFormChange("paisNuam", value)
-                              }
-                              options={paisNuamOptions}
-                              size="small"
-                              fullWidth
-                              showClearIndicator
-                              formControlProps={{ fullWidth: true }}
-                            />
-                            <TextField
-                              label="CO Código *"
-                              value={detailFormData.codigo || params.row.id}
-                              onChange={(value) =>
-                                handleDetailFormChange("codigo", value)
-                              }
-                              size="small"
-                              fullWidth
-                            />
-                            <TextField
-                              label="Nombre Corto *"
-                              value={
-                                detailFormData.nombreCorto ||
-                                params.row.name.split(" ")[0]
-                              }
-                              onChange={(value) =>
-                                handleDetailFormChange("nombreCorto", value)
-                              }
-                              size="small"
-                              fullWidth
-                            />
-
-                            {/* Fila 2: Nombre, Tipo de Participante, País de Origen */}
-                            <TextField
-                              label="Nombre *"
-                              value={detailFormData.nombre || params.row.name}
-                              onChange={(value) =>
-                                handleDetailFormChange("nombre", value)
-                              }
-                              size="small"
-                              fullWidth
-                            />
+                            {/* Calidad Tributaria */}
                             <Box sx={{ width: "100%" }}>
                               <Select
-                                label="Tipo de Participante *"
-                                value={detailFormData.tipoParticipante}
+                                label="Calidad Tributaria *"
+                                value={detailFormData.calidadTributaria}
                                 onChange={(value) =>
                                   handleDetailFormChange(
-                                    "tipoParticipante",
+                                    "calidadTributaria",
                                     value,
                                   )
                                 }
-                                options={tipoParticipanteOptions}
+                                options={calidadTributariaOptions}
                                 size="small"
                                 fullWidth
                                 showClearIndicator
@@ -1617,402 +2104,309 @@ export default function AppComplete() {
                                   display: "block",
                                 }}
                               >
-                                Máximo 5 opciones
+                                Máximo 2 opciones
                               </Typography>
                             </Box>
-                            <Select
-                              label="País de Origen *"
-                              value={detailFormData.paisOrigen}
-                              onChange={(value) =>
-                                handleDetailFormChange("paisOrigen", value)
-                              }
-                              options={paisOrigenOptions}
-                              size="small"
-                              fullWidth
-                              showClearIndicator
-                              formControlProps={{ fullWidth: true }}
-                            />
 
-                            {/* Fila 3: Tipo de Entidad, Código Fiscal, Fecha de Ingreso */}
-                            <Select
-                              label="Tipo de Entidad *"
-                              value={detailFormData.tipoEntidad}
-                              onChange={(value) =>
-                                handleDetailFormChange("tipoEntidad", value)
-                              }
-                              options={tipoEntidadOptions}
-                              size="small"
-                              fullWidth
-                              showClearIndicator
-                              formControlProps={{ fullWidth: true }}
-                            />
-                            <TextField
-                              label="Código Fiscal *"
-                              value={detailFormData.codigoFiscal}
-                              onChange={(value) =>
-                                handleDetailFormChange("codigoFiscal", value)
-                              }
-                              size="small"
-                              fullWidth
-                            />
-                            <DatePicker
-                              label="Fecha de Ingreso *"
-                              value={detailFormData.fechaIngreso}
-                              onChange={(value) =>
-                                handleDetailFormChange("fechaIngreso", value)
-                              }
-                              slotProps={{
-                                textField: { size: "small", fullWidth: true },
+                            {/* Patrimonio (Moneda + Valor) */}
+                            <Box
+                              sx={{
+                                position: "relative",
+                                display: "flex",
+                                alignItems: "center",
                               }}
-                              showClearIndicator
-                            />
+                            >
+                              <Typography
+                                variant="caption"
+                                sx={{
+                                  position: "absolute",
+                                  top: -8,
+                                  left: 12,
+                                  bgcolor: "background.paper",
+                                  px: 0.5,
+                                  color: "text.secondary",
+                                  fontSize: "0.75rem",
+                                  zIndex: 1,
+                                }}
+                              >
+                                Patrimonio *
+                              </Typography>
+                              <Select
+                                value={detailFormData.moneda}
+                                onChange={(value) =>
+                                  handleDetailFormChange("moneda", value)
+                                }
+                                options={monedaOptions}
+                                size="small"
+                                sx={{
+                                  minWidth: 80,
+                                  "& .MuiOutlinedInput-notchedOutline": {
+                                    borderRight: "none",
+                                    borderTopRightRadius: 0,
+                                    borderBottomRightRadius: 0,
+                                  },
+                                  "& .MuiSelect-select": {
+                                    pr: "24px !important",
+                                  },
+                                }}
+                              />
+                              <TextField
+                                value={detailFormData.patrimonio}
+                                onChange={(value) =>
+                                  handleDetailFormChange("patrimonio", value)
+                                }
+                                placeholder="$ 0"
+                                size="small"
+                                sx={{
+                                  flex: 1,
+                                  "& .MuiOutlinedInput-notchedOutline": {
+                                    borderLeft: "none",
+                                    borderTopLeftRadius: 0,
+                                    borderBottomLeftRadius: 0,
+                                  },
+                                }}
+                              />
+                            </Box>
 
-                            {/* Fila 4: Estado */}
-                            <Select
-                              label="Estado *"
-                              value={detailFormData.estado}
-                              onChange={(value) =>
-                                handleDetailFormChange("estado", value)
-                              }
-                              options={estadoOptions}
-                              size="small"
-                              fullWidth
-                              showClearIndicator
-                              formControlProps={{ fullWidth: true }}
-                            />
+                            {/* Formador de Mercado */}
+                            <Box
+                              sx={{
+                                display: "flex",
+                                alignItems: "center",
+                                height: 40,
+                              }}
+                            >
+                              <Switch
+                                label="Formador de Mercado"
+                                checked={detailFormData.formadorMercado}
+                                onChange={(e) =>
+                                  handleDetailFormChange(
+                                    "formadorMercado",
+                                    e.target.checked,
+                                  )
+                                }
+                              />
+                            </Box>
                           </Box>
-                        </Box>
 
-                        {/* Financiero */}
-                        <Typography
-                          variant="subtitle1"
-                          sx={{ mb: 2, fontWeight: 600 }}
-                        >
-                          Financiero
-                        </Typography>
+                          {/* Contacto */}
+                          <Typography
+                            variant="subtitle1"
+                            sx={{ mb: 2, fontWeight: 600 }}
+                          >
+                            Contacto
+                          </Typography>
 
-                        <Box
-                          sx={{
-                            display: "grid",
-                            gridTemplateColumns: "repeat(3, 1fr)",
-                            gap: 3,
-                            mb: 3,
-                            alignItems: "start",
-                          }}
-                        >
-                          {/* Calidad Tributaria */}
-                          <Box sx={{ width: "100%" }}>
-                            <Select
-                              label="Calidad Tributaria *"
-                              value={detailFormData.calidadTributaria}
+                          {/* Fila 1 Contacto */}
+                          <Box
+                            sx={{
+                              display: "grid",
+                              gridTemplateColumns: "repeat(3, 1fr)",
+                              gap: 3,
+                              mb: 2,
+                            }}
+                          >
+                            <TextField
+                              label="Dirección Oficina Principal *"
+                              value={detailFormData.direccionOficina}
                               onChange={(value) =>
                                 handleDetailFormChange(
-                                  "calidadTributaria",
+                                  "direccionOficina",
                                   value,
                                 )
                               }
-                              options={calidadTributariaOptions}
                               size="small"
                               fullWidth
-                              showClearIndicator
-                              formControlProps={{ fullWidth: true }}
                             />
-                            <Typography
-                              variant="caption"
+                            <Box
                               sx={{
-                                color: "text.secondary",
-                                mt: 0.5,
-                                ml: 1,
-                                display: "block",
+                                position: "relative",
+                                display: "flex",
+                                alignItems: "center",
                               }}
                             >
-                              Máximo 2 opciones
-                            </Typography>
+                              <Typography
+                                variant="caption"
+                                sx={{
+                                  position: "absolute",
+                                  top: -8,
+                                  left: 12,
+                                  bgcolor: "background.paper",
+                                  px: 0.5,
+                                  color: "text.secondary",
+                                  fontSize: "0.75rem",
+                                  zIndex: 1,
+                                }}
+                              >
+                                Teléfono *
+                              </Typography>
+                              <Select
+                                value={detailFormData.codigoTelefono}
+                                onChange={(value) =>
+                                  handleDetailFormChange(
+                                    "codigoTelefono",
+                                    value,
+                                  )
+                                }
+                                options={codigoTelefonoOptions}
+                                size="small"
+                                sx={{
+                                  minWidth: 80,
+                                  "& .MuiOutlinedInput-notchedOutline": {
+                                    borderRight: "none",
+                                    borderTopRightRadius: 0,
+                                    borderBottomRightRadius: 0,
+                                  },
+                                  "& .MuiSelect-select": {
+                                    pr: "24px !important",
+                                  },
+                                }}
+                              />
+                              <TextField
+                                value={detailFormData.telefono}
+                                onChange={(value: string) =>
+                                  handleDetailFormChange("telefono", value)
+                                }
+                                placeholder="000 000 0000"
+                                size="small"
+                                sx={{
+                                  flex: 1,
+                                  "& .MuiOutlinedInput-notchedOutline": {
+                                    borderLeft: "none",
+                                    borderTopLeftRadius: 0,
+                                    borderBottomLeftRadius: 0,
+                                  },
+                                }}
+                              />
+                            </Box>
+                            <Box />
                           </Box>
 
-                          {/* Patrimonio (Moneda + Valor) */}
+                          {/* Fila 2 Contacto */}
                           <Box
                             sx={{
-                              position: "relative",
-                              display: "flex",
-                              alignItems: "center",
+                              display: "grid",
+                              gridTemplateColumns: "repeat(3, 1fr)",
+                              gap: 3,
+                              mb: 3,
                             }}
                           >
-                            <Typography
-                              variant="caption"
-                              sx={{
-                                position: "absolute",
-                                top: -8,
-                                left: 12,
-                                bgcolor: "background.paper",
-                                px: 0.5,
-                                color: "text.secondary",
-                                fontSize: "0.75rem",
-                                zIndex: 1,
-                              }}
-                            >
-                              Patrimonio *
-                            </Typography>
-                            <Select
-                              value={detailFormData.moneda}
-                              onChange={(value) =>
-                                handleDetailFormChange("moneda", value)
+                            <TextField
+                              label="Página web"
+                              value={detailFormData.paginaWeb}
+                              onChange={(value: string) =>
+                                handleDetailFormChange("paginaWeb", value)
                               }
-                              options={monedaOptions}
                               size="small"
-                              sx={{
-                                minWidth: 80,
-                                "& .MuiOutlinedInput-notchedOutline": {
-                                  borderRight: "none",
-                                  borderTopRightRadius: 0,
-                                  borderBottomRightRadius: 0,
-                                },
-                                "& .MuiSelect-select": {
-                                  pr: "24px !important",
-                                },
-                              }}
+                              fullWidth
                             />
                             <TextField
-                              value={detailFormData.patrimonio}
-                              onChange={(value) =>
-                                handleDetailFormChange("patrimonio", value)
+                              label="Correo Electrónico"
+                              value={
+                                detailFormData.correoElectronico ||
+                                params.row.email
                               }
-                              placeholder="$ 0"
-                              size="small"
-                              sx={{
-                                flex: 1,
-                                "& .MuiOutlinedInput-notchedOutline": {
-                                  borderLeft: "none",
-                                  borderTopLeftRadius: 0,
-                                  borderBottomLeftRadius: 0,
-                                },
-                              }}
-                            />
-                          </Box>
-
-                          {/* Formador de Mercado */}
-                          <Box
-                            sx={{
-                              display: "flex",
-                              alignItems: "center",
-                              height: 40,
-                            }}
-                          >
-                            <Switch
-                              label="Formador de Mercado"
-                              checked={detailFormData.formadorMercado}
-                              onChange={(e) =>
+                              onChange={(value: string) =>
                                 handleDetailFormChange(
-                                  "formadorMercado",
-                                  e.target.checked,
+                                  "correoElectronico",
+                                  value,
                                 )
                               }
+                              size="small"
+                              fullWidth
                             />
+                            <Box />
                           </Box>
                         </Box>
+                      </TabItem>
 
-                        {/* Contacto */}
-                        <Typography
-                          variant="subtitle1"
-                          sx={{ mb: 2, fontWeight: 600 }}
-                        >
-                          Contacto
-                        </Typography>
-
-                        {/* Fila 1 Contacto */}
-                        <Box
-                          sx={{
-                            display: "grid",
-                            gridTemplateColumns: "repeat(3, 1fr)",
-                            gap: 3,
-                            mb: 2,
-                          }}
-                        >
-                          <TextField
-                            label="Dirección Oficina Principal *"
-                            value={detailFormData.direccionOficina}
-                            onChange={(value) =>
-                              handleDetailFormChange("direccionOficina", value)
-                            }
-                            size="small"
-                            fullWidth
-                          />
+                      <TabItem id={1} title="EQUIVALENCIAS">
+                        <Box sx={{ pt: 3 }}>
+                          <Typography
+                            variant="body2"
+                            sx={{ color: "text.secondary" }}
+                          >
+                            Configuración de equivalencias del participante.
+                          </Typography>
                           <Box
                             sx={{
-                              position: "relative",
-                              display: "flex",
-                              alignItems: "center",
+                              mt: 2,
+                              p: 3,
+                              bgcolor: "Background.secondary",
+                              borderRadius: 1,
+                              border: "1px solid",
+                              borderColor: "Divider",
                             }}
                           >
-                            <Typography
-                              variant="caption"
-                              sx={{
-                                position: "absolute",
-                                top: -8,
-                                left: 12,
-                                bgcolor: "background.paper",
-                                px: 0.5,
-                                color: "text.secondary",
-                                fontSize: "0.75rem",
-                                zIndex: 1,
-                              }}
-                            >
-                              Teléfono *
+                            <Typography variant="body1">
+                              Aquí se configuran las equivalencias de códigos
+                              entre diferentes sistemas para el participante{" "}
+                              <strong>{params.row.name}</strong>.
                             </Typography>
-                            <Select
-                              value={detailFormData.codigoTelefono}
-                              onChange={(value) =>
-                                handleDetailFormChange("codigoTelefono", value)
-                              }
-                              options={codigoTelefonoOptions}
-                              size="small"
-                              sx={{
-                                minWidth: 80,
-                                "& .MuiOutlinedInput-notchedOutline": {
-                                  borderRight: "none",
-                                  borderTopRightRadius: 0,
-                                  borderBottomRightRadius: 0,
-                                },
-                                "& .MuiSelect-select": {
-                                  pr: "24px !important",
-                                },
-                              }}
-                            />
-                            <TextField
-                              value={detailFormData.telefono}
-                              onChange={(value: string) =>
-                                handleDetailFormChange("telefono", value)
-                              }
-                              placeholder="000 000 0000"
-                              size="small"
-                              sx={{
-                                flex: 1,
-                                "& .MuiOutlinedInput-notchedOutline": {
-                                  borderLeft: "none",
-                                  borderTopLeftRadius: 0,
-                                  borderBottomLeftRadius: 0,
-                                },
-                              }}
-                            />
                           </Box>
-                          <Box />
                         </Box>
+                      </TabItem>
 
-                        {/* Fila 2 Contacto */}
-                        <Box
-                          sx={{
-                            display: "grid",
-                            gridTemplateColumns: "repeat(3, 1fr)",
-                            gap: 3,
-                            mb: 3,
-                          }}
-                        >
-                          <TextField
-                            label="Página web"
-                            value={detailFormData.paginaWeb}
-                            onChange={(value: string) =>
-                              handleDetailFormChange("paginaWeb", value)
-                            }
-                            size="small"
-                            fullWidth
-                          />
-                          <TextField
-                            label="Correo Electrónico"
-                            value={
-                              detailFormData.correoElectronico ||
-                              params.row.email
-                            }
-                            onChange={(value: string) =>
-                              handleDetailFormChange("correoElectronico", value)
-                            }
-                            size="small"
-                            fullWidth
-                          />
-                          <Box />
-                        </Box>
-                      </Box>
-                    </TabItem>
-
-                    <TabItem id={1} title="EQUIVALENCIAS">
-                      <Box sx={{ pt: 3 }}>
-                        <Typography
-                          variant="body2"
-                          sx={{ color: "text.secondary" }}
-                        >
-                          Configuración de equivalencias del participante.
-                        </Typography>
-                        <Box
-                          sx={{
-                            mt: 2,
-                            p: 3,
-                            bgcolor: "#f5f5f5",
-                            borderRadius: 1,
-                          }}
-                        >
-                          <Typography variant="body1">
-                            Aquí se configuran las equivalencias de códigos
-                            entre diferentes sistemas para el participante{" "}
-                            <strong>{params.row.name}</strong>.
+                      <TabItem id={2} title="CONVENIOS">
+                        <Box sx={{ pt: 3 }}>
+                          <Typography
+                            variant="body2"
+                            sx={{ color: "text.secondary" }}
+                          >
+                            Configuración de convenios del participante.
                           </Typography>
+                          <Box
+                            sx={{
+                              mt: 2,
+                              p: 3,
+                              bgcolor: "Background.secondary",
+                              borderRadius: 1,
+                              border: "1px solid",
+                              borderColor: "Divider",
+                            }}
+                          >
+                            <Typography variant="body1">
+                              Listado de convenios activos para{" "}
+                              <strong>{params.row.name}</strong> del
+                              departamento{" "}
+                              <strong>{params.row.department}</strong>.
+                            </Typography>
+                          </Box>
                         </Box>
-                      </Box>
-                    </TabItem>
+                      </TabItem>
+                    </TabsWrapper>
 
-                    <TabItem id={2} title="CONVENIOS">
-                      <Box sx={{ pt: 3 }}>
-                        <Typography
-                          variant="body2"
-                          sx={{ color: "text.secondary" }}
-                        >
-                          Configuración de convenios del participante.
-                        </Typography>
-                        <Box
-                          sx={{
-                            mt: 2,
-                            p: 3,
-                            bgcolor: "#f5f5f5",
-                            borderRadius: 1,
-                          }}
-                        >
-                          <Typography variant="body1">
-                            Listado de convenios activos para{" "}
-                            <strong>{params.row.name}</strong> del departamento{" "}
-                            <strong>{params.row.department}</strong>.
-                          </Typography>
-                        </Box>
-                      </Box>
-                    </TabItem>
-                  </TabsWrapper>
-
-                  {/* Botones de acción */}
-                  <Box
-                    sx={{
-                      display: "flex",
-                      justifyContent: "flex-end",
-                      gap: 2,
-                      mt: 3,
-                    }}
-                  >
-                    <Button variant="outlined">CANCELAR</Button>
-                    <Button
-                      variant="contained"
-                      onClick={() =>
-                        console.log("Guardando:", params.row, detailFormData)
-                      }
+                    {/* Botones de acción */}
+                    <Box
+                      sx={{
+                        display: "flex",
+                        justifyContent: "flex-end",
+                        gap: 2,
+                        mt: 3,
+                      }}
                     >
-                      GUARDAR
-                    </Button>
+                      <Button variant="outlined">CANCELAR</Button>
+                      <Button
+                        variant="contained"
+                        onClick={() =>
+                          console.log("Guardando:", params.row, detailFormData)
+                        }
+                      >
+                        GUARDAR
+                      </Button>
+                    </Box>
                   </Box>
-                </Box>
-              )}
-              pagination
-              initialState={{
-                pagination: {
-                  paginationModel: { pageSize: 5, page: 0 },
-                },
-              }}
-              pageSizeOptions={[5, 10, 25]}
-            />
+                )}
+                pagination
+                initialState={{
+                  pagination: {
+                    paginationModel: { pageSize: 5, page: 0 },
+                  },
+                }}
+                pageSizeOptions={[5, 10, 25]}
+                showToolbar={true}
+              />
+            </CodeExample>
           </Box>
           <Alert severity="info" sx={{ mt: 2 }}>
             💡 <strong>Master-Detail:</strong> Expande una fila para ver el
@@ -2032,213 +2426,229 @@ export default function AppComplete() {
             fechas.
           </Alert>
 
-          <Box sx={{ height: 500, width: "100%" }}>
-            <DataGridProX
-              rows={[
-                {
-                  id: 1,
-                  producto: "Laptop Dell XPS",
-                  categoria: "Electrónica",
-                  precio: 1299.99,
-                  stock: 25,
-                  estado: "Activo",
-                  fechaIngreso: "2024-01-15",
-                },
-                {
-                  id: 2,
-                  producto: "Mouse Logitech MX",
-                  categoria: "Accesorios",
-                  precio: 89.99,
-                  stock: 150,
-                  estado: "Activo",
-                  fechaIngreso: "2024-02-20",
-                },
-                {
-                  id: 3,
-                  producto: "Teclado Mecánico",
-                  categoria: "Accesorios",
-                  precio: 149.99,
-                  stock: 75,
-                  estado: "Activo",
-                  fechaIngreso: "2024-01-28",
-                },
-                {
-                  id: 4,
-                  producto: "Monitor Samsung 27",
-                  categoria: "Electrónica",
-                  precio: 399.99,
-                  stock: 40,
-                  estado: "Inactivo",
-                  fechaIngreso: "2023-12-10",
-                },
-                {
-                  id: 5,
-                  producto: "Webcam HD Pro",
-                  categoria: "Accesorios",
-                  precio: 79.99,
-                  stock: 200,
-                  estado: "Activo",
-                  fechaIngreso: "2024-03-05",
-                },
-                {
-                  id: 6,
-                  producto: "SSD NVMe 1TB",
-                  categoria: "Almacenamiento",
-                  precio: 129.99,
-                  stock: 80,
-                  estado: "Activo",
-                  fechaIngreso: "2024-02-14",
-                },
-                {
-                  id: 7,
-                  producto: "RAM DDR5 32GB",
-                  categoria: "Componentes",
-                  precio: 189.99,
-                  stock: 60,
-                  estado: "Activo",
-                  fechaIngreso: "2024-01-22",
-                },
-                {
-                  id: 8,
-                  producto: "Tarjeta Gráfica RTX",
-                  categoria: "Componentes",
-                  precio: 699.99,
-                  stock: 15,
-                  estado: "Bajo Stock",
-                  fechaIngreso: "2024-03-01",
-                },
-                {
-                  id: 9,
-                  producto: "Auriculares Gaming",
-                  categoria: "Accesorios",
-                  precio: 129.99,
-                  stock: 90,
-                  estado: "Activo",
-                  fechaIngreso: "2024-02-28",
-                },
-                {
-                  id: 10,
-                  producto: "Cable HDMI 2.1",
-                  categoria: "Accesorios",
-                  precio: 24.99,
-                  stock: 500,
-                  estado: "Activo",
-                  fechaIngreso: "2024-01-05",
-                },
-                {
-                  id: 11,
-                  producto: "Tablet Android",
-                  categoria: "Electrónica",
-                  precio: 349.99,
-                  stock: 35,
-                  estado: "Activo",
-                  fechaIngreso: "2024-03-10",
-                },
-                {
-                  id: 12,
-                  producto: "Impresora Laser",
-                  categoria: "Oficina",
-                  precio: 299.99,
-                  stock: 20,
-                  estado: "Inactivo",
-                  fechaIngreso: "2023-11-15",
-                },
-              ]}
-              columns={[
-                {
-                  field: "id",
-                  headerName: "ID",
-                  width: 80,
-                  type: "number",
-                },
-                {
-                  field: "producto",
-                  headerName: "Producto",
-                  width: 200,
-                  type: "string",
-                },
-                {
-                  field: "categoria",
-                  headerName: "Categoría",
-                  width: 150,
-                  type: "singleSelect",
-                  valueOptions: [
-                    "Electrónica",
-                    "Accesorios",
-                    "Almacenamiento",
-                    "Componentes",
-                    "Oficina",
-                  ],
-                },
-                {
-                  field: "precio",
-                  headerName: "Precio",
-                  width: 120,
-                  type: "number",
-                  valueFormatter: (value: number) => `$${value?.toFixed(2)}`,
-                },
-                {
-                  field: "stock",
-                  headerName: "Stock",
-                  width: 100,
-                  type: "number",
-                },
-                {
-                  field: "estado",
-                  headerName: "Estado",
-                  width: 130,
-                  type: "singleSelect",
-                  valueOptions: ["Activo", "Inactivo", "Bajo Stock"],
-                  renderCell: (params: GridRenderCellParams) => (
-                    <Box
-                      sx={{
-                        px: 1.5,
-                        py: 0.5,
-                        borderRadius: 1,
-                        bgcolor:
-                          params.value === "Activo"
-                            ? "success.light"
-                            : params.value === "Inactivo"
-                              ? "error.light"
-                              : "warning.light",
-                        color:
-                          params.value === "Activo"
-                            ? "success.dark"
-                            : params.value === "Inactivo"
-                              ? "error.dark"
-                              : "warning.dark",
-                        fontWeight: 500,
-                        fontSize: "0.75rem",
-                      }}
-                    >
-                      {params.value}
-                    </Box>
-                  ),
-                },
-                {
-                  field: "fechaIngreso",
-                  headerName: "Fecha Ingreso",
-                  width: 140,
-                  type: "date",
-                  valueGetter: (value: string) => new Date(value),
-                  valueFormatter: (value: Date) =>
-                    value?.toLocaleDateString("es-CO"),
-                },
-              ]}
-              headerFilters
-              slotProps={{
-                headerFilterCell: {
-                  showClearIcon: true,
-                },
-              }}
-              initialState={{
-                pagination: {
-                  paginationModel: { pageSize: 10, page: 0 },
-                },
-              }}
-              pageSizeOptions={[5, 10, 25]}
-              disableRowSelectionOnClick
-            />
+          <Box sx={{ width: "100%" }}>
+            <CodeExample
+              title="Ejemplo de DataGridProX con Header Filters"
+              code={`<DataGridProX
+ rows={rowsProX}
+ columns={columnsProX}
+ pagination
+ initialState={{
+   pagination: {
+     paginationModel: { pageSize: 5, page: 0 },
+   },
+ }}
+ pageSizeOptions={[5, 10, 25]}
+ showToolbar={true}
+/>`}
+            >
+              <DataGridProX
+                rows={[
+                  {
+                    id: 1,
+                    producto: "Laptop Dell XPS",
+                    categoria: "Electrónica",
+                    precio: 1299.99,
+                    stock: 25,
+                    estado: "Activo",
+                    fechaIngreso: "2024-01-15",
+                  },
+                  {
+                    id: 2,
+                    producto: "Mouse Logitech MX",
+                    categoria: "Accesorios",
+                    precio: 89.99,
+                    stock: 150,
+                    estado: "Activo",
+                    fechaIngreso: "2024-02-20",
+                  },
+                  {
+                    id: 3,
+                    producto: "Teclado Mecánico",
+                    categoria: "Accesorios",
+                    precio: 149.99,
+                    stock: 75,
+                    estado: "Activo",
+                    fechaIngreso: "2024-01-28",
+                  },
+                  {
+                    id: 4,
+                    producto: "Monitor Samsung 27",
+                    categoria: "Electrónica",
+                    precio: 399.99,
+                    stock: 40,
+                    estado: "Inactivo",
+                    fechaIngreso: "2023-12-10",
+                  },
+                  {
+                    id: 5,
+                    producto: "Webcam HD Pro",
+                    categoria: "Accesorios",
+                    precio: 79.99,
+                    stock: 200,
+                    estado: "Activo",
+                    fechaIngreso: "2024-03-05",
+                  },
+                  {
+                    id: 6,
+                    producto: "SSD NVMe 1TB",
+                    categoria: "Almacenamiento",
+                    precio: 129.99,
+                    stock: 80,
+                    estado: "Activo",
+                    fechaIngreso: "2024-02-14",
+                  },
+                  {
+                    id: 7,
+                    producto: "RAM DDR5 32GB",
+                    categoria: "Componentes",
+                    precio: 189.99,
+                    stock: 60,
+                    estado: "Activo",
+                    fechaIngreso: "2024-01-22",
+                  },
+                  {
+                    id: 8,
+                    producto: "Tarjeta Gráfica RTX",
+                    categoria: "Componentes",
+                    precio: 699.99,
+                    stock: 15,
+                    estado: "Bajo Stock",
+                    fechaIngreso: "2024-03-01",
+                  },
+                  {
+                    id: 9,
+                    producto: "Auriculares Gaming",
+                    categoria: "Accesorios",
+                    precio: 129.99,
+                    stock: 90,
+                    estado: "Activo",
+                    fechaIngreso: "2024-02-28",
+                  },
+                  {
+                    id: 10,
+                    producto: "Cable HDMI 2.1",
+                    categoria: "Accesorios",
+                    precio: 24.99,
+                    stock: 500,
+                    estado: "Activo",
+                    fechaIngreso: "2024-01-05",
+                  },
+                  {
+                    id: 11,
+                    producto: "Tablet Android",
+                    categoria: "Electrónica",
+                    precio: 349.99,
+                    stock: 35,
+                    estado: "Activo",
+                    fechaIngreso: "2024-03-10",
+                  },
+                  {
+                    id: 12,
+                    producto: "Impresora Laser",
+                    categoria: "Oficina",
+                    precio: 299.99,
+                    stock: 20,
+                    estado: "Inactivo",
+                    fechaIngreso: "2023-11-15",
+                  },
+                ]}
+                columns={[
+                  {
+                    field: "id",
+                    headerName: "ID",
+                    width: 80,
+                    type: "number",
+                  },
+                  {
+                    field: "producto",
+                    headerName: "Producto",
+                    width: 200,
+                    type: "string",
+                  },
+                  {
+                    field: "categoria",
+                    headerName: "Categoría",
+                    width: 150,
+                    type: "singleSelect",
+                    valueOptions: [
+                      "Electrónica",
+                      "Accesorios",
+                      "Almacenamiento",
+                      "Componentes",
+                      "Oficina",
+                    ],
+                  },
+                  {
+                    field: "precio",
+                    headerName: "Precio",
+                    width: 120,
+                    type: "number",
+                    valueFormatter: (value: number) => `$${value?.toFixed(2)}`,
+                  },
+                  {
+                    field: "stock",
+                    headerName: "Stock",
+                    width: 100,
+                    type: "number",
+                  },
+                  {
+                    field: "estado",
+                    headerName: "Estado",
+                    width: 130,
+                    type: "singleSelect",
+                    valueOptions: ["Activo", "Inactivo", "Bajo Stock"],
+                    renderCell: (params: GridRenderCellParams) => (
+                      <Box
+                        sx={{
+                          px: 1.5,
+                          py: 0.5,
+                          borderRadius: 1,
+                          bgcolor:
+                            params.value === "Activo"
+                              ? "success.light"
+                              : params.value === "Inactivo"
+                                ? "error.light"
+                                : "warning.light",
+                          color:
+                            params.value === "Activo"
+                              ? "success.dark"
+                              : params.value === "Inactivo"
+                                ? "error.dark"
+                                : "warning.dark",
+                          fontWeight: 500,
+                          fontSize: "0.75rem",
+                        }}
+                      >
+                        {params.value}
+                      </Box>
+                    ),
+                  },
+                  {
+                    field: "fechaIngreso",
+                    headerName: "Fecha Ingreso",
+                    width: 140,
+                    type: "date",
+                    valueGetter: (value: string) => new Date(value),
+                    valueFormatter: (value: Date) =>
+                      value?.toLocaleDateString("es-CO"),
+                  },
+                ]}
+                headerFilters
+                slotProps={{
+                  headerFilterCell: {
+                    showClearIcon: true,
+                  },
+                }}
+                initialState={{
+                  pagination: {
+                    paginationModel: { pageSize: 10, page: 0 },
+                  },
+                }}
+                pageSizeOptions={[5, 10, 25]}
+                disableRowSelectionOnClick
+              />
+            </CodeExample>
           </Box>
 
           <Alert severity="info" sx={{ mt: 2 }}>
@@ -2440,34 +2850,64 @@ export default function AppComplete() {
                   <Typography variant="caption" display="block" mb={1}>
                     Size: sm
                   </Typography>
-                  <IsotypeName
-                    projectName="nuam"
-                    logoSrc={isotypeLogoSrc}
-                    size="sm"
-                    showText={true}
-                  />
+                  <CodeExample
+                    title="IsotypeName con logo y texto"
+                    code={`<IsotypeName
+ projectName="nuam"
+ logoSrc={isotypeLogoSrc}
+ size="sm"
+ showText={true}
+/>`}
+                  >
+                    <IsotypeName
+                      projectName="nuam"
+                      logoSrc={isotypeLogoSrc}
+                      size="sm"
+                      showText={true}
+                    />
+                  </CodeExample>
                 </Box>
                 <Box>
                   <Typography variant="caption" display="block" mb={1}>
                     Size: md
                   </Typography>
-                  <IsotypeName
-                    projectName="nuam"
-                    logoSrc={isotypeLogoSrc}
-                    size="md"
-                    showText={true}
-                  />
+                  <CodeExample
+                    title="IsotypeName con logo y texto"
+                    code={`<IsotypeName
+ projectName="nuam"
+ logoSrc={isotypeLogoSrc}
+ size="md"
+ showText={true}
+/>`}
+                  >
+                    <IsotypeName
+                      projectName="nuam"
+                      logoSrc={isotypeLogoSrc}
+                      size="md"
+                      showText={true}
+                    />
+                  </CodeExample>
                 </Box>
                 <Box>
                   <Typography variant="caption" display="block" mb={1}>
                     Size: lg
                   </Typography>
-                  <IsotypeName
-                    projectName="nuam"
-                    logoSrc={isotypeLogoSrc}
-                    size="lg"
-                    showText={true}
-                  />
+                  <CodeExample
+                    title="IsotypeName con logo y texto"
+                    code={`<IsotypeName
+ projectName="nuam"
+ logoSrc={isotypeLogoSrc}
+ size="lg"
+ showText={true}
+/>`}
+                  >
+                    <IsotypeName
+                      projectName="nuam"
+                      logoSrc={isotypeLogoSrc}
+                      size="lg"
+                      showText={true}
+                    />
+                  </CodeExample>
                 </Box>
               </Stack>
             </Box>
@@ -2482,34 +2922,64 @@ export default function AppComplete() {
                   <Typography variant="caption" display="block" mb={1}>
                     Size: sm
                   </Typography>
-                  <IsotypeName
-                    projectName="nuam"
-                    logoSrc={isotypeLogoSrc}
-                    size="sm"
-                    showText={false}
-                  />
+                  <CodeExample
+                    title="IsotypeName solo logo"
+                    code={`<IsotypeName
+ projectName="nuam"
+ logoSrc={isotypeLogoSrc}
+ size="sm"
+ showText={false}
+/>`}
+                  >
+                    <IsotypeName
+                      projectName="nuam"
+                      logoSrc={isotypeLogoSrc}
+                      size="sm"
+                      showText={false}
+                    />
+                  </CodeExample>
                 </Box>
                 <Box>
                   <Typography variant="caption" display="block" mb={1}>
                     Size: md
                   </Typography>
-                  <IsotypeName
-                    projectName="nuam"
-                    logoSrc={isotypeLogoSrc}
-                    size="md"
-                    showText={false}
-                  />
+                  <CodeExample
+                    title="IsotypeName solo logo"
+                    code={`<IsotypeName
+ projectName="nuam"
+ logoSrc={isotypeLogoSrc}
+ size="md"
+ showText={false}
+/>`}
+                  >
+                    <IsotypeName
+                      projectName="nuam"
+                      logoSrc={isotypeLogoSrc}
+                      size="md"
+                      showText={false}
+                    />
+                  </CodeExample>
                 </Box>
                 <Box>
                   <Typography variant="caption" display="block" mb={1}>
                     Size: lg
                   </Typography>
-                  <IsotypeName
-                    projectName="nuam"
-                    logoSrc={isotypeLogoSrc}
-                    size="lg"
-                    showText={false}
-                  />
+                  <CodeExample
+                    title="IsotypeName solo logo"
+                    code={`<IsotypeName
+ projectName="nuam"
+ logoSrc={isotypeLogoSrc}
+ size="lg"
+ showText={false}
+/>`}
+                  >
+                    <IsotypeName
+                      projectName="nuam"
+                      logoSrc={isotypeLogoSrc}
+                      size="lg"
+                      showText={false}
+                    />
+                  </CodeExample>
                 </Box>
               </Stack>
             </Box>
@@ -2524,19 +2994,34 @@ export default function AppComplete() {
                   <Typography variant="caption" display="block" mb={1}>
                     Size: sm
                   </Typography>
-                  <IsotypeName projectName="nuam" size="sm" />
+                  <CodeExample
+                    title="IsotypeName solo texto"
+                    code={`<IsotypeName projectName="nuam" size="sm" />`}
+                  >
+                    <IsotypeName projectName="nuam" size="sm" />
+                  </CodeExample>
                 </Box>
                 <Box>
                   <Typography variant="caption" display="block" mb={1}>
                     Size: md
                   </Typography>
-                  <IsotypeName projectName="nuam" size="md" />
+                  <CodeExample
+                    title="IsotypeName solo texto"
+                    code={`<IsotypeName projectName="nuam" size="md" />`}
+                  >
+                    <IsotypeName projectName="nuam" size="md" />
+                  </CodeExample>
                 </Box>
                 <Box>
                   <Typography variant="caption" display="block" mb={1}>
                     Size: lg
                   </Typography>
-                  <IsotypeName projectName="nuam" size="lg" />
+                  <CodeExample
+                    title="IsotypeName solo texto"
+                    code={`<IsotypeName projectName="nuam" size="lg" />`}
+                  >
+                    <IsotypeName projectName="nuam" size="lg" />
+                  </CodeExample>
                 </Box>
               </Stack>
             </Box>
@@ -2551,25 +3036,47 @@ export default function AppComplete() {
                   <Typography variant="caption" display="block" mb={1}>
                     horizontal
                   </Typography>
-                  <IsotypeName
-                    projectName="nuam"
-                    logoSrc={isotypeLogoSrc}
-                    variant="horizontal"
-                    size="sm"
-                    showText={true}
-                  />
+                  <CodeExample
+                    title="IsotypeName variante horizontal"
+                    code={`<IsotypeName
+ projectName="nuam"
+ logoSrc={isotypeLogoSrc}
+ variant="horizontal"
+ size="sm"
+ showText={true}
+/>`}
+                  >
+                    <IsotypeName
+                      projectName="nuam"
+                      logoSrc={isotypeLogoSrc}
+                      variant="horizontal"
+                      size="sm"
+                      showText={true}
+                    />
+                  </CodeExample>
                 </Box>
                 <Box>
                   <Typography variant="caption" display="block" mb={1}>
                     vertical
                   </Typography>
-                  <IsotypeName
-                    projectName="nuam"
-                    logoSrc={isotypeLogoSrc}
-                    variant="vertical"
-                    size="sm"
-                    showText={true}
-                  />
+                  <CodeExample
+                    title="IsotypeName variante vertical"
+                    code={`<IsotypeName
+ projectName="nuam"
+ logoSrc={isotypeLogoSrc}
+ variant="vertical"
+ size="sm"
+ showText={true}
+/>`}
+                  >
+                    <IsotypeName
+                      projectName="nuam"
+                      logoSrc={isotypeLogoSrc}
+                      variant="vertical"
+                      size="sm"
+                      showText={true}
+                    />
+                  </CodeExample>
                 </Box>
               </Stack>
             </Box>
@@ -2586,20 +3093,42 @@ export default function AppComplete() {
                 Dark Variant
               </Typography>
               <Stack direction="row" spacing={4} alignItems="center">
-                <IsotypeName
-                  projectName="nuam"
-                  logoSrc={isotypeLogoSrc}
-                  variant="dark"
-                  size="sm"
-                  showText={true}
-                />
-                <IsotypeName
-                  projectName="nuam"
-                  logoSrc={isotypeLogoSrc}
-                  variant="dark"
-                  size="md"
-                  showText={true}
-                />
+                <CodeExample
+                  title="IsotypeName variante dark"
+                  code={`<IsotypeName
+ projectName="nuam"
+ logoSrc={isotypeLogoSrc}
+ variant="dark"
+ size="sm"
+ showText={true}
+/>`}
+                >
+                  <IsotypeName
+                    projectName="nuam"
+                    logoSrc={isotypeLogoSrc}
+                    variant="dark"
+                    size="sm"
+                    showText={true}
+                  />
+                </CodeExample>
+                <CodeExample
+                  title="IsotypeName variante dark"
+                  code={`<IsotypeName
+ projectName="nuam"
+ logoSrc={isotypeLogoSrc}
+ variant="dark"
+ size="md"
+ showText={true}
+/>`}
+                >
+                  <IsotypeName
+                    projectName="nuam"
+                    logoSrc={isotypeLogoSrc}
+                    variant="dark"
+                    size="md"
+                    showText={true}
+                  />
+                </CodeExample>
               </Stack>
             </Box>
           </Stack>
@@ -2631,32 +3160,64 @@ export default function AppComplete() {
                   minHeight: 300,
                 }}
               >
-                <RichTreeView
-                  items={treeItems}
-                  expandedItems={treeExpandedItems}
-                  onExpandedItemsChange={(
-                    _: React.SyntheticEvent | null,
-                    itemIds: string[],
-                  ) => setTreeExpandedItems(itemIds)}
-                  selectedItems={treeSelectedItems}
-                  onSelectedItemsChange={(
-                    _: React.SyntheticEvent | null,
-                    itemIds: string | string[] | null,
-                  ) =>
-                    setTreeSelectedItems(Array.isArray(itemIds) ? itemIds : [])
-                  }
-                  multiSelect
-                  slots={{
-                    expandIcon: () => <FolderOpen fontSize="small" />,
-                    collapseIcon: () => <Folder fontSize="small" />,
-                    endIcon: () => <InsertDriveFile fontSize="small" />,
-                  }}
-                  sx={{
-                    "& .MuiTreeItem-label": {
-                      fontSize: "0.95rem",
-                    },
-                  }}
-                />
+                <CodeExample
+                  title="RichTreeView con multi-select"
+                  code={`<RichTreeView
+ items={treeItems}
+ expandedItems={treeExpandedItems}
+ onExpandedItemsChange={(
+   _: React.SyntheticEvent | null,
+   itemIds: string[],
+ ) => setTreeExpandedItems(itemIds)}
+ selectedItems={treeSelectedItems}
+ onSelectedItemsChange={(
+   _: React.SyntheticEvent | null,
+   itemIds: string | string[] | null,
+ ) =>
+   setTreeSelectedItems(Array.isArray(itemIds) ? itemIds : [])
+ }
+ multiSelect
+ slots={{
+   expandIcon: () => <FolderOpen fontSize="small" />,
+   collapseIcon: () => <Folder fontSize="small" />,
+   endIcon: () => <InsertDriveFile fontSize="small" />,
+ }}
+ sx={{
+   "& .MuiTreeItem-label": {
+     fontSize: "0.95rem",
+   },
+ }}
+/>`}
+                >
+                  <RichTreeView
+                    items={treeItems}
+                    expandedItems={treeExpandedItems}
+                    onExpandedItemsChange={(
+                      _: React.SyntheticEvent | null,
+                      itemIds: string[],
+                    ) => setTreeExpandedItems(itemIds)}
+                    selectedItems={treeSelectedItems}
+                    onSelectedItemsChange={(
+                      _: React.SyntheticEvent | null,
+                      itemIds: string | string[] | null,
+                    ) =>
+                      setTreeSelectedItems(
+                        Array.isArray(itemIds) ? itemIds : [],
+                      )
+                    }
+                    multiSelect
+                    slots={{
+                      expandIcon: () => <FolderOpen fontSize="small" />,
+                      collapseIcon: () => <Folder fontSize="small" />,
+                      endIcon: () => <InsertDriveFile fontSize="small" />,
+                    }}
+                    sx={{
+                      "& .MuiTreeItem-label": {
+                        fontSize: "0.95rem",
+                      },
+                    }}
+                  />
+                </CodeExample>
               </Box>
             </Box>
 
@@ -2667,7 +3228,7 @@ export default function AppComplete() {
               </Typography>
               <Box
                 sx={{
-                  bgcolor: "#f5f5f5",
+                  bgcolor: "Background.secondary",
                   borderRadius: 1,
                   p: 2,
                   minHeight: 300,
@@ -2828,50 +3389,63 @@ export default function AppComplete() {
                   p: 2,
                 }}
               >
-                <RichTreeView
-                  items={[
-                    {
-                      id: "project",
-                      label: "mi-proyecto",
-                      children: [
-                        { id: "readme", label: "README.md" },
-                        { id: "package", label: "package.json" },
-                        {
-                          id: "src-folder",
-                          label: "src",
-                          children: [
-                            { id: "index", label: "index.tsx" },
-                            { id: "styles", label: "styles.css" },
-                          ],
-                        },
-                        {
-                          id: "assets-folder",
-                          label: "assets",
-                          children: [
-                            { id: "logo", label: "logo.png" },
-                            { id: "icon", label: "icon.svg" },
-                          ],
-                        },
-                      ],
-                    },
-                  ]}
-                  defaultExpandedItems={[
-                    "project",
-                    "src-folder",
-                    "assets-folder",
-                  ]}
-                  slots={{
-                    expandIcon: () => (
-                      <FolderOpen fontSize="small" color="warning" />
-                    ),
-                    collapseIcon: () => (
-                      <Folder fontSize="small" color="warning" />
-                    ),
-                    endIcon: () => (
-                      <Description fontSize="small" color="action" />
-                    ),
-                  }}
-                />
+                <CodeExample
+                  title="RichTreeView con iconos personalizados"
+                  code={`<RichTreeView
+  items={treeItems} 
+  defaultExpandedItems={["project", "src-folder", "assets-folder"]}
+  slots={{
+    expandIcon: () => <FolderOpen fontSize="small" color="warning" />,
+    collapseIcon: () => <Folder fontSize="small" color="warning" />,
+    endIcon: () => <Description fontSize="small" color="action" />,
+  }}
+/>`}
+                >
+                  <RichTreeView
+                    items={[
+                      {
+                        id: "project",
+                        label: "mi-proyecto",
+                        children: [
+                          { id: "readme", label: "README.md" },
+                          { id: "package", label: "package.json" },
+                          {
+                            id: "src-folder",
+                            label: "src",
+                            children: [
+                              { id: "index", label: "index.tsx" },
+                              { id: "styles", label: "styles.css" },
+                            ],
+                          },
+                          {
+                            id: "assets-folder",
+                            label: "assets",
+                            children: [
+                              { id: "logo", label: "logo.png" },
+                              { id: "icon", label: "icon.svg" },
+                            ],
+                          },
+                        ],
+                      },
+                    ]}
+                    defaultExpandedItems={[
+                      "project",
+                      "src-folder",
+                      "assets-folder",
+                    ]}
+                    slots={{
+                      expandIcon: () => (
+                        <FolderOpen fontSize="small" color="warning" />
+                      ),
+                      collapseIcon: () => (
+                        <Folder fontSize="small" color="warning" />
+                      ),
+                      endIcon: () => (
+                        <Description fontSize="small" color="action" />
+                      ),
+                    }}
+                  />
+                </CodeExample>
               </Box>
             </Box>
 
@@ -2887,51 +3461,63 @@ export default function AppComplete() {
                   p: 2,
                 }}
               >
-                <RichTreeView
-                  items={[
-                    {
-                      id: "permisos",
-                      label: "Permisos de usuario",
-                      children: [
-                        {
-                          id: "lectura",
-                          label: "Lectura",
-                          children: [
-                            { id: "ver-docs", label: "Ver documentos" },
-                            { id: "ver-reportes", label: "Ver reportes" },
-                          ],
-                        },
-                        {
-                          id: "escritura",
-                          label: "Escritura",
-                          children: [
-                            { id: "crear-docs", label: "Crear documentos" },
-                            { id: "editar-docs", label: "Editar documentos" },
-                          ],
-                        },
-                        {
-                          id: "admin",
-                          label: "Administración",
-                          children: [
-                            {
-                              id: "gestionar-users",
-                              label: "Gestionar usuarios",
-                            },
-                            { id: "config", label: "Configuración" },
-                          ],
-                        },
-                      ],
-                    },
-                  ]}
-                  defaultExpandedItems={[
-                    "permisos",
-                    "lectura",
-                    "escritura",
-                    "admin",
-                  ]}
-                  checkboxSelection
-                  multiSelect
-                />
+                <CodeExample
+                  title="RichTreeView con checkboxSelection"
+                  code={`<RichTreeView
+  items={[
+    {items={treeItems}},
+  ]}
+  defaultExpandedItems={["permisos", "lectura", "escritura", "admin"]}
+  checkboxSelection
+  multiSelect
+/>`}
+                >
+                  <RichTreeView
+                    items={[
+                      {
+                        id: "permisos",
+                        label: "Permisos de usuario",
+                        children: [
+                          {
+                            id: "lectura",
+                            label: "Lectura",
+                            children: [
+                              { id: "ver-docs", label: "Ver documentos" },
+                              { id: "ver-reportes", label: "Ver reportes" },
+                            ],
+                          },
+                          {
+                            id: "escritura",
+                            label: "Escritura",
+                            children: [
+                              { id: "crear-docs", label: "Crear documentos" },
+                              { id: "editar-docs", label: "Editar documentos" },
+                            ],
+                          },
+                          {
+                            id: "admin",
+                            label: "Administración",
+                            children: [
+                              {
+                                id: "gestionar-users",
+                                label: "Gestionar usuarios",
+                              },
+                              { id: "config", label: "Configuración" },
+                            ],
+                          },
+                        ],
+                      },
+                    ]}
+                    defaultExpandedItems={[
+                      "permisos",
+                      "lectura",
+                      "escritura",
+                      "admin",
+                    ]}
+                    checkboxSelection
+                    multiSelect
+                  />
+                </CodeExample>
               </Box>
             </Box>
           </Stack>
@@ -2976,83 +3562,102 @@ export default function AppComplete() {
                   minHeight: 300,
                 }}
               >
-                <RichTreeViewPro
-                  items={[
-                    {
-                      id: "database",
-                      label: "Base de Datos",
-                      children: [
-                        {
-                          id: "users-table",
-                          label: "usuarios",
-                          children: [
-                            { id: "user-1", label: "id: INT PRIMARY KEY" },
-                            { id: "user-2", label: "nombre: VARCHAR(100)" },
-                            { id: "user-3", label: "email: VARCHAR(255)" },
-                            { id: "user-4", label: "created_at: TIMESTAMP" },
-                          ],
-                        },
-                        {
-                          id: "products-table",
-                          label: "productos",
-                          children: [
-                            { id: "prod-1", label: "id: INT PRIMARY KEY" },
-                            { id: "prod-2", label: "nombre: VARCHAR(200)" },
-                            { id: "prod-3", label: "precio: DECIMAL(10,2)" },
-                            { id: "prod-4", label: "stock: INT" },
-                          ],
-                        },
-                        {
-                          id: "orders-table",
-                          label: "ordenes",
-                          children: [
-                            { id: "order-1", label: "id: INT PRIMARY KEY" },
-                            { id: "order-2", label: "usuario_id: INT FK" },
-                            { id: "order-3", label: "total: DECIMAL(12,2)" },
-                            { id: "order-4", label: "status: ENUM" },
-                          ],
-                        },
-                      ],
-                    },
-                    {
-                      id: "api",
-                      label: "API Endpoints",
-                      children: [
-                        {
-                          id: "api-auth",
-                          label: "/auth",
-                          children: [
-                            { id: "auth-1", label: "POST /login" },
-                            { id: "auth-2", label: "POST /register" },
-                            { id: "auth-3", label: "POST /logout" },
-                          ],
-                        },
-                        {
-                          id: "api-users",
-                          label: "/users",
-                          children: [
-                            { id: "users-1", label: "GET /" },
-                            { id: "users-2", label: "GET /:id" },
-                            { id: "users-3", label: "PUT /:id" },
-                            { id: "users-4", label: "DELETE /:id" },
-                          ],
-                        },
-                      ],
-                    },
-                  ]}
-                  defaultExpandedItems={["database", "api"]}
-                  multiSelect
-                  checkboxSelection
-                  slots={{
-                    expandIcon: () => (
-                      <FolderOpen fontSize="small" color="primary" />
-                    ),
-                    collapseIcon: () => (
-                      <Folder fontSize="small" color="primary" />
-                    ),
-                    endIcon: () => <Code fontSize="small" color="action" />,
-                  }}
-                />
+                <CodeExample
+                  title="RichTreeViewPro con lazy loading"
+                  code={`<RichTreeViewPro
+ items={asyncItems}
+ defaultExpandedItems={["database", "api"]}
+ multiSelect
+ checkboxSelection
+ slots={{
+   expandIcon: () => (
+     <FolderOpen fontSize="small" color="primary" />
+   ),
+   collapseIcon: () => (
+     <Folder fontSize="small" color="primary" />
+   ),
+   endIcon: () => <Code fontSize="small" color="action" />,
+ }}
+/>`}
+                >
+                  <RichTreeViewPro
+                    items={[
+                      {
+                        id: "database",
+                        label: "Base de Datos",
+                        children: [
+                          {
+                            id: "users-table",
+                            label: "usuarios",
+                            children: [
+                              { id: "user-1", label: "id: INT PRIMARY KEY" },
+                              { id: "user-2", label: "nombre: VARCHAR(100)" },
+                              { id: "user-3", label: "email: VARCHAR(255)" },
+                              { id: "user-4", label: "created_at: TIMESTAMP" },
+                            ],
+                          },
+                          {
+                            id: "products-table",
+                            label: "productos",
+                            children: [
+                              { id: "prod-1", label: "id: INT PRIMARY KEY" },
+                              { id: "prod-2", label: "nombre: VARCHAR(200)" },
+                              { id: "prod-3", label: "precio: DECIMAL(10,2)" },
+                              { id: "prod-4", label: "stock: INT" },
+                            ],
+                          },
+                          {
+                            id: "orders-table",
+                            label: "ordenes",
+                            children: [
+                              { id: "order-1", label: "id: INT PRIMARY KEY" },
+                              { id: "order-2", label: "usuario_id: INT FK" },
+                              { id: "order-3", label: "total: DECIMAL(12,2)" },
+                              { id: "order-4", label: "status: ENUM" },
+                            ],
+                          },
+                        ],
+                      },
+                      {
+                        id: "api",
+                        label: "API Endpoints",
+                        children: [
+                          {
+                            id: "api-auth",
+                            label: "/auth",
+                            children: [
+                              { id: "auth-1", label: "POST /login" },
+                              { id: "auth-2", label: "POST /register" },
+                              { id: "auth-3", label: "POST /logout" },
+                            ],
+                          },
+                          {
+                            id: "api-users",
+                            label: "/users",
+                            children: [
+                              { id: "users-1", label: "GET /" },
+                              { id: "users-2", label: "GET /:id" },
+                              { id: "users-3", label: "PUT /:id" },
+                              { id: "users-4", label: "DELETE /:id" },
+                            ],
+                          },
+                        ],
+                      },
+                    ]}
+                    defaultExpandedItems={["database", "api"]}
+                    multiSelect
+                    checkboxSelection
+                    slots={{
+                      expandIcon: () => (
+                        <FolderOpen fontSize="small" color="primary" />
+                      ),
+                      collapseIcon: () => (
+                        <Folder fontSize="small" color="primary" />
+                      ),
+                      endIcon: () => <Code fontSize="small" color="action" />,
+                    }}
+                  />
+                </CodeExample>
               </Box>
             </Box>
 
@@ -3076,82 +3681,122 @@ export default function AppComplete() {
                   minHeight: 300,
                 }}
               >
-                <RichTreeViewPro
-                  items={[
-                    {
-                      id: "app-root",
-                      label: "<App />",
-                      children: [
-                        {
-                          id: "layout",
-                          label: "<Layout />",
-                          children: [
-                            {
-                              id: "header",
-                              label: "<Header />",
-                              children: [
-                                { id: "nav", label: "<Navigation />" },
-                                { id: "search", label: "<SearchBar />" },
-                                { id: "user-menu", label: "<UserMenu />" },
-                              ],
-                            },
-                            {
-                              id: "main",
-                              label: "<Main />",
-                              children: [
-                                { id: "sidebar", label: "<Sidebar />" },
-                                {
-                                  id: "content",
-                                  label: "<Content />",
-                                  children: [
-                                    { id: "dashboard", label: "<Dashboard />" },
-                                    { id: "charts", label: "<Charts />" },
-                                    { id: "table", label: "<DataTable />" },
-                                  ],
-                                },
-                              ],
-                            },
-                            {
-                              id: "footer",
-                              label: "<Footer />",
-                              children: [
-                                { id: "links", label: "<FooterLinks />" },
-                                { id: "copyright", label: "<Copyright />" },
-                              ],
-                            },
-                          ],
-                        },
-                      ],
-                    },
-                  ]}
-                  defaultExpandedItems={[
-                    "app-root",
-                    "layout",
-                    "header",
-                    "main",
-                    "content",
-                  ]}
-                  slots={{
-                    expandIcon: () => (
-                      <FolderOpen
-                        fontSize="small"
-                        sx={{ color: "primary.main" }}
-                      />
-                    ),
-                    collapseIcon: () => (
-                      <Folder fontSize="small" sx={{ color: "primary.main" }} />
-                    ),
-                    endIcon: () => (
-                      <Code fontSize="small" sx={{ color: "primary.main" }} />
-                    ),
-                  }}
-                  sx={{
-                    "& .MuiTreeItem-label": {
-                      fontFamily: "monospace",
-                      fontSize: "0.9rem",
-                    },
-                  }}
-                />
+                <CodeExample
+                  title="RichTreeViewPro con estructura de componentes"
+                  code={`<RichTreeViewPro
+ items={asyncItems}
+ defaultExpandedItems={[
+  "app-root",
+  "layout",
+  "header",
+  "main",
+  "content",
+   ]}
+ slots={{
+   expandIcon: () => (
+     <FolderOpen
+       fontSize="small"
+       sx={{ color: "primary.main" }}
+     />
+   ),
+   collapseIcon: () => (
+     <Folder fontSize="small" sx={{ color: "primary.main" }} />
+   ),
+   endIcon: () => (
+     <Code fontSize="small" sx={{ color: "primary.main" }} />
+   ),
+ }}
+ sx={{
+   "& .MuiTreeItem-label": {
+     fontFamily: "monospace",
+     fontSize: "0.9rem",
+   },
+ }}
+/>`}
+                >
+                  <RichTreeViewPro
+                    items={[
+                      {
+                        id: "app-root",
+                        label: "<App />",
+                        children: [
+                          {
+                            id: "layout",
+                            label: "<Layout />",
+                            children: [
+                              {
+                                id: "header",
+                                label: "<Header />",
+                                children: [
+                                  { id: "nav", label: "<Navigation />" },
+                                  { id: "search", label: "<SearchBar />" },
+                                  { id: "user-menu", label: "<UserMenu />" },
+                                ],
+                              },
+                              {
+                                id: "main",
+                                label: "<Main />",
+                                children: [
+                                  { id: "sidebar", label: "<Sidebar />" },
+                                  {
+                                    id: "content",
+                                    label: "<Content />",
+                                    children: [
+                                      {
+                                        id: "dashboard",
+                                        label: "<Dashboard />",
+                                      },
+                                      { id: "charts", label: "<Charts />" },
+                                      { id: "table", label: "<DataTable />" },
+                                    ],
+                                  },
+                                ],
+                              },
+                              {
+                                id: "footer",
+                                label: "<Footer />",
+                                children: [
+                                  { id: "links", label: "<FooterLinks />" },
+                                  { id: "copyright", label: "<Copyright />" },
+                                ],
+                              },
+                            ],
+                          },
+                        ],
+                      },
+                    ]}
+                    defaultExpandedItems={[
+                      "app-root",
+                      "layout",
+                      "header",
+                      "main",
+                      "content",
+                    ]}
+                    slots={{
+                      expandIcon: () => (
+                        <FolderOpen
+                          fontSize="small"
+                          sx={{ color: "primary.main" }}
+                        />
+                      ),
+                      collapseIcon: () => (
+                        <Folder
+                          fontSize="small"
+                          sx={{ color: "primary.main" }}
+                        />
+                      ),
+                      endIcon: () => (
+                        <Code fontSize="small" sx={{ color: "primary.main" }} />
+                      ),
+                    }}
+                    sx={{
+                      "& .MuiTreeItem-label": {
+                        fontFamily: "monospace",
+                        fontSize: "0.9rem",
+                      },
+                    }}
+                  />
+                </CodeExample>
               </Box>
             </Box>
           </Stack>
@@ -3170,79 +3815,106 @@ export default function AppComplete() {
               maxWidth: 600,
             }}
           >
-            <RichTreeViewPro
-              items={[
-                {
-                  id: "modules",
-                  label: "Módulos del Sistema",
-                  children: [
-                    {
-                      id: "mod-ventas",
-                      label: "Ventas",
-                      children: [
-                        { id: "ventas-crear", label: "Crear cotización" },
-                        { id: "ventas-editar", label: "Editar cotización" },
-                        { id: "ventas-aprobar", label: "Aprobar cotización" },
-                        { id: "ventas-facturar", label: "Generar factura" },
-                      ],
-                    },
-                    {
-                      id: "mod-inventario",
-                      label: "Inventario",
-                      children: [
-                        { id: "inv-ver", label: "Ver inventario" },
-                        { id: "inv-entrada", label: "Registrar entrada" },
-                        { id: "inv-salida", label: "Registrar salida" },
-                        { id: "inv-ajuste", label: "Ajuste de inventario" },
-                      ],
-                    },
-                    {
-                      id: "mod-reportes",
-                      label: "Reportes",
-                      children: [
-                        { id: "rep-ventas", label: "Reporte de ventas" },
-                        {
-                          id: "rep-inventario",
-                          label: "Reporte de inventario",
-                        },
-                        { id: "rep-financiero", label: "Reporte financiero" },
-                        { id: "rep-exportar", label: "Exportar datos" },
-                      ],
-                    },
-                    {
-                      id: "mod-admin",
-                      label: "Administración",
-                      children: [
-                        { id: "admin-users", label: "Gestión de usuarios" },
-                        { id: "admin-roles", label: "Gestión de roles" },
-                        { id: "admin-config", label: "Configuración general" },
-                        { id: "admin-audit", label: "Auditoría del sistema" },
-                      ],
-                    },
-                  ],
-                },
-              ]}
-              defaultExpandedItems={[
-                "modules",
-                "mod-ventas",
-                "mod-inventario",
-                "mod-reportes",
-                "mod-admin",
-              ]}
-              checkboxSelection
-              multiSelect
-              slots={{
-                expandIcon: () => (
-                  <FolderOpen fontSize="small" color="secondary" />
-                ),
-                collapseIcon: () => (
-                  <Folder fontSize="small" color="secondary" />
-                ),
-                endIcon: () => (
-                  <InsertDriveFile fontSize="small" color="action" />
-                ),
-              }}
-            />
+            <CodeExample
+              title="RichTreeViewPro con checkboxSelection para permisos"
+              code={`<RichTreeViewPro
+  items={permissionsItems}
+  defaultExpandedItems={["modules", 
+    "mod-ventas", 
+    "mod-inventario", 
+    "mod-reportes", 
+    "mod-admin"]}
+  checkboxSelection
+  multiSelect
+  slots={{
+    expandIcon: () => (
+      <FolderOpen fontSize="small" color="secondary" />
+    ),
+    collapseIcon: () => (
+      <Folder fontSize="small" color="secondary" />
+    ),
+    endIcon: () => (          
+      <InsertDriveFile fontSize="small" color="action" />
+    ),
+  }}/>`}
+            >
+              <RichTreeViewPro
+                items={[
+                  {
+                    id: "modules",
+                    label: "Módulos del Sistema",
+                    children: [
+                      {
+                        id: "mod-ventas",
+                        label: "Ventas",
+                        children: [
+                          { id: "ventas-crear", label: "Crear cotización" },
+                          { id: "ventas-editar", label: "Editar cotización" },
+                          { id: "ventas-aprobar", label: "Aprobar cotización" },
+                          { id: "ventas-facturar", label: "Generar factura" },
+                        ],
+                      },
+                      {
+                        id: "mod-inventario",
+                        label: "Inventario",
+                        children: [
+                          { id: "inv-ver", label: "Ver inventario" },
+                          { id: "inv-entrada", label: "Registrar entrada" },
+                          { id: "inv-salida", label: "Registrar salida" },
+                          { id: "inv-ajuste", label: "Ajuste de inventario" },
+                        ],
+                      },
+                      {
+                        id: "mod-reportes",
+                        label: "Reportes",
+                        children: [
+                          { id: "rep-ventas", label: "Reporte de ventas" },
+                          {
+                            id: "rep-inventario",
+                            label: "Reporte de inventario",
+                          },
+                          { id: "rep-financiero", label: "Reporte financiero" },
+                          { id: "rep-exportar", label: "Exportar datos" },
+                        ],
+                      },
+                      {
+                        id: "mod-admin",
+                        label: "Administración",
+                        children: [
+                          { id: "admin-users", label: "Gestión de usuarios" },
+                          { id: "admin-roles", label: "Gestión de roles" },
+                          {
+                            id: "admin-config",
+                            label: "Configuración general",
+                          },
+                          { id: "admin-audit", label: "Auditoría del sistema" },
+                        ],
+                      },
+                    ],
+                  },
+                ]}
+                defaultExpandedItems={[
+                  "modules",
+                  "mod-ventas",
+                  "mod-inventario",
+                  "mod-reportes",
+                  "mod-admin",
+                ]}
+                checkboxSelection
+                multiSelect
+                slots={{
+                  expandIcon: () => (
+                    <FolderOpen fontSize="small" color="secondary" />
+                  ),
+                  collapseIcon: () => (
+                    <Folder fontSize="small" color="secondary" />
+                  ),
+                  endIcon: () => (
+                    <InsertDriveFile fontSize="small" color="action" />
+                  ),
+                }}
+              />
+            </CodeExample>
           </Box>
 
           <Alert severity="info" sx={{ mt: 3 }}>
@@ -3276,16 +3948,27 @@ export default function AppComplete() {
               >
                 Gráfico simple con una sola serie de datos.
               </Typography>
-              <LineChart
-                xAxis={[{ data: [1, 2, 3, 4, 5, 6, 7] }]}
-                series={[
-                  {
-                    data: [2, 5.5, 2, 8.5, 1.5, 5, 3],
-                    label: "Ventas",
-                  },
-                ]}
-                height={300}
-              />
+              <CodeExample
+                title="Gráfico de línea básico"
+                code={`<LineChart
+ xAxis={[{ data: [1, 2, 3, 4, 5, 6, 7] }]}
+ series={[
+   { data: [2, 5.5, 2, 8.5, 1.5, 5, 3], label: "Ventas" },
+    ]}
+   height={300}
+/>`}
+              >
+                <LineChart
+                  xAxis={[{ data: [1, 2, 3, 4, 5, 6, 7] }]}
+                  series={[
+                    {
+                      data: [2, 5.5, 2, 8.5, 1.5, 5, 3],
+                      label: "Ventas",
+                    },
+                  ]}
+                  height={300}
+                />
+              </CodeExample>
             </Box>
 
             <Divider />
@@ -3301,20 +3984,38 @@ export default function AppComplete() {
               >
                 Comparación de múltiples series en un solo gráfico.
               </Typography>
-              <LineChart
-                xAxis={[
-                  {
-                    data: ["Ene", "Feb", "Mar", "Abr", "May", "Jun"],
-                    scaleType: "band",
-                  },
-                ]}
-                series={[
-                  { data: [35, 44, 24, 34, 25, 40], label: "2023" },
-                  { data: [51, 60, 47, 55, 48, 65], label: "2024" },
-                  { data: [15, 25, 30, 22, 35, 28], label: "2025" },
-                ]}
-                height={300}
-              />
+              <CodeExample
+                title="Gráfico de línea con múltiples series"
+                code={`<LineChart
+ xAxis={[
+   {
+     data: ["Ene", "Feb", "Mar", "Abr", "May", "Jun"],
+     scaleType: "band",
+     },
+     ]}
+     series={[
+     { data: [35, 44, 24, 34, 25, 40], label: "2023" },
+     { data: [51, 60, 47, 55, 48, 65], label: "2024" },
+     { data: [15, 25, 30, 22, 35, 28], label: "2025" },
+      ]}
+ height={300}
+/>`}
+              >
+                <LineChart
+                  xAxis={[
+                    {
+                      data: ["Ene", "Feb", "Mar", "Abr", "May", "Jun"],
+                      scaleType: "band",
+                    },
+                  ]}
+                  series={[
+                    { data: [35, 44, 24, 34, 25, 40], label: "2023" },
+                    { data: [51, 60, 47, 55, 48, 65], label: "2024" },
+                    { data: [15, 25, 30, 22, 35, 28], label: "2025" },
+                  ]}
+                  height={300}
+                />
+              </CodeExample>
             </Box>
 
             <Divider />
@@ -3330,17 +4031,28 @@ export default function AppComplete() {
               >
                 Rellena el área bajo la línea con <code>area: true</code>.
               </Typography>
-              <LineChart
-                xAxis={[{ data: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10] }]}
-                series={[
-                  {
-                    data: [2, 5, 3, 8, 1, 6, 4, 9, 2, 7],
-                    area: true,
-                    label: "Ingresos",
-                  },
-                ]}
-                height={300}
-              />
+              <CodeExample
+                title="Gráfico de área"
+                code={`<LineChart
+ xAxis={[{ data: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10] }]}
+ series={[
+   { data: [2, 5, 3, 8, 1, 6, 4, 9, 2, 7], area: true },
+    ]}
+ height={300}
+/>`}
+              >
+                <LineChart
+                  xAxis={[{ data: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10] }]}
+                  series={[
+                    {
+                      data: [2, 5, 3, 8, 1, 6, 4, 9, 2, 7],
+                      area: true,
+                      label: "Ingresos",
+                    },
+                  ]}
+                  height={300}
+                />
+              </CodeExample>
             </Box>
 
             <Divider />
@@ -3356,36 +4068,61 @@ export default function AppComplete() {
               >
                 Varias series con área para comparar tendencias.
               </Typography>
-              <LineChart
-                xAxis={[
-                  {
-                    data: [
-                      "Ene",
-                      "Feb",
-                      "Mar",
-                      "Abr",
-                      "May",
-                      "Jun",
-                      "Jul",
-                      "Ago",
-                    ],
-                    scaleType: "band",
-                  },
-                ]}
-                series={[
-                  {
-                    data: [40, 35, 50, 45, 60, 55, 70, 65],
-                    area: true,
-                    label: "Producto A",
-                  },
-                  {
-                    data: [25, 30, 35, 40, 45, 50, 55, 60],
-                    area: true,
-                    label: "Producto B",
-                  },
-                ]}
-                height={300}
-              />
+              <CodeExample
+                title="Gráfico con múltiples áreas"
+                code={`<LineChart
+  xAxis={[ 
+    {
+      data: ["Ene", "Feb", "Mar", "Abr", "May", "Jun", "Jul", "Ago"],
+      scaleType: "band",
+    },  
+  ]}  
+  series={[
+    {
+      data: [40, 35, 50, 45, 60, 55, 70, 65],
+      area: true,
+      label: "Producto A",
+    },
+    {
+      data: [25, 30, 35, 40, 45, 50, 55, 60],
+      area: true,
+      label: "Producto B",
+    },
+  ]}  
+  height={300}
+/>`}
+              >
+                <LineChart
+                  xAxis={[
+                    {
+                      data: [
+                        "Ene",
+                        "Feb",
+                        "Mar",
+                        "Abr",
+                        "May",
+                        "Jun",
+                        "Jul",
+                        "Ago",
+                      ],
+                      scaleType: "band",
+                    },
+                  ]}
+                  series={[
+                    {
+                      data: [40, 35, 50, 45, 60, 55, 70, 65],
+                      area: true,
+                      label: "Producto A",
+                    },
+                    {
+                      data: [25, 30, 35, 40, 45, 50, 55, 60],
+                      area: true,
+                      label: "Producto B",
+                    },
+                  ]}
+                  height={300}
+                />
+              </CodeExample>
             </Box>
 
             <Divider />
