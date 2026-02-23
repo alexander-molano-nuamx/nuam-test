@@ -1,5 +1,6 @@
 import { useState } from "react";
 import dayjs, { type Dayjs } from "dayjs";
+import { CodeExample } from "./components/CodeExample";
 import {
   NuamThemeWrapper,
   Alert,
@@ -1129,38 +1130,54 @@ export default function AppComplete() {
           </Typography>
           <Divider sx={{ mb: 3 }} />
 
-          <Stack direction="row" spacing={2} flexWrap="wrap" useFlexGap>
-            <Button variant="contained" color="primary">
-              Contained
-            </Button>
-            <Button variant="outlined" color="primary">
-              Outlined
-            </Button>
-            <Button variant="text" color="primary">
-              Text
-            </Button>
-            <Button variant="contained" color="secondary">
-              Secondary
-            </Button>
-            <Button variant="contained" startIcon={<Save />}>
-              Guardar
-            </Button>
-            <Button variant="outlined" startIcon={<Cancel />}>
-              Cancelar
-            </Button>
-            <Button variant="contained" startIcon={<Delete />} color="primary">
-              Eliminar
-            </Button>
-            <Button variant="contained" disabled>
-              Disabled
-            </Button>
-            <Button variant="contained" size="small">
-              Small
-            </Button>
-            <Button variant="contained" size="large">
-              Large
-            </Button>
-          </Stack>
+          <CodeExample
+            title="Variantes, colores y tamaños"
+            code={`<Stack direction="row" spacing={2} flexWrap="wrap" useFlexGap>
+  <Button variant="contained" color="primary">Contained</Button>
+  <Button variant="outlined" color="primary">Outlined</Button>
+  <Button variant="text" color="primary">Text</Button>
+  <Button variant="contained" color="secondary">Secondary</Button>
+  <Button variant="contained" startIcon={<Save />}>Guardar</Button>
+  <Button variant="outlined" startIcon={<Cancel />}>Cancelar</Button>
+  <Button variant="contained" startIcon={<Delete />} color="primary">Eliminar</Button>
+  <Button variant="contained" disabled>Disabled</Button>
+  <Button variant="contained" size="small">Small</Button>
+  <Button variant="contained" size="large">Large</Button>
+</Stack>`}
+          >
+            <Stack direction="row" spacing={2} flexWrap="wrap" useFlexGap>
+              <Button variant="contained" color="primary">
+                Contained
+              </Button>
+              <Button variant="outlined" color="primary">
+                Outlined
+              </Button>
+              <Button variant="text" color="primary">
+                Text
+              </Button>
+              <Button variant="contained" color="secondary">
+                Secondary
+              </Button>
+              <Button variant="contained" startIcon={<Save />}>
+                Guardar
+              </Button>
+              <Button variant="outlined" startIcon={<Cancel />}>
+                Cancelar
+              </Button>
+              <Button variant="contained" startIcon={<Delete />} color="primary">
+                Eliminar
+              </Button>
+              <Button variant="contained" disabled>
+                Disabled
+              </Button>
+              <Button variant="contained" size="small">
+                Small
+              </Button>
+              <Button variant="contained" size="large">
+                Large
+              </Button>
+            </Stack>
+          </CodeExample>
         </Card>
 
         {/* SECCIÓN 3: DATAGRID BÁSICO */}
