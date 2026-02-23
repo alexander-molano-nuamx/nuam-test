@@ -9,8 +9,7 @@ function initializeMuiLicense() {
 
   if (!licenseKey) {
     console.warn(
-      "⚠️ MUI X License key not found. Set VITE_MUI_LICENSE in .env file.\n" +
-        "Components may show watermarks or license warnings."
+      "⚠️ MUI X License is deployed by DevOPs team. Please contact them to obtain the license key and set it in the VITE_MUI_LICENSE environment variable.",
     );
     return;
   }

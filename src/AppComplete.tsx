@@ -355,6 +355,9 @@ const shortcutsItems = [
 
 export default function AppComplete() {
   const [textValue, setTextValue] = useState("");
+  const [textValue1, setTextValue1] = useState("");
+  const [textValue2, setTextValue2] = useState("");
+  const [textValue3, setTextValue3] = useState("");
   const [emailValue, setEmailValue] = useState("");
   const [checkboxValue, setCheckboxValue] = useState(false);
   const [switchValue, setSwitchValue] = useState(false);
@@ -644,33 +647,82 @@ export default function AppComplete() {
                 TextField
               </Typography>
               <Stack spacing={2}>
-                <TextField
-                  label="Texto simple"
-                  value={textValue}
-                  onChange={(value) => setTextValue(value as string)}
-                  placeholder="Escribe algo..."
-                  helperText="Campo de texto básico"
-                />
-                <TextField
-                  label="Email"
-                  value={emailValue}
-                  onChange={(value) => setEmailValue(value as string)}
-                  type="email"
-                  helperText="Campo de email"
-                />
-                <TextField
-                  label="Campo requerido"
-                  required
-                  error={textValue === ""}
-                  helperText={
-                    textValue === "" ? "Este campo es obligatorio" : "Correcto"
-                  }
-                />
-                <TextField
-                  label="Campo deshabilitado"
-                  disabled
-                  value="No editable"
-                />
+                <CodeExample
+                  title="Ejemplo de TextField"
+                  code={`<TextField label="Texto simple" 
+ value={textValue}
+ onChange={(value) => setTextValue(value as string)}
+ placeholder="Escribe algo..."
+ helperText="Campo de texto básico" />`}
+                >
+                  <TextField
+                    label="Texto simple"
+                    value={textValue1}
+                    onChange={(value) => setTextValue1(value as string)}
+                    placeholder="Escribe algo..."
+                    helperText="Campo de texto básico"
+                    sx={{ width: "50%" }}
+                  />
+                </CodeExample>
+                <CodeExample
+                  title="TextField con validación de email"
+                  code={`<TextField
+ label="Email"
+ value={emailValue}
+ onChange={(value) => setEmailValue(value as string)}
+ type="email"
+ helperText="Campo de email"
+ sx={{ width: "50%" }}
+/>`}
+                >
+                  <TextField
+                    label="Email"
+                    value={emailValue}
+                    onChange={(value) => setEmailValue(value as string)}
+                    type="email"
+                    helperText="Campo de email"
+                    sx={{ width: "50%" }}
+                  />
+                </CodeExample>
+                <CodeExample
+                  title="TextField requerido con validación"
+                  code={`<TextField
+ label="Campo requerido"
+ required
+ error={textValue === ""}
+ helperText={
+   textValue === "" ? "Este campo es obligatorio" : "Correcto"
+ }
+ sx={{ width: "50%" }}
+/>`}
+                >
+                  <TextField
+                    label="Campo requerido"
+                    required
+                    error={textValue === ""}
+                    helperText={
+                      textValue === ""
+                        ? "Este campo es obligatorio"
+                        : "Correcto"
+                    }
+                    sx={{ width: "50%" }}
+                  />
+                </CodeExample>
+                <CodeExample
+                  title="TextField deshabilitado"
+                  code={`<TextField
+ label="Campo deshabilitado"
+ disabled
+ value="No editable"
+ sx={{ width: "50%" }}
+/>`}
+                >
+                  <TextField
+                    label="Campo deshabilitado"
+                    disabled
+                    value="No editable"
+                  />
+                </CodeExample>
               </Stack>
             </Box>
 
@@ -1164,7 +1216,11 @@ export default function AppComplete() {
               <Button variant="outlined" startIcon={<Cancel />}>
                 Cancelar
               </Button>
-              <Button variant="contained" startIcon={<Delete />} color="primary">
+              <Button
+                variant="contained"
+                startIcon={<Delete />}
+                color="primary"
+              >
                 Eliminar
               </Button>
               <Button variant="contained" disabled>
@@ -2203,31 +2259,61 @@ export default function AppComplete() {
           </Typography>
           <Divider sx={{ mb: 3 }} />
 
-          <Button variant="contained" onClick={() => setShowModal(true)}>
-            Abrir Modal
-          </Button>
-
-          <Modal
-            open={showModal}
-            onClose={() => setShowModal(false)}
-            title="Modal de ejemplo"
-            boxProps={{}}
+          <CodeExample
+            title="Modal básico"
+            code={`<Button variant="contained" onClick={() => setShowModal(true)}>
+  Abrir Modal
+</Button>
+<Modal
+  open={showModal}
+  onClose={() => setShowModal(false)}
+  title="Modal de ejemplo"
+  boxProps={{}}
+>
+  <Box p={2}>
+    <Typography gutterBottom>Contenido del modal</Typography>
+    <TextField label="Campo en modal" sx={{ mt: 2, width: "100%" }} />
+    <Stack direction="row" spacing={2} mt={3}>
+      <Button variant="contained" onClick={() => setShowModal(false)}>Aceptar</Button>
+      <Button variant="outlined" onClick={() => setShowModal(false)}>Cancelar</Button>
+    </Stack>
+  </Box>
+</Modal>`}
           >
-            <Box p={2}>
-              <Typography gutterBottom>
-                Este es un modal con contenido personalizado.
-              </Typography>
-              <TextField label="Campo en modal" sx={{ mt: 2, width: "100%" }} />
-              <Stack direction="row" spacing={2} mt={3}>
-                <Button variant="contained" onClick={() => setShowModal(false)}>
-                  Aceptar
-                </Button>
-                <Button variant="outlined" onClick={() => setShowModal(false)}>
-                  Cancelar
-                </Button>
-              </Stack>
-            </Box>
-          </Modal>
+            <Button variant="contained" onClick={() => setShowModal(true)}>
+              Abrir Modal
+            </Button>
+            <Modal
+              open={showModal}
+              onClose={() => setShowModal(false)}
+              title="Modal de ejemplo"
+              boxProps={{}}
+            >
+              <Box p={2}>
+                <Typography gutterBottom>
+                  Este es un modal con contenido personalizado.
+                </Typography>
+                <TextField
+                  label="Campo en modal"
+                  sx={{ mt: 2, width: "100%" }}
+                />
+                <Stack direction="row" spacing={2} mt={3}>
+                  <Button
+                    variant="contained"
+                    onClick={() => setShowModal(false)}
+                  >
+                    Aceptar
+                  </Button>
+                  <Button
+                    variant="outlined"
+                    onClick={() => setShowModal(false)}
+                  >
+                    Cancelar
+                  </Button>
+                </Stack>
+              </Box>
+            </Modal>
+          </CodeExample>
         </Card>
 
         {/* SECCIÓN 7: TIPOGRAFÍA */}
@@ -2237,22 +2323,42 @@ export default function AppComplete() {
           </Typography>
           <Divider sx={{ mb: 3 }} />
 
-          <Stack spacing={2}>
-            <Typography variant="h1">Heading 1</Typography>
-            <Typography variant="h2">Heading 2</Typography>
-            <Typography variant="h3">Heading 3</Typography>
-            <Typography variant="h4">Heading 4</Typography>
-            <Typography variant="h5">Heading 5</Typography>
-            <Typography variant="h6">Heading 6</Typography>
-            <Typography variant="subtitle1">Subtitle 1</Typography>
-            <Typography variant="subtitle2">Subtitle 2</Typography>
-            <Typography variant="body1">Body 1 - Texto normal</Typography>
-            <Typography variant="body2">Body 2 - Texto secundario</Typography>
-            <Typography variant="caption">Caption - Texto pequeño</Typography>
-            <Typography variant="overline">OVERLINE</Typography>
-            <Typography color="primary">Texto primario</Typography>
-            <Typography color="secondary">Texto secundario</Typography>
-          </Stack>
+          <CodeExample
+            title="Variantes de tipografía"
+            code={`<Stack spacing={2}>
+  <Typography variant="h1">Heading 1</Typography>
+  <Typography variant="h2">Heading 2</Typography>
+  <Typography variant="h3">Heading 3</Typography>
+  <Typography variant="h4">Heading 4</Typography>
+  <Typography variant="h5">Heading 5</Typography>
+  <Typography variant="h6">Heading 6</Typography>
+  <Typography variant="subtitle1">Subtitle 1</Typography>
+  <Typography variant="subtitle2">Subtitle 2</Typography>
+  <Typography variant="body1">Body 1 - Texto normal</Typography>
+  <Typography variant="body2">Body 2 - Texto secundario</Typography>
+  <Typography variant="caption">Caption - Texto pequeño</Typography>
+  <Typography variant="overline">OVERLINE</Typography>
+  <Typography color="primary">Texto primario</Typography>
+  <Typography color="secondary">Texto secundario</Typography>
+</Stack>`}
+          >
+            <Stack spacing={2}>
+              <Typography variant="h1">Heading 1</Typography>
+              <Typography variant="h2">Heading 2</Typography>
+              <Typography variant="h3">Heading 3</Typography>
+              <Typography variant="h4">Heading 4</Typography>
+              <Typography variant="h5">Heading 5</Typography>
+              <Typography variant="h6">Heading 6</Typography>
+              <Typography variant="subtitle1">Subtitle 1</Typography>
+              <Typography variant="subtitle2">Subtitle 2</Typography>
+              <Typography variant="body1">Body 1 - Texto normal</Typography>
+              <Typography variant="body2">Body 2 - Texto secundario</Typography>
+              <Typography variant="caption">Caption - Texto pequeño</Typography>
+              <Typography variant="overline">OVERLINE</Typography>
+              <Typography color="primary">Texto primario</Typography>
+              <Typography color="secondary">Texto secundario</Typography>
+            </Stack>
+          </CodeExample>
         </Card>
 
         {/* SECCIÓN 8: CARDS */}
@@ -2262,34 +2368,56 @@ export default function AppComplete() {
           </Typography>
           <Divider sx={{ mb: 3 }} />
 
-          <Stack spacing={2}>
-            <Card elevation={1}>
-              <Box p={2}>
-                <Typography variant="h6">Card elevation 1</Typography>
-                <Typography variant="body2">
-                  Tarjeta con elevación mínima
-                </Typography>
-              </Box>
-            </Card>
-
-            <Card elevation={3}>
-              <Box p={2}>
-                <Typography variant="h6">Card elevation 3</Typography>
-                <Typography variant="body2">
-                  Tarjeta con elevación media
-                </Typography>
-              </Box>
-            </Card>
-
-            <Card elevation={8}>
-              <Box p={2}>
-                <Typography variant="h6">Card elevation 8</Typography>
-                <Typography variant="body2">
-                  Tarjeta con elevación alta
-                </Typography>
-              </Box>
-            </Card>
-          </Stack>
+          <CodeExample
+            title="Elevaciones de Card"
+            code={`<Stack spacing={2}>
+  <Card elevation={1}>
+    <Box p={2}>
+      <Typography variant="h6">Card elevation 1</Typography>
+      <Typography variant="body2">Tarjeta con elevación mínima</Typography>
+    </Box>
+  </Card>
+  <Card elevation={3}>
+    <Box p={2}>
+      <Typography variant="h6">Card elevation 3</Typography>
+      <Typography variant="body2">Tarjeta con elevación media</Typography>
+    </Box>
+  </Card>
+  <Card elevation={8}>
+    <Box p={2}>
+      <Typography variant="h6">Card elevation 8</Typography>
+      <Typography variant="body2">Tarjeta con elevación alta</Typography>
+    </Box>
+  </Card>
+</Stack>`}
+          >
+            <Stack spacing={2}>
+              <Card elevation={1}>
+                <Box p={2}>
+                  <Typography variant="h6">Card elevation 1</Typography>
+                  <Typography variant="body2">
+                    Tarjeta con elevación mínima
+                  </Typography>
+                </Box>
+              </Card>
+              <Card elevation={3}>
+                <Box p={2}>
+                  <Typography variant="h6">Card elevation 3</Typography>
+                  <Typography variant="body2">
+                    Tarjeta con elevación media
+                  </Typography>
+                </Box>
+              </Card>
+              <Card elevation={8}>
+                <Box p={2}>
+                  <Typography variant="h6">Card elevation 8</Typography>
+                  <Typography variant="body2">
+                    Tarjeta con elevación alta
+                  </Typography>
+                </Box>
+              </Card>
+            </Stack>
+          </CodeExample>
         </Card>
 
         {/* SECCIÓN 9: ISOTYPE NAME */}
@@ -4666,36 +4794,23 @@ export default function AppComplete() {
 
           <Stack spacing={4}>
             {/* 1. Basic Sparkline */}
-            <Box>
-              <Typography variant="h6" gutterBottom>
-                1. Sparkline Básico
-              </Typography>
-              <Typography
-                variant="body2"
-                sx={{ color: "text.secondary", mb: 2 }}
-              >
-                Gráfico de línea compacto para mostrar tendencias.
-              </Typography>
+            <CodeExample
+              title="1. Sparkline Básico"
+              code={`<SparkLineChart data={[1, 4, 2, 5, 7, 2, 4, 6]} height={100} width={300} />`}
+            >
               <SparkLineChart
                 data={[1, 4, 2, 5, 7, 2, 4, 6]}
                 height={100}
                 width={300}
               />
-            </Box>
-
-            <Divider />
+            </CodeExample>
 
             {/* 2. Plot Types */}
-            <Box>
-              <Typography variant="h6" gutterBottom>
-                2. Tipos de Gráfico (plotType)
-              </Typography>
-              <Typography
-                variant="body2"
-                sx={{ color: "text.secondary", mb: 2 }}
-              >
-                Usa <code>plotType</code> para elegir entre línea y barras.
-              </Typography>
+            <CodeExample
+              title="2. Tipos de Gráfico (plotType)"
+              code={`<SparkLineChart data={[3, 1, 4, 1, 5, 9, 2, 6, 5, 3]} height={80} width={200} plotType="line" />
+<SparkLineChart data={[3, 1, 4, 1, 5, 9, 2, 6, 5, 3]} height={80} width={200} plotType="bar" />`}
+            >
               <Stack direction={{ xs: "column", md: "row" }} spacing={4}>
                 <Box sx={{ flex: 1 }}>
                   <Typography variant="caption" display="block" gutterBottom>
@@ -4720,21 +4835,14 @@ export default function AppComplete() {
                   />
                 </Box>
               </Stack>
-            </Box>
-
-            <Divider />
+            </CodeExample>
 
             {/* 3. Area Sparkline */}
-            <Box>
-              <Typography variant="h6" gutterBottom>
-                3. Sparkline con Área
-              </Typography>
-              <Typography
-                variant="body2"
-                sx={{ color: "text.secondary", mb: 2 }}
-              >
-                Rellena el área bajo la línea con <code>area: true</code>.
-              </Typography>
+            <CodeExample
+              title="3. Sparkline con Área"
+              code={`<SparkLineChart data={[2, 5, 3, 8, 1, 6, 4, 9, 2, 7]} height={80} width={200} />
+<SparkLineChart data={[2, 5, 3, 8, 1, 6, 4, 9, 2, 7]} height={80} width={200} area />`}
+            >
               <Stack direction={{ xs: "column", md: "row" }} spacing={4}>
                 <Box sx={{ flex: 1 }}>
                   <Typography variant="caption" display="block" gutterBottom>
@@ -4758,22 +4866,14 @@ export default function AppComplete() {
                   />
                 </Box>
               </Stack>
-            </Box>
-
-            <Divider />
+            </CodeExample>
 
             {/* 4. With Tooltip */}
-            <Box>
-              <Typography variant="h6" gutterBottom>
-                4. Con Tooltip (showTooltip)
-              </Typography>
-              <Typography
-                variant="body2"
-                sx={{ color: "text.secondary", mb: 2 }}
-              >
-                Muestra el valor al pasar el cursor con{" "}
-                <code>showTooltip: true</code>.
-              </Typography>
+            <CodeExample
+              title="4. Con Tooltip (showTooltip)"
+              code={`<SparkLineChart data={[10, 25, 18, 32, 15, 28]} height={80} width={200} showTooltip />
+<SparkLineChart data={[10, 25, 18, 32, 15, 28]} height={80} width={200} plotType="bar" showTooltip />`}
+            >
               <Stack direction={{ xs: "column", md: "row" }} spacing={4}>
                 <Box sx={{ flex: 1 }}>
                   <Typography variant="caption" display="block" gutterBottom>
@@ -4799,21 +4899,14 @@ export default function AppComplete() {
                   />
                 </Box>
               </Stack>
-            </Box>
-
-            <Divider />
+            </CodeExample>
 
             {/* 5. With Highlight */}
-            <Box>
-              <Typography variant="h6" gutterBottom>
-                5. Con Resaltado (showHighlight)
-              </Typography>
-              <Typography
-                variant="body2"
-                sx={{ color: "text.secondary", mb: 2 }}
-              >
-                Resalta el punto activo con <code>showHighlight: true</code>.
-              </Typography>
+            <CodeExample
+              title="5. Con Resaltado (showHighlight)"
+              code={`<SparkLineChart data={[5, 12, 8, 15, 10, 18]} height={80} width={200} showHighlight showTooltip />
+<SparkLineChart data={[5, 12, 8, 15, 10, 18]} height={80} width={200} plotType="bar" showHighlight showTooltip />`}
+            >
               <Stack direction={{ xs: "column", md: "row" }} spacing={4}>
                 <Box sx={{ flex: 1 }}>
                   <Typography variant="caption" display="block" gutterBottom>
@@ -4841,21 +4934,14 @@ export default function AppComplete() {
                   />
                 </Box>
               </Stack>
-            </Box>
-
-            <Divider />
+            </CodeExample>
 
             {/* 6. Negative Values */}
-            <Box>
-              <Typography variant="h6" gutterBottom>
-                6. Valores Negativos
-              </Typography>
-              <Typography
-                variant="body2"
-                sx={{ color: "text.secondary", mb: 2 }}
-              >
-                Sparklines manejan correctamente valores positivos y negativos.
-              </Typography>
+            <CodeExample
+              title="6. Valores Negativos"
+              code={`<SparkLineChart data={[3, -10, -2, 5, 7, -2, 4]} height={80} width={200} area showTooltip />
+<SparkLineChart data={[3, -10, -2, 5, 7, -2, 4]} height={80} width={200} plotType="bar" showTooltip />`}
+            >
               <Stack direction={{ xs: "column", md: "row" }} spacing={4}>
                 <Box sx={{ flex: 1 }}>
                   <Typography variant="caption" display="block" gutterBottom>
@@ -4882,21 +4968,14 @@ export default function AppComplete() {
                   />
                 </Box>
               </Stack>
-            </Box>
-
-            <Divider />
+            </CodeExample>
 
             {/* 7. Custom Colors */}
-            <Box>
-              <Typography variant="h6" gutterBottom>
-                7. Colores Personalizados
-              </Typography>
-              <Typography
-                variant="body2"
-                sx={{ color: "text.secondary", mb: 2 }}
-              >
-                Define colores usando la prop <code>colors</code>.
-              </Typography>
+            <CodeExample
+              title="7. Colores Personalizados"
+              code={`<SparkLineChart data={[10, 15, 12, 18, 20, 25, 22, 30]} height={80} width={200} color="#4caf50" area />
+<SparkLineChart data={[35, 30, 32, 25, 28, 20, 22, 15]} height={80} width={200} color="#f44336" area />`}
+            >
               <Stack direction={{ xs: "column", md: "row" }} spacing={4}>
                 <Box sx={{ flex: 1 }}>
                   <Typography variant="caption" display="block" gutterBottom>
@@ -4923,22 +5002,20 @@ export default function AppComplete() {
                   />
                 </Box>
               </Stack>
-            </Box>
-
-            <Divider />
+            </CodeExample>
 
             {/* 8. Value Formatter */}
-            <Box>
-              <Typography variant="h6" gutterBottom>
-                8. Formato de Valores (valueFormatter)
-              </Typography>
-              <Typography
-                variant="body2"
-                sx={{ color: "text.secondary", mb: 2 }}
-              >
-                Personaliza el formato del tooltip con{" "}
-                <code>valueFormatter</code>.
-              </Typography>
+            <CodeExample
+              title="8. Formato de Valores (valueFormatter)"
+              code={`<SparkLineChart
+  data={[1200, 1500, 1350, 1800]}
+  height={80}
+  width={200}
+  showTooltip
+  showHighlight
+  valueFormatter={(value) => value !== null ? \`$\${value.toLocaleString()}\` : ""}
+/>`}
+            >
               <Stack direction={{ xs: "column", md: "row" }} spacing={4}>
                 <Box sx={{ flex: 1 }}>
                   <Typography variant="caption" display="block" gutterBottom>
@@ -4972,22 +5049,15 @@ export default function AppComplete() {
                   />
                 </Box>
               </Stack>
-            </Box>
-
-            <Divider />
+            </CodeExample>
 
             {/* 9. Different Sizes */}
-            <Box>
-              <Typography variant="h6" gutterBottom>
-                9. Diferentes Tamaños
-              </Typography>
-              <Typography
-                variant="body2"
-                sx={{ color: "text.secondary", mb: 2 }}
-              >
-                Ajusta <code>width</code> y <code>height</code> según el
-                contexto.
-              </Typography>
+            <CodeExample
+              title="9. Diferentes Tamaños"
+              code={`<SparkLineChart data={[1, 4, 2, 5, 3]} height={40} width={100} />
+<SparkLineChart data={[1, 4, 2, 5, 3, 6, 4]} height={60} width={150} />
+<SparkLineChart data={[1, 4, 2, 5, 3, 6, 4, 7]} height={80} width={200} />`}
+            >
               <Stack direction="row" spacing={4} alignItems="flex-end">
                 <Box>
                   <Typography variant="caption" display="block" gutterBottom>
@@ -5020,21 +5090,15 @@ export default function AppComplete() {
                   />
                 </Box>
               </Stack>
-            </Box>
-
-            <Divider />
+            </CodeExample>
 
             {/* 10. Curve Types */}
-            <Box>
-              <Typography variant="h6" gutterBottom>
-                10. Tipos de Curva
-              </Typography>
-              <Typography
-                variant="body2"
-                sx={{ color: "text.secondary", mb: 2 }}
-              >
-                Diferentes interpolaciones con la prop <code>curve</code>.
-              </Typography>
+            <CodeExample
+              title="10. Tipos de Curva"
+              code={`<SparkLineChart data={[2, 5, 3, 8, 4, 7, 5]} height={70} width={180} curve="linear" />
+<SparkLineChart data={[2, 5, 3, 8, 4, 7, 5]} height={70} width={180} curve="natural" />
+<SparkLineChart data={[2, 5, 3, 8, 4, 7, 5]} height={70} width={180} curve="monotoneX" />`}
+            >
               <Stack direction={{ xs: "column", md: "row" }} spacing={4}>
                 <Box sx={{ flex: 1 }}>
                   <Typography variant="caption" display="block" gutterBottom>
@@ -5070,21 +5134,18 @@ export default function AppComplete() {
                   />
                 </Box>
               </Stack>
-            </Box>
-
-            <Divider />
+            </CodeExample>
 
             {/* 11. Dashboard Example with Table */}
-            <Box>
-              <Typography variant="h6" gutterBottom>
-                11. Ejemplo en Contexto - KPIs
-              </Typography>
-              <Typography
-                variant="body2"
-                sx={{ color: "text.secondary", mb: 2 }}
-              >
-                Sparklines en tarjetas de métricas estilo dashboard.
-              </Typography>
+            <CodeExample
+              title="11. Ejemplo en Contexto - KPIs"
+              code={`<Card variant="outlined" sx={{ p: 2, textAlign: "center" }}>
+  <Typography variant="caption">Ventas Mensuales</Typography>
+  <Typography variant="h5" sx={{ my: 1 }}>$125,430</Typography>
+  <SparkLineChart data={[80, 95, 88, 102, 98, 115, 108, 125]} height={50} width={150} color="#4caf50" area />
+  <Typography variant="caption" sx={{ color: "success.main" }}>↑ 12.5% vs mes anterior</Typography>
+</Card>`}
+            >
               <Stack direction={{ xs: "column", md: "row" }} spacing={2}>
                 <Card
                   variant="outlined"
@@ -5159,21 +5220,22 @@ export default function AppComplete() {
                   </Typography>
                 </Card>
               </Stack>
-            </Box>
-
-            <Divider />
+            </CodeExample>
 
             {/* 12. Complete Interactive Example */}
-            <Box>
-              <Typography variant="h6" gutterBottom>
-                12. Ejemplo Interactivo Completo
-              </Typography>
-              <Typography
-                variant="body2"
-                sx={{ color: "text.secondary", mb: 2 }}
-              >
-                Todas las funcionalidades combinadas.
-              </Typography>
+            <CodeExample
+              title="12. Ejemplo Interactivo Completo"
+              code={`<SparkLineChart
+  data={[65, 72, 68, 85, 78, 92, 88, 95, 90, 102, 98, 110]}
+  height={100}
+  width={250}
+  showTooltip
+  showHighlight
+  area
+  color="#673ab7"
+  valueFormatter={(value) => value !== null ? \`\${value} unidades\` : ""}
+/>`}
+            >
               <Stack direction={{ xs: "column", md: "row" }} spacing={4}>
                 <Box sx={{ flex: 1 }}>
                   <Typography variant="subtitle2" gutterBottom>
@@ -5210,7 +5272,7 @@ export default function AppComplete() {
                   />
                 </Box>
               </Stack>
-            </Box>
+            </CodeExample>
           </Stack>
 
           <Alert severity="info" sx={{ mt: 3 }}>
@@ -5263,10 +5325,14 @@ export default function AppComplete() {
 
           <Stack spacing={4}>
             {/* Basic Bar Chart */}
-            <Box>
-              <Typography variant="h6" gutterBottom>
-                1. Barras Básicas
-              </Typography>
+            <CodeExample
+              title="1. Barras Básicas"
+              code={`<BarChart
+  xAxis={[{ scaleType: "band", data: ["Ene", "Feb", "Mar", "Abr", "May", "Jun"] }]}
+  series={[{ data: [4, 3, 5, 2, 6, 4], label: "Ventas" }]}
+  height={300}
+/>`}
+            >
               <BarChart
                 xAxis={[
                   {
@@ -5277,15 +5343,21 @@ export default function AppComplete() {
                 series={[{ data: [4, 3, 5, 2, 6, 4], label: "Ventas" }]}
                 height={300}
               />
-            </Box>
-
-            <Divider />
+            </CodeExample>
 
             {/* Multiple Series */}
-            <Box>
-              <Typography variant="h6" gutterBottom>
-                2. Múltiples Series
-              </Typography>
+            <CodeExample
+              title="2. Múltiples Series"
+              code={`<BarChart
+  xAxis={[{ scaleType: "band", data: ["Q1", "Q2", "Q3", "Q4"] }]}
+  series={[
+    { data: [35, 44, 24, 34], label: "2023" },
+    { data: [51, 60, 47, 55], label: "2024" },
+    { data: [15, 25, 30, 22], label: "2025" },
+  ]}
+  height={300}
+/>`}
+            >
               <BarChart
                 xAxis={[
                   {
@@ -5300,15 +5372,21 @@ export default function AppComplete() {
                 ]}
                 height={300}
               />
-            </Box>
-
-            <Divider />
+            </CodeExample>
 
             {/* Stacked Bars */}
-            <Box>
-              <Typography variant="h6" gutterBottom>
-                3. Barras Apiladas (stack)
-              </Typography>
+            <CodeExample
+              title="3. Barras Apiladas (stack)"
+              code={`<BarChart
+  xAxis={[{ scaleType: "band", data: ["Norte", "Sur", "Este", "Oeste"] }]}
+  series={[
+    { data: [40, 30, 25, 35], label: "Producto A", stack: "total" },
+    { data: [30, 25, 30, 25], label: "Producto B", stack: "total" },
+    { data: [20, 35, 20, 30], label: "Producto C", stack: "total" },
+  ]}
+  height={300}
+/>`}
+            >
               <BarChart
                 xAxis={[
                   {
@@ -5335,15 +5413,18 @@ export default function AppComplete() {
                 ]}
                 height={300}
               />
-            </Box>
-
-            <Divider />
+            </CodeExample>
 
             {/* Horizontal Bars */}
-            <Box>
-              <Typography variant="h6" gutterBottom>
-                4. Barras Horizontales (layout: horizontal)
-              </Typography>
+            <CodeExample
+              title="4. Barras Horizontales (layout: horizontal)"
+              code={`<BarChart
+  yAxis={[{ scaleType: "band", data: ["Marketing", "Ventas", "IT", "RRHH", "Finanzas"] }]}
+  series={[{ data: [85, 72, 90, 65, 78], label: "Presupuesto %" }]}
+  layout="horizontal"
+  height={300}
+/>`}
+            >
               <BarChart
                 yAxis={[
                   {
@@ -5357,15 +5438,18 @@ export default function AppComplete() {
                 layout="horizontal"
                 height={300}
               />
-            </Box>
-
-            <Divider />
+            </CodeExample>
 
             {/* Custom Colors */}
-            <Box>
-              <Typography variant="h6" gutterBottom>
-                5. Colores Personalizados
-              </Typography>
+            <CodeExample
+              title="5. Colores Personalizados"
+              code={`<BarChart
+  xAxis={[{ scaleType: "band", data: ["Exitoso", "Pendiente", "Fallido"] }]}
+  series={[{ data: [85, 12, 3], color: "#4caf50" }]}
+  colors={["#4caf50", "#ff9800", "#f44336"]}
+  height={250}
+/>`}
+            >
               <BarChart
                 xAxis={[
                   {
@@ -5382,15 +5466,18 @@ export default function AppComplete() {
                 colors={["#4caf50", "#ff9800", "#f44336"]}
                 height={250}
               />
-            </Box>
-
-            <Divider />
+            </CodeExample>
 
             {/* With Grid */}
-            <Box>
-              <Typography variant="h6" gutterBottom>
-                6. Con Grid y Negative Values
-              </Typography>
+            <CodeExample
+              title="6. Con Grid y Negative Values"
+              code={`<BarChart
+  xAxis={[{ scaleType: "band", data: ["Ene", "Feb", "Mar", "Abr", "May", "Jun"] }]}
+  series={[{ data: [15, -8, 22, -5, 18, -12], label: "Balance" }]}
+  grid={{ horizontal: true }}
+  height={300}
+/>`}
+            >
               <BarChart
                 xAxis={[
                   {
@@ -5407,7 +5494,7 @@ export default function AppComplete() {
                 grid={{ horizontal: true }}
                 height={300}
               />
-            </Box>
+            </CodeExample>
           </Stack>
 
           <Alert severity="info" sx={{ mt: 3 }}>
@@ -5430,10 +5517,22 @@ export default function AppComplete() {
 
           <Stack spacing={4}>
             {/* Basic Scatter */}
-            <Box>
-              <Typography variant="h6" gutterBottom>
-                1. Dispersión Básica
-              </Typography>
+            <CodeExample
+              title="1. Dispersión Básica"
+              code={`<ScatterChart
+  series={[
+    {
+      data: [
+        { x: 1, y: 2, id: 1 }, { x: 2, y: 5, id: 2 }, { x: 3, y: 3, id: 3 },
+        { x: 4, y: 8, id: 4 }, { x: 5, y: 6, id: 5 }, { x: 6, y: 9, id: 6 },
+        { x: 7, y: 4, id: 7 },
+      ],
+      label: "Serie A",
+    },
+  ]}
+  height={300}
+/>`}
+            >
               <ScatterChart
                 series={[
                   {
@@ -5451,15 +5550,31 @@ export default function AppComplete() {
                 ]}
                 height={300}
               />
-            </Box>
-
-            <Divider />
+            </CodeExample>
 
             {/* Multiple Series */}
-            <Box>
-              <Typography variant="h6" gutterBottom>
-                2. Múltiples Series
-              </Typography>
+            <CodeExample
+              title="2. Múltiples Series"
+              code={`<ScatterChart
+  series={[
+    {
+      data: [
+        { x: 10, y: 20, id: 1 }, { x: 25, y: 35, id: 2 }, { x: 40, y: 45, id: 3 },
+        { x: 55, y: 60, id: 4 }, { x: 70, y: 75, id: 5 },
+      ],
+      label: "Grupo A",
+    },
+    {
+      data: [
+        { x: 15, y: 40, id: 6 }, { x: 30, y: 55, id: 7 }, { x: 45, y: 30, id: 8 },
+        { x: 60, y: 50, id: 9 }, { x: 75, y: 65, id: 10 },
+      ],
+      label: "Grupo B",
+    },
+  ]}
+  height={300}
+/>`}
+            >
               <ScatterChart
                 series={[
                   {
@@ -5485,15 +5600,27 @@ export default function AppComplete() {
                 ]}
                 height={300}
               />
-            </Box>
-
-            <Divider />
+            </CodeExample>
 
             {/* With Grid */}
-            <Box>
-              <Typography variant="h6" gutterBottom>
-                3. Con Grid y Colores
-              </Typography>
+            <CodeExample
+              title="3. Con Grid y Colores"
+              code={`<ScatterChart
+  series={[
+    {
+      data: [
+        { x: 100, y: 200, id: 1 }, { x: 150, y: 280, id: 2 },
+        { x: 200, y: 350, id: 3 }, { x: 250, y: 420, id: 4 },
+        { x: 300, y: 380, id: 5 },
+      ],
+      label: "Ventas vs Clientes",
+      color: "#e91e63",
+    },
+  ]}
+  grid={{ horizontal: true, vertical: true }}
+  height={300}
+/>`}
+            >
               <ScatterChart
                 series={[
                   {
@@ -5511,7 +5638,7 @@ export default function AppComplete() {
                 grid={{ horizontal: true, vertical: true }}
                 height={300}
               />
-            </Box>
+            </CodeExample>
           </Stack>
 
           <Alert severity="info" sx={{ mt: 3 }}>
@@ -5533,24 +5660,40 @@ export default function AppComplete() {
 
           <Stack spacing={4}>
             {/* Basic Gauge */}
-            <Box>
-              <Typography variant="h6" gutterBottom>
-                1. Gauge Básico
-              </Typography>
+            <CodeExample
+              title="1. Gauge Básico"
+              code={`<Stack direction="row" spacing={4} justifyContent="center">
+  <Gauge value={75} height={200} width={200} />
+  <Gauge value={45} height={200} width={200} />
+  <Gauge value={90} height={200} width={200} />
+</Stack>`}
+            >
               <Stack direction="row" spacing={4} justifyContent="center">
                 <Gauge value={75} height={200} width={200} />
                 <Gauge value={45} height={200} width={200} />
                 <Gauge value={90} height={200} width={200} />
               </Stack>
-            </Box>
-
-            <Divider />
+            </CodeExample>
 
             {/* With Text */}
-            <Box>
-              <Typography variant="h6" gutterBottom>
-                2. Con Texto Personalizado
-              </Typography>
+            <CodeExample
+              title="2. Con Texto Personalizado"
+              code={`<Stack direction="row" spacing={4} justifyContent="center">
+  <Gauge
+    value={68}
+    height={200}
+    width={200}
+    text={({ value }) => \`\${value ?? 0}%\`}
+  />
+  <Gauge
+    value={850}
+    valueMax={1000}
+    height={200}
+    width={200}
+    text={({ value }) => \`\${value ?? 0}/1000\`}
+  />
+</Stack>`}
+            >
               <Stack direction="row" spacing={4} justifyContent="center">
                 <Gauge
                   value={68}
@@ -5570,15 +5713,22 @@ export default function AppComplete() {
                   }
                 />
               </Stack>
-            </Box>
-
-            <Divider />
+            </CodeExample>
 
             {/* Start/End Angles */}
-            <Box>
-              <Typography variant="h6" gutterBottom>
-                3. Ángulos Personalizados
-              </Typography>
+            <CodeExample
+              title="3. Ángulos Personalizados"
+              code={`<Stack direction="row" spacing={4} justifyContent="center">
+  <Box textAlign="center">
+    <Typography variant="caption">Semicírculo</Typography>
+    <Gauge value={60} startAngle={-90} endAngle={90} height={150} width={200} />
+  </Box>
+  <Box textAlign="center">
+    <Typography variant="caption">270°</Typography>
+    <Gauge value={80} startAngle={-135} endAngle={135} height={150} width={200} />
+  </Box>
+</Stack>`}
+            >
               <Stack direction="row" spacing={4} justifyContent="center">
                 <Box textAlign="center">
                   <Typography variant="caption">Semicírculo</Typography>
@@ -5601,15 +5751,22 @@ export default function AppComplete() {
                   />
                 </Box>
               </Stack>
-            </Box>
-
-            <Divider />
+            </CodeExample>
 
             {/* Inner/Outer Radius */}
-            <Box>
-              <Typography variant="h6" gutterBottom>
-                4. Radio Interior/Exterior
-              </Typography>
+            <CodeExample
+              title="4. Radio Interior/Exterior"
+              code={`<Stack direction="row" spacing={4} justifyContent="center">
+  <Box textAlign="center">
+    <Typography variant="caption">Delgado</Typography>
+    <Gauge value={70} innerRadius="80%" outerRadius="100%" height={180} width={180} />
+  </Box>
+  <Box textAlign="center">
+    <Typography variant="caption">Grueso</Typography>
+    <Gauge value={70} innerRadius="50%" outerRadius="100%" height={180} width={180} />
+  </Box>
+</Stack>`}
+            >
               <Stack direction="row" spacing={4} justifyContent="center">
                 <Box textAlign="center">
                   <Typography variant="caption">Delgado</Typography>
@@ -5632,7 +5789,7 @@ export default function AppComplete() {
                   />
                 </Box>
               </Stack>
-            </Box>
+            </CodeExample>
           </Stack>
 
           <Alert severity="info" sx={{ mt: 3 }}>
@@ -5654,10 +5811,16 @@ export default function AppComplete() {
           </Alert>
 
           <Stack spacing={4}>
-            <Box>
-              <Typography variant="h6" gutterBottom>
-                Ejemplo de Radar
-              </Typography>
+            <CodeExample
+              title="Ejemplo de Radar"
+              code={`<RadarChart
+  height={400}
+  series={[{ data: [80, 95, 70, 85, 90] }]}
+  radar={{
+    metrics: ["Ventas", "Marketing", "Desarrollo", "Soporte", "RRHH"],
+  }}
+/>`}
+            >
               <RadarChart
                 height={400}
                 series={[{ data: [80, 95, 70, 85, 90] }]}
@@ -5671,7 +5834,7 @@ export default function AppComplete() {
                   ],
                 }}
               />
-            </Box>
+            </CodeExample>
           </Stack>
         </Card>
 
@@ -5686,10 +5849,25 @@ export default function AppComplete() {
           </Alert>
 
           <Stack spacing={4}>
-            <Box>
-              <Typography variant="h6" gutterBottom>
-                Ejemplo de Heatmap
-              </Typography>
+            <CodeExample
+              title="Ejemplo de Heatmap"
+              code={`<Heatmap
+  height={300}
+  xAxis={[{ data: ["Lun", "Mar", "Mié", "Jue", "Vie"] }]}
+  yAxis={[{ data: ["Mañana", "Tarde", "Noche"] }]}
+  series={[
+    {
+      data: [
+        [0, 0, 10], [0, 1, 20], [0, 2, 15],
+        [1, 0, 25], [1, 1, 30], [1, 2, 20],
+        [2, 0, 35], [2, 1, 40], [2, 2, 25],
+        [3, 0, 30], [3, 1, 35], [3, 2, 30],
+        [4, 0, 20], [4, 1, 25], [4, 2, 40],
+      ],
+    },
+  ]}
+/>`}
+            >
               <Heatmap
                 height={300}
                 xAxis={[{ data: ["Lun", "Mar", "Mié", "Jue", "Vie"] }]}
@@ -5716,7 +5894,7 @@ export default function AppComplete() {
                   },
                 ]}
               />
-            </Box>
+            </CodeExample>
           </Stack>
         </Card>
 
@@ -5731,10 +5909,23 @@ export default function AppComplete() {
           </Alert>
 
           <Stack spacing={4}>
-            <Box>
-              <Typography variant="h6" gutterBottom>
-                Embudo de Ventas
-              </Typography>
+            <CodeExample
+              title="Embudo de Ventas"
+              code={`<FunnelChart
+  height={350}
+  series={[
+    {
+      data: [
+        { value: 1000, label: "Visitantes" },
+        { value: 750, label: "Leads" },
+        { value: 500, label: "Oportunidades" },
+        { value: 250, label: "Propuestas" },
+        { value: 100, label: "Ventas" },
+      ],
+    },
+  ]}
+/>`}
+            >
               <FunnelChart
                 height={350}
                 series={[
@@ -5749,7 +5940,7 @@ export default function AppComplete() {
                   },
                 ]}
               />
-            </Box>
+            </CodeExample>
           </Stack>
         </Card>
 
@@ -5805,10 +5996,14 @@ export default function AppComplete() {
           </Alert>
 
           <Stack spacing={4}>
-            <Box>
-              <Typography variant="h6" gutterBottom>
-                Área Básica
-              </Typography>
+            <CodeExample
+              title="Área Básica"
+              code={`<AreaChart
+  xAxis={[{ data: [1, 2, 3, 4, 5, 6, 7, 8] }]}
+  series={[{ data: [2, 5, 3, 8, 1, 6, 4, 7], label: "Ventas", area: true }]}
+  height={300}
+/>`}
+            >
               <AreaChart
                 xAxis={[{ data: [1, 2, 3, 4, 5, 6, 7, 8] }]}
                 series={[
@@ -5820,14 +6015,20 @@ export default function AppComplete() {
                 ]}
                 height={300}
               />
-            </Box>
+            </CodeExample>
 
-            <Divider />
-
-            <Box>
-              <Typography variant="h6" gutterBottom>
-                Áreas Apiladas
-              </Typography>
+            <CodeExample
+              title="Áreas Apiladas"
+              code={`<AreaChart
+  xAxis={[{ data: ["Ene", "Feb", "Mar", "Abr", "May", "Jun"], scaleType: "band" }]}
+  series={[
+    { data: [40, 35, 50, 45, 60, 55], label: "Web", stack: "total", area: true },
+    { data: [30, 40, 35, 50, 45, 55], label: "Mobile", stack: "total", area: true },
+    { data: [20, 25, 30, 25, 35, 30], label: "Desktop", stack: "total", area: true },
+  ]}
+  height={300}
+/>`}
+            >
               <AreaChart
                 xAxis={[
                   {
@@ -5857,7 +6058,7 @@ export default function AppComplete() {
                 ]}
                 height={300}
               />
-            </Box>
+            </CodeExample>
           </Stack>
         </Card>
 
