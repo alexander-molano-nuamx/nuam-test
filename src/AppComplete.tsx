@@ -355,9 +355,7 @@ const shortcutsItems = [
 
 export default function AppComplete() {
   const [textValue, setTextValue] = useState("");
-  const [textValue1, setTextValue1] = useState("");
-  const [textValue2, setTextValue2] = useState("");
-  const [textValue3, setTextValue3] = useState("");
+
   const [emailValue, setEmailValue] = useState("");
   const [checkboxValue, setCheckboxValue] = useState(false);
   const [switchValue, setSwitchValue] = useState(false);
@@ -657,8 +655,8 @@ export default function AppComplete() {
                 >
                   <TextField
                     label="Texto simple"
-                    value={textValue1}
-                    onChange={(value) => setTextValue1(value as string)}
+                    value={textValue}
+                    onChange={(value) => setTextValue(value as string)}
                     placeholder="Escribe algo..."
                     helperText="Campo de texto básico"
                     sx={{ width: "50%" }}
