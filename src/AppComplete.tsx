@@ -71,6 +71,8 @@ import {
   LayersOutlined,
   AccountTree,
   BarChartOutlined,
+  ExpandMore,
+  ExpandLess,
 } from "@mui/icons-material";
 import { Box, Stack } from "@mui/material";
 import type { GridColDef } from "@mui/x-data-grid";
@@ -2405,6 +2407,14 @@ export default function AppComplete() {
                 }}
                 pageSizeOptions={[5, 10, 25]}
                 showToolbar={true}
+                slots={{
+                  detailPanelExpandIcon: () => (
+                    <ExpandMore fontSize="small" color="action" />
+                  ),
+                  detailPanelCollapseIcon: () => (
+                    <ExpandLess fontSize="small" color="action" />
+                  ),
+                }}
               />
             </CodeExample>
           </Box>
@@ -4219,12 +4229,18 @@ export default function AppComplete() {
                     </Typography>
                     <LineChart
                       xAxis={[{ data: [0, 1, 2, 3, 4, 5] }]}
-                      series={[{ data: [0, 5, 2, 6, 3, 9], curve: "catmullRom" }]}
+                      series={[
+                        { data: [0, 5, 2, 6, 3, 9], curve: "catmullRom" },
+                      ]}
                       height={200}
                     />
                   </Box>
                 </Stack>
-                <Stack direction={{ xs: "column", md: "row" }} spacing={2} mt={2}>
+                <Stack
+                  direction={{ xs: "column", md: "row" }}
+                  spacing={2}
+                  mt={2}
+                >
                   <Box sx={{ flex: 1 }}>
                     <Typography variant="caption" display="block" gutterBottom>
                       <code>curve: &quot;step&quot;</code>
@@ -4241,7 +4257,9 @@ export default function AppComplete() {
                     </Typography>
                     <LineChart
                       xAxis={[{ data: [0, 1, 2, 3, 4, 5] }]}
-                      series={[{ data: [0, 5, 2, 6, 3, 9], curve: "monotoneX" }]}
+                      series={[
+                        { data: [0, 5, 2, 6, 3, 9], curve: "monotoneX" },
+                      ]}
                       height={200}
                     />
                   </Box>
@@ -4310,21 +4328,27 @@ export default function AppComplete() {
                 <Stack direction={{ xs: "column", md: "row" }} spacing={2}>
                   <Box sx={{ flex: 1 }}>
                     <Typography variant="caption" display="block" gutterBottom>
-                      <code>baseline: &quot;min&quot;</code> (rellena hacia abajo)
+                      <code>baseline: &quot;min&quot;</code> (rellena hacia
+                      abajo)
                     </Typography>
                     <LineChart
                       xAxis={[{ data: [1, 2, 3, 4, 5] }]}
-                      series={[{ data: [4, 3, 5, 2, 6], area: true, baseline: "min" }]}
+                      series={[
+                        { data: [4, 3, 5, 2, 6], area: true, baseline: "min" },
+                      ]}
                       height={200}
                     />
                   </Box>
                   <Box sx={{ flex: 1 }}>
                     <Typography variant="caption" display="block" gutterBottom>
-                      <code>baseline: &quot;max&quot;</code> (rellena hacia arriba)
+                      <code>baseline: &quot;max&quot;</code> (rellena hacia
+                      arriba)
                     </Typography>
                     <LineChart
                       xAxis={[{ data: [1, 2, 3, 4, 5] }]}
-                      series={[{ data: [4, 3, 5, 2, 6], area: true, baseline: "max" }]}
+                      series={[
+                        { data: [4, 3, 5, 2, 6], area: true, baseline: "max" },
+                      ]}
                       height={200}
                     />
                   </Box>
@@ -4357,7 +4381,12 @@ export default function AppComplete() {
                     </Typography>
                     <LineChart
                       xAxis={[{ data: [1, 2, 3, 4, 5, 6, 7, 8] }]}
-                      series={[{ data: [2, 5, null, null, 8, 3, 6, 4], connectNulls: false }]}
+                      series={[
+                        {
+                          data: [2, 5, null, null, 8, 3, 6, 4],
+                          connectNulls: false,
+                        },
+                      ]}
                       height={200}
                     />
                   </Box>
@@ -4367,7 +4396,12 @@ export default function AppComplete() {
                     </Typography>
                     <LineChart
                       xAxis={[{ data: [1, 2, 3, 4, 5, 6, 7, 8] }]}
-                      series={[{ data: [2, 5, null, null, 8, 3, 6, 4], connectNulls: true }]}
+                      series={[
+                        {
+                          data: [2, 5, null, null, 8, 3, 6, 4],
+                          connectNulls: true,
+                        },
+                      ]}
                       height={200}
                     />
                   </Box>
@@ -4461,9 +4495,21 @@ export default function AppComplete() {
                 <LineChart
                   xAxis={[{ data: [1, 2, 3, 4, 5, 6] }]}
                   series={[
-                    { data: [3, 4, 1, 6, 5, 2], label: "Serie Roja", color: "#f44336" },
-                    { data: [1, 3, 2, 5, 4, 6], label: "Serie Verde", color: "#4caf50" },
-                    { data: [2, 1, 4, 3, 6, 5], label: "Serie Azul", color: "#2196f3" },
+                    {
+                      data: [3, 4, 1, 6, 5, 2],
+                      label: "Serie Roja",
+                      color: "#f44336",
+                    },
+                    {
+                      data: [1, 3, 2, 5, 4, 6],
+                      label: "Serie Verde",
+                      color: "#4caf50",
+                    },
+                    {
+                      data: [2, 1, 4, 3, 6, 5],
+                      label: "Serie Azul",
+                      color: "#2196f3",
+                    },
                   ]}
                   height={300}
                 />
@@ -5255,10 +5301,30 @@ export default function AppComplete() {
                       series={[
                         {
                           data: [
-                            { id: 0, value: 30, label: "Éxito", color: "#4caf50" },
-                            { id: 1, value: 20, label: "Advertencia", color: "#ff9800" },
-                            { id: 2, value: 10, label: "Error", color: "#f44336" },
-                            { id: 3, value: 40, label: "Info", color: "#2196f3" },
+                            {
+                              id: 0,
+                              value: 30,
+                              label: "Éxito",
+                              color: "#4caf50",
+                            },
+                            {
+                              id: 1,
+                              value: 20,
+                              label: "Advertencia",
+                              color: "#ff9800",
+                            },
+                            {
+                              id: 2,
+                              value: 10,
+                              label: "Error",
+                              color: "#f44336",
+                            },
+                            {
+                              id: 3,
+                              value: 40,
+                              label: "Info",
+                              color: "#2196f3",
+                            },
                           ],
                         },
                       ]}
@@ -5409,7 +5475,16 @@ export default function AppComplete() {
                       <code>cx: 100</code> (izquierda)
                     </Typography>
                     <PieChart
-                      series={[{ data: [{ id: 0, value: 50 }, { id: 1, value: 30 }, { id: 2, value: 20 }], cx: 100 }]}
+                      series={[
+                        {
+                          data: [
+                            { id: 0, value: 50 },
+                            { id: 1, value: 30 },
+                            { id: 2, value: 20 },
+                          ],
+                          cx: 100,
+                        },
+                      ]}
                       width={300}
                       height={200}
                     />
@@ -5419,7 +5494,16 @@ export default function AppComplete() {
                       <code>cx: 200</code> (derecha)
                     </Typography>
                     <PieChart
-                      series={[{ data: [{ id: 0, value: 50 }, { id: 1, value: 30 }, { id: 2, value: 20 }], cx: 200 }]}
+                      series={[
+                        {
+                          data: [
+                            { id: 0, value: 50 },
+                            { id: 1, value: 30 },
+                            { id: 2, value: 20 },
+                          ],
+                          cx: 200,
+                        },
+                      ]}
                       width={300}
                       height={200}
                     />
@@ -5452,7 +5536,16 @@ export default function AppComplete() {
                       <code>outerRadius: 60</code>
                     </Typography>
                     <PieChart
-                      series={[{ data: [{ id: 0, value: 40 }, { id: 1, value: 35 }, { id: 2, value: 25 }], outerRadius: 60 }]}
+                      series={[
+                        {
+                          data: [
+                            { id: 0, value: 40 },
+                            { id: 1, value: 35 },
+                            { id: 2, value: 25 },
+                          ],
+                          outerRadius: 60,
+                        },
+                      ]}
                       width={200}
                       height={200}
                     />
@@ -5462,7 +5555,16 @@ export default function AppComplete() {
                       <code>outerRadius: 90</code>
                     </Typography>
                     <PieChart
-                      series={[{ data: [{ id: 0, value: 40 }, { id: 1, value: 35 }, { id: 2, value: 25 }], outerRadius: 90 }]}
+                      series={[
+                        {
+                          data: [
+                            { id: 0, value: 40 },
+                            { id: 1, value: 35 },
+                            { id: 2, value: 25 },
+                          ],
+                          outerRadius: 90,
+                        },
+                      ]}
                       width={200}
                       height={200}
                     />
@@ -5556,16 +5658,37 @@ export default function AppComplete() {
                       series={[
                         {
                           data: [
-                            { id: 0, value: 45, label: "Electrónica", color: "#3f51b5" },
-                            { id: 1, value: 25, label: "Ropa", color: "#f50057" },
-                            { id: 2, value: 18, label: "Hogar", color: "#00bcd4" },
-                            { id: 3, value: 12, label: "Otros", color: "#ff9800" },
+                            {
+                              id: 0,
+                              value: 45,
+                              label: "Electrónica",
+                              color: "#3f51b5",
+                            },
+                            {
+                              id: 1,
+                              value: 25,
+                              label: "Ropa",
+                              color: "#f50057",
+                            },
+                            {
+                              id: 2,
+                              value: 18,
+                              label: "Hogar",
+                              color: "#00bcd4",
+                            },
+                            {
+                              id: 3,
+                              value: 12,
+                              label: "Otros",
+                              color: "#ff9800",
+                            },
                           ],
                           innerRadius: 50,
                           outerRadius: 90,
                           paddingAngle: 3,
                           cornerRadius: 8,
-                          arcLabel: (item: { value: number }) => `${item.value}%`,
+                          arcLabel: (item: { value: number }) =>
+                            `${item.value}%`,
                           arcLabelMinAngle: 30,
                           highlighted: { additionalRadius: 10 },
                           faded: { additionalRadius: -5, color: "gray" },
@@ -5583,10 +5706,30 @@ export default function AppComplete() {
                       series={[
                         {
                           data: [
-                            { id: 0, value: 8, label: "Completados", color: "#4caf50" },
-                            { id: 1, value: 5, label: "En Progreso", color: "#2196f3" },
-                            { id: 2, value: 3, label: "Pendientes", color: "#ff9800" },
-                            { id: 3, value: 2, label: "Cancelados", color: "#f44336" },
+                            {
+                              id: 0,
+                              value: 8,
+                              label: "Completados",
+                              color: "#4caf50",
+                            },
+                            {
+                              id: 1,
+                              value: 5,
+                              label: "En Progreso",
+                              color: "#2196f3",
+                            },
+                            {
+                              id: 2,
+                              value: 3,
+                              label: "Pendientes",
+                              color: "#ff9800",
+                            },
+                            {
+                              id: 3,
+                              value: 2,
+                              label: "Cancelados",
+                              color: "#f44336",
+                            },
                           ],
                           startAngle: -90,
                           endAngle: 270,
