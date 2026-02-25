@@ -2409,10 +2409,10 @@ export default function AppComplete() {
                 showToolbar={true}
                 slots={{
                   detailPanelExpandIcon: () => (
-                    <ExpandMore fontSize="small" color="action" />
+                    <ExpandMore fontSize="medium" color="action" />
                   ),
                   detailPanelCollapseIcon: () => (
-                    <ExpandLess fontSize="small" color="action" />
+                    <ExpandLess fontSize="medium" color="action" />
                   ),
                 }}
               />
