@@ -2399,6 +2399,7 @@ export default function AppComplete() {
                     </Box>
                   </Box>
                 )}
+                disableColumnMenu={false}
                 pagination
                 initialState={{
                   pagination: {
@@ -2409,10 +2410,10 @@ export default function AppComplete() {
                 showToolbar={true}
                 slots={{
                   detailPanelExpandIcon: () => (
-                    <ExpandMore fontSize="medium" color="action" />
+                    <ExpandMore fontSize="small" color="action" />
                   ),
                   detailPanelCollapseIcon: () => (
-                    <ExpandLess fontSize="medium" color="action" />
+                    <ExpandLess fontSize="small" color="action" />
                   ),
                 }}
               />
