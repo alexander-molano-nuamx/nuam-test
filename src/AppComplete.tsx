@@ -1841,29 +1841,104 @@ export default function AppComplete() {
             >
               <DataGridProX
                 rows={[
-                  { id: 1, name: "Juan Pérez", email: "juan@example.com", role: "Admin", age: 32, active: true, department: "IT", detailType: "form" },
-                  { id: 2, name: "María García", email: "maria@example.com", role: "Usuario", age: 28, active: true, department: "Ventas", detailType: "email" },
-                  { id: 3, name: "Pedro López", email: "pedro@example.com", role: "Editor", age: 35, active: false, department: "Marketing", detailType: "contact" },
-                  { id: 4, name: "Ana Martínez", email: "ana@example.com", role: "Admin", age: 26, active: true, department: "Finanzas", detailType: "form" },
-                  { id: 5, name: "Carlos Rodríguez", email: "carlos@example.com", role: "Editor", age: 40, active: true, department: "IT", detailType: "email" },
-                  { id: 6, name: "Laura Sánchez", email: "laura@example.com", role: "Usuario", age: 31, active: false, department: "Legal", detailType: "contact" },
+                  {
+                    id: 1,
+                    name: "Juan Pérez P",
+                    email: "juan@example.com",
+                    role: "Admin",
+                    age: 32,
+                    active: true,
+                    department: "IT",
+                    detailType: "form",
+                  },
+                  {
+                    id: 2,
+                    name: "María García",
+                    email: "maria@example.com",
+                    role: "Usuario",
+                    age: 28,
+                    active: true,
+                    department: "Ventas",
+                    detailType: "email",
+                  },
+                  {
+                    id: 3,
+                    name: "Pedro López",
+                    email: "pedro@example.com",
+                    role: "Editor",
+                    age: 35,
+                    active: false,
+                    department: "Marketing",
+                    detailType: "contact",
+                  },
+                  {
+                    id: 4,
+                    name: "Ana Martínez",
+                    email: "ana@example.com",
+                    role: "Admin",
+                    age: 26,
+                    active: true,
+                    department: "Finanzas",
+                    detailType: "form",
+                  },
+                  {
+                    id: 5,
+                    name: "Carlos Rodríguez",
+                    email: "carlos@example.com",
+                    role: "Editor",
+                    age: 40,
+                    active: true,
+                    department: "IT",
+                    detailType: "email",
+                  },
+                  {
+                    id: 6,
+                    name: "Laura Sánchez",
+                    email: "laura@example.com",
+                    role: "Usuario",
+                    age: 31,
+                    active: false,
+                    department: "Legal",
+                    detailType: "contact",
+                  },
                 ]}
                 columns={[
                   { field: "id", headerName: "ID", width: 60, type: "number" },
                   { field: "name", headerName: "Nombre", width: 160 },
                   { field: "email", headerName: "Email", width: 200 },
                   { field: "role", headerName: "Rol", width: 110 },
-                  { field: "department", headerName: "Departamento", width: 130 },
-                  { field: "active", headerName: "Activo", width: 80, type: "boolean" },
+                  {
+                    field: "department",
+                    headerName: "Departamento",
+                    width: 130,
+                  },
+                  {
+                    field: "active",
+                    headerName: "Activo",
+                    width: 80,
+                    type: "boolean",
+                  },
                   {
                     field: "detailType",
                     headerName: "Panel",
                     width: 130,
                     renderCell: (p) => (
                       <Chip
-                        label={p.row.detailType === "form" ? "Formulario" : p.row.detailType === "email" ? "Email" : "Contacto"}
+                        label={
+                          p.row.detailType === "form"
+                            ? "Formulario"
+                            : p.row.detailType === "email"
+                              ? "Email"
+                              : "Contacto"
+                        }
                         size="small"
-                        color={p.row.detailType === "form" ? "primary" : p.row.detailType === "email" ? "info" : "success"}
+                        color={
+                          p.row.detailType === "form"
+                            ? "primary"
+                            : p.row.detailType === "email"
+                              ? "info"
+                              : "success"
+                        }
                       />
                     ),
                   },
@@ -1874,161 +1949,376 @@ export default function AppComplete() {
                   return 600;
                 }}
                 getDetailPanelContent={(params) => {
-                  if (params.row.detailType === "email") return (
-                    <Stack sx={{ py: 2, height: "100%", boxSizing: "border-box", position: "sticky", left: 0, width: "100%" }} direction="column">
-                      <Paper sx={{ flex: 1, mx: "auto", width: "90%", p: 2 }}>
-                        <Stack direction="column" spacing={1}>
-                          <Typography variant="h5">{`Informe de ${params.row.department}`}</Typography>
-                          <Typography variant="caption">{`Fecha: ${new Date().toLocaleDateString("es-CO")}`}</Typography>
-                          <Typography variant="subtitle2">{`De: ${params.row.name} <${params.row.email}>`}</Typography>
-                          <Typography variant="subtitle2">{`Para: administrador <admin@nuam.com>`}</Typography>
-                          <Typography variant="body2">
-                            Adjunto encontrará el informe mensual del departamento de {params.row.department}.
-                            Por favor revisar los indicadores de desempeño y métricas clave del período.
-                            Quedamos atentos a sus comentarios para el siguiente ciclo.
-                          </Typography>
-                        </Stack>
-                        <Divider sx={{ my: 3 }} />
-                        <ButtonGroup variant="text" sx={{ display: "flex", justifyContent: "flex-end" }}>
-                          <Button sx={{ px: 2 }} startIcon={<Reply />}>Responder</Button>
-                          <Button sx={{ px: 2 }} startIcon={<Forward />}>Reenviar</Button>
-                          <Button sx={{ px: 2 }} color="error" startIcon={<Delete />}>Eliminar</Button>
-                        </ButtonGroup>
-                      </Paper>
-                    </Stack>
-                  );
-                  if (params.row.detailType === "contact") return (
-                    <Box sx={{ p: 3, display: "flex", justifyContent: "center" }}>
-                      <Paper sx={{ p: 3, maxWidth: 420, width: "100%" }}>
-                        <Stack direction="row" spacing={3} alignItems="center" sx={{ mb: 2 }}>
-                          <Avatar sx={{ width: 72, height: 72, bgcolor: "primary.main", fontSize: "1.5rem" }}>
-                            {params.row.name.split(" ").map((n: string) => n[0]).join("").slice(0, 2)}
-                          </Avatar>
-                          <Stack spacing={0.5}>
-                            <Typography variant="h5">{params.row.name}</Typography>
-                            <Typography variant="subtitle2" color="text.secondary">{params.row.role}</Typography>
-                            <Chip label={params.row.active ? "Activo" : "Inactivo"} color={params.row.active ? "success" : "default"} size="small" />
-                          </Stack>
-                        </Stack>
-                        <Divider sx={{ mb: 2 }} />
-                        <Stack spacing={1.5}>
-                          <Stack direction="row" spacing={1} alignItems="center">
-                            <EmailOutlined fontSize="small" color="action" />
-                            <Typography variant="body2">{params.row.email}</Typography>
-                          </Stack>
-                          <Stack direction="row" spacing={1} alignItems="center">
-                            <Work fontSize="small" color="action" />
-                            <Typography variant="body2">{params.row.department}</Typography>
-                          </Stack>
-                          <Stack direction="row" spacing={1} alignItems="center">
-                            <Phone fontSize="small" color="action" />
-                            <Typography variant="body2">+57 300 000 000{params.row.id}</Typography>
-                          </Stack>
-                        </Stack>
-                        <Divider sx={{ my: 2 }} />
-                        <Stack direction="row" spacing={1} justifyContent="flex-end">
-                          <Button variant="outlined" size="small" startIcon={<EmailOutlined />}>Contactar</Button>
-                          <Button variant="outlined" size="small" startIcon={<AccountCircle />}>Ver perfil</Button>
-                        </Stack>
-                      </Paper>
-                    </Box>
-                  );
-                  return (
-                  <Box sx={{ p: 3, bgcolor: "background.paper" }}>
-                    {/* Header */}
-                    <Box sx={{ mb: 1 }}>
-                      <Typography variant="h5" sx={{ fontWeight: 400 }}>
-                        Editar Participante: {params.row.name}
-                      </Typography>
-                      <Typography
-                        variant="body2"
-                        sx={{ color: "text.secondary" }}
+                  if (params.row.detailType === "email")
+                    return (
+                      <Stack
+                        sx={{
+                          py: 2,
+                          height: "100%",
+                          boxSizing: "border-box",
+                          position: "sticky",
+                          left: 0,
+                          width: "100%",
+                        }}
+                        direction="column"
                       >
-                        Los campos marcados con{" "}
-                        <span style={{ color: "red" }}>*</span> son obligatorios
-                      </Typography>
-                    </Box>
+                        <Paper sx={{ flex: 1, mx: "auto", width: "90%", p: 2 }}>
+                          <Stack direction="column" spacing={1}>
+                            <Typography variant="h5">{`Informe de ${params.row.department}`}</Typography>
+                            <Typography variant="caption">{`Fecha: ${new Date().toLocaleDateString("es-CO")}`}</Typography>
+                            <Typography variant="subtitle2">{`De: ${params.row.name} <${params.row.email}>`}</Typography>
+                            <Typography variant="subtitle2">{`Para: administrador <admin@nuam.com>`}</Typography>
+                            <Typography variant="body2">
+                              Adjunto encontrará el informe mensual del
+                              departamento de {params.row.department}. Por favor
+                              revisar los indicadores de desempeño y métricas
+                              clave del período. Quedamos atentos a sus
+                              comentarios para el siguiente ciclo.
+                            </Typography>
+                          </Stack>
+                          <Divider sx={{ my: 3 }} />
+                          <ButtonGroup
+                            variant="text"
+                            sx={{ display: "flex", justifyContent: "flex-end" }}
+                          >
+                            <Button sx={{ px: 2 }} startIcon={<Reply />}>
+                              Responder
+                            </Button>
+                            <Button sx={{ px: 2 }} startIcon={<Forward />}>
+                              Reenviar
+                            </Button>
+                            <Button
+                              sx={{ px: 2 }}
+                              color="error"
+                              startIcon={<Delete />}
+                            >
+                              Eliminar
+                            </Button>
+                          </ButtonGroup>
+                        </Paper>
+                      </Stack>
+                    );
+                  if (params.row.detailType === "contact")
+                    return (
+                      <Box
+                        sx={{ p: 3, display: "flex", justifyContent: "center" }}
+                      >
+                        <Paper sx={{ p: 3, maxWidth: 420, width: "100%" }}>
+                          <Stack
+                            direction="row"
+                            spacing={3}
+                            alignItems="center"
+                            sx={{ mb: 2 }}
+                          >
+                            <Avatar
+                              sx={{
+                                width: 72,
+                                height: 72,
+                                bgcolor: "primary.main",
+                                fontSize: "1.5rem",
+                              }}
+                            >
+                              {params.row.name
+                                .split(" ")
+                                .map((n: string) => n[0])
+                                .join("")
+                                .slice(0, 2)}
+                            </Avatar>
+                            <Stack spacing={0.5}>
+                              <Typography variant="h5">
+                                {params.row.name}
+                              </Typography>
+                              <Typography
+                                variant="subtitle2"
+                                color="text.secondary"
+                              >
+                                {params.row.role}
+                              </Typography>
+                              <Chip
+                                label={
+                                  params.row.active ? "Activo" : "Inactivo"
+                                }
+                                color={
+                                  params.row.active ? "success" : "default"
+                                }
+                                size="small"
+                              />
+                            </Stack>
+                          </Stack>
+                          <Divider sx={{ mb: 2 }} />
+                          <Stack spacing={1.5}>
+                            <Stack
+                              direction="row"
+                              spacing={1}
+                              alignItems="center"
+                            >
+                              <EmailOutlined fontSize="small" color="action" />
+                              <Typography variant="body2">
+                                {params.row.email}
+                              </Typography>
+                            </Stack>
+                            <Stack
+                              direction="row"
+                              spacing={1}
+                              alignItems="center"
+                            >
+                              <Work fontSize="small" color="action" />
+                              <Typography variant="body2">
+                                {params.row.department}
+                              </Typography>
+                            </Stack>
+                            <Stack
+                              direction="row"
+                              spacing={1}
+                              alignItems="center"
+                            >
+                              <Phone fontSize="small" color="action" />
+                              <Typography variant="body2">
+                                +57 300 000 000{params.row.id}
+                              </Typography>
+                            </Stack>
+                          </Stack>
+                          <Divider sx={{ my: 2 }} />
+                          <Stack
+                            direction="row"
+                            spacing={1}
+                            justifyContent="flex-end"
+                          >
+                            <Button
+                              variant="outlined"
+                              size="small"
+                              startIcon={<EmailOutlined />}
+                            >
+                              Contactar
+                            </Button>
+                            <Button
+                              variant="outlined"
+                              size="small"
+                              startIcon={<AccountCircle />}
+                            >
+                              Ver perfil
+                            </Button>
+                          </Stack>
+                        </Paper>
+                      </Box>
+                    );
+                  return (
+                    <Box sx={{ p: 3, bgcolor: "background.paper" }}>
+                      {/* Header */}
+                      <Box sx={{ mb: 1 }}>
+                        <Typography variant="h5" sx={{ fontWeight: 400 }}>
+                          Editar Participante: {params.row.name}
+                        </Typography>
+                        <Typography
+                          variant="body2"
+                          sx={{ color: "text.secondary" }}
+                        >
+                          Los campos marcados con{" "}
+                          <span style={{ color: "red" }}>*</span> son
+                          obligatorios
+                        </Typography>
+                      </Box>
 
-                    {/* Tabs */}
-                    <TabsWrapper
-                      currentTab={detailPanelTab}
-                      setCurrentTab={setDetailPanelTab}
-                    >
-                      <TabItem id={0} title="GENERAL">
-                        <Box sx={{ pt: 3 }}>
-                          {/* Información Básica */}
-                          <Box sx={{ mb: 3 }}>
+                      {/* Tabs */}
+                      <TabsWrapper
+                        currentTab={detailPanelTab}
+                        setCurrentTab={setDetailPanelTab}
+                      >
+                        <TabItem id={0} title="GENERAL">
+                          <Box sx={{ pt: 3 }}>
+                            {/* Información Básica */}
+                            <Box sx={{ mb: 3 }}>
+                              <Typography
+                                variant="subtitle1"
+                                sx={{ mb: 2, fontWeight: 600 }}
+                              >
+                                Información Básica
+                              </Typography>
+
+                              {/* Grid 3 columnas x 4 filas */}
+                              <Box
+                                sx={{
+                                  display: "grid",
+                                  gridTemplateColumns: "repeat(3, 1fr)",
+                                  gap: 2,
+                                }}
+                              >
+                                {/* Fila 1: País nuam, CO Código, Nombre Corto */}
+                                <Select
+                                  label="País nuam"
+                                  value={detailFormData.paisNuam}
+                                  onChange={(value) =>
+                                    handleDetailFormChange("paisNuam", value)
+                                  }
+                                  options={paisNuamOptions}
+                                  size="small"
+                                  fullWidth
+                                  showClearIndicator
+                                  formControlProps={{ fullWidth: true }}
+                                />
+                                <TextField
+                                  label="CO Código *"
+                                  value={detailFormData.codigo || params.row.id}
+                                  onChange={(value) =>
+                                    handleDetailFormChange("codigo", value)
+                                  }
+                                  size="small"
+                                  fullWidth
+                                />
+                                <TextField
+                                  label="Nombre Corto *"
+                                  value={
+                                    detailFormData.nombreCorto ||
+                                    params.row.name.split(" ")[0]
+                                  }
+                                  onChange={(value) =>
+                                    handleDetailFormChange("nombreCorto", value)
+                                  }
+                                  size="small"
+                                  fullWidth
+                                />
+
+                                {/* Fila 2: Nombre, Tipo de Participante, País de Origen */}
+                                <TextField
+                                  label="Nombre *"
+                                  value={
+                                    detailFormData.nombre || params.row.name
+                                  }
+                                  onChange={(value) =>
+                                    handleDetailFormChange("nombre", value)
+                                  }
+                                  size="small"
+                                  fullWidth
+                                />
+                                <Box sx={{ width: "100%" }}>
+                                  <Select
+                                    label="Tipo de Participante *"
+                                    value={detailFormData.tipoParticipante}
+                                    onChange={(value) =>
+                                      handleDetailFormChange(
+                                        "tipoParticipante",
+                                        value,
+                                      )
+                                    }
+                                    options={tipoParticipanteOptions}
+                                    size="small"
+                                    fullWidth
+                                    showClearIndicator
+                                    formControlProps={{ fullWidth: true }}
+                                  />
+                                  <Typography
+                                    variant="caption"
+                                    sx={{
+                                      color: "text.secondary",
+                                      mt: 0.5,
+                                      ml: 1,
+                                      display: "block",
+                                    }}
+                                  >
+                                    Máximo 5 opciones
+                                  </Typography>
+                                </Box>
+                                <Select
+                                  label="País de Origen *"
+                                  value={detailFormData.paisOrigen}
+                                  onChange={(value) =>
+                                    handleDetailFormChange("paisOrigen", value)
+                                  }
+                                  options={paisOrigenOptions}
+                                  size="small"
+                                  fullWidth
+                                  showClearIndicator
+                                  formControlProps={{ fullWidth: true }}
+                                />
+
+                                {/* Fila 3: Tipo de Entidad, Código Fiscal, Fecha de Ingreso */}
+                                <Select
+                                  label="Tipo de Entidad *"
+                                  value={detailFormData.tipoEntidad}
+                                  onChange={(value) =>
+                                    handleDetailFormChange("tipoEntidad", value)
+                                  }
+                                  options={tipoEntidadOptions}
+                                  size="small"
+                                  fullWidth
+                                  showClearIndicator
+                                  formControlProps={{ fullWidth: true }}
+                                />
+                                <TextField
+                                  label="Código Fiscal *"
+                                  value={detailFormData.codigoFiscal}
+                                  onChange={(value) =>
+                                    handleDetailFormChange(
+                                      "codigoFiscal",
+                                      value,
+                                    )
+                                  }
+                                  size="small"
+                                  fullWidth
+                                />
+                                <DatePicker
+                                  label="Fecha de Ingreso *"
+                                  value={detailFormData.fechaIngreso}
+                                  onChange={(value) =>
+                                    handleDetailFormChange(
+                                      "fechaIngreso",
+                                      value,
+                                    )
+                                  }
+                                  slotProps={{
+                                    textField: {
+                                      size: "small",
+                                      fullWidth: true,
+                                    },
+                                  }}
+                                  showClearIndicator
+                                />
+
+                                {/* Fila 4: Estado */}
+                                <Select
+                                  label="Estado *"
+                                  value={detailFormData.estado}
+                                  onChange={(value) =>
+                                    handleDetailFormChange("estado", value)
+                                  }
+                                  options={estadoOptions}
+                                  size="small"
+                                  fullWidth
+                                  showClearIndicator
+                                  formControlProps={{ fullWidth: true }}
+                                />
+                              </Box>
+                            </Box>
+
+                            {/* Financiero */}
                             <Typography
                               variant="subtitle1"
                               sx={{ mb: 2, fontWeight: 600 }}
                             >
-                              Información Básica
+                              Financiero
                             </Typography>
 
-                            {/* Grid 3 columnas x 4 filas */}
                             <Box
                               sx={{
                                 display: "grid",
                                 gridTemplateColumns: "repeat(3, 1fr)",
-                                gap: 2,
+                                gap: 3,
+                                mb: 3,
+                                alignItems: "start",
                               }}
                             >
-                              {/* Fila 1: País nuam, CO Código, Nombre Corto */}
-                              <Select
-                                label="País nuam"
-                                value={detailFormData.paisNuam}
-                                onChange={(value) =>
-                                  handleDetailFormChange("paisNuam", value)
-                                }
-                                options={paisNuamOptions}
-                                size="small"
-                                fullWidth
-                                showClearIndicator
-                                formControlProps={{ fullWidth: true }}
-                              />
-                              <TextField
-                                label="CO Código *"
-                                value={detailFormData.codigo || params.row.id}
-                                onChange={(value) =>
-                                  handleDetailFormChange("codigo", value)
-                                }
-                                size="small"
-                                fullWidth
-                              />
-                              <TextField
-                                label="Nombre Corto *"
-                                value={
-                                  detailFormData.nombreCorto ||
-                                  params.row.name.split(" ")[0]
-                                }
-                                onChange={(value) =>
-                                  handleDetailFormChange("nombreCorto", value)
-                                }
-                                size="small"
-                                fullWidth
-                              />
-
-                              {/* Fila 2: Nombre, Tipo de Participante, País de Origen */}
-                              <TextField
-                                label="Nombre *"
-                                value={detailFormData.nombre || params.row.name}
-                                onChange={(value) =>
-                                  handleDetailFormChange("nombre", value)
-                                }
-                                size="small"
-                                fullWidth
-                              />
+                              {/* Calidad Tributaria */}
                               <Box sx={{ width: "100%" }}>
                                 <Select
-                                  label="Tipo de Participante *"
-                                  value={detailFormData.tipoParticipante}
+                                  label="Calidad Tributaria *"
+                                  value={detailFormData.calidadTributaria}
                                   onChange={(value) =>
                                     handleDetailFormChange(
-                                      "tipoParticipante",
+                                      "calidadTributaria",
                                       value,
                                     )
                                   }
-                                  options={tipoParticipanteOptions}
+                                  options={calidadTributariaOptions}
                                   size="small"
                                   fullWidth
                                   showClearIndicator
@@ -2043,407 +2333,302 @@ export default function AppComplete() {
                                     display: "block",
                                   }}
                                 >
-                                  Máximo 5 opciones
+                                  Máximo 2 opciones
                                 </Typography>
                               </Box>
-                              <Select
-                                label="País de Origen *"
-                                value={detailFormData.paisOrigen}
-                                onChange={(value) =>
-                                  handleDetailFormChange("paisOrigen", value)
-                                }
-                                options={paisOrigenOptions}
-                                size="small"
-                                fullWidth
-                                showClearIndicator
-                                formControlProps={{ fullWidth: true }}
-                              />
 
-                              {/* Fila 3: Tipo de Entidad, Código Fiscal, Fecha de Ingreso */}
-                              <Select
-                                label="Tipo de Entidad *"
-                                value={detailFormData.tipoEntidad}
-                                onChange={(value) =>
-                                  handleDetailFormChange("tipoEntidad", value)
-                                }
-                                options={tipoEntidadOptions}
-                                size="small"
-                                fullWidth
-                                showClearIndicator
-                                formControlProps={{ fullWidth: true }}
-                              />
-                              <TextField
-                                label="Código Fiscal *"
-                                value={detailFormData.codigoFiscal}
-                                onChange={(value) =>
-                                  handleDetailFormChange("codigoFiscal", value)
-                                }
-                                size="small"
-                                fullWidth
-                              />
-                              <DatePicker
-                                label="Fecha de Ingreso *"
-                                value={detailFormData.fechaIngreso}
-                                onChange={(value) =>
-                                  handleDetailFormChange("fechaIngreso", value)
-                                }
-                                slotProps={{
-                                  textField: { size: "small", fullWidth: true },
+                              {/* Patrimonio (Moneda + Valor) */}
+                              <Box
+                                sx={{
+                                  position: "relative",
+                                  display: "flex",
+                                  alignItems: "center",
                                 }}
-                                showClearIndicator
-                              />
+                              >
+                                <Typography
+                                  variant="caption"
+                                  sx={{
+                                    position: "absolute",
+                                    top: -8,
+                                    left: 12,
+                                    bgcolor: "background.paper",
+                                    px: 0.5,
+                                    color: "text.secondary",
+                                    fontSize: "0.75rem",
+                                    zIndex: 1,
+                                  }}
+                                >
+                                  Patrimonio *
+                                </Typography>
+                                <Select
+                                  value={detailFormData.moneda}
+                                  onChange={(value) =>
+                                    handleDetailFormChange("moneda", value)
+                                  }
+                                  options={monedaOptions}
+                                  size="small"
+                                  sx={{
+                                    minWidth: 80,
+                                    "& .MuiOutlinedInput-notchedOutline": {
+                                      borderRight: "none",
+                                      borderTopRightRadius: 0,
+                                      borderBottomRightRadius: 0,
+                                    },
+                                    "& .MuiSelect-select": {
+                                      pr: "24px !important",
+                                    },
+                                  }}
+                                />
+                                <TextField
+                                  value={detailFormData.patrimonio}
+                                  onChange={(value) =>
+                                    handleDetailFormChange("patrimonio", value)
+                                  }
+                                  placeholder="$ 0"
+                                  size="small"
+                                  sx={{
+                                    flex: 1,
+                                    "& .MuiOutlinedInput-notchedOutline": {
+                                      borderLeft: "none",
+                                      borderTopLeftRadius: 0,
+                                      borderBottomLeftRadius: 0,
+                                    },
+                                  }}
+                                />
+                              </Box>
 
-                              {/* Fila 4: Estado */}
-                              <Select
-                                label="Estado *"
-                                value={detailFormData.estado}
-                                onChange={(value) =>
-                                  handleDetailFormChange("estado", value)
-                                }
-                                options={estadoOptions}
-                                size="small"
-                                fullWidth
-                                showClearIndicator
-                                formControlProps={{ fullWidth: true }}
-                              />
+                              {/* Formador de Mercado */}
+                              <Box
+                                sx={{
+                                  display: "flex",
+                                  alignItems: "center",
+                                  height: 40,
+                                }}
+                              >
+                                <Switch
+                                  label="Formador de Mercado"
+                                  checked={detailFormData.formadorMercado}
+                                  onChange={(e) =>
+                                    handleDetailFormChange(
+                                      "formadorMercado",
+                                      e.target.checked,
+                                    )
+                                  }
+                                />
+                              </Box>
                             </Box>
-                          </Box>
 
-                          {/* Financiero */}
-                          <Typography
-                            variant="subtitle1"
-                            sx={{ mb: 2, fontWeight: 600 }}
-                          >
-                            Financiero
-                          </Typography>
+                            {/* Contacto */}
+                            <Typography
+                              variant="subtitle1"
+                              sx={{ mb: 2, fontWeight: 600 }}
+                            >
+                              Contacto
+                            </Typography>
 
-                          <Box
-                            sx={{
-                              display: "grid",
-                              gridTemplateColumns: "repeat(3, 1fr)",
-                              gap: 3,
-                              mb: 3,
-                              alignItems: "start",
-                            }}
-                          >
-                            {/* Calidad Tributaria */}
-                            <Box sx={{ width: "100%" }}>
-                              <Select
-                                label="Calidad Tributaria *"
-                                value={detailFormData.calidadTributaria}
+                            {/* Fila 1 Contacto */}
+                            <Box
+                              sx={{
+                                display: "grid",
+                                gridTemplateColumns: "repeat(3, 1fr)",
+                                gap: 3,
+                                mb: 2,
+                              }}
+                            >
+                              <TextField
+                                label="Dirección Oficina Principal *"
+                                value={detailFormData.direccionOficina}
                                 onChange={(value) =>
                                   handleDetailFormChange(
-                                    "calidadTributaria",
+                                    "direccionOficina",
                                     value,
                                   )
                                 }
-                                options={calidadTributariaOptions}
                                 size="small"
                                 fullWidth
-                                showClearIndicator
-                                formControlProps={{ fullWidth: true }}
                               />
-                              <Typography
-                                variant="caption"
+                              <Box
                                 sx={{
-                                  color: "text.secondary",
-                                  mt: 0.5,
-                                  ml: 1,
-                                  display: "block",
+                                  position: "relative",
+                                  display: "flex",
+                                  alignItems: "center",
                                 }}
                               >
-                                Máximo 2 opciones
-                              </Typography>
+                                <Typography
+                                  variant="caption"
+                                  sx={{
+                                    position: "absolute",
+                                    top: -8,
+                                    left: 12,
+                                    bgcolor: "background.paper",
+                                    px: 0.5,
+                                    color: "text.secondary",
+                                    fontSize: "0.75rem",
+                                    zIndex: 1,
+                                  }}
+                                >
+                                  Teléfono *
+                                </Typography>
+                                <Select
+                                  value={detailFormData.codigoTelefono}
+                                  onChange={(value) =>
+                                    handleDetailFormChange(
+                                      "codigoTelefono",
+                                      value,
+                                    )
+                                  }
+                                  options={codigoTelefonoOptions}
+                                  size="small"
+                                  sx={{
+                                    minWidth: 80,
+                                    "& .MuiOutlinedInput-notchedOutline": {
+                                      borderRight: "none",
+                                      borderTopRightRadius: 0,
+                                      borderBottomRightRadius: 0,
+                                    },
+                                    "& .MuiSelect-select": {
+                                      pr: "24px !important",
+                                    },
+                                  }}
+                                />
+                                <TextField
+                                  value={detailFormData.telefono}
+                                  onChange={(value: string) =>
+                                    handleDetailFormChange("telefono", value)
+                                  }
+                                  placeholder="000 000 0000"
+                                  size="small"
+                                  sx={{
+                                    flex: 1,
+                                    "& .MuiOutlinedInput-notchedOutline": {
+                                      borderLeft: "none",
+                                      borderTopLeftRadius: 0,
+                                      borderBottomLeftRadius: 0,
+                                    },
+                                  }}
+                                />
+                              </Box>
+                              <Box />
                             </Box>
 
-                            {/* Patrimonio (Moneda + Valor) */}
+                            {/* Fila 2 Contacto */}
                             <Box
                               sx={{
-                                position: "relative",
-                                display: "flex",
-                                alignItems: "center",
+                                display: "grid",
+                                gridTemplateColumns: "repeat(3, 1fr)",
+                                gap: 3,
+                                mb: 3,
                               }}
                             >
-                              <Typography
-                                variant="caption"
-                                sx={{
-                                  position: "absolute",
-                                  top: -8,
-                                  left: 12,
-                                  bgcolor: "background.paper",
-                                  px: 0.5,
-                                  color: "text.secondary",
-                                  fontSize: "0.75rem",
-                                  zIndex: 1,
-                                }}
-                              >
-                                Patrimonio *
-                              </Typography>
-                              <Select
-                                value={detailFormData.moneda}
-                                onChange={(value) =>
-                                  handleDetailFormChange("moneda", value)
-                                }
-                                options={monedaOptions}
-                                size="small"
-                                sx={{
-                                  minWidth: 80,
-                                  "& .MuiOutlinedInput-notchedOutline": {
-                                    borderRight: "none",
-                                    borderTopRightRadius: 0,
-                                    borderBottomRightRadius: 0,
-                                  },
-                                  "& .MuiSelect-select": {
-                                    pr: "24px !important",
-                                  },
-                                }}
-                              />
                               <TextField
-                                value={detailFormData.patrimonio}
-                                onChange={(value) =>
-                                  handleDetailFormChange("patrimonio", value)
-                                }
-                                placeholder="$ 0"
-                                size="small"
-                                sx={{
-                                  flex: 1,
-                                  "& .MuiOutlinedInput-notchedOutline": {
-                                    borderLeft: "none",
-                                    borderTopLeftRadius: 0,
-                                    borderBottomLeftRadius: 0,
-                                  },
-                                }}
-                              />
-                            </Box>
-
-                            {/* Formador de Mercado */}
-                            <Box
-                              sx={{
-                                display: "flex",
-                                alignItems: "center",
-                                height: 40,
-                              }}
-                            >
-                              <Switch
-                                label="Formador de Mercado"
-                                checked={detailFormData.formadorMercado}
-                                onChange={(e) =>
-                                  handleDetailFormChange(
-                                    "formadorMercado",
-                                    e.target.checked,
-                                  )
-                                }
-                              />
-                            </Box>
-                          </Box>
-
-                          {/* Contacto */}
-                          <Typography
-                            variant="subtitle1"
-                            sx={{ mb: 2, fontWeight: 600 }}
-                          >
-                            Contacto
-                          </Typography>
-
-                          {/* Fila 1 Contacto */}
-                          <Box
-                            sx={{
-                              display: "grid",
-                              gridTemplateColumns: "repeat(3, 1fr)",
-                              gap: 3,
-                              mb: 2,
-                            }}
-                          >
-                            <TextField
-                              label="Dirección Oficina Principal *"
-                              value={detailFormData.direccionOficina}
-                              onChange={(value) =>
-                                handleDetailFormChange(
-                                  "direccionOficina",
-                                  value,
-                                )
-                              }
-                              size="small"
-                              fullWidth
-                            />
-                            <Box
-                              sx={{
-                                position: "relative",
-                                display: "flex",
-                                alignItems: "center",
-                              }}
-                            >
-                              <Typography
-                                variant="caption"
-                                sx={{
-                                  position: "absolute",
-                                  top: -8,
-                                  left: 12,
-                                  bgcolor: "background.paper",
-                                  px: 0.5,
-                                  color: "text.secondary",
-                                  fontSize: "0.75rem",
-                                  zIndex: 1,
-                                }}
-                              >
-                                Teléfono *
-                              </Typography>
-                              <Select
-                                value={detailFormData.codigoTelefono}
-                                onChange={(value) =>
-                                  handleDetailFormChange(
-                                    "codigoTelefono",
-                                    value,
-                                  )
-                                }
-                                options={codigoTelefonoOptions}
-                                size="small"
-                                sx={{
-                                  minWidth: 80,
-                                  "& .MuiOutlinedInput-notchedOutline": {
-                                    borderRight: "none",
-                                    borderTopRightRadius: 0,
-                                    borderBottomRightRadius: 0,
-                                  },
-                                  "& .MuiSelect-select": {
-                                    pr: "24px !important",
-                                  },
-                                }}
-                              />
-                              <TextField
-                                value={detailFormData.telefono}
+                                label="Página web"
+                                value={detailFormData.paginaWeb}
                                 onChange={(value: string) =>
-                                  handleDetailFormChange("telefono", value)
+                                  handleDetailFormChange("paginaWeb", value)
                                 }
-                                placeholder="000 000 0000"
                                 size="small"
-                                sx={{
-                                  flex: 1,
-                                  "& .MuiOutlinedInput-notchedOutline": {
-                                    borderLeft: "none",
-                                    borderTopLeftRadius: 0,
-                                    borderBottomLeftRadius: 0,
-                                  },
-                                }}
+                                fullWidth
                               />
+                              <TextField
+                                label="Correo Electrónico"
+                                value={
+                                  detailFormData.correoElectronico ||
+                                  params.row.email
+                                }
+                                onChange={(value: string) =>
+                                  handleDetailFormChange(
+                                    "correoElectronico",
+                                    value,
+                                  )
+                                }
+                                size="small"
+                                fullWidth
+                              />
+                              <Box />
                             </Box>
-                            <Box />
                           </Box>
+                        </TabItem>
 
-                          {/* Fila 2 Contacto */}
-                          <Box
-                            sx={{
-                              display: "grid",
-                              gridTemplateColumns: "repeat(3, 1fr)",
-                              gap: 3,
-                              mb: 3,
-                            }}
-                          >
-                            <TextField
-                              label="Página web"
-                              value={detailFormData.paginaWeb}
-                              onChange={(value: string) =>
-                                handleDetailFormChange("paginaWeb", value)
-                              }
-                              size="small"
-                              fullWidth
-                            />
-                            <TextField
-                              label="Correo Electrónico"
-                              value={
-                                detailFormData.correoElectronico ||
-                                params.row.email
-                              }
-                              onChange={(value: string) =>
-                                handleDetailFormChange(
-                                  "correoElectronico",
-                                  value,
-                                )
-                              }
-                              size="small"
-                              fullWidth
-                            />
-                            <Box />
-                          </Box>
-                        </Box>
-                      </TabItem>
-
-                      <TabItem id={1} title="EQUIVALENCIAS">
-                        <Box sx={{ pt: 3 }}>
-                          <Typography
-                            variant="body2"
-                            sx={{ color: "text.secondary" }}
-                          >
-                            Configuración de equivalencias del participante.
-                          </Typography>
-                          <Box
-                            sx={{
-                              mt: 2,
-                              p: 3,
-                              bgcolor: "Background.secondary",
-                              borderRadius: 1,
-                              border: "1px solid",
-                              borderColor: "Divider",
-                            }}
-                          >
-                            <Typography variant="body1">
-                              Aquí se configuran las equivalencias de códigos
-                              entre diferentes sistemas para el participante{" "}
-                              <strong>{params.row.name}</strong>.
+                        <TabItem id={1} title="EQUIVALENCIAS">
+                          <Box sx={{ pt: 3 }}>
+                            <Typography
+                              variant="body2"
+                              sx={{ color: "text.secondary" }}
+                            >
+                              Configuración de equivalencias del participante.
                             </Typography>
+                            <Box
+                              sx={{
+                                mt: 2,
+                                p: 3,
+                                bgcolor: "Background.secondary",
+                                borderRadius: 1,
+                                border: "1px solid",
+                                borderColor: "Divider",
+                              }}
+                            >
+                              <Typography variant="body1">
+                                Aquí se configuran las equivalencias de códigos
+                                entre diferentes sistemas para el participante{" "}
+                                <strong>{params.row.name}</strong>.
+                              </Typography>
+                            </Box>
                           </Box>
-                        </Box>
-                      </TabItem>
+                        </TabItem>
 
-                      <TabItem id={2} title="CONVENIOS">
-                        <Box sx={{ pt: 3 }}>
-                          <Typography
-                            variant="body2"
-                            sx={{ color: "text.secondary" }}
-                          >
-                            Configuración de convenios del participante.
-                          </Typography>
-                          <Box
-                            sx={{
-                              mt: 2,
-                              p: 3,
-                              bgcolor: "Background.secondary",
-                              borderRadius: 1,
-                              border: "1px solid",
-                              borderColor: "Divider",
-                            }}
-                          >
-                            <Typography variant="body1">
-                              Listado de convenios activos para{" "}
-                              <strong>{params.row.name}</strong> del
-                              departamento{" "}
-                              <strong>{params.row.department}</strong>.
+                        <TabItem id={2} title="CONVENIOS">
+                          <Box sx={{ pt: 3 }}>
+                            <Typography
+                              variant="body2"
+                              sx={{ color: "text.secondary" }}
+                            >
+                              Configuración de convenios del participante.
                             </Typography>
+                            <Box
+                              sx={{
+                                mt: 2,
+                                p: 3,
+                                bgcolor: "Background.secondary",
+                                borderRadius: 1,
+                                border: "1px solid",
+                                borderColor: "Divider",
+                              }}
+                            >
+                              <Typography variant="body1">
+                                Listado de convenios activos para{" "}
+                                <strong>{params.row.name}</strong> del
+                                departamento{" "}
+                                <strong>{params.row.department}</strong>.
+                              </Typography>
+                            </Box>
                           </Box>
-                        </Box>
-                      </TabItem>
-                    </TabsWrapper>
+                        </TabItem>
+                      </TabsWrapper>
 
-                    {/* Botones de acción */}
-                    <Box
-                      sx={{
-                        display: "flex",
-                        justifyContent: "flex-end",
-                        gap: 2,
-                        mt: 3,
-                      }}
-                    >
-                      <Button variant="outlined">CANCELAR</Button>
-                      <Button
-                        variant="contained"
-                        onClick={() =>
-                          console.log("Guardando:", params.row, detailFormData)
-                        }
+                      {/* Botones de acción */}
+                      <Box
+                        sx={{
+                          display: "flex",
+                          justifyContent: "flex-end",
+                          gap: 2,
+                          mt: 3,
+                        }}
                       >
-                        GUARDAR
-                      </Button>
+                        <Button variant="outlined">CANCELAR</Button>
+                        <Button
+                          variant="contained"
+                          onClick={() =>
+                            console.log(
+                              "Guardando:",
+                              params.row,
+                              detailFormData,
+                            )
+                          }
+                        >
+                          GUARDAR
+                        </Button>
+                      </Box>
                     </Box>
-                  </Box>
                   );
                 }}
                 disableColumnMenu={false}
@@ -2467,8 +2652,9 @@ export default function AppComplete() {
             </CodeExample>
           </Box>
           <Alert severity="info" sx={{ mt: 3 }}>
-            💡 <strong>Master-Detail:</strong> Expande cualquier fila para ver 3 tipos
-            de panel: (1) Formulario con tabs, (2) Panel estilo email, (3) Tarjeta de contacto
+            💡 <strong>Master-Detail:</strong> Expande cualquier fila para ver 3
+            tipos de panel: (1) Formulario con tabs, (2) Panel estilo email, (3)
+            Tarjeta de contacto
           </Alert>
         </Card>
 
