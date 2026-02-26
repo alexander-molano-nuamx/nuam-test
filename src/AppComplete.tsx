@@ -2030,7 +2030,7 @@ export default function AppComplete() {
                               </Typography>
                               <Typography
                                 variant="subtitle2"
-                                color="text.secondary"
+                                sx={{ color: "text.secondary" }}
                               >
                                 {params.row.role}
                               </Typography>
