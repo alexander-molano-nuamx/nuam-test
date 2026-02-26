@@ -73,8 +73,14 @@ import {
   BarChartOutlined,
   ExpandMore,
   ExpandLess,
+  Reply,
+  Forward,
+  EmailOutlined,
+  Phone,
+  Work,
+  AccountCircle,
 } from "@mui/icons-material";
-import { Box, Stack } from "@mui/material";
+import { Avatar, Box, ButtonGroup, Chip, Paper, Stack } from "@mui/material";
 import type { GridColDef } from "@mui/x-data-grid";
 import type { Location, NavigateFunction } from "react-router";
 
@@ -1835,59 +1841,99 @@ export default function AppComplete() {
             >
               <DataGridProX
                 rows={[
-                  {
-                    id: 1,
-                    name: "Juan Pérez",
-                    email: "juan@example.com",
-                    role: "Admin",
-                    age: 32,
-                    active: true,
-                    department: "IT",
-                  },
-                  {
-                    id: 2,
-                    name: "María García",
-                    email: "maria@example.com",
-                    role: "Usuario",
-                    age: 28,
-                    active: true,
-                    department: "Ventas",
-                  },
-                  {
-                    id: 3,
-                    name: "Pedro López",
-                    email: "pedro@example.com",
-                    role: "Editor",
-                    age: 35,
-                    active: false,
-                    department: "Marketing",
-                  },
+                  { id: 1, name: "Juan Pérez", email: "juan@example.com", role: "Admin", age: 32, active: true, department: "IT", detailType: "form" },
+                  { id: 2, name: "María García", email: "maria@example.com", role: "Usuario", age: 28, active: true, department: "Ventas", detailType: "email" },
+                  { id: 3, name: "Pedro López", email: "pedro@example.com", role: "Editor", age: 35, active: false, department: "Marketing", detailType: "contact" },
+                  { id: 4, name: "Ana Martínez", email: "ana@example.com", role: "Admin", age: 26, active: true, department: "Finanzas", detailType: "form" },
+                  { id: 5, name: "Carlos Rodríguez", email: "carlos@example.com", role: "Editor", age: 40, active: true, department: "IT", detailType: "email" },
+                  { id: 6, name: "Laura Sánchez", email: "laura@example.com", role: "Usuario", age: 31, active: false, department: "Legal", detailType: "contact" },
                 ]}
                 columns={[
-                  { field: "id", headerName: "ID", width: 70, type: "number" },
-                  { field: "name", headerName: "Nombre", width: 180 },
-                  { field: "email", headerName: "Email", width: 220 },
-                  { field: "role", headerName: "Rol", width: 120 },
+                  { field: "id", headerName: "ID", width: 60, type: "number" },
+                  { field: "name", headerName: "Nombre", width: 160 },
+                  { field: "email", headerName: "Email", width: 200 },
+                  { field: "role", headerName: "Rol", width: 110 },
+                  { field: "department", headerName: "Departamento", width: 130 },
+                  { field: "active", headerName: "Activo", width: 80, type: "boolean" },
                   {
-                    field: "age",
-                    headerName: "Edad",
-                    width: 90,
-                    type: "number",
-                  },
-                  {
-                    field: "department",
-                    headerName: "Departamento",
-                    width: 150,
-                  },
-                  {
-                    field: "active",
-                    headerName: "Activo",
-                    width: 100,
-                    type: "boolean",
+                    field: "detailType",
+                    headerName: "Panel",
+                    width: 130,
+                    renderCell: (p) => (
+                      <Chip
+                        label={p.row.detailType === "form" ? "Formulario" : p.row.detailType === "email" ? "Email" : "Contacto"}
+                        size="small"
+                        color={p.row.detailType === "form" ? "primary" : p.row.detailType === "email" ? "info" : "success"}
+                      />
+                    ),
                   },
                 ]}
-                getDetailPanelHeight={() => 600}
-                getDetailPanelContent={(params) => (
+                getDetailPanelHeight={(params) => {
+                  if (params.row.detailType === "email") return 320;
+                  if (params.row.detailType === "contact") return 260;
+                  return 600;
+                }}
+                getDetailPanelContent={(params) => {
+                  if (params.row.detailType === "email") return (
+                    <Stack sx={{ py: 2, height: "100%", boxSizing: "border-box", position: "sticky", left: 0, width: "100%" }} direction="column">
+                      <Paper sx={{ flex: 1, mx: "auto", width: "90%", p: 2 }}>
+                        <Stack direction="column" spacing={1}>
+                          <Typography variant="h5">{`Informe de ${params.row.department}`}</Typography>
+                          <Typography variant="caption">{`Fecha: ${new Date().toLocaleDateString("es-CO")}`}</Typography>
+                          <Typography variant="subtitle2">{`De: ${params.row.name} <${params.row.email}>`}</Typography>
+                          <Typography variant="subtitle2">{`Para: administrador <admin@nuam.com>`}</Typography>
+                          <Typography variant="body2">
+                            Adjunto encontrará el informe mensual del departamento de {params.row.department}.
+                            Por favor revisar los indicadores de desempeño y métricas clave del período.
+                            Quedamos atentos a sus comentarios para el siguiente ciclo.
+                          </Typography>
+                        </Stack>
+                        <Divider sx={{ my: 3 }} />
+                        <ButtonGroup variant="text" sx={{ display: "flex", justifyContent: "flex-end" }}>
+                          <Button sx={{ px: 2 }} startIcon={<Reply />}>Responder</Button>
+                          <Button sx={{ px: 2 }} startIcon={<Forward />}>Reenviar</Button>
+                          <Button sx={{ px: 2 }} color="error" startIcon={<Delete />}>Eliminar</Button>
+                        </ButtonGroup>
+                      </Paper>
+                    </Stack>
+                  );
+                  if (params.row.detailType === "contact") return (
+                    <Box sx={{ p: 3, display: "flex", justifyContent: "center" }}>
+                      <Paper sx={{ p: 3, maxWidth: 420, width: "100%" }}>
+                        <Stack direction="row" spacing={3} alignItems="center" sx={{ mb: 2 }}>
+                          <Avatar sx={{ width: 72, height: 72, bgcolor: "primary.main", fontSize: "1.5rem" }}>
+                            {params.row.name.split(" ").map((n: string) => n[0]).join("").slice(0, 2)}
+                          </Avatar>
+                          <Stack spacing={0.5}>
+                            <Typography variant="h5">{params.row.name}</Typography>
+                            <Typography variant="subtitle2" color="text.secondary">{params.row.role}</Typography>
+                            <Chip label={params.row.active ? "Activo" : "Inactivo"} color={params.row.active ? "success" : "default"} size="small" />
+                          </Stack>
+                        </Stack>
+                        <Divider sx={{ mb: 2 }} />
+                        <Stack spacing={1.5}>
+                          <Stack direction="row" spacing={1} alignItems="center">
+                            <EmailOutlined fontSize="small" color="action" />
+                            <Typography variant="body2">{params.row.email}</Typography>
+                          </Stack>
+                          <Stack direction="row" spacing={1} alignItems="center">
+                            <Work fontSize="small" color="action" />
+                            <Typography variant="body2">{params.row.department}</Typography>
+                          </Stack>
+                          <Stack direction="row" spacing={1} alignItems="center">
+                            <Phone fontSize="small" color="action" />
+                            <Typography variant="body2">+57 300 000 000{params.row.id}</Typography>
+                          </Stack>
+                        </Stack>
+                        <Divider sx={{ my: 2 }} />
+                        <Stack direction="row" spacing={1} justifyContent="flex-end">
+                          <Button variant="outlined" size="small" startIcon={<EmailOutlined />}>Contactar</Button>
+                          <Button variant="outlined" size="small" startIcon={<AccountCircle />}>Ver perfil</Button>
+                        </Stack>
+                      </Paper>
+                    </Box>
+                  );
+                  return (
                   <Box sx={{ p: 3, bgcolor: "background.paper" }}>
                     {/* Header */}
                     <Box sx={{ mb: 1 }}>
@@ -2398,7 +2444,8 @@ export default function AppComplete() {
                       </Button>
                     </Box>
                   </Box>
-                )}
+                  );
+                }}
                 disableColumnMenu={false}
                 pagination
                 initialState={{
@@ -2419,9 +2466,9 @@ export default function AppComplete() {
               />
             </CodeExample>
           </Box>
-          <Alert severity="info" sx={{ mt: 2 }}>
-            💡 <strong>Master-Detail:</strong> Expande una fila para ver el
-            formulario completo con tabs (General, Equivalencias, Convenios)
+          <Alert severity="info" sx={{ mt: 3 }}>
+            💡 <strong>Master-Detail:</strong> Expande cualquier fila para ver 3 tipos
+            de panel: (1) Formulario con tabs, (2) Panel estilo email, (3) Tarjeta de contacto
           </Alert>
         </Card>
 
@@ -2674,7 +2721,7 @@ export default function AppComplete() {
         {/* SECCIÓN 8: MODAL */}
         <Card id="section-modal" sx={{ mb: 3, p: 3 }}>
           <Typography variant="h5" color="primary" gutterBottom>
-            6. Modal
+            8. Modal
           </Typography>
           <Divider sx={{ mb: 3 }} />
 
@@ -2735,10 +2782,10 @@ export default function AppComplete() {
           </CodeExample>
         </Card>
 
-        {/* SECCIÓN 7: TIPOGRAFÍA */}
+        {/* SECCIÓN 9: TIPOGRAFÍA */}
         <Card id="section-tipografia" sx={{ mb: 3, p: 3 }}>
           <Typography variant="h5" color="primary" gutterBottom>
-            7. Tipografía
+            9. Tipografía
           </Typography>
           <Divider sx={{ mb: 3 }} />
 
@@ -2780,10 +2827,10 @@ export default function AppComplete() {
           </CodeExample>
         </Card>
 
-        {/* SECCIÓN 8: CARDS */}
+        {/* SECCIÓN 10: CARDS */}
         <Card id="section-cards" sx={{ mb: 3, p: 3 }} elevation={3}>
           <Typography variant="h5" color="primary" gutterBottom>
-            8. Cards
+            10. Cards
           </Typography>
           <Divider sx={{ mb: 3 }} />
 
@@ -2839,10 +2886,10 @@ export default function AppComplete() {
           </CodeExample>
         </Card>
 
-        {/* SECCIÓN 9: ISOTYPE NAME */}
+        {/* SECCIÓN 11: ISOTYPE NAME */}
         <Card id="section-isotype" sx={{ mb: 3, p: 3 }}>
           <Typography variant="h5" color="primary" gutterBottom>
-            9. IsotypeName Component
+            11. IsotypeName Component
           </Typography>
           <Divider sx={{ mb: 3 }} />
           <Alert severity="success" sx={{ mb: 2 }}>
@@ -3145,10 +3192,10 @@ export default function AppComplete() {
           </Stack>
         </Card>
 
-        {/* SECCIÓN 10: RICH TREE VIEW */}
+        {/* SECCIÓN 12: RICH TREE VIEW */}
         <Card id="section-rich-tree-view" sx={{ mb: 3, p: 3 }}>
           <Typography variant="h5" color="primary" gutterBottom>
-            10. RichTreeView
+            12. RichTreeView
           </Typography>
           <Divider sx={{ mb: 3 }} />
           <Alert severity="success" sx={{ mb: 2 }}>
@@ -3540,10 +3587,10 @@ export default function AppComplete() {
           </Alert>
         </Card>
 
-        {/* SECCIÓN 11: RICH TREE VIEW PRO */}
+        {/* SECCIÓN 13: RICH TREE VIEW PRO */}
         <Card id="section-rich-tree-view-pro" sx={{ mb: 3, p: 3 }}>
           <Typography variant="h5" color="primary" gutterBottom>
-            11. RichTreeViewPro
+            13. RichTreeViewPro
           </Typography>
           <Divider sx={{ mb: 3 }} />
           <Alert severity="success" sx={{ mb: 2 }}>
@@ -3936,10 +3983,10 @@ export default function AppComplete() {
           </Alert>
         </Card>
 
-        {/* SECCIÓN 12: LINE CHARTS */}
+        {/* SECCIÓN 14: LINE CHARTS */}
         <Card id="section-line-chart" sx={{ mb: 3, p: 3 }}>
           <Typography variant="h5" color="primary" gutterBottom>
-            12. LineChart - Gráficos de Línea
+            14. LineChart - Gráficos de Línea
           </Typography>
           <Divider sx={{ mb: 3 }} />
           <Alert severity="success" sx={{ mb: 3 }}>
@@ -4762,10 +4809,10 @@ export default function AppComplete() {
           </Alert>
         </Card>
 
-        {/* SECCIÓN 13: PIE CHARTS */}
+        {/* SECCIÓN 15: PIE CHARTS */}
         <Card id="section-pie-chart" sx={{ mb: 3, p: 3 }}>
           <Typography variant="h5" color="primary" gutterBottom>
-            13. PieChart - Gráficos Circulares
+            15. PieChart - Gráficos Circulares
           </Typography>
           <Divider sx={{ mb: 3 }} />
           <Alert severity="success" sx={{ mb: 3 }}>
@@ -5789,10 +5836,10 @@ export default function AppComplete() {
           </Alert>
         </Card>
 
-        {/* SECCIÓN 14: SPARKLINE CHARTS */}
+        {/* SECCIÓN 16: SPARKLINE CHARTS */}
         <Card id="section-sparkline-chart" sx={{ mb: 3, p: 3 }}>
           <Typography variant="h5" color="primary" gutterBottom>
-            14. SparkLineChart - Gráficos Compactos
+            16. SparkLineChart - Gráficos Compactos
           </Typography>
           <Divider sx={{ mb: 3 }} />
           <Alert severity="success" sx={{ mb: 3 }}>
@@ -6321,10 +6368,10 @@ export default function AppComplete() {
           </Alert>
         </Card>
 
-        {/* SECCIÓN 15: BAR CHARTS */}
+        {/* SECCIÓN 17: BAR CHARTS */}
         <Card id="section-bar-chart" sx={{ mb: 3, p: 3 }}>
           <Typography variant="h5" color="primary" gutterBottom>
-            15. BarChart - Gráficos de Barras
+            17. BarChart - Gráficos de Barras
           </Typography>
           <Divider sx={{ mb: 3 }} />
           <Alert severity="success" sx={{ mb: 3 }}>
@@ -6513,10 +6560,10 @@ export default function AppComplete() {
           </Alert>
         </Card>
 
-        {/* SECCIÓN 16: SCATTER CHART */}
+        {/* SECCIÓN 18: SCATTER CHART */}
         <Card id="section-scatter-chart" sx={{ mb: 3, p: 3 }}>
           <Typography variant="h5" color="primary" gutterBottom>
-            16. ScatterChart - Gráficos de Dispersión
+            18. ScatterChart - Gráficos de Dispersión
           </Typography>
           <Divider sx={{ mb: 3 }} />
           <Alert severity="success" sx={{ mb: 3 }}>
@@ -6656,10 +6703,10 @@ export default function AppComplete() {
           </Alert>
         </Card>
 
-        {/* SECCIÓN 17: GAUGE */}
+        {/* SECCIÓN 19: GAUGE */}
         <Card id="section-gauge" sx={{ mb: 3, p: 3 }}>
           <Typography variant="h5" color="primary" gutterBottom>
-            17. Gauge - Medidores
+            19. Gauge - Medidores
           </Typography>
           <Divider sx={{ mb: 3 }} />
           <Alert severity="success" sx={{ mb: 3 }}>
@@ -6808,10 +6855,10 @@ export default function AppComplete() {
           </Alert>
         </Card>
 
-        {/* SECCIÓN 18: RADAR CHART */}
+        {/* SECCIÓN 20: RADAR CHART */}
         <Card id="section-radar-chart" sx={{ mb: 3, p: 3 }}>
           <Typography variant="h5" color="primary" gutterBottom>
-            18. RadarChart - Gráficos de Radar
+            20. RadarChart - Gráficos de Radar
           </Typography>
           <Divider sx={{ mb: 3 }} />
           <Alert severity="success" sx={{ mb: 3 }}>
@@ -6847,10 +6894,10 @@ export default function AppComplete() {
           </Stack>
         </Card>
 
-        {/* SECCIÓN 19: HEATMAP */}
+        {/* SECCIÓN 21: HEATMAP */}
         <Card id="section-heatmap" sx={{ mb: 3, p: 3 }}>
           <Typography variant="h5" color="primary" gutterBottom>
-            19. Heatmap - Mapas de Calor
+            21. Heatmap - Mapas de Calor
           </Typography>
           <Divider sx={{ mb: 3 }} />
           <Alert severity="success" sx={{ mb: 3 }}>
@@ -6907,10 +6954,10 @@ export default function AppComplete() {
           </Stack>
         </Card>
 
-        {/* SECCIÓN 20: FUNNEL CHART */}
+        {/* SECCIÓN 22: FUNNEL CHART */}
         <Card id="section-funnel-chart" sx={{ mb: 3, p: 3 }}>
           <Typography variant="h5" color="primary" gutterBottom>
-            20. FunnelChart - Gráficos de Embudo
+            22. FunnelChart - Gráficos de Embudo
           </Typography>
           <Divider sx={{ mb: 3 }} />
           <Alert severity="success" sx={{ mb: 3 }}>
@@ -6953,10 +7000,10 @@ export default function AppComplete() {
           </Stack>
         </Card>
 
-        {/* SECCIÓN 21: SANKEY CHART */}
+        {/* SECCIÓN 23: SANKEY CHART */}
         <Card id="section-sankey-chart" sx={{ mb: 3, p: 3 }}>
           <Typography variant="h5" color="primary" gutterBottom>
-            21. SankeyChart - Diagramas de Flujo
+            23. SankeyChart - Diagramas de Flujo
           </Typography>
           <Divider sx={{ mb: 3 }} />
           <Alert severity="success" sx={{ mb: 3 }}>
@@ -6994,10 +7041,10 @@ export default function AppComplete() {
           </Stack>
         </Card>
 
-        {/* SECCIÓN 22: AREA CHART */}
+        {/* SECCIÓN 24: AREA CHART */}
         <Card id="section-area-chart" sx={{ mb: 3, p: 3 }}>
           <Typography variant="h5" color="primary" gutterBottom>
-            22. AreaChart - Gráficos de Área
+            24. AreaChart - Gráficos de Área
           </Typography>
           <Divider sx={{ mb: 3 }} />
           <Alert severity="success" sx={{ mb: 3 }}>
