@@ -12,14 +12,14 @@ function App() {
 
   return (
     <NuamThemeWrapper>
-      {/* Selector de vista */}
+      {/* Selector de vista — oculto en mobile (aparece en sidebar) */}
       <Box
         sx={{
           position: "fixed",
           top: 60,
           right: 16,
           zIndex: 9999,
-          display: "flex",
+          display: { xs: "none", md: "flex" },
           gap: 1,
           bgcolor: "background.paper",
           p: 1,
@@ -44,7 +44,11 @@ function App() {
       </Box>
 
       {/* Contenido */}
-      {view === "playground" ? <AppComplete /> : <StockDashboard />}
+      {view === "playground" ? (
+        <AppComplete view={view} setView={setView} />
+      ) : (
+        <StockDashboard onBack={() => setView("playground")} />
+      )}
     </NuamThemeWrapper>
   );
 }

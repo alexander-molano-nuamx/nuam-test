@@ -7,7 +7,7 @@ import {
   Alert,
   Button,
 } from "@nuam/common-fe-lib-components";
-import { Box, Chip } from "@mui/material";
+import { Box, Chip, useMediaQuery, useTheme } from "@mui/material";
 import type { GridColDef } from "@mui/x-data-grid-pro";
 import TrendingUpIcon from "@mui/icons-material/TrendingUp";
 import TrendingDownIcon from "@mui/icons-material/TrendingDown";
@@ -71,7 +71,9 @@ const formatCurrency = (num: number): string => {
   }).format(num);
 };
 
-export default function StockDashboard() {
+export default function StockDashboard({ onBack }: { onBack?: () => void } = {}) {
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down("md"));
   const [stocks, setStocks] = useState<Stock[]>(initialStocks);
   const [isLive, setIsLive] = useState(false);
   const [selectedStock, setSelectedStock] = useState<Stock | null>(null);
@@ -233,6 +235,11 @@ export default function StockDashboard() {
   return (
     <NuamThemeWrapper>
       <Box sx={{ p: 3 }}>
+        {onBack && isMobile && (
+          <Button variant="outlined" size="small" onClick={onBack} sx={{ mb: 2 }}>
+            ← Volver
+          </Button>
+        )}
         <Typography variant="h4" color="primary" gutterBottom>
           Stock Dashboard - DataGridPro Demo
         </Typography>

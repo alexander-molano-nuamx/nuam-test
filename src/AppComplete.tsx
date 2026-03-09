@@ -73,6 +73,8 @@ import {
   BarChartOutlined,
   ExpandMore,
   ExpandLess,
+  Apps,
+  ShowChart,
   Reply,
   Forward,
   EmailOutlined,
@@ -80,7 +82,16 @@ import {
   Work,
   AccountCircle,
 } from "@mui/icons-material";
-import { Avatar, Box, ButtonGroup, Chip, Paper, Stack } from "@mui/material";
+import {
+  Avatar,
+  Box,
+  ButtonGroup,
+  Chip,
+  Paper,
+  Stack,
+  useMediaQuery,
+  useTheme,
+} from "@mui/material";
 import type { GridColDef } from "@mui/x-data-grid";
 import type { Location, NavigateFunction } from "react-router";
 
@@ -361,7 +372,15 @@ const shortcutsItems = [
   { label: "Reestablecer", getValue: () => [null, null] },
 ];
 
-export default function AppComplete() {
+interface AppCompleteProps {
+  view?: "playground" | "stock";
+  setView?: (view: "playground" | "stock") => void;
+}
+
+export default function AppComplete({
+  view = "playground",
+  setView,
+}: AppCompleteProps = {}) {
   const [textValue, setTextValue] = useState("");
   const [emailValue, setEmailValue] = useState("");
   const [checkboxValue, setCheckboxValue] = useState(false);
@@ -398,7 +417,11 @@ export default function AppComplete() {
   const [showAlert, setShowAlert] = useState(true);
   const [autocompleteValue, setAutocompleteValue] =
     useState<SerieItemOpa | null>(null);
-  const [openSideBar, setOpenSideBar] = useState(true);
+  const [openSideBar, setOpenSideBar] = useState(
+    () => window.innerWidth >= 900,
+  );
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down("md"));
 
   // RichTreeView state
   const [treeExpandedItems, setTreeExpandedItems] = useState<string[]>([
@@ -484,6 +507,19 @@ export default function AppComplete() {
     pathname: "/section-formularios",
   } as unknown as Location;
   const mockNavigation = ((path: string) => {
+    // Interceptar rutas especiales de navegación de vista
+    if (path.includes("view-playground") && setView) {
+      setView("playground");
+      setOpenSideBar(false);
+      return;
+    }
+    if (path.includes("view-stock") && setView) {
+      setView("stock");
+      setOpenSideBar(false);
+      return;
+    }
+    // Cerrar sidebar en mobile al navegar
+    if (isMobile) setOpenSideBar(false);
     // path viene como "/section-xxx" → extraemos el id sin la barra inicial
     const id = path.replace(/^\//, "");
     const el = document.getElementById(id);
@@ -585,9 +621,9 @@ export default function AppComplete() {
     <NuamThemeWrapper>
       {/* Header Bar */}
       <AppBar
-        appTitle="nuam Playground"
+        appTitle={isMobile ? "" : "nuam Playground"}
         toggleSidebar={() => setOpenSideBar(!openSideBar)}
-        useIsotypeName={true}
+        useIsotypeName={!isMobile}
         isotypeNameProps={{
           projectName: "nuam",
           logoSrc: isotypeLogoSrc,
@@ -605,25 +641,107 @@ export default function AppComplete() {
         }
       />
 
-      {/* SideBar */}
-      <SideBar
-        openSideBar={openSideBar}
-        pages={sidebarPages}
-        location={mockLocation}
-        navigation={mockNavigation}
-      />
+      {/* SideBar — en mobile empujamos el List interno para que no quede bajo el overlay del IsotypeName */}
+      <Box
+        sx={
+          isMobile
+            ? { "& .MuiDrawer-paper > .MuiList-root": { marginTop: "49px" } }
+            : {}
+        }
+      >
+        <SideBar
+          openSideBar={openSideBar}
+          pages={[
+            ...sidebarPages,
+            ...(isMobile && setView
+              ? view === "playground"
+                ? [
+                    {
+                      name: "Stock Dashboard",
+                      path: "/view-stock",
+                      icon: <ShowChart />,
+                    },
+                  ]
+                : [
+                    {
+                      name: "Playground",
+                      path: "/view-playground",
+                      icon: <Apps />,
+                    },
+                  ]
+              : []),
+          ]}
+          location={mockLocation}
+          navigation={mockNavigation}
+        />
+      </Box>
+
+      {/* Overlay mobile — cierra sidebar al hacer click, va DESPUÉS del SideBar en el DOM */}
+      {isMobile && openSideBar && (
+        <Box
+          onClick={() => setOpenSideBar(false)}
+          sx={{
+            position: "fixed",
+            top: 0,
+            left: `${DRAWER_WIDTH}px`,
+            right: 0,
+            bottom: 0,
+            bgcolor: "rgba(0, 0, 0, 0.58)",
+          }}
+        />
+      )}
+      {isMobile && openSideBar && (
+        <Box
+          sx={{
+            position: "fixed",
+            top: "49px",
+            left: 0,
+
+            height: "49px",
+            zIndex: 1300,
+            px: 2,
+            display: "flex",
+            alignItems: "center",
+            bgcolor: "background.paper",
+            borderBottom: "1px solid",
+            borderColor: "divider",
+            overflow: "hidden",
+          }}
+        >
+          {/* Wrapper para forzar row — IsotypeName tiene media query que fuerza column en mobile */}
+          <Box
+            sx={{
+              "& > [role='banner']": {
+                flexDirection: "row !important",
+                gap: "8px !important",
+                width: "50%",
+              },
+              marginTop: "16px", // Ajuste visual para centrar el logo con el texto
+              paddingBottom: "16px", // Ajuste visual para centrar el logo con el texto
+            }}
+          >
+            <IsotypeName
+              projectName="nuam"
+              logoSrc={isotypeLogoSrc}
+              variant="horizontal"
+              size="sm"
+              showText={true}
+            />
+          </Box>
+        </Box>
+      )}
 
       {/* Main content with top margin to avoid header overlap and left margin for sidebar */}
       <Box
         sx={{
           marginTop: "49px",
-          marginLeft: openSideBar ? `${DRAWER_WIDTH}px` : 0,
-          padding: 3,
+          marginLeft: { xs: 0, md: openSideBar ? `${DRAWER_WIDTH}px` : 0 },
+          padding: { xs: 1, sm: 2, md: 3 },
           transition: "margin-left 225ms cubic-bezier(0.4, 0, 0.6, 1) 0ms",
         }}
       >
         <Typography variant="h4" color="primary" gutterBottom>
-          nuam component library - Playground
+          Component library - nuam Playground
         </Typography>
 
         {/* Alert */}
@@ -666,7 +784,7 @@ export default function AppComplete() {
                     onChange={(value) => setTextValue(value as string)}
                     placeholder="Escribe algo..."
                     helperText="Campo de texto básico"
-                    sx={{ width: "50%" }}
+                    sx={{ width: { xs: "100%", sm: "50%" } }}
                   />
                 </CodeExample>
                 <CodeExample
@@ -677,7 +795,7 @@ export default function AppComplete() {
  onChange={(value) => setEmailValue(value as string)}
  type="email"
  helperText="Campo de email"
- sx={{ width: "50%" }}
+ sx={{ width: { xs: "100%", sm: "50%" } }}
 />`}
                 >
                   <TextField
@@ -686,7 +804,7 @@ export default function AppComplete() {
                     onChange={(value) => setEmailValue(value as string)}
                     type="email"
                     helperText="Campo de email"
-                    sx={{ width: "50%" }}
+                    sx={{ width: { xs: "100%", sm: "50%" } }}
                   />
                 </CodeExample>
                 <CodeExample
@@ -698,7 +816,7 @@ export default function AppComplete() {
  helperText={
    textValue === "" ? "Este campo es obligatorio" : "Correcto"
  }
- sx={{ width: "50%" }}
+ sx={{ width: { xs: "100%", sm: "50%" } }}
 />`}
                 >
                   <TextField
@@ -710,7 +828,7 @@ export default function AppComplete() {
                         ? "Este campo es obligatorio"
                         : "Correcto"
                     }
-                    sx={{ width: "50%" }}
+                    sx={{ width: { xs: "100%", sm: "50%" } }}
                   />
                 </CodeExample>
                 <CodeExample
@@ -719,14 +837,14 @@ export default function AppComplete() {
  label="Campo deshabilitado"
  disabled
  value="No editable"
- sx={{ width: "50%" }}
+ sx={{ width: { xs: "100%", sm: "50%" } }}
 />`}
                 >
                   <TextField
                     label="Campo deshabilitado"
                     disabled
                     value="No editable"
-                    sx={{ width: "50%" }}
+                    sx={{ width: { xs: "100%", sm: "50%" } }}
                   />
                 </CodeExample>
               </Stack>
@@ -792,7 +910,7 @@ export default function AppComplete() {
   labelKey="name"
   valueKey="id"
   searchKeys={["name", "duration", "type"]}
-  sx={{ width: "40%" }}
+  sx={{ width: { xs: "100%", sm: "40%" } }}
 />`}
               >
                 <Autocomplete
@@ -806,7 +924,7 @@ export default function AppComplete() {
                   labelKey="name"
                   valueKey="id"
                   searchKeys={["name", "duration", "type"]}
-                  sx={{ width: "40%" }}
+                  sx={{ width: { xs: "100%", sm: "40%" } }}
                 />
                 {autocompleteValue && (
                   <Box
@@ -849,7 +967,7 @@ export default function AppComplete() {
  showClearIndicator={true}
  value={dateValue}
  onChange={(value) => setDateValue(value)}
- sx={{ width: "40%" }}
+ sx={{ width: { xs: "100%", sm: "40%" } }}
 />`}
               >
                 <DatePicker
@@ -857,7 +975,7 @@ export default function AppComplete() {
                   showClearIndicator={true}
                   value={dateValue}
                   onChange={(value) => setDateValue(value)}
-                  sx={{ width: "40%" }}
+                  sx={{ width: { xs: "100%", sm: "40%" } }}
                 />
               </CodeExample>
             </Box>
@@ -878,14 +996,14 @@ export default function AppComplete() {
  localeText={{ start: "Fecha inicio", end: "Fecha fin" }}
  value={dateRangeValue}
  onChange={(newValue) => setDateRangeValue(newValue)}
- sx={{ width: "40%" }}
+ sx={{ width: { xs: "100%", sm: "40%" } }}
 />`}
               >
                 <DateRangePicker
                   localeText={{ start: "Fecha inicio", end: "Fecha fin" }}
                   value={dateRangeValue}
                   onChange={(newValue) => setDateRangeValue(newValue)}
-                  sx={{ width: "40%" }}
+                  sx={{ width: { xs: "100%", sm: "40%" } }}
                 />
                 {dateRangeValue[0] && dateRangeValue[1] && (
                   <Box
@@ -991,7 +1109,7 @@ export default function AppComplete() {
  label="Selecciona un rango de horas"
  value={timeRangeValue}
  onChange={(newValue) => setTimeRangeValue(newValue)}
- sx={{ width: "40%" }}
+ sx={{ width: { xs: "100%", sm: "40%" } }}
 />`}
               >
                 <TimeRangePicker
@@ -1001,7 +1119,7 @@ export default function AppComplete() {
                   }}
                   value={timeRangeValue}
                   onChange={(newValue) => setTimeRangeValue(newValue)}
-                  sx={{ width: "40%" }}
+                  sx={{ width: { xs: "100%", sm: "40%" } }}
                 />
 
                 {timeRangeValue[0] && timeRangeValue[1] && (
@@ -1131,14 +1249,14 @@ export default function AppComplete() {
  label="Rango de fechas"
  value={singleInputDateRange}
  onChange={(newValue) => setSingleInputDateRange(newValue)}
- sx={{ width: "40%" }}
+ sx={{ width: { xs: "100%", sm: "40%" } }}
 />`}
               >
                 <SingleInputDateRangeField
                   label="Rango de fechas"
                   value={singleInputDateRange}
                   onChange={(newValue) => setSingleInputDateRange(newValue)}
-                  sx={{ width: "40%" }}
+                  sx={{ width: { xs: "100%", sm: "40%" } }}
                 />
                 {singleInputDateRange[0] && singleInputDateRange[1] && (
                   <Box
@@ -1192,7 +1310,7 @@ export default function AppComplete() {
  }}
  value={multiInputDateRange}
  onChange={(newValue) => setMultiInputDateRange(newValue)}
- sx={{ width: "40%" }}
+ sx={{ width: { xs: "100%", sm: "40%" } }}
 />`}
               >
                 <MultiInputDateRangeField
@@ -1204,7 +1322,7 @@ export default function AppComplete() {
                   }}
                   value={multiInputDateRange}
                   onChange={(newValue) => setMultiInputDateRange(newValue)}
-                  sx={{ width: "40%" }}
+                  sx={{ width: { xs: "100%", sm: "40%" } }}
                 />
                 {multiInputDateRange[0] && multiInputDateRange[1] && (
                   <Box
@@ -1324,14 +1442,14 @@ export default function AppComplete() {
  label="Rango de horas"
  value={singleInputTimeRange}
  onChange={(newValue) => setSingleInputTimeRange(newValue)}
- sx={{ width: "40%" }}
+ sx={{ width: { xs: "100%", sm: "40%" } }}
 />`}
               >
                 <SingleInputTimeRangeField
                   label="Rango de horas"
                   value={singleInputTimeRange}
                   onChange={(newValue) => setSingleInputTimeRange(newValue)}
-                  sx={{ width: "40%" }}
+                  sx={{ width: { xs: "100%", sm: "40%" } }}
                 />
                 {singleInputTimeRange[0] && singleInputTimeRange[1] && (
                   <Box
@@ -1385,7 +1503,7 @@ export default function AppComplete() {
   }}
   value={multiInputTimeRange}
   onChange={(newValue) => setMultiInputTimeRange(newValue)}
-  sx={{ width: "40%" }}
+  sx={{ width: { xs: "100%", sm: "40%" } }}
 />`}
               >
                 <MultiInputTimeRangeField
@@ -1396,7 +1514,7 @@ export default function AppComplete() {
                   }}
                   value={multiInputTimeRange}
                   onChange={(newValue) => setMultiInputTimeRange(newValue)}
-                  sx={{ width: "40%" }}
+                  sx={{ width: { xs: "100%", sm: "40%" } }}
                 />
                 {multiInputTimeRange[0] && multiInputTimeRange[1] && (
                   <Box
@@ -1504,7 +1622,7 @@ export default function AppComplete() {
             icono de menú (⋮)
           </Alert>
 
-          <Box sx={{ width: "100%" }}>
+          <Box sx={{ width: "100%", overflowX: "auto" }}>
             <CodeExample
               title="Ejemplo de DataGrid básico con paginación y toolbar"
               code={`<DataGrid
@@ -1555,7 +1673,7 @@ export default function AppComplete() {
             operadores de filtro personalizados por columna
           </Alert>
 
-          <Box sx={{ width: "100%" }}>
+          <Box sx={{ width: "100%", overflowX: "auto" }}>
             <CodeExample
               title="DataGrid con customFilterOperators para filtros personalizados"
               code={`<DataGrid
@@ -1610,7 +1728,7 @@ export default function AppComplete() {
             integrada, incluye todas las características Pro
           </Alert>
 
-          <Box sx={{ width: "100%" }}>
+          <Box sx={{ width: "100%", overflowX: "auto" }}>
             <CodeExample
               title="Ejemplo de DataGridPro con características avanzadas"
               code={`<DataGridPro
@@ -1805,7 +1923,7 @@ export default function AppComplete() {
             fila para expandir el panel de detalle con formulario completo
           </Alert>
 
-          <Box sx={{ width: "100%" }}>
+          <Box sx={{ width: "100%", overflowX: "auto" }}>
             <CodeExample
               title="Ejemplo de DataGridProX con Master-Detail Panel personalizado"
               code={`<DataGridProX
@@ -2139,7 +2257,11 @@ export default function AppComplete() {
                               <Box
                                 sx={{
                                   display: "grid",
-                                  gridTemplateColumns: "repeat(3, 1fr)",
+                                  gridTemplateColumns: {
+                                    xs: "1fr",
+                                    sm: "repeat(2, 1fr)",
+                                    md: "repeat(3, 1fr)",
+                                  },
                                   gap: 2,
                                 }}
                               >
@@ -2301,7 +2423,11 @@ export default function AppComplete() {
                             <Box
                               sx={{
                                 display: "grid",
-                                gridTemplateColumns: "repeat(3, 1fr)",
+                                gridTemplateColumns: {
+                                  xs: "1fr",
+                                  sm: "repeat(2, 1fr)",
+                                  md: "repeat(3, 1fr)",
+                                },
                                 gap: 3,
                                 mb: 3,
                                 alignItems: "start",
@@ -2430,7 +2556,11 @@ export default function AppComplete() {
                             <Box
                               sx={{
                                 display: "grid",
-                                gridTemplateColumns: "repeat(3, 1fr)",
+                                gridTemplateColumns: {
+                                  xs: "1fr",
+                                  sm: "repeat(2, 1fr)",
+                                  md: "repeat(3, 1fr)",
+                                },
                                 gap: 3,
                                 mb: 2,
                               }}
@@ -2515,7 +2645,11 @@ export default function AppComplete() {
                             <Box
                               sx={{
                                 display: "grid",
-                                gridTemplateColumns: "repeat(3, 1fr)",
+                                gridTemplateColumns: {
+                                  xs: "1fr",
+                                  sm: "repeat(2, 1fr)",
+                                  md: "repeat(3, 1fr)",
+                                },
                                 gap: 3,
                                 mb: 3,
                               }}
@@ -2670,7 +2804,7 @@ export default function AppComplete() {
             fechas.
           </Alert>
 
-          <Box sx={{ width: "100%" }}>
+          <Box sx={{ width: "100%", overflowX: "auto" }}>
             <CodeExample
               title="Ejemplo de DataGridProX con Header Filters"
               code={`<DataGridProX
