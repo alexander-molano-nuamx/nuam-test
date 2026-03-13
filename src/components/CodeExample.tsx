@@ -54,7 +54,7 @@ export const CodeExample: React.FC<CodeExampleProps> = ({
       )}
 
       {/* Preview */}
-      <Box sx={{ p: 3 }}>{children}</Box>
+      <Box sx={{ p: 3, overflowX: "auto" }}>{children}</Box>
 
       {/* Toolbar */}
       <Box

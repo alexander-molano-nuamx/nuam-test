@@ -1066,7 +1066,7 @@ export default function AppComplete({
                   value={dateTimeRangeValue}
                   onChange={(newValue) => setDateTimeRangeValue(newValue)}
                   sx={{
-                    width: "40%",
+                    width: { xs: "100%", sm: "40%" },
                   }}
                 />
                 {dateTimeRangeValue[0] && dateTimeRangeValue[1] && (
@@ -1166,8 +1166,8 @@ export default function AppComplete({
                   border: "1px solid",
                   borderColor: "divider",
                   borderRadius: 1,
-                  overflow: "hidden",
-                  width: "fit-content",
+                  overflowX: "auto",
+                  maxWidth: "100%",
                 }}
               >
                 <CodeExample
@@ -1372,8 +1372,8 @@ export default function AppComplete({
                   border: "1px solid",
                   borderColor: "divider",
                   borderRadius: 1,
-                  overflow: "hidden",
-                  width: "fit-content",
+                  overflowX: "auto",
+                  maxWidth: "100%",
                 }}
               >
                 <CodeExample
@@ -3223,7 +3223,7 @@ export default function AppComplete({
               <Typography variant="h6" gutterBottom>
                 Logo + Texto (showText: true)
               </Typography>
-              <Stack direction="row" spacing={4} alignItems="center">
+              <Stack direction={{ xs: "column", sm: "row" }} spacing={4} alignItems="center">
                 <Box>
                   <Typography variant="caption" display="block" mb={1}>
                     Size: sm
@@ -3295,7 +3295,7 @@ export default function AppComplete({
               <Typography variant="h6" gutterBottom>
                 Solo Logo (showText: false)
               </Typography>
-              <Stack direction="row" spacing={4} alignItems="center">
+              <Stack direction={{ xs: "column", sm: "row" }} spacing={4} alignItems="center">
                 <Box>
                   <Typography variant="caption" display="block" mb={1}>
                     Size: sm
@@ -5168,19 +5168,21 @@ export default function AppComplete({
   height={200}
 />`}
               >
-                <PieChart
-                  series={[
-                    {
-                      data: [
-                        { id: 0, value: 10, label: "Categoría A" },
-                        { id: 1, value: 15, label: "Categoría B" },
-                        { id: 2, value: 20, label: "Categoría C" },
-                      ],
-                    },
-                  ]}
-                  width={400}
-                  height={200}
-                />
+                <Box sx={{ overflowX: "auto" }}>
+                  <PieChart
+                    series={[
+                      {
+                        data: [
+                          { id: 0, value: 10, label: "Categoría A" },
+                          { id: 1, value: 15, label: "Categoría B" },
+                          { id: 2, value: 20, label: "Categoría C" },
+                        ],
+                      },
+                    ]}
+                    width={400}
+                    height={200}
+                  />
+                </Box>
               </CodeExample>
             </Box>
 
@@ -5551,23 +5553,25 @@ export default function AppComplete({
   height={250}
 />`}
               >
-                <PieChart
-                  series={[
-                    {
-                      data: [
-                        { id: 0, value: 40, label: "Producto A" },
-                        { id: 1, value: 35, label: "Producto B" },
-                        { id: 2, value: 15, label: "Producto C" },
-                        { id: 3, value: 10, label: "Otros" },
-                      ],
-                      arcLabel: (item: { value: number }) => `${item.value}%`,
-                      arcLabelMinAngle: 35,
-                      innerRadius: 30,
-                    },
-                  ]}
-                  width={400}
-                  height={250}
-                />
+                <Box sx={{ overflowX: "auto" }}>
+                  <PieChart
+                    series={[
+                      {
+                        data: [
+                          { id: 0, value: 40, label: "Producto A" },
+                          { id: 1, value: 35, label: "Producto B" },
+                          { id: 2, value: 15, label: "Producto C" },
+                          { id: 3, value: 10, label: "Otros" },
+                        ],
+                        arcLabel: (item: { value: number }) => `${item.value}%`,
+                        arcLabelMinAngle: 35,
+                        innerRadius: 30,
+                      },
+                    ]}
+                    width={400}
+                    height={250}
+                  />
+                </Box>
               </CodeExample>
             </Box>
 
@@ -5752,23 +5756,25 @@ export default function AppComplete({
   height={250}
 />`}
               >
-                <PieChart
-                  series={[
-                    {
-                      data: [
-                        { id: 0, value: 35, label: "Desktop" },
-                        { id: 1, value: 45, label: "Mobile" },
-                        { id: 2, value: 20, label: "Tablet" },
-                      ],
-                      innerRadius: 40,
-                      paddingAngle: 2,
-                      cornerRadius: 5,
-                      highlighted: { additionalRadius: 10 },
-                    },
-                  ]}
-                  width={400}
-                  height={250}
-                />
+                <Box sx={{ overflowX: "auto" }}>
+                  <PieChart
+                    series={[
+                      {
+                        data: [
+                          { id: 0, value: 35, label: "Desktop" },
+                          { id: 1, value: 45, label: "Mobile" },
+                          { id: 2, value: 20, label: "Tablet" },
+                        ],
+                        innerRadius: 40,
+                        paddingAngle: 2,
+                        cornerRadius: 5,
+                        highlighted: { additionalRadius: 10 },
+                      },
+                    ]}
+                    width={400}
+                    height={250}
+                  />
+                </Box>
               </CodeExample>
             </Box>
 
@@ -5799,23 +5805,25 @@ export default function AppComplete({
   height={250}
 />`}
               >
-                <PieChart
-                  series={[
-                    {
-                      data: [
-                        { id: 0, value: 40, label: "Orgánico" },
-                        { id: 1, value: 30, label: "Pagado" },
-                        { id: 2, value: 20, label: "Social" },
-                        { id: 3, value: 10, label: "Directo" },
-                      ],
-                      innerRadius: 30,
-                      faded: { innerRadius: 30, additionalRadius: -10 },
-                      highlighted: { additionalRadius: 5 },
-                    },
-                  ]}
-                  width={400}
-                  height={250}
-                />
+                <Box sx={{ overflowX: "auto" }}>
+                  <PieChart
+                    series={[
+                      {
+                        data: [
+                          { id: 0, value: 40, label: "Orgánico" },
+                          { id: 1, value: 30, label: "Pagado" },
+                          { id: 2, value: 20, label: "Social" },
+                          { id: 3, value: 10, label: "Directo" },
+                        ],
+                        innerRadius: 30,
+                        faded: { innerRadius: 30, additionalRadius: -10 },
+                        highlighted: { additionalRadius: 5 },
+                      },
+                    ]}
+                    width={400}
+                    height={250}
+                  />
+                </Box>
               </CodeExample>
             </Box>
 
@@ -5967,22 +5975,24 @@ export default function AppComplete({
   height={250}
 />`}
               >
-                <PieChart
-                  series={[
-                    {
-                      data: [
-                        { id: 0, value: 55, label: "Aprobado" },
-                        { id: 1, value: 30, label: "Pendiente" },
-                        { id: 2, value: 15, label: "Rechazado" },
-                      ],
-                      innerRadius: 40,
-                      arcLabel: "value",
-                    },
-                  ]}
-                  skipAnimation
-                  width={400}
-                  height={250}
-                />
+                <Box sx={{ overflowX: "auto" }}>
+                  <PieChart
+                    series={[
+                      {
+                        data: [
+                          { id: 0, value: 55, label: "Aprobado" },
+                          { id: 1, value: 30, label: "Pendiente" },
+                          { id: 2, value: 15, label: "Rechazado" },
+                        ],
+                        innerRadius: 40,
+                        arcLabel: "value",
+                      },
+                    ]}
+                    skipAnimation
+                    width={400}
+                    height={250}
+                  />
+                </Box>
               </CodeExample>
             </Box>
 
@@ -7105,7 +7115,7 @@ export default function AppComplete({
   </Box>
 </Stack>`}
             >
-              <Stack direction="row" spacing={4} justifyContent="center">
+              <Stack direction={{ xs: "column", sm: "row" }} spacing={4} justifyContent="center" alignItems="center">
                 <Box textAlign="center">
                   <Typography variant="caption">Semicírculo</Typography>
                   <Gauge
@@ -7143,7 +7153,7 @@ export default function AppComplete({
   </Box>
 </Stack>`}
             >
-              <Stack direction="row" spacing={4} justifyContent="center">
+              <Stack direction={{ xs: "column", sm: "row" }} spacing={4} justifyContent="center" alignItems="center">
                 <Box textAlign="center">
                   <Typography variant="caption">Delgado</Typography>
                   <Gauge
