@@ -34,7 +34,7 @@ export const CodeExample: React.FC<CodeExampleProps> = ({
         border: "1px solid",
         borderColor: "divider",
         borderRadius: 2,
-        overflow: "hidden",
+        overflow: "clip",
         mb: 2,
       }}
     >
@@ -54,7 +54,7 @@ export const CodeExample: React.FC<CodeExampleProps> = ({
       )}
 
       {/* Preview */}
-      <Box sx={{ p: 3, overflowX: "auto" }}>{children}</Box>
+      <Box sx={{ p: 3, overflowX: "auto", WebkitOverflowScrolling: "touch" }}>{children}</Box>
 
       {/* Toolbar */}
       <Box
