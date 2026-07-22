@@ -53,6 +53,9 @@ import {
   FunnelChart,
   AreaChart,
   type GridRenderCellParams,
+  LineChartPro,
+  BarChartPro,
+  ScatterChartPro,
 } from "@nuam/common-fe-lib-components";
 import isotypeLogoSrc from "./assets/isotype.svg";
 
@@ -137,6 +140,181 @@ export interface SerieItemOpa {
     [hour: string]: number;
   };
 }
+
+const data = [
+  {
+    id: "data-0",
+    x1: 329.39,
+    x2: 391.29,
+    y1: 443.28,
+    y2: 153.9,
+  },
+  {
+    id: "data-1",
+    x1: 96.94,
+    x2: 139.6,
+    y1: 110.5,
+    y2: 217.8,
+  },
+  {
+    id: "data-2",
+    x1: 336.35,
+    x2: 282.34,
+    y1: 175.23,
+    y2: 286.32,
+  },
+  {
+    id: "data-3",
+    x1: 159.44,
+    x2: 384.85,
+    y1: 195.97,
+    y2: 325.12,
+  },
+  {
+    id: "data-4",
+    x1: 188.86,
+    x2: 182.27,
+    y1: 351.77,
+    y2: 144.58,
+  },
+  {
+    id: "data-5",
+    x1: 143.86,
+    x2: 360.22,
+    y1: 43.253,
+    y2: 146.51,
+  },
+  {
+    id: "data-6",
+    x1: 202.02,
+    x2: 209.5,
+    y1: 376.34,
+    y2: 309.69,
+  },
+  {
+    id: "data-7",
+    x1: 384.41,
+    x2: 258.93,
+    y1: 31.514,
+    y2: 236.38,
+  },
+  {
+    id: "data-8",
+    x1: 256.76,
+    x2: 70.571,
+    y1: 231.31,
+    y2: 440.72,
+  },
+  {
+    id: "data-9",
+    x1: 143.79,
+    x2: 419.02,
+    y1: 108.04,
+    y2: 20.29,
+  },
+  {
+    id: "data-10",
+    x1: 103.48,
+    x2: 15.886,
+    y1: 321.77,
+    y2: 484.17,
+  },
+  {
+    id: "data-11",
+    x1: 272.39,
+    x2: 189.03,
+    y1: 120.18,
+    y2: 54.962,
+  },
+  {
+    id: "data-12",
+    x1: 23.57,
+    x2: 456.4,
+    y1: 366.2,
+    y2: 418.5,
+  },
+  {
+    id: "data-13",
+    x1: 219.73,
+    x2: 235.96,
+    y1: 451.45,
+    y2: 181.32,
+  },
+  {
+    id: "data-14",
+    x1: 54.99,
+    x2: 434.5,
+    y1: 294.8,
+    y2: 440.9,
+  },
+  {
+    id: "data-15",
+    x1: 134.13,
+    x2: 383.8,
+    y1: 121.83,
+    y2: 273.52,
+  },
+  {
+    id: "data-16",
+    x1: 12.7,
+    x2: 270.8,
+    y1: 287.7,
+    y2: 346.7,
+  },
+  {
+    id: "data-17",
+    x1: 176.51,
+    x2: 119.17,
+    y1: 134.06,
+    y2: 74.528,
+  },
+  {
+    id: "data-18",
+    x1: 65.05,
+    x2: 78.93,
+    y1: 104.5,
+    y2: 150.9,
+  },
+  {
+    id: "data-19",
+    x1: 162.25,
+    x2: 63.707,
+    y1: 413.07,
+    y2: 26.483,
+  },
+  {
+    id: "data-20",
+    x1: 68.88,
+    x2: 150.8,
+    y1: 74.68,
+    y2: 333.2,
+  },
+  {
+    id: "data-21",
+    x1: 95.29,
+    x2: 329.1,
+    y1: 360.6,
+    y2: 422.0,
+  },
+  {
+    id: "data-22",
+    x1: 390.62,
+    x2: 10.01,
+    y1: 330.72,
+    y2: 488.06,
+  },
+];
+
+const series = [
+  {
+    label: "Series A",
+    data: data.map((v) => ({ x: v.x1, y: v.y1, id: v.id })),
+  },
+  {
+    label: "Series B",
+    data: data.map((v) => ({ x: v.x1, y: v.y2, id: v.id })),
+  },
+];
 
 const seriesDataOpa: SerieItemOpa[] = [
   {
@@ -3223,7 +3401,11 @@ export default function AppComplete({
               <Typography variant="h6" gutterBottom>
                 Logo + Texto (showText: true)
               </Typography>
-              <Stack direction={{ xs: "column", sm: "row" }} spacing={4} alignItems="center">
+              <Stack
+                direction={{ xs: "column", sm: "row" }}
+                spacing={4}
+                alignItems="center"
+              >
                 <Box>
                   <Typography variant="caption" display="block" mb={1}>
                     Size: sm
@@ -3295,7 +3477,11 @@ export default function AppComplete({
               <Typography variant="h6" gutterBottom>
                 Solo Logo (showText: false)
               </Typography>
-              <Stack direction={{ xs: "column", sm: "row" }} spacing={4} alignItems="center">
+              <Stack
+                direction={{ xs: "column", sm: "row" }}
+                spacing={4}
+                alignItems="center"
+              >
                 <Box>
                   <Typography variant="caption" display="block" mb={1}>
                     Size: sm
@@ -4306,12 +4492,12 @@ export default function AppComplete({
         {/* SECCIÓN 14: LINE CHARTS */}
         <Card id="section-line-chart" sx={{ mb: 3, p: 3 }}>
           <Typography variant="h5" color="primary" gutterBottom>
-            14. LineChart - Gráficos de Línea
+            14. LineChartPro - Gráficos de Línea
           </Typography>
           <Divider sx={{ mb: 3 }} />
           <Alert severity="success" sx={{ mb: 3 }}>
-            Gráficos de línea con múltiples funcionalidades: áreas, apilado,
-            interpolación, marcadores, y más. Basado en MUI X Charts.
+            Gráficos de línea con múltiples funcionalidades: zoom, áreas,
+            apilado, interpolación, marcadores, y más. Basado en MUI X Charts.
           </Alert>
 
           <Stack spacing={4}>
@@ -4329,19 +4515,19 @@ export default function AppComplete({
               <CodeExample
                 title="Gráfico de línea básico"
                 code={`<LineChart
- xAxis={[{ data: [1, 2, 3, 4, 5, 6, 7] }]}
+ xAxis={[{ data: [1, 2, 3, 4, 5, 6, 7], zoom: true }]}
  series={[
    { data: [2, 5.5, 2, 8.5, 1.5, 5, 3], label: "Ventas" },
     ]}
    height={300}
 />`}
               >
-                <LineChart
-                  xAxis={[{ data: [1, 2, 3, 4, 5, 6, 7] }]}
+                <LineChartPro
+                  xAxis={[{ data: [1, 2, 3, 4, 5, 6, 7], zoom: true }]}
                   series={[
                     {
                       data: [2, 5.5, 2, 8.5, 1.5, 5, 3],
-                      label: "Ventas",
+                      label: "Ventas nuam",
                     },
                   ]}
                   height={300}
@@ -6701,7 +6887,7 @@ export default function AppComplete({
         {/* SECCIÓN 17: BAR CHARTS */}
         <Card id="section-bar-chart" sx={{ mb: 3, p: 3 }}>
           <Typography variant="h5" color="primary" gutterBottom>
-            17. BarChart - Gráficos de Barras
+            17. BarChartPro - Gráficos de Barras
           </Typography>
           <Divider sx={{ mb: 3 }} />
           <Alert severity="success" sx={{ mb: 3 }}>
@@ -6714,19 +6900,35 @@ export default function AppComplete({
             <CodeExample
               title="1. Barras Básicas"
               code={`<BarChart
-  xAxis={[{ scaleType: "band", data: ["Ene", "Feb", "Mar", "Abr", "May", "Jun"] }]}
+  xAxis={[{ scaleType: "band", data: ["Ene", "Feb", "Mar", "Abr", "May", "Jun"]
+  zoom: {
+                      minStart: 0,
+                      maxEnd: 100,
+                      minSpan: 10,
+                      maxSpan: 100,
+                      step: 5,
+                      panning: true,
+                    }, }]}
   series={[{ data: [4, 3, 5, 2, 6, 4], label: "Ventas" }]}
   height={300}
 />`}
             >
-              <BarChart
+              <BarChartPro
                 xAxis={[
                   {
                     scaleType: "band",
                     data: ["Ene", "Feb", "Mar", "Abr", "May", "Jun"],
+                    zoom: {
+                      minStart: 0,
+                      maxEnd: 100,
+                      minSpan: 10,
+                      maxSpan: 100,
+                      step: 5,
+                      panning: true,
+                    },
                   },
                 ]}
-                series={[{ data: [4, 3, 5, 2, 6, 4], label: "Ventas" }]}
+                series={[{ data: [4, 3, 5, 2, 6, 4], label: "Ventas nuam" }]}
                 height={300}
               />
             </CodeExample>
@@ -6740,15 +6942,32 @@ export default function AppComplete({
     { data: [35, 44, 24, 34], label: "2023" },
     { data: [51, 60, 47, 55], label: "2024" },
     { data: [15, 25, 30, 22], label: "2025" },
-  ]}
+  ]
+    zoom: {
+                      minStart: 0,
+                      maxEnd: 100,
+                      minSpan: 10,
+                      maxSpan: 100,
+                      step: 5,
+                      panning: true,
+                    },
+                    }
   height={300}
 />`}
             >
-              <BarChart
+              <BarChartPro
                 xAxis={[
                   {
                     scaleType: "band",
                     data: ["Q1", "Q2", "Q3", "Q4"],
+                    zoom: {
+                      minStart: 0,
+                      maxEnd: 100,
+                      minSpan: 10,
+                      maxSpan: 100,
+                      step: 5,
+                      panning: true,
+                    },
                   },
                 ]}
                 series={[
@@ -6773,11 +6992,12 @@ export default function AppComplete({
   height={300}
 />`}
             >
-              <BarChart
+              <BarChartPro
                 xAxis={[
                   {
                     scaleType: "band",
                     data: ["Norte", "Sur", "Este", "Oeste"],
+                    zoom: { filterMode: "discard" },
                   },
                 ]}
                 series={[
@@ -6805,17 +7025,18 @@ export default function AppComplete({
             <CodeExample
               title="4. Barras Horizontales (layout: horizontal)"
               code={`<BarChart
-  yAxis={[{ scaleType: "band", data: ["Marketing", "Ventas", "IT", "RRHH", "Finanzas"] }]}
+  yAxis={[{ scaleType: "band", data: ["Marketing", "Ventas", "IT", "RRHH", "Finanzas"], zoom: true }]}
   series={[{ data: [85, 72, 90, 65, 78], label: "Presupuesto %" }]}
   layout="horizontal"
   height={300}
 />`}
             >
-              <BarChart
+              <BarChartPro
                 yAxis={[
                   {
                     scaleType: "band",
                     data: ["Marketing", "Ventas", "IT", "RRHH", "Finanzas"],
+                    zoom: true,
                   },
                 ]}
                 series={[
@@ -6836,11 +7057,12 @@ export default function AppComplete({
   height={250}
 />`}
             >
-              <BarChart
+              <BarChartPro
                 xAxis={[
                   {
                     scaleType: "band",
                     data: ["Exitoso", "Pendiente", "Fallido"],
+                    zoom: { filterMode: "discard" },
                   },
                 ]}
                 series={[
@@ -6864,11 +7086,12 @@ export default function AppComplete({
   height={300}
 />`}
             >
-              <BarChart
+              <BarChartPro
                 xAxis={[
                   {
                     scaleType: "band",
                     data: ["Ene", "Feb", "Mar", "Abr", "May", "Jun"],
+                    zoom: { filterMode: "discard" },
                   },
                 ]}
                 series={[
@@ -7007,22 +7230,34 @@ export default function AppComplete({
   height={300}
 />`}
             >
-              <ScatterChart
-                series={[
+              <ScatterChartPro
+                height={300}
+                xAxis={[
                   {
-                    data: [
-                      { x: 100, y: 200, id: 1 },
-                      { x: 150, y: 280, id: 2 },
-                      { x: 200, y: 350, id: 3 },
-                      { x: 250, y: 420, id: 4 },
-                      { x: 300, y: 380, id: 5 },
-                    ],
-                    label: "Ventas vs Clientes",
-                    color: "#e91e63",
+                    zoom: {
+                      minStart: 0,
+                      maxEnd: 100,
+                      minSpan: 10,
+                      maxSpan: 100,
+                      step: 5,
+                      panning: true,
+                    },
                   },
                 ]}
+                yAxis={[
+                  {
+                    zoom: {
+                      minStart: 0,
+                      maxEnd: 100,
+                      minSpan: 10,
+                      maxSpan: 100,
+                      step: 5,
+                      panning: true,
+                    },
+                  },
+                ]}
+                series={series}
                 grid={{ horizontal: true, vertical: true }}
-                height={300}
               />
             </CodeExample>
           </Stack>
@@ -7115,7 +7350,12 @@ export default function AppComplete({
   </Box>
 </Stack>`}
             >
-              <Stack direction={{ xs: "column", sm: "row" }} spacing={4} justifyContent="center" alignItems="center">
+              <Stack
+                direction={{ xs: "column", sm: "row" }}
+                spacing={4}
+                justifyContent="center"
+                alignItems="center"
+              >
                 <Box textAlign="center">
                   <Typography variant="caption">Semicírculo</Typography>
                   <Gauge
@@ -7153,7 +7393,12 @@ export default function AppComplete({
   </Box>
 </Stack>`}
             >
-              <Stack direction={{ xs: "column", sm: "row" }} spacing={4} justifyContent="center" alignItems="center">
+              <Stack
+                direction={{ xs: "column", sm: "row" }}
+                spacing={4}
+                justifyContent="center"
+                alignItems="center"
+              >
                 <Box textAlign="center">
                   <Typography variant="caption">Delgado</Typography>
                   <Gauge
