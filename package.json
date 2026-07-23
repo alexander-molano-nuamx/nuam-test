@@ -24,7 +24,7 @@
     "@mui/x-date-pickers": "^9.10.0",
     "@mui/x-license": "^9.10.0",
     "@mui/x-tree-view": "^9.10.0",
-    "@nuam/common-fe-lib-components": "file:../nuam-lib-components-front",
+    "@nuam/common-fe-lib-components": "^1.34.2",
     "dayjs": "^1.11.19",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
