@@ -45,7 +45,6 @@ import {
   LineChart,
   PieChart,
   SparkLineChart,
-  BarChart,
   ScatterChart,
   Gauge,
   RadarChart,
@@ -1106,9 +1105,9 @@ export default function AppComplete({
                 />
                 {autocompleteValue && (
                   <Box
-                    mt={2}
-                    p={2}
                     sx={{
+                      mt: 2,
+                      p: 2,
                       backgroundColor: "Background.secondary",
                       borderRadius: 1,
                       border: "1px solid",
@@ -1737,7 +1736,7 @@ export default function AppComplete({
 
           <CodeExample
             title="Variantes, colores y tamaños"
-            code={`<Stack direction="row" spacing={2} flexWrap="wrap" useFlexGap>
+            code={`<Stack direction="row" spacing={2} sx={{ flexWrap: "wrap" }} useFlexGap>
   <Button variant="contained" color="primary">Contained</Button>
   <Button variant="outlined" color="primary">Outlined</Button>
   <Button variant="text" color="primary">Text</Button>
@@ -1750,7 +1749,12 @@ export default function AppComplete({
   <Button variant="contained" size="large">Large</Button>
 </Stack>`}
           >
-            <Stack direction="row" spacing={2} flexWrap="wrap" useFlexGap>
+            <Stack
+              direction="row"
+              spacing={2}
+              sx={{ flexWrap: "wrap" }}
+              useFlexGap
+            >
               <Button variant="contained" color="primary">
                 Contained
               </Button>
@@ -2303,8 +2307,7 @@ export default function AppComplete({
                           <Stack
                             direction="row"
                             spacing={3}
-                            alignItems="center"
-                            sx={{ mb: 2 }}
+                            sx={{ alignItems: "center", mb: 2 }}
                           >
                             <Avatar
                               sx={{
@@ -2346,7 +2349,7 @@ export default function AppComplete({
                             <Stack
                               direction="row"
                               spacing={1}
-                              alignItems="center"
+                              sx={{ alignItems: "center" }}
                             >
                               <EmailOutlined fontSize="small" color="action" />
                               <Typography variant="body2">
@@ -2356,7 +2359,7 @@ export default function AppComplete({
                             <Stack
                               direction="row"
                               spacing={1}
-                              alignItems="center"
+                              sx={{ alignItems: "center" }}
                             >
                               <Work fontSize="small" color="action" />
                               <Typography variant="body2">
@@ -2366,7 +2369,7 @@ export default function AppComplete({
                             <Stack
                               direction="row"
                               spacing={1}
-                              alignItems="center"
+                              sx={{ alignItems: "center" }}
                             >
                               <Phone fontSize="small" color="action" />
                               <Typography variant="body2">
@@ -2378,7 +2381,7 @@ export default function AppComplete({
                           <Stack
                             direction="row"
                             spacing={1}
-                            justifyContent="flex-end"
+                            sx={{ justifyContent: "flex-end" }}
                           >
                             <Button
                               variant="outlined"
@@ -3234,10 +3237,10 @@ export default function AppComplete({
   title="Modal de ejemplo"
   boxProps={{}}
 >
-  <Box p={2}>
+  <Box sx={{ p: 2 }}>
     <Typography gutterBottom>Contenido del modal</Typography>
     <TextField label="Campo en modal" sx={{ mt: 2, width: "100%" }} />
-    <Stack direction="row" spacing={2} mt={3}>
+    <Stack direction="row" spacing={2} sx={{ mt: 3 }}>
       <Button variant="contained" onClick={() => setShowModal(false)}>Aceptar</Button>
       <Button variant="outlined" onClick={() => setShowModal(false)}>Cancelar</Button>
     </Stack>
@@ -3253,7 +3256,7 @@ export default function AppComplete({
               title="Modal de ejemplo"
               boxProps={{}}
             >
-              <Box p={2}>
+              <Box sx={{ p: 2 }}>
                 <Typography gutterBottom>
                   Este es un modal con contenido personalizado.
                 </Typography>
@@ -3261,7 +3264,7 @@ export default function AppComplete({
                   label="Campo en modal"
                   sx={{ mt: 2, width: "100%" }}
                 />
-                <Stack direction="row" spacing={2} mt={3}>
+                <Stack direction="row" spacing={2} sx={{ mt: 3 }}>
                   <Button
                     variant="contained"
                     onClick={() => setShowModal(false)}
@@ -3336,19 +3339,19 @@ export default function AppComplete({
             title="Elevaciones de Card"
             code={`<Stack spacing={2}>
   <Card elevation={1}>
-    <Box p={2}>
+    <Box sx={{ p: 2 }}>
       <Typography variant="h6">Card elevation 1</Typography>
       <Typography variant="body2">Tarjeta con elevación mínima</Typography>
     </Box>
   </Card>
   <Card elevation={3}>
-    <Box p={2}>
+    <Box sx={{ p: 2 }}>
       <Typography variant="h6">Card elevation 3</Typography>
       <Typography variant="body2">Tarjeta con elevación media</Typography>
     </Box>
   </Card>
   <Card elevation={8}>
-    <Box p={2}>
+    <Box sx={{ p: 2 }}>
       <Typography variant="h6">Card elevation 8</Typography>
       <Typography variant="body2">Tarjeta con elevación alta</Typography>
     </Box>
@@ -3357,7 +3360,7 @@ export default function AppComplete({
           >
             <Stack spacing={2}>
               <Card elevation={1}>
-                <Box p={2}>
+                <Box sx={{ p: 2 }}>
                   <Typography variant="h6">Card elevation 1</Typography>
                   <Typography variant="body2">
                     Tarjeta con elevación mínima
@@ -3365,7 +3368,7 @@ export default function AppComplete({
                 </Box>
               </Card>
               <Card elevation={3}>
-                <Box p={2}>
+                <Box sx={{ p: 2 }}>
                   <Typography variant="h6">Card elevation 3</Typography>
                   <Typography variant="body2">
                     Tarjeta con elevación media
@@ -3373,7 +3376,7 @@ export default function AppComplete({
                 </Box>
               </Card>
               <Card elevation={8}>
-                <Box p={2}>
+                <Box sx={{ p: 2 }}>
                   <Typography variant="h6">Card elevation 8</Typography>
                   <Typography variant="body2">
                     Tarjeta con elevación alta
@@ -3404,10 +3407,13 @@ export default function AppComplete({
               <Stack
                 direction={{ xs: "column", sm: "row" }}
                 spacing={4}
-                alignItems="center"
+                sx={{ alignItems: "center" }}
               >
                 <Box>
-                  <Typography variant="caption" display="block" mb={1}>
+                  <Typography
+                    variant="caption"
+                    sx={{ display: "block", mb: 1 }}
+                  >
                     Size: sm
                   </Typography>
                   <CodeExample
@@ -3428,7 +3434,10 @@ export default function AppComplete({
                   </CodeExample>
                 </Box>
                 <Box>
-                  <Typography variant="caption" display="block" mb={1}>
+                  <Typography
+                    variant="caption"
+                    sx={{ display: "block", mb: 1 }}
+                  >
                     Size: md
                   </Typography>
                   <CodeExample
@@ -3449,7 +3458,10 @@ export default function AppComplete({
                   </CodeExample>
                 </Box>
                 <Box>
-                  <Typography variant="caption" display="block" mb={1}>
+                  <Typography
+                    variant="caption"
+                    sx={{ display: "block", mb: 1 }}
+                  >
                     Size: lg
                   </Typography>
                   <CodeExample
@@ -3480,10 +3492,13 @@ export default function AppComplete({
               <Stack
                 direction={{ xs: "column", sm: "row" }}
                 spacing={4}
-                alignItems="center"
+                sx={{ alignItems: "center" }}
               >
                 <Box>
-                  <Typography variant="caption" display="block" mb={1}>
+                  <Typography
+                    variant="caption"
+                    sx={{ display: "block", mb: 1 }}
+                  >
                     Size: sm
                   </Typography>
                   <CodeExample
@@ -3504,7 +3519,10 @@ export default function AppComplete({
                   </CodeExample>
                 </Box>
                 <Box>
-                  <Typography variant="caption" display="block" mb={1}>
+                  <Typography
+                    variant="caption"
+                    sx={{ display: "block", mb: 1 }}
+                  >
                     Size: md
                   </Typography>
                   <CodeExample
@@ -3525,7 +3543,10 @@ export default function AppComplete({
                   </CodeExample>
                 </Box>
                 <Box>
-                  <Typography variant="caption" display="block" mb={1}>
+                  <Typography
+                    variant="caption"
+                    sx={{ display: "block", mb: 1 }}
+                  >
                     Size: lg
                   </Typography>
                   <CodeExample
@@ -3553,9 +3574,12 @@ export default function AppComplete({
               <Typography variant="h6" gutterBottom>
                 Solo Texto (sin logoSrc)
               </Typography>
-              <Stack direction="row" spacing={4} alignItems="center">
+              <Stack direction="row" spacing={4} sx={{ alignItems: "center" }}>
                 <Box>
-                  <Typography variant="caption" display="block" mb={1}>
+                  <Typography
+                    variant="caption"
+                    sx={{ display: "block", mb: 1 }}
+                  >
                     Size: sm
                   </Typography>
                   <CodeExample
@@ -3566,7 +3590,10 @@ export default function AppComplete({
                   </CodeExample>
                 </Box>
                 <Box>
-                  <Typography variant="caption" display="block" mb={1}>
+                  <Typography
+                    variant="caption"
+                    sx={{ display: "block", mb: 1 }}
+                  >
                     Size: md
                   </Typography>
                   <CodeExample
@@ -3577,7 +3604,10 @@ export default function AppComplete({
                   </CodeExample>
                 </Box>
                 <Box>
-                  <Typography variant="caption" display="block" mb={1}>
+                  <Typography
+                    variant="caption"
+                    sx={{ display: "block", mb: 1 }}
+                  >
                     Size: lg
                   </Typography>
                   <CodeExample
@@ -3595,9 +3625,12 @@ export default function AppComplete({
               <Typography variant="h6" gutterBottom>
                 Variantes
               </Typography>
-              <Stack direction="row" spacing={4} alignItems="center">
+              <Stack direction="row" spacing={4} sx={{ alignItems: "center" }}>
                 <Box>
-                  <Typography variant="caption" display="block" mb={1}>
+                  <Typography
+                    variant="caption"
+                    sx={{ display: "block", mb: 1 }}
+                  >
                     horizontal
                   </Typography>
                   <CodeExample
@@ -3620,7 +3653,10 @@ export default function AppComplete({
                   </CodeExample>
                 </Box>
                 <Box>
-                  <Typography variant="caption" display="block" mb={1}>
+                  <Typography
+                    variant="caption"
+                    sx={{ display: "block", mb: 1 }}
+                  >
                     vertical
                   </Typography>
                   <CodeExample
@@ -3656,7 +3692,7 @@ export default function AppComplete({
               <Typography variant="h6" gutterBottom sx={{ color: "#fff" }}>
                 Dark Variant
               </Typography>
-              <Stack direction="row" spacing={4} alignItems="center">
+              <Stack direction="row" spacing={4} sx={{ alignItems: "center" }}>
                 <CodeExample
                   title="IsotypeName variante dark"
                   code={`<IsotypeName
@@ -4768,7 +4804,11 @@ export default function AppComplete({
               >
                 <Stack direction={{ xs: "column", md: "row" }} spacing={2}>
                   <Box sx={{ flex: 1 }}>
-                    <Typography variant="caption" display="block" gutterBottom>
+                    <Typography
+                      variant="caption"
+                      sx={{ display: "block" }}
+                      gutterBottom
+                    >
                       <code>curve: &quot;linear&quot;</code>
                     </Typography>
                     <LineChart
@@ -4778,7 +4818,11 @@ export default function AppComplete({
                     />
                   </Box>
                   <Box sx={{ flex: 1 }}>
-                    <Typography variant="caption" display="block" gutterBottom>
+                    <Typography
+                      variant="caption"
+                      sx={{ display: "block" }}
+                      gutterBottom
+                    >
                       <code>curve: &quot;catmullRom&quot;</code>
                     </Typography>
                     <LineChart
@@ -4793,10 +4837,14 @@ export default function AppComplete({
                 <Stack
                   direction={{ xs: "column", md: "row" }}
                   spacing={2}
-                  mt={2}
+                  sx={{ mt: 2 }}
                 >
                   <Box sx={{ flex: 1 }}>
-                    <Typography variant="caption" display="block" gutterBottom>
+                    <Typography
+                      variant="caption"
+                      sx={{ display: "block" }}
+                      gutterBottom
+                    >
                       <code>curve: &quot;step&quot;</code>
                     </Typography>
                     <LineChart
@@ -4806,7 +4854,11 @@ export default function AppComplete({
                     />
                   </Box>
                   <Box sx={{ flex: 1 }}>
-                    <Typography variant="caption" display="block" gutterBottom>
+                    <Typography
+                      variant="caption"
+                      sx={{ display: "block" }}
+                      gutterBottom
+                    >
                       <code>curve: &quot;monotoneX&quot;</code>
                     </Typography>
                     <LineChart
@@ -4881,7 +4933,11 @@ export default function AppComplete({
               >
                 <Stack direction={{ xs: "column", md: "row" }} spacing={2}>
                   <Box sx={{ flex: 1 }}>
-                    <Typography variant="caption" display="block" gutterBottom>
+                    <Typography
+                      variant="caption"
+                      sx={{ display: "block" }}
+                      gutterBottom
+                    >
                       <code>baseline: &quot;min&quot;</code> (rellena hacia
                       abajo)
                     </Typography>
@@ -4894,7 +4950,11 @@ export default function AppComplete({
                     />
                   </Box>
                   <Box sx={{ flex: 1 }}>
-                    <Typography variant="caption" display="block" gutterBottom>
+                    <Typography
+                      variant="caption"
+                      sx={{ display: "block" }}
+                      gutterBottom
+                    >
                       <code>baseline: &quot;max&quot;</code> (rellena hacia
                       arriba)
                     </Typography>
@@ -4930,7 +4990,11 @@ export default function AppComplete({
               >
                 <Stack direction={{ xs: "column", md: "row" }} spacing={2}>
                   <Box sx={{ flex: 1 }}>
-                    <Typography variant="caption" display="block" gutterBottom>
+                    <Typography
+                      variant="caption"
+                      sx={{ display: "block" }}
+                      gutterBottom
+                    >
                       Sin connectNulls (gap en datos)
                     </Typography>
                     <LineChart
@@ -4945,7 +5009,11 @@ export default function AppComplete({
                     />
                   </Box>
                   <Box sx={{ flex: 1 }}>
-                    <Typography variant="caption" display="block" gutterBottom>
+                    <Typography
+                      variant="caption"
+                      sx={{ display: "block" }}
+                      gutterBottom
+                    >
                       Con <code>connectNulls: true</code>
                     </Typography>
                     <LineChart
@@ -5178,7 +5246,11 @@ export default function AppComplete({
               >
                 <Stack direction={{ xs: "column", md: "row" }} spacing={2}>
                   <Box sx={{ flex: 1 }}>
-                    <Typography variant="caption" display="block" gutterBottom>
+                    <Typography
+                      variant="caption"
+                      sx={{ display: "block" }}
+                      gutterBottom
+                    >
                       <code>curve: &quot;stepBefore&quot;</code>
                     </Typography>
                     <LineChart
@@ -5188,7 +5260,11 @@ export default function AppComplete({
                     />
                   </Box>
                   <Box sx={{ flex: 1 }}>
-                    <Typography variant="caption" display="block" gutterBottom>
+                    <Typography
+                      variant="caption"
+                      sx={{ display: "block" }}
+                      gutterBottom
+                    >
                       <code>curve: &quot;stepAfter&quot;</code>
                     </Typography>
                     <LineChart
@@ -5400,7 +5476,11 @@ export default function AppComplete({
               >
                 <Stack direction={{ xs: "column", md: "row" }} spacing={2}>
                   <Box sx={{ flex: 1 }}>
-                    <Typography variant="caption" display="block" gutterBottom>
+                    <Typography
+                      variant="caption"
+                      sx={{ display: "block" }}
+                      gutterBottom
+                    >
                       <code>innerRadius: 30</code>
                     </Typography>
                     <PieChart
@@ -5420,7 +5500,11 @@ export default function AppComplete({
                     />
                   </Box>
                   <Box sx={{ flex: 1 }}>
-                    <Typography variant="caption" display="block" gutterBottom>
+                    <Typography
+                      variant="caption"
+                      sx={{ display: "block" }}
+                      gutterBottom
+                    >
                       <code>innerRadius: 60</code>
                     </Typography>
                     <PieChart
@@ -5463,7 +5547,11 @@ export default function AppComplete({
               >
                 <Stack direction={{ xs: "column", md: "row" }} spacing={2}>
                   <Box sx={{ flex: 1 }}>
-                    <Typography variant="caption" display="block" gutterBottom>
+                    <Typography
+                      variant="caption"
+                      sx={{ display: "block" }}
+                      gutterBottom
+                    >
                       <code>paddingAngle: 2</code>
                     </Typography>
                     <PieChart
@@ -5485,7 +5573,11 @@ export default function AppComplete({
                     />
                   </Box>
                   <Box sx={{ flex: 1 }}>
-                    <Typography variant="caption" display="block" gutterBottom>
+                    <Typography
+                      variant="caption"
+                      sx={{ display: "block" }}
+                      gutterBottom
+                    >
                       <code>paddingAngle: 5</code>
                     </Typography>
                     <PieChart
@@ -5530,7 +5622,11 @@ export default function AppComplete({
               >
                 <Stack direction={{ xs: "column", md: "row" }} spacing={2}>
                   <Box sx={{ flex: 1 }}>
-                    <Typography variant="caption" display="block" gutterBottom>
+                    <Typography
+                      variant="caption"
+                      sx={{ display: "block" }}
+                      gutterBottom
+                    >
                       <code>cornerRadius: 5</code>
                     </Typography>
                     <PieChart
@@ -5552,7 +5648,11 @@ export default function AppComplete({
                     />
                   </Box>
                   <Box sx={{ flex: 1 }}>
-                    <Typography variant="caption" display="block" gutterBottom>
+                    <Typography
+                      variant="caption"
+                      sx={{ display: "block" }}
+                      gutterBottom
+                    >
                       <code>cornerRadius: 10</code>
                     </Typography>
                     <PieChart
@@ -5598,7 +5698,11 @@ export default function AppComplete({
               >
                 <Stack direction={{ xs: "column", md: "row" }} spacing={2}>
                   <Box sx={{ flex: 1 }}>
-                    <Typography variant="caption" display="block" gutterBottom>
+                    <Typography
+                      variant="caption"
+                      sx={{ display: "block" }}
+                      gutterBottom
+                    >
                       Semicírculo: <code>startAngle: -90, endAngle: 90</code>
                     </Typography>
                     <PieChart
@@ -5619,7 +5723,11 @@ export default function AppComplete({
                     />
                   </Box>
                   <Box sx={{ flex: 1 }}>
-                    <Typography variant="caption" display="block" gutterBottom>
+                    <Typography
+                      variant="caption"
+                      sx={{ display: "block" }}
+                      gutterBottom
+                    >
                       Gauge: <code>startAngle: -120, endAngle: 120</code>
                     </Typography>
                     <PieChart
@@ -5663,7 +5771,11 @@ export default function AppComplete({
               >
                 <Stack direction={{ xs: "column", md: "row" }} spacing={2}>
                   <Box sx={{ flex: 1 }}>
-                    <Typography variant="caption" display="block" gutterBottom>
+                    <Typography
+                      variant="caption"
+                      sx={{ display: "block" }}
+                      gutterBottom
+                    >
                       <code>arcLabel: &quot;value&quot;</code>
                     </Typography>
                     <PieChart
@@ -5683,7 +5795,11 @@ export default function AppComplete({
                     />
                   </Box>
                   <Box sx={{ flex: 1 }}>
-                    <Typography variant="caption" display="block" gutterBottom>
+                    <Typography
+                      variant="caption"
+                      sx={{ display: "block" }}
+                      gutterBottom
+                    >
                       <code>arcLabel: &quot;label&quot;</code>
                     </Typography>
                     <PieChart
@@ -5782,7 +5898,11 @@ export default function AppComplete({
               >
                 <Stack direction={{ xs: "column", md: "row" }} spacing={2}>
                   <Box sx={{ flex: 1 }}>
-                    <Typography variant="caption" display="block" gutterBottom>
+                    <Typography
+                      variant="caption"
+                      sx={{ display: "block" }}
+                      gutterBottom
+                    >
                       Sin mínimo (etiquetas en todos)
                     </Typography>
                     <PieChart
@@ -5804,7 +5924,11 @@ export default function AppComplete({
                     />
                   </Box>
                   <Box sx={{ flex: 1 }}>
-                    <Typography variant="caption" display="block" gutterBottom>
+                    <Typography
+                      variant="caption"
+                      sx={{ display: "block" }}
+                      gutterBottom
+                    >
                       <code>arcLabelMinAngle: 25</code>
                     </Typography>
                     <PieChart
@@ -5852,7 +5976,11 @@ export default function AppComplete({
               >
                 <Stack direction={{ xs: "column", md: "row" }} spacing={2}>
                   <Box sx={{ flex: 1 }}>
-                    <Typography variant="caption" display="block" gutterBottom>
+                    <Typography
+                      variant="caption"
+                      sx={{ display: "block" }}
+                      gutterBottom
+                    >
                       Colores por dato
                     </Typography>
                     <PieChart
@@ -5891,7 +6019,11 @@ export default function AppComplete({
                     />
                   </Box>
                   <Box sx={{ flex: 1 }}>
-                    <Typography variant="caption" display="block" gutterBottom>
+                    <Typography
+                      variant="caption"
+                      sx={{ display: "block" }}
+                      gutterBottom
+                    >
                       Paleta global con <code>colors</code>
                     </Typography>
                     <PieChart
@@ -6033,7 +6165,11 @@ export default function AppComplete({
               >
                 <Stack direction={{ xs: "column", md: "row" }} spacing={2}>
                   <Box sx={{ flex: 1 }}>
-                    <Typography variant="caption" display="block" gutterBottom>
+                    <Typography
+                      variant="caption"
+                      sx={{ display: "block" }}
+                      gutterBottom
+                    >
                       <code>cx: 100</code> (izquierda)
                     </Typography>
                     <PieChart
@@ -6052,7 +6188,11 @@ export default function AppComplete({
                     />
                   </Box>
                   <Box sx={{ flex: 1 }}>
-                    <Typography variant="caption" display="block" gutterBottom>
+                    <Typography
+                      variant="caption"
+                      sx={{ display: "block" }}
+                      gutterBottom
+                    >
                       <code>cx: 200</code> (derecha)
                     </Typography>
                     <PieChart
@@ -6094,7 +6234,11 @@ export default function AppComplete({
               >
                 <Stack direction={{ xs: "column", md: "row" }} spacing={2}>
                   <Box sx={{ flex: 1 }}>
-                    <Typography variant="caption" display="block" gutterBottom>
+                    <Typography
+                      variant="caption"
+                      sx={{ display: "block" }}
+                      gutterBottom
+                    >
                       <code>outerRadius: 60</code>
                     </Typography>
                     <PieChart
@@ -6113,7 +6257,11 @@ export default function AppComplete({
                     />
                   </Box>
                   <Box sx={{ flex: 1 }}>
-                    <Typography variant="caption" display="block" gutterBottom>
+                    <Typography
+                      variant="caption"
+                      sx={{ display: "block" }}
+                      gutterBottom
+                    >
                       <code>outerRadius: 90</code>
                     </Typography>
                     <PieChart
@@ -6385,7 +6533,11 @@ export default function AppComplete({
             >
               <Stack direction={{ xs: "column", md: "row" }} spacing={4}>
                 <Box sx={{ flex: 1 }}>
-                  <Typography variant="caption" display="block" gutterBottom>
+                  <Typography
+                    variant="caption"
+                    sx={{ display: "block" }}
+                    gutterBottom
+                  >
                     <code>plotType: &quot;line&quot;</code> (default)
                   </Typography>
                   <SparkLineChart
@@ -6396,7 +6548,11 @@ export default function AppComplete({
                   />
                 </Box>
                 <Box sx={{ flex: 1 }}>
-                  <Typography variant="caption" display="block" gutterBottom>
+                  <Typography
+                    variant="caption"
+                    sx={{ display: "block" }}
+                    gutterBottom
+                  >
                     <code>plotType: &quot;bar&quot;</code>
                   </Typography>
                   <SparkLineChart
@@ -6417,7 +6573,11 @@ export default function AppComplete({
             >
               <Stack direction={{ xs: "column", md: "row" }} spacing={4}>
                 <Box sx={{ flex: 1 }}>
-                  <Typography variant="caption" display="block" gutterBottom>
+                  <Typography
+                    variant="caption"
+                    sx={{ display: "block" }}
+                    gutterBottom
+                  >
                     Sin área
                   </Typography>
                   <SparkLineChart
@@ -6427,7 +6587,11 @@ export default function AppComplete({
                   />
                 </Box>
                 <Box sx={{ flex: 1 }}>
-                  <Typography variant="caption" display="block" gutterBottom>
+                  <Typography
+                    variant="caption"
+                    sx={{ display: "block" }}
+                    gutterBottom
+                  >
                     <code>area: true</code>
                   </Typography>
                   <SparkLineChart
@@ -6448,7 +6612,11 @@ export default function AppComplete({
             >
               <Stack direction={{ xs: "column", md: "row" }} spacing={4}>
                 <Box sx={{ flex: 1 }}>
-                  <Typography variant="caption" display="block" gutterBottom>
+                  <Typography
+                    variant="caption"
+                    sx={{ display: "block" }}
+                    gutterBottom
+                  >
                     Línea con tooltip
                   </Typography>
                   <SparkLineChart
@@ -6459,7 +6627,11 @@ export default function AppComplete({
                   />
                 </Box>
                 <Box sx={{ flex: 1 }}>
-                  <Typography variant="caption" display="block" gutterBottom>
+                  <Typography
+                    variant="caption"
+                    sx={{ display: "block" }}
+                    gutterBottom
+                  >
                     Barras con tooltip
                   </Typography>
                   <SparkLineChart
@@ -6481,7 +6653,11 @@ export default function AppComplete({
             >
               <Stack direction={{ xs: "column", md: "row" }} spacing={4}>
                 <Box sx={{ flex: 1 }}>
-                  <Typography variant="caption" display="block" gutterBottom>
+                  <Typography
+                    variant="caption"
+                    sx={{ display: "block" }}
+                    gutterBottom
+                  >
                     Línea con highlight (punto)
                   </Typography>
                   <SparkLineChart
@@ -6493,7 +6669,11 @@ export default function AppComplete({
                   />
                 </Box>
                 <Box sx={{ flex: 1 }}>
-                  <Typography variant="caption" display="block" gutterBottom>
+                  <Typography
+                    variant="caption"
+                    sx={{ display: "block" }}
+                    gutterBottom
+                  >
                     Barras con highlight (banda)
                   </Typography>
                   <SparkLineChart
@@ -6516,7 +6696,11 @@ export default function AppComplete({
             >
               <Stack direction={{ xs: "column", md: "row" }} spacing={4}>
                 <Box sx={{ flex: 1 }}>
-                  <Typography variant="caption" display="block" gutterBottom>
+                  <Typography
+                    variant="caption"
+                    sx={{ display: "block" }}
+                    gutterBottom
+                  >
                     Línea con negativos
                   </Typography>
                   <SparkLineChart
@@ -6528,7 +6712,11 @@ export default function AppComplete({
                   />
                 </Box>
                 <Box sx={{ flex: 1 }}>
-                  <Typography variant="caption" display="block" gutterBottom>
+                  <Typography
+                    variant="caption"
+                    sx={{ display: "block" }}
+                    gutterBottom
+                  >
                     Barras con negativos
                   </Typography>
                   <SparkLineChart
@@ -6550,7 +6738,11 @@ export default function AppComplete({
             >
               <Stack direction={{ xs: "column", md: "row" }} spacing={4}>
                 <Box sx={{ flex: 1 }}>
-                  <Typography variant="caption" display="block" gutterBottom>
+                  <Typography
+                    variant="caption"
+                    sx={{ display: "block" }}
+                    gutterBottom
+                  >
                     Verde (tendencia positiva)
                   </Typography>
                   <SparkLineChart
@@ -6562,7 +6754,11 @@ export default function AppComplete({
                   />
                 </Box>
                 <Box sx={{ flex: 1 }}>
-                  <Typography variant="caption" display="block" gutterBottom>
+                  <Typography
+                    variant="caption"
+                    sx={{ display: "block" }}
+                    gutterBottom
+                  >
                     Rojo (tendencia negativa)
                   </Typography>
                   <SparkLineChart
@@ -6590,7 +6786,11 @@ export default function AppComplete({
             >
               <Stack direction={{ xs: "column", md: "row" }} spacing={4}>
                 <Box sx={{ flex: 1 }}>
-                  <Typography variant="caption" display="block" gutterBottom>
+                  <Typography
+                    variant="caption"
+                    sx={{ display: "block" }}
+                    gutterBottom
+                  >
                     Formato moneda
                   </Typography>
                   <SparkLineChart
@@ -6605,7 +6805,11 @@ export default function AppComplete({
                   />
                 </Box>
                 <Box sx={{ flex: 1 }}>
-                  <Typography variant="caption" display="block" gutterBottom>
+                  <Typography
+                    variant="caption"
+                    sx={{ display: "block" }}
+                    gutterBottom
+                  >
                     Formato porcentaje
                   </Typography>
                   <SparkLineChart
@@ -6630,9 +6834,17 @@ export default function AppComplete({
 <SparkLineChart data={[1, 4, 2, 5, 3, 6, 4]} height={60} width={150} />
 <SparkLineChart data={[1, 4, 2, 5, 3, 6, 4, 7]} height={80} width={200} />`}
             >
-              <Stack direction="row" spacing={4} alignItems="flex-end">
+              <Stack
+                direction="row"
+                spacing={4}
+                sx={{ alignItems: "flex-end" }}
+              >
                 <Box>
-                  <Typography variant="caption" display="block" gutterBottom>
+                  <Typography
+                    variant="caption"
+                    sx={{ display: "block" }}
+                    gutterBottom
+                  >
                     Mini (100x40)
                   </Typography>
                   <SparkLineChart
@@ -6642,7 +6854,11 @@ export default function AppComplete({
                   />
                 </Box>
                 <Box>
-                  <Typography variant="caption" display="block" gutterBottom>
+                  <Typography
+                    variant="caption"
+                    sx={{ display: "block" }}
+                    gutterBottom
+                  >
                     Pequeño (150x60)
                   </Typography>
                   <SparkLineChart
@@ -6652,7 +6868,11 @@ export default function AppComplete({
                   />
                 </Box>
                 <Box>
-                  <Typography variant="caption" display="block" gutterBottom>
+                  <Typography
+                    variant="caption"
+                    sx={{ display: "block" }}
+                    gutterBottom
+                  >
                     Mediano (200x80)
                   </Typography>
                   <SparkLineChart
@@ -6673,7 +6893,11 @@ export default function AppComplete({
             >
               <Stack direction={{ xs: "column", md: "row" }} spacing={4}>
                 <Box sx={{ flex: 1 }}>
-                  <Typography variant="caption" display="block" gutterBottom>
+                  <Typography
+                    variant="caption"
+                    sx={{ display: "block" }}
+                    gutterBottom
+                  >
                     <code>curve: &quot;linear&quot;</code>
                   </Typography>
                   <SparkLineChart
@@ -6684,7 +6908,11 @@ export default function AppComplete({
                   />
                 </Box>
                 <Box sx={{ flex: 1 }}>
-                  <Typography variant="caption" display="block" gutterBottom>
+                  <Typography
+                    variant="caption"
+                    sx={{ display: "block" }}
+                    gutterBottom
+                  >
                     <code>curve: &quot;natural&quot;</code>
                   </Typography>
                   <SparkLineChart
@@ -6695,7 +6923,11 @@ export default function AppComplete({
                   />
                 </Box>
                 <Box sx={{ flex: 1 }}>
-                  <Typography variant="caption" display="block" gutterBottom>
+                  <Typography
+                    variant="caption"
+                    sx={{ display: "block" }}
+                    gutterBottom
+                  >
                     <code>curve: &quot;monotoneX&quot;</code>
                   </Typography>
                   <SparkLineChart
@@ -7283,13 +7515,17 @@ export default function AppComplete({
             {/* Basic Gauge */}
             <CodeExample
               title="1. Gauge Básico"
-              code={`<Stack direction="row" spacing={4} justifyContent="center">
+              code={`<Stack direction="row" spacing={4} sx={{ justifyContent: "center" }}>
   <Gauge value={75} height={200} width={200} />
   <Gauge value={45} height={200} width={200} />
   <Gauge value={90} height={200} width={200} />
 </Stack>`}
             >
-              <Stack direction="row" spacing={4} justifyContent="center">
+              <Stack
+                direction="row"
+                spacing={4}
+                sx={{ justifyContent: "center" }}
+              >
                 <Gauge value={75} height={200} width={200} />
                 <Gauge value={45} height={200} width={200} />
                 <Gauge value={90} height={200} width={200} />
@@ -7299,7 +7535,7 @@ export default function AppComplete({
             {/* With Text */}
             <CodeExample
               title="2. Con Texto Personalizado"
-              code={`<Stack direction="row" spacing={4} justifyContent="center">
+              code={`<Stack direction="row" spacing={4} sx={{ justifyContent: "center" }}>
   <Gauge
     value={68}
     height={200}
@@ -7315,7 +7551,11 @@ export default function AppComplete({
   />
 </Stack>`}
             >
-              <Stack direction="row" spacing={4} justifyContent="center">
+              <Stack
+                direction="row"
+                spacing={4}
+                sx={{ justifyContent: "center" }}
+              >
                 <Gauge
                   value={68}
                   height={200}
@@ -7339,12 +7579,12 @@ export default function AppComplete({
             {/* Start/End Angles */}
             <CodeExample
               title="3. Ángulos Personalizados"
-              code={`<Stack direction="row" spacing={4} justifyContent="center">
-  <Box textAlign="center">
+              code={`<Stack direction="row" spacing={4} sx={{ justifyContent: "center" }}>
+  <Box sx={{ textAlign: "center" }}>
     <Typography variant="caption">Semicírculo</Typography>
     <Gauge value={60} startAngle={-90} endAngle={90} height={150} width={200} />
   </Box>
-  <Box textAlign="center">
+  <Box sx={{ textAlign: "center" }}>
     <Typography variant="caption">270°</Typography>
     <Gauge value={80} startAngle={-135} endAngle={135} height={150} width={200} />
   </Box>
@@ -7353,10 +7593,9 @@ export default function AppComplete({
               <Stack
                 direction={{ xs: "column", sm: "row" }}
                 spacing={4}
-                justifyContent="center"
-                alignItems="center"
+                sx={{ justifyContent: "center", alignItems: "center" }}
               >
-                <Box textAlign="center">
+                <Box sx={{ textAlign: "center" }}>
                   <Typography variant="caption">Semicírculo</Typography>
                   <Gauge
                     value={60}
@@ -7366,7 +7605,7 @@ export default function AppComplete({
                     width={200}
                   />
                 </Box>
-                <Box textAlign="center">
+                <Box sx={{ textAlign: "center" }}>
                   <Typography variant="caption">270°</Typography>
                   <Gauge
                     value={80}
@@ -7382,12 +7621,12 @@ export default function AppComplete({
             {/* Inner/Outer Radius */}
             <CodeExample
               title="4. Radio Interior/Exterior"
-              code={`<Stack direction="row" spacing={4} justifyContent="center">
-  <Box textAlign="center">
+              code={`<Stack direction="row" spacing={4} sx={{ justifyContent: "center" }}>
+  <Box sx={{ textAlign: "center" }}>
     <Typography variant="caption">Delgado</Typography>
     <Gauge value={70} innerRadius="80%" outerRadius="100%" height={180} width={180} />
   </Box>
-  <Box textAlign="center">
+  <Box sx={{ textAlign: "center" }}>
     <Typography variant="caption">Grueso</Typography>
     <Gauge value={70} innerRadius="50%" outerRadius="100%" height={180} width={180} />
   </Box>
@@ -7396,10 +7635,9 @@ export default function AppComplete({
               <Stack
                 direction={{ xs: "column", sm: "row" }}
                 spacing={4}
-                justifyContent="center"
-                alignItems="center"
+                sx={{ justifyContent: "center", alignItems: "center" }}
               >
-                <Box textAlign="center">
+                <Box sx={{ textAlign: "center" }}>
                   <Typography variant="caption">Delgado</Typography>
                   <Gauge
                     value={70}
@@ -7409,7 +7647,7 @@ export default function AppComplete({
                     width={180}
                   />
                 </Box>
-                <Box textAlign="center">
+                <Box sx={{ textAlign: "center" }}>
                   <Typography variant="caption">Grueso</Typography>
                   <Gauge
                     value={70}

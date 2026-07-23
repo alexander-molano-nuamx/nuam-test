@@ -28,18 +28,138 @@ interface Stock {
 
 // Datos iniciales de acciones
 const initialStocks: Stock[] = [
-  { id: 1, symbol: "AAPL", name: "Apple Inc.", price: 178.52, change: 2.34, changePercent: 1.33, volume: 52436789, marketCap: "2.8T", sector: "Tecnología" },
-  { id: 2, symbol: "GOOGL", name: "Alphabet Inc.", price: 141.80, change: -1.25, changePercent: -0.87, volume: 21345678, marketCap: "1.8T", sector: "Tecnología" },
-  { id: 3, symbol: "MSFT", name: "Microsoft Corp.", price: 378.91, change: 5.67, changePercent: 1.52, volume: 18234567, marketCap: "2.9T", sector: "Tecnología" },
-  { id: 4, symbol: "AMZN", name: "Amazon.com Inc.", price: 178.25, change: -2.10, changePercent: -1.16, volume: 31234567, marketCap: "1.9T", sector: "Consumo" },
-  { id: 5, symbol: "NVDA", name: "NVIDIA Corp.", price: 875.35, change: 15.20, changePercent: 1.77, volume: 41234567, marketCap: "2.2T", sector: "Tecnología" },
-  { id: 6, symbol: "META", name: "Meta Platforms", price: 505.75, change: 8.45, changePercent: 1.70, volume: 15234567, marketCap: "1.3T", sector: "Tecnología" },
-  { id: 7, symbol: "TSLA", name: "Tesla Inc.", price: 248.50, change: -5.30, changePercent: -2.09, volume: 71234567, marketCap: "790B", sector: "Automotriz" },
-  { id: 8, symbol: "JPM", name: "JPMorgan Chase", price: 198.45, change: 1.85, changePercent: 0.94, volume: 8234567, marketCap: "572B", sector: "Finanzas" },
-  { id: 9, symbol: "V", name: "Visa Inc.", price: 279.60, change: 3.20, changePercent: 1.16, volume: 6234567, marketCap: "574B", sector: "Finanzas" },
-  { id: 10, symbol: "WMT", name: "Walmart Inc.", price: 165.80, change: -0.45, changePercent: -0.27, volume: 5234567, marketCap: "445B", sector: "Consumo" },
-  { id: 11, symbol: "PG", name: "Procter & Gamble", price: 158.25, change: 0.95, changePercent: 0.60, volume: 4234567, marketCap: "373B", sector: "Consumo" },
-  { id: 12, symbol: "JNJ", name: "Johnson & Johnson", price: 156.40, change: -1.10, changePercent: -0.70, volume: 3234567, marketCap: "377B", sector: "Salud" },
+  {
+    id: 1,
+    symbol: "AAPL",
+    name: "Apple Inc.",
+    price: 178.52,
+    change: 2.34,
+    changePercent: 1.33,
+    volume: 52436789,
+    marketCap: "2.8T",
+    sector: "Tecnología",
+  },
+  {
+    id: 2,
+    symbol: "GOOGL",
+    name: "Alphabet Inc.",
+    price: 141.8,
+    change: -1.25,
+    changePercent: -0.87,
+    volume: 21345678,
+    marketCap: "1.8T",
+    sector: "Tecnología",
+  },
+  {
+    id: 3,
+    symbol: "MSFT",
+    name: "Microsoft Corp.",
+    price: 378.91,
+    change: 5.67,
+    changePercent: 1.52,
+    volume: 18234567,
+    marketCap: "2.9T",
+    sector: "Tecnología",
+  },
+  {
+    id: 4,
+    symbol: "AMZN",
+    name: "Amazon.com Inc.",
+    price: 178.25,
+    change: -2.1,
+    changePercent: -1.16,
+    volume: 31234567,
+    marketCap: "1.9T",
+    sector: "Consumo",
+  },
+  {
+    id: 5,
+    symbol: "NVDA",
+    name: "NVIDIA Corp.",
+    price: 875.35,
+    change: 15.2,
+    changePercent: 1.77,
+    volume: 41234567,
+    marketCap: "2.2T",
+    sector: "Tecnología",
+  },
+  {
+    id: 6,
+    symbol: "META",
+    name: "Meta Platforms",
+    price: 505.75,
+    change: 8.45,
+    changePercent: 1.7,
+    volume: 15234567,
+    marketCap: "1.3T",
+    sector: "Tecnología",
+  },
+  {
+    id: 7,
+    symbol: "TSLA",
+    name: "Tesla Inc.",
+    price: 248.5,
+    change: -5.3,
+    changePercent: -2.09,
+    volume: 71234567,
+    marketCap: "790B",
+    sector: "Automotriz",
+  },
+  {
+    id: 8,
+    symbol: "JPM",
+    name: "JPMorgan Chase",
+    price: 198.45,
+    change: 1.85,
+    changePercent: 0.94,
+    volume: 8234567,
+    marketCap: "572B",
+    sector: "Finanzas",
+  },
+  {
+    id: 9,
+    symbol: "V",
+    name: "Visa Inc.",
+    price: 279.6,
+    change: 3.2,
+    changePercent: 1.16,
+    volume: 6234567,
+    marketCap: "574B",
+    sector: "Finanzas",
+  },
+  {
+    id: 10,
+    symbol: "WMT",
+    name: "Walmart Inc.",
+    price: 165.8,
+    change: -0.45,
+    changePercent: -0.27,
+    volume: 5234567,
+    marketCap: "445B",
+    sector: "Consumo",
+  },
+  {
+    id: 11,
+    symbol: "PG",
+    name: "Procter & Gamble",
+    price: 158.25,
+    change: 0.95,
+    changePercent: 0.6,
+    volume: 4234567,
+    marketCap: "373B",
+    sector: "Consumo",
+  },
+  {
+    id: 12,
+    symbol: "JNJ",
+    name: "Johnson & Johnson",
+    price: 156.4,
+    change: -1.1,
+    changePercent: -0.7,
+    volume: 3234567,
+    marketCap: "377B",
+    sector: "Salud",
+  },
 ];
 
 // Función para simular cambios de precio
@@ -71,7 +191,9 @@ const formatCurrency = (num: number): string => {
   }).format(num);
 };
 
-export default function StockDashboard({ onBack }: { onBack?: () => void } = {}) {
+export default function StockDashboard({
+  onBack,
+}: { onBack?: () => void } = {}) {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("md"));
   const [stocks, setStocks] = useState<Stock[]>(initialStocks);
@@ -84,7 +206,7 @@ export default function StockDashboard({ onBack }: { onBack?: () => void } = {})
 
     const interval = setInterval(() => {
       setStocks((prevStocks) =>
-        prevStocks.map((stock) => simulatePriceChange(stock))
+        prevStocks.map((stock) => simulatePriceChange(stock)),
       );
     }, 1500);
 
@@ -94,7 +216,7 @@ export default function StockDashboard({ onBack }: { onBack?: () => void } = {})
   // Refrescar datos manualmente
   const handleRefresh = useCallback(() => {
     setStocks((prevStocks) =>
-      prevStocks.map((stock) => simulatePriceChange(stock))
+      prevStocks.map((stock) => simulatePriceChange(stock)),
     );
   }, []);
 
@@ -236,7 +358,12 @@ export default function StockDashboard({ onBack }: { onBack?: () => void } = {})
     <NuamThemeWrapper>
       <Box sx={{ p: 3 }}>
         {onBack && isMobile && (
-          <Button variant="outlined" size="small" onClick={onBack} sx={{ mb: 2 }}>
+          <Button
+            variant="outlined"
+            size="small"
+            onClick={onBack}
+            sx={{ mb: 2 }}
+          >
             ← Volver
           </Button>
         )}
@@ -306,7 +433,10 @@ export default function StockDashboard({ onBack }: { onBack?: () => void } = {})
               <Typography variant="body2" sx={{ color: "success.dark" }}>
                 Ganadores
               </Typography>
-              <Typography variant="h5" sx={{ color: "success.dark" }} fontWeight="bold">
+              <Typography
+                variant="h5"
+                sx={{ color: "success.dark", fontWeight: "bold" }}
+              >
                 {stocks.filter((s) => s.change > 0).length}
               </Typography>
             </Box>
@@ -321,7 +451,10 @@ export default function StockDashboard({ onBack }: { onBack?: () => void } = {})
               <Typography variant="body2" sx={{ color: "error.dark" }}>
                 Perdedores
               </Typography>
-              <Typography variant="h5" sx={{ color: "error.dark" }} fontWeight="bold">
+              <Typography
+                variant="h5"
+                sx={{ color: "error.dark", fontWeight: "bold" }}
+              >
                 {stocks.filter((s) => s.change < 0).length}
               </Typography>
             </Box>
@@ -336,7 +469,7 @@ export default function StockDashboard({ onBack }: { onBack?: () => void } = {})
               <Typography variant="body2" sx={{ color: "text.secondary" }}>
                 Sin cambio
               </Typography>
-              <Typography variant="h5" fontWeight="bold">
+              <Typography variant="h5" sx={{ fontWeight: "bold" }}>
                 {stocks.filter((s) => s.change === 0).length}
               </Typography>
             </Box>
@@ -363,7 +496,9 @@ export default function StockDashboard({ onBack }: { onBack?: () => void } = {})
               enableColumnMenu={true}
               checkboxSelection
               disableRowSelectionOnClick={false}
-              onRowClick={(params: { row: Stock }) => setSelectedStock(params.row)}
+              onRowClick={(params: { row: Stock }) =>
+                setSelectedStock(params.row)
+              }
               sx={{
                 "& .MuiDataGrid-row:hover": {
                   bgcolor: "action.hover",
@@ -418,7 +553,7 @@ export default function StockDashboard({ onBack }: { onBack?: () => void } = {})
                   <Typography variant="body2" sx={{ color: "text.secondary" }}>
                     Precio Actual
                   </Typography>
-                  <Typography variant="h5" fontWeight="bold">
+                  <Typography variant="h5" sx={{ fontWeight: "bold" }}>
                     {formatCurrency(selectedStock.price)}
                   </Typography>
                 </Box>
@@ -428,9 +563,12 @@ export default function StockDashboard({ onBack }: { onBack?: () => void } = {})
                   </Typography>
                   <Typography
                     variant="h5"
-                    fontWeight="bold"
                     sx={{
-                      color: selectedStock.change >= 0 ? "success.main" : "error.main",
+                      fontWeight: "bold",
+                      color:
+                        selectedStock.change >= 0
+                          ? "success.main"
+                          : "error.main",
                     }}
                   >
                     {selectedStock.change >= 0 ? "+" : ""}
@@ -442,7 +580,7 @@ export default function StockDashboard({ onBack }: { onBack?: () => void } = {})
                   <Typography variant="body2" sx={{ color: "text.secondary" }}>
                     Volumen
                   </Typography>
-                  <Typography variant="h5" fontWeight="bold">
+                  <Typography variant="h5" sx={{ fontWeight: "bold" }}>
                     {formatNumber(selectedStock.volume)}
                   </Typography>
                 </Box>
@@ -450,7 +588,7 @@ export default function StockDashboard({ onBack }: { onBack?: () => void } = {})
                   <Typography variant="body2" sx={{ color: "text.secondary" }}>
                     Cap. Mercado
                   </Typography>
-                  <Typography variant="h5" fontWeight="bold">
+                  <Typography variant="h5" sx={{ fontWeight: "bold" }}>
                     {selectedStock.marketCap}
                   </Typography>
                 </Box>
