@@ -457,7 +457,7 @@ const sidebarPages: IPage[] = [
     icon: <SmartButton />,
   },
   {
-    name: "DataGrid",
+    name: "DataGridPro",
     path: "/section-datagrid",
     icon: <TableChart />,
     children: [
