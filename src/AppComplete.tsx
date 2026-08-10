@@ -4540,7 +4540,7 @@ export default function AppComplete({
             {/* 1. Basic Line Chart */}
             <Box>
               <Typography variant="h6" gutterBottom>
-                1. Gráfico de Línea Básico
+                1. Gráfico de Línea Básico con zoom
               </Typography>
               <Typography
                 variant="body2"
