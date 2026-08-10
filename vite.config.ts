@@ -27,9 +27,13 @@ export default defineConfig({
       },
     },
     alias: {
+      'react': path.resolve(__dirname, 'node_modules/react'),
+      'react-dom': path.resolve(__dirname, 'node_modules/react-dom'),
       '@mui/material': path.resolve(__dirname, 'node_modules/@mui/material'),
       '@mui/system': path.resolve(__dirname, 'node_modules/@mui/system'),
       '@mui/private-theming': path.resolve(__dirname, 'node_modules/@mui/private-theming'),
+      '@mui/x-charts': path.resolve(__dirname, 'node_modules/@mui/x-charts'),
+      '@mui/x-charts-pro': path.resolve(__dirname, 'node_modules/@mui/x-charts-pro'),
       '@emotion/react': path.resolve(__dirname, 'node_modules/@emotion/react'),
       '@emotion/styled': path.resolve(__dirname, 'node_modules/@emotion/styled'),
     },
