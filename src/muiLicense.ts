@@ -2,7 +2,7 @@ import { LicenseInfo } from "@mui/x-license";
 
 /**
  * Inicializa la licencia MUI X Pro
- * La key se obtiene de la variable de entorno MUI_LICENSE_KEY
+ * La key se obtiene de la variable de entorno VITE_MUI_LICENSE
  */
 function initializeMuiLicense() {
   const licenseKey = import.meta.env.VITE_MUI_LICENSE;
