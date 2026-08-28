@@ -50,6 +50,7 @@ import {
   RadarChart,
   Heatmap,
   FunnelChart,
+  SankeyChart,
   AreaChart,
   type GridRenderCellParams,
   LineChartPro,
@@ -7901,28 +7902,26 @@ export default function AppComplete({
               <Typography variant="h6" gutterBottom>
                 Flujo de Tráfico
               </Typography>
-              {/* <SankeyChart
+              <SankeyChart
                 height={400}
-                series={[
-                  {
-                    data: {
-                      nodes: [
-                        { id: "google", label: "Google" },
-                        { id: "facebook", label: "Facebook" },
-                        { id: "home", label: "Home Page" },
-                        { id: "products", label: "Products" },
-                        { id: "checkout", label: "Checkout" },
-                      ],
-                      links: [
-                        { source: "google", target: "home", value: 500 },
-                        { source: "facebook", target: "home", value: 300 },
-                        { source: "home", target: "products", value: 600 },
-                        { source: "products", target: "checkout", value: 400 },
-                      ],
-                    },
+                series={{
+                  data: {
+                    nodes: [
+                      { id: "google", label: "Google" },
+                      { id: "facebook", label: "Facebook" },
+                      { id: "home", label: "Home Page" },
+                      { id: "products", label: "Products" },
+                      { id: "checkout", label: "Checkout" },
+                    ],
+                    links: [
+                      { source: "google", target: "home", value: 500 },
+                      { source: "facebook", target: "home", value: 300 },
+                      { source: "home", target: "products", value: 600 },
+                      { source: "products", target: "checkout", value: 400 },
+                    ],
                   },
-                ]}
-              /> */}
+                }}
+              />
             </Box>
           </Stack>
         </Card>
