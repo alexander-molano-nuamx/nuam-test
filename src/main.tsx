@@ -1,6 +1,7 @@
 import "./muiLicense"; // Inicializa la licencia MUI X antes de cualquier componente
 import { StrictMode, useState } from "react";
 import { createRoot } from "react-dom/client";
+import { BrowserRouter } from "react-router";
 import "./index.css";
 import AppComplete from "./AppComplete.tsx";
 import StockDashboard from "./StockDashboard.tsx";
@@ -55,6 +56,8 @@ function App() {
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
-    <App />
+    <BrowserRouter>
+      <App />
+    </BrowserRouter>
   </StrictMode>
 );

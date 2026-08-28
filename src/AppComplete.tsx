@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import dayjs, { type Dayjs } from "dayjs";
 import { CodeExample } from "./components/CodeExample";
 import {
@@ -95,7 +95,12 @@ import {
   useTheme,
 } from "@mui/material";
 import type { GridColDef } from "@mui/x-data-grid";
-import type { Location, NavigateFunction } from "react-router";
+import {
+  useLocation,
+  useNavigate,
+  type NavigateFunction,
+  type NavigateOptions,
+} from "react-router";
 
 interface Product {
   id: number;
@@ -679,29 +684,52 @@ export default function AppComplete({
     setDetailFormData((prev) => ({ ...prev, [field]: value }));
   };
 
-  // Mock de location y navigation para SideBar (sin react-router)
-  const mockLocation = {
-    pathname: "/section-formularios",
-  } as unknown as Location;
-  const mockNavigation = ((path: string) => {
-    // Interceptar rutas especiales de navegación de vista
-    if (path.includes("view-playground") && setView) {
+  const location = useLocation();
+  const navigate = useNavigate();
+
+  const handleNavigate: NavigateFunction = (...args) => {
+    // SideBar siempre llama con un string (ver MenuItem en la librería); el
+    // overload de delta numérico de NavigateFunction no aplica acá, pero el
+    // tipo de la prop lo exige igual.
+    const [path, options] = args;
+    if (typeof path === "number") {
+      navigate(path);
+      return;
+    }
+    const pathStr = typeof path === "string" ? path : (path.pathname ?? "");
+
+    // Interceptar rutas especiales de navegación de vista (no son secciones reales)
+    if (pathStr.includes("view-playground") && setView) {
       setView("playground");
       setOpenSideBar(false);
       return;
     }
-    if (path.includes("view-stock") && setView) {
+    if (pathStr.includes("view-stock") && setView) {
       setView("stock");
       setOpenSideBar(false);
       return;
     }
     // Cerrar sidebar en mobile al navegar
     if (isMobile) setOpenSideBar(false);
-    // path viene como "/section-xxx" → extraemos el id sin la barra inicial
-    const id = path.replace(/^\//, "");
-    const el = document.getElementById(id);
-    if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
-  }) as unknown as NavigateFunction;
+    navigate(path, options as NavigateOptions | undefined);
+  };
+
+  // path viene como "/section-xxx" → id sin la barra inicial. En "/" mostramos
+  // la primera sección (y redirigimos abajo para que el sidebar la resalte).
+  const activeSection =
+    location.pathname === "/"
+      ? "section-formularios"
+      : location.pathname.slice(1);
+
+  useEffect(() => {
+    if (location.pathname === "/") {
+      navigate("/section-formularios", { replace: true });
+    }
+  }, [location.pathname, navigate]);
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [activeSection]);
 
   // Datos para DataGrid básico
   const dataGridColumns: GridColDef[] = [
@@ -848,8 +876,8 @@ export default function AppComplete({
                   ]
               : []),
           ]}
-          location={mockLocation}
-          navigation={mockNavigation}
+          location={location}
+          navigation={handleNavigate}
         />
       </Box>
 
@@ -934,6 +962,7 @@ export default function AppComplete({
         )}
 
         {/* SECCIÓN 1: FORMULARIOS */}
+        {activeSection === "section-formularios" && (
         <Card id="section-formularios" sx={{ mb: 3, p: 3 }}>
           <Typography variant="h5" color="primary" gutterBottom>
             1. Componentes de Formulario
@@ -1726,8 +1755,10 @@ export default function AppComplete({
             </Box>
           </Stack>
         </Card>
+        )}
 
         {/* SECCIÓN 2: BOTONES */}
+        {activeSection === "section-botones" && (
         <Card id="section-botones" sx={{ mb: 3, p: 3 }}>
           <Typography variant="h5" color="primary" gutterBottom>
             2. Botones
@@ -1792,8 +1823,10 @@ export default function AppComplete({
             </Stack>
           </CodeExample>
         </Card>
+        )}
 
         {/* SECCIÓN 3: DATAGRID BÁSICO */}
+        {activeSection === "section-datagrid" && (
         <Card id="section-datagrid" sx={{ mb: 3, p: 3 }}>
           <Typography variant="h5" color="primary" gutterBottom>
             3. DataGrid Básico
@@ -1843,8 +1876,10 @@ export default function AppComplete({
             </CodeExample>
           </Box>
         </Card>
+        )}
 
         {/* SECCIÓN 4: DATAGRID CON FILTROS PERSONALIZADOS (v1.31.0) */}
+        {activeSection === "section-datagrid-filtros" && (
         <Card id="section-datagrid-filtros" sx={{ mb: 3, p: 3 }}>
           <Typography variant="h5" color="primary" gutterBottom>
             4. DataGrid con Filtros Personalizados
@@ -1898,8 +1933,10 @@ export default function AppComplete({
             </CodeExample>
           </Box>
         </Card>
+        )}
 
         {/* SECCIÓN 5: DATAGRID PRO (v1.33.0) */}
+        {activeSection === "section-datagrid-pro" && (
         <Card id="section-datagrid-pro" sx={{ mb: 3, p: 3 }}>
           <Typography variant="h5" color="primary" gutterBottom>
             5. DataGridPro - Funcionalidades Avanzadas
@@ -2094,7 +2131,9 @@ export default function AppComplete({
             Excel Export y más características avanzadas de MUI X Pro
           </Alert>
         </Card>
+        )}
         {/* SECCIÓN 6: DATAGRID PRO-X con Master-Detail */}
+        {activeSection === "section-datagrid-master-detail" && (
         <Card id="section-datagrid-master-detail" sx={{ mb: 3, p: 3 }}>
           <Typography variant="h5" color="primary" gutterBottom>
             6. DataGridProX - Master-Detail Panel
@@ -2972,8 +3011,10 @@ export default function AppComplete({
             Tarjeta de contacto
           </Alert>
         </Card>
+        )}
 
         {/* SECCIÓN 7: DATA GRID HEADER FILTERS */}
+        {activeSection === "section-datagrid-header-filters" && (
         <Card id="section-datagrid-header-filters" sx={{ mb: 3, p: 3 }}>
           <Typography variant="h5" color="primary" gutterBottom>
             7. DataGridProX - Header Filters
@@ -3218,8 +3259,10 @@ export default function AppComplete({
             determinan el tipo de filtro mostrado.
           </Alert>
         </Card>
+        )}
 
         {/* SECCIÓN 8: MODAL */}
+        {activeSection === "section-modal" && (
         <Card id="section-modal" sx={{ mb: 3, p: 3 }}>
           <Typography variant="h5" color="primary" gutterBottom>
             8. Modal
@@ -3282,8 +3325,10 @@ export default function AppComplete({
             </Modal>
           </CodeExample>
         </Card>
+        )}
 
         {/* SECCIÓN 9: TIPOGRAFÍA */}
+        {activeSection === "section-tipografia" && (
         <Card id="section-tipografia" sx={{ mb: 3, p: 3 }}>
           <Typography variant="h5" color="primary" gutterBottom>
             9. Tipografía
@@ -3327,8 +3372,10 @@ export default function AppComplete({
             </Stack>
           </CodeExample>
         </Card>
+        )}
 
         {/* SECCIÓN 10: CARDS */}
+        {activeSection === "section-cards" && (
         <Card id="section-cards" sx={{ mb: 3, p: 3 }} elevation={3}>
           <Typography variant="h5" color="primary" gutterBottom>
             10. Cards
@@ -3386,8 +3433,10 @@ export default function AppComplete({
             </Stack>
           </CodeExample>
         </Card>
+        )}
 
         {/* SECCIÓN 11: ISOTYPE NAME */}
+        {activeSection === "section-isotype" && (
         <Card id="section-isotype" sx={{ mb: 3, p: 3 }}>
           <Typography variant="h5" color="primary" gutterBottom>
             11. IsotypeName Component
@@ -3733,8 +3782,10 @@ export default function AppComplete({
             </Box>
           </Stack>
         </Card>
+        )}
 
         {/* SECCIÓN 12: RICH TREE VIEW */}
+        {activeSection === "section-rich-tree-view" && (
         <Card id="section-rich-tree-view" sx={{ mb: 3, p: 3 }}>
           <Typography variant="h5" color="primary" gutterBottom>
             12. RichTreeView
@@ -4128,8 +4179,10 @@ export default function AppComplete({
             checkboxSelection para selección con casillas de verificación
           </Alert>
         </Card>
+        )}
 
         {/* SECCIÓN 13: RICH TREE VIEW PRO */}
+        {activeSection === "section-rich-tree-view-pro" && (
         <Card id="section-rich-tree-view-pro" sx={{ mb: 3, p: 3 }}>
           <Typography variant="h5" color="primary" gutterBottom>
             13. RichTreeViewPro
@@ -4524,8 +4577,10 @@ export default function AppComplete({
             checkboxSelection con propagación automática
           </Alert>
         </Card>
+        )}
 
         {/* SECCIÓN 14: LINE CHARTS */}
+        {activeSection === "section-line-chart" && (
         <Card id="section-line-chart" sx={{ mb: 3, p: 3 }}>
           <Typography variant="h5" color="primary" gutterBottom>
             14. LineChartPro - Gráficos de Línea
@@ -5390,8 +5445,10 @@ export default function AppComplete({
             </ul>
           </Alert>
         </Card>
+        )}
 
         {/* SECCIÓN 15: PIE CHARTS */}
+        {activeSection === "section-pie-chart" && (
         <Card id="section-pie-chart" sx={{ mb: 3, p: 3 }}>
           <Typography variant="h5" color="primary" gutterBottom>
             15. PieChart - Gráficos Circulares
@@ -6499,8 +6556,10 @@ export default function AppComplete({
             </ul>
           </Alert>
         </Card>
+        )}
 
         {/* SECCIÓN 16: SPARKLINE CHARTS */}
+        {activeSection === "section-sparkline-chart" && (
         <Card id="section-sparkline-chart" sx={{ mb: 3, p: 3 }}>
           <Typography variant="h5" color="primary" gutterBottom>
             16. SparkLineChart - Gráficos Compactos
@@ -7115,8 +7174,10 @@ export default function AppComplete({
             </ul>
           </Alert>
         </Card>
+        )}
 
         {/* SECCIÓN 17: BAR CHARTS */}
+        {activeSection === "section-bar-chart" && (
         <Card id="section-bar-chart" sx={{ mb: 3, p: 3 }}>
           <Typography variant="h5" color="primary" gutterBottom>
             17. BarChartPro - Gráficos de Barras
@@ -7344,8 +7405,10 @@ export default function AppComplete({
             <code>grid</code> para líneas de referencia.
           </Alert>
         </Card>
+        )}
 
         {/* SECCIÓN 18: SCATTER CHART */}
+        {activeSection === "section-scatter-chart" && (
         <Card id="section-scatter-chart" sx={{ mb: 3, p: 3 }}>
           <Typography variant="h5" color="primary" gutterBottom>
             18. ScatterChart - Gráficos de Dispersión
@@ -7499,8 +7562,10 @@ export default function AppComplete({
             <code>x</code>, <code>y</code> e <code>id</code>.
           </Alert>
         </Card>
+        )}
 
         {/* SECCIÓN 19: GAUGE */}
+        {activeSection === "section-gauge" && (
         <Card id="section-gauge" sx={{ mb: 3, p: 3 }}>
           <Typography variant="h5" color="primary" gutterBottom>
             19. Gauge - Medidores
@@ -7667,8 +7732,10 @@ export default function AppComplete({
             <code>innerRadius/outerRadius</code>, <code>text</code>.
           </Alert>
         </Card>
+        )}
 
         {/* SECCIÓN 20: RADAR CHART */}
+        {activeSection === "section-radar-chart" && (
         <Card id="section-radar-chart" sx={{ mb: 3, p: 3 }}>
           <Typography variant="h5" color="primary" gutterBottom>
             20. RadarChart - Gráficos de Radar
@@ -7706,8 +7773,10 @@ export default function AppComplete({
             </CodeExample>
           </Stack>
         </Card>
+        )}
 
         {/* SECCIÓN 21: HEATMAP */}
+        {activeSection === "section-heatmap" && (
         <Card id="section-heatmap" sx={{ mb: 3, p: 3 }}>
           <Typography variant="h5" color="primary" gutterBottom>
             21. Heatmap - Mapas de Calor
@@ -7766,8 +7835,10 @@ export default function AppComplete({
             </CodeExample>
           </Stack>
         </Card>
+        )}
 
         {/* SECCIÓN 22: FUNNEL CHART */}
+        {activeSection === "section-funnel-chart" && (
         <Card id="section-funnel-chart" sx={{ mb: 3, p: 3 }}>
           <Typography variant="h5" color="primary" gutterBottom>
             22. FunnelChart - Gráficos de Embudo
@@ -7812,8 +7883,10 @@ export default function AppComplete({
             </CodeExample>
           </Stack>
         </Card>
+        )}
 
         {/* SECCIÓN 23: SANKEY CHART */}
+        {activeSection === "section-sankey-chart" && (
         <Card id="section-sankey-chart" sx={{ mb: 3, p: 3 }}>
           <Typography variant="h5" color="primary" gutterBottom>
             23. SankeyChart - Diagramas de Flujo
@@ -7853,8 +7926,10 @@ export default function AppComplete({
             </Box>
           </Stack>
         </Card>
+        )}
 
         {/* SECCIÓN 24: AREA CHART */}
+        {activeSection === "section-area-chart" && (
         <Card id="section-area-chart" sx={{ mb: 3, p: 3 }}>
           <Typography variant="h5" color="primary" gutterBottom>
             24. AreaChart - Gráficos de Área
@@ -7930,6 +8005,7 @@ export default function AppComplete({
             </CodeExample>
           </Stack>
         </Card>
+        )}
 
         {/* Footer */}
         <Alert severity="success">
